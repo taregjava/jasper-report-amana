@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport
+        xmlns="http://jasperreports.sourceforge.net/jasperreports"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports
+    http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+        name="inspection_report"
+        pageWidth="595"
+        pageHeight="842"
+        columnWidth="555"
+        leftMargin="20"
+        rightMargin="20"
+        topMargin="20"
+        bottomMargin="20">
+
+    <!-- ================= PARAMETERS ================= -->
+
+    <parameter name="inspectionData"
+               class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+
+    <parameter name="reportLogo" class="java.io.InputStream"/>
+
+    <!-- ================= TITLE ================= -->
+
+    <title>
+        <band height="80">
+
+            <!-- Logo -->
+            <image>
+                <reportElement x="0" y="0" width="80" height="60"/>
+                <imageExpression><![CDATA[$P{reportLogo}]]></imageExpression>
+            </image>
+
+            <!-- Arabic Title -->
+            <staticText>
+                <reportElement x="100" y="20" width="350" height="30"/>
+                <textElement textAlignment="Center">
+                    <font size="16" isBold="true"/>
+                </textElement>
+                <text><![CDATA[تقرير فحص المنشأة]]></text>
+            </staticText>
+
+        </band>
+    </title>
+
+    <!-- ================= DETAIL ================= -->
+
+    <detail>
+        <band height="200">
+
+            <componentElement>
+                <reportElement x="0" y="0" width="555" height="200"/>
+                <jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components"
+                          xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components
+                          http://jasperreports.sourceforge.net/xsd/components.xsd">
+
+                    <datasetRun subDataset="inspectionDataset">
+                        <dataSourceExpression><![CDATA[$P{inspectionData}]]></dataSourceExpression>
+                    </datasetRun>
+
+                    <!-- Column: رقم -->
+                    <jr:column width="50">
+                        <jr:columnHeader height="30">
+                            <staticText>
+                                <reportElement width="50" height="30"/>
+                                <textElement textAlignment="Center"/>
+                                <text><![CDATA[رقم]]></text>
+                            </staticText>
+                        </jr:columnHeader>
+                        <jr:detailCell height="25">
+                            <textField>
+                                <reportElement width="50" height="25"/>
+                                <textFieldExpression><![CDATA[$F{itemNumber}]]></textFieldExpression>
+                            </textField>
+                        </jr:detailCell>
+                    </jr:column>
+
+                    <!-- Column: البند -->
+                    <jr:column width="200">
+                        <jr:columnHeader height="30">
+                            <staticText>
+                                <reportElement width="200" height="30"/>
+                                <text><![CDATA[البند]]></text>
+                            </staticText>
+                        </jr:columnHeader>
+                        <jr:detailCell height="25">
+                            <textField>
+                                <reportElement width="200" height="25"/>
+                                <textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+                            </textField>
+                        </jr:detailCell>
+                    </jr:column>
+
+                    <!-- Column: مطابق -->
+                    <jr:column width="80">
+                        <jr:columnHeader height="30">
+                            <staticText>
+                                <reportElement width="80" height="30"/>
+                                <text><![CDATA[مطابق]]></text>
+                            </staticText>
+                        </jr:columnHeader>
+                        <jr:detailCell height="25">
+                            <textField>
+                                <reportElement width="80" height="25"/>
+                                <textFieldExpression><![CDATA[
+$F{status}.equals("MATCHED") ? "●" : ""
+]]></textFieldExpression>
+                            </textField>
+                        </jr:detailCell>
+                    </jr:column>
+
+                    <!-- Column: غير مطابق -->
+                    <jr:column width="80">
+                        <jr:columnHeader height="30">
+                            <staticText>
+                                <reportElement width="80" height="30"/>
+                                <text><![CDATA[غير مطابق]]></text>
+                            </staticText>
+                        </jr:columnHeader>
+                        <jr:detailCell height="25">
+                            <textField>
+                                <reportElement width="80" height="25"/>
+                                <textFieldExpression><![CDATA[
+$F{status}.equals("NOT_MATCHED") ? "●" : ""
+]]></textFieldExpression>
+                            </textField>
+                        </jr:detailCell>
+                    </jr:column>
+
+                </jr:table>
+            </componentElement>
+
+        </band>
+    </detail>
+
+    <!-- ================= SUB DATASET ================= -->
+
+    <subDataset name="inspectionDataset">
+        <field name="itemNumber" class="java.lang.Integer"/>
+        <field name="description" class="java.lang.String"/>
+        <field name="status" class="java.lang.String"/>
+        <field name="classification" class="java.lang.String"/>
+        <field name="repeat" class="java.lang.Integer"/>
+    </subDataset>
+
+</jasperReport>

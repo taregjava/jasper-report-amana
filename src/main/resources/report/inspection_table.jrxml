@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport
+        xmlns="http://jasperreports.sourceforge.net/jasperreports"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports
+                            http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+        name="inspection_table"
+        pageWidth="802"
+        pageHeight="1000"
+        columnWidth="802"
+        leftMargin="0"
+        rightMargin="0"
+        topMargin="20"
+        bottomMargin="20">
+
+    <!-- ================= PARAMETERS ================= -->
+    <parameter name="siteMapImage" class="java.lang.Object"/>
+    <parameter name="frontImage" class="java.lang.Object"/>
+    <parameter name="rightImage" class="java.lang.Object"/>
+    <parameter name="leftImage" class="java.lang.Object"/>
+
+    <!-- ================= FIELDS ================= -->
+    <field name="itemNumber" class="java.lang.Integer"/>
+    <field name="description" class="java.lang.String"/>
+    <field name="match" class="java.lang.String"/>
+    <field name="notMatch" class="java.lang.String"/>
+    <field name="classification" class="java.lang.String"/>
+    <field name="repeat" class="java.lang.String"/>
+    <field name="status" class="java.lang.String"/>
+    <!-- ================= BACKGROUND (images shown on first page only; background doesn't reserve layout space) ================= -->
+    <background>
+        <band height="560">
+            <!-- LEFT IMAGE COLUMN -->
+            <frame>
+                <reportElement x="0" y="0" width="150" height="140">
+                    <printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
+                </reportElement>
+
+                <staticText>
+                    <reportElement x="5" y="3" width="140" height="12"/>
+                    <textElement textAlignment="Center">
+                        <font pdfFontName="fonts/Amiri-Regular.ttf"
+                              pdfEncoding="Identity-H"
+                              isPdfEmbedded="true"
+                              size="9"
+                              isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[صوره الموقع من الخريطه]]></text>
+                </staticText>
+
+                <frame>
+                    <reportElement x="5" y="16" width="140" height="120"/>
+                    <box><pen lineWidth="0.5"/></box>
+                    <image scaleImage="RetainShape">
+                        <reportElement x="2" y="2" width="136" height="116"/>
+                        <imageExpression class="java.lang.Object"><![CDATA[$P{siteMapImage}]]></imageExpression>
+                    </image>
+                </frame>
+            </frame>
+
+            <frame>
+                <reportElement x="0" y="140" width="150" height="140">
+                    <printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
+                </reportElement>
+
+                <staticText>
+                    <reportElement x="5" y="3" width="140" height="12"/>
+                    <textElement textAlignment="Center">
+                        <font pdfFontName="fonts/Amiri-Regular.ttf"
+                              pdfEncoding="Identity-H"
+                              isPdfEmbedded="true"
+                              size="9"
+                              isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[الواجهه الاماميه]]></text>
+                </staticText>
+
+                <frame>
+                    <reportElement x="5" y="16" width="140" height="120"/>
+                    <box><pen lineWidth="0.5"/></box>
+                    <image scaleImage="RetainShape">
+                        <reportElement x="2" y="2" width="136" height="116"/>
+                        <imageExpression class="java.lang.Object"><![CDATA[$P{frontImage}]]></imageExpression>
+                    </image>
+                </frame>
+            </frame>
+
+            <frame>
+                <reportElement x="0" y="280" width="150" height="120">
+                    <printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
+                </reportElement>
+
+                <staticText>
+                    <reportElement x="5" y="3" width="140" height="12"/>
+                    <textElement textAlignment="Center">
+                        <font pdfFontName="fonts/Amiri-Regular.ttf"
+                              pdfEncoding="Identity-H"
+                              isPdfEmbedded="true"
+                              size="9"
+                              isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[الجانب الايمن]]></text>
+                </staticText>
+
+                <frame>
+                    <reportElement x="5" y="16" width="140" height="100"/>
+                    <box><pen lineWidth="0.5"/></box>
+                    <image scaleImage="RetainShape">
+                        <reportElement x="2" y="2" width="136" height="96"/>
+                        <imageExpression class="java.lang.Object"><![CDATA[$P{rightImage}]]></imageExpression>
+                    </image>
+                </frame>
+            </frame>
+
+            <!-- LEFT (new 4th) IMAGE COLUMN -->
+            <frame>
+                <reportElement x="0" y="420" width="150" height="140">
+                    <printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
+                </reportElement>
+
+                <staticText>
+                    <reportElement x="5" y="3" width="140" height="12"/>
+                    <textElement textAlignment="Center">
+                        <font pdfFontName="fonts/Amiri-Regular.ttf"
+                              pdfEncoding="Identity-H"
+                              isPdfEmbedded="true"
+                              size="9"
+                              isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[الجانب الايسر]]></text>
+                </staticText>
+
+                <frame>
+                    <reportElement x="5" y="16" width="140" height="120"/>
+                    <box><pen lineWidth="0.5"/></box>
+                    <image scaleImage="RetainShape">
+                        <reportElement x="2" y="2" width="136" height="116"/>
+                        <imageExpression class="java.lang.Object"><![CDATA[$P{leftImage}]]></imageExpression>
+                    </image>
+                </frame>
+            </frame>
+
+        </band>
+    </background>
+
+    <!-- keep an empty pageHeader so the band exists but doesn't reserve space -->
+    <pageHeader>
+        <band height="0"/>
+    </pageHeader>
+
+    <!-- ================= COLUMN HEADER ================= -->
+    <columnHeader>
+        <band height="55">
+
+            <!-- Table Title -->
+            <staticText>
+                <reportElement x="322" y="0" width="480" height="25"
+                               mode="Opaque" backcolor="#EFEFEF"/>
+                <box><pen lineWidth="0.7"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="fonts/Amiri-Regular.ttf"
+                          pdfEncoding="Identity-H"
+                          isPdfEmbedded="true"
+                          size="11"
+                          isBold="true"/>
+                </textElement>
+                <text><![CDATA[اشتراطات شهادة الامتثال]]></text>
+            </staticText>
+
+            <!-- Column Headers Row -->
+            <staticText>
+                <reportElement x="322" y="30" width="25" height="25"
+                               mode="Opaque" backcolor="#DDDDDD"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="fonts/Amiri-Regular.ttf"
+                          pdfEncoding="Identity-H"
+                          isPdfEmbedded="true"
+                          size="10"
+                          isBold="true"/>
+                </textElement>
+                <text><![CDATA[التكرار]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="347" y="30" width="70" height="25"
+                               mode="Opaque" backcolor="#DDDDDD"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="fonts/Amiri-Regular.ttf"
+                          pdfEncoding="Identity-H"
+                          isPdfEmbedded="true"
+                          size="10"
+                          isBold="true"/>
+                </textElement>
+                <text><![CDATA[التصنيف]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="417" y="30" width="90" height="25"
+                               mode="Opaque" backcolor="#DDDDDD"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="fonts/Amiri-Regular.ttf"
+                          pdfEncoding="Identity-H"
+                          isPdfEmbedded="true"
+                          size="10"
+                          isBold="true"/>
+                </textElement>
+                <text><![CDATA[غير مطابق]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="507" y="30" width="90" height="25"
+                               mode="Opaque" backcolor="#DDDDDD"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="fonts/Amiri-Regular.ttf"
+                          pdfEncoding="Identity-H"
+                          isPdfEmbedded="true"
+                          size="10"
+                          isBold="true"/>
+                </textElement>
+                <text><![CDATA[مطابق]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="597" y="30" width="170" height="25"
+                               mode="Opaque" backcolor="#DDDDDD"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="fonts/Amiri-Regular.ttf"
+                          pdfEncoding="Identity-H"
+                          isPdfEmbedded="true"
+                          size="10"
+                          isBold="true"/>
+                </textElement>
+                <text><![CDATA[البند]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="767" y="30" width="35" height="25"
+                               mode="Opaque" backcolor="#DDDDDD"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="fonts/Amiri-Regular.ttf"
+                          pdfEncoding="Identity-H"
+                          isPdfEmbedded="true"
+                          size="10"
+                          isBold="true"/>
+                </textElement>
+                <text><![CDATA[م]]></text>
+            </staticText>
+
+        </band>
+    </columnHeader>
+
+    <!-- ================= TABLE HEADER / DETAIL ================= -->
+    <detail>
+        <band height="25" splitType="Stretch">
+
+            <textField>
+                <reportElement x="322" y="0" width="25" height="25"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="fonts/Amiri-Regular.ttf"
+                          pdfEncoding="Identity-H"
+                          isPdfEmbedded="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{repeat}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="347" y="0" width="70" height="25"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="fonts/Amiri-Regular.ttf"
+                          pdfEncoding="Identity-H"
+                          isPdfEmbedded="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{classification}]]></textFieldExpression>
+            </textField>
+
+
+            <frame>
+                <reportElement x="417" y="0" width="90" height="25"/>
+                <box><pen lineWidth="0.5"/></box>
+
+                <ellipse>
+                    <reportElement x="35" y="5" width="15" height="15">
+                        <printWhenExpression><![CDATA[$F{status}.equals("NOT_MATCHED")]]></printWhenExpression>
+                    </reportElement>
+                    <graphicElement>
+                        <pen lineWidth="1.0"/>
+                    </graphicElement>
+                </ellipse>
+
+                <ellipse>
+                    <reportElement x="35" y="5" width="15" height="15"
+                                   mode="Opaque" backcolor="#666666">
+                        <printWhenExpression><![CDATA[$F{status}.equals("NOT_MATCHED")]]></printWhenExpression>
+                    </reportElement>
+                </ellipse>
+            </frame>
+
+            <frame>
+                <reportElement x="507" y="0" width="90" height="25"/>
+                <box><pen lineWidth="0.5"/></box>
+
+                <ellipse>
+                    <reportElement x="35" y="5" width="15" height="15">
+                        <printWhenExpression><![CDATA[$F{status}.equals("MATCHED")]]></printWhenExpression>
+                    </reportElement>
+                    <graphicElement>
+                        <pen lineWidth="1.0"/>
+                    </graphicElement>
+                </ellipse>
+
+                <ellipse>
+                    <reportElement x="35" y="5" width="15" height="15"
+                                   mode="Opaque" backcolor="#666666">
+                        <printWhenExpression><![CDATA[$F{status}.equals("MATCHED")]]></printWhenExpression>
+                    </reportElement>
+                </ellipse>
+            </frame>
+
+            <textField isStretchWithOverflow="true">
+                <reportElement x="597" y="0" width="170" height="25"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font pdfFontName="fonts/Amiri-Regular.ttf"
+                          pdfEncoding="Identity-H"
+                          isPdfEmbedded="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="767" y="0" width="35" height="25"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="fonts/Amiri-Regular.ttf"
+                          pdfEncoding="Identity-H"
+                          isPdfEmbedded="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{itemNumber}]]></textFieldExpression>
+            </textField>
+
+        </band>
+    </detail>
+
+</jasperReport>

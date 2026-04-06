@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Simple Arabic/RTL-friendly JRXML as a starting template. Replace fonts/Amiri-Regular.ttf with your real TTF. -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+    name="inspection_report_ar" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="false">
+
+    <!-- Report-level properties for RTL and PDF embedding -->
+    <property name="net.sf.jasperreports.export.xls.detect.cell.type" value="true"/>
+    <property name="net.sf.jasperreports.text.direction" value="RTL"/>
+
+    <!-- Styles (moved up before parameters/fields to satisfy schema order) -->
+    <style name="Base" isDefault="true" fontName="Amiri" fontSize="12"/>
+    <style name="Title" forecolor="#0b5b44" fontSize="18" isBold="true"/>
+    <style name="HeaderBand" mode="Opaque" backcolor="#0b6b57" forecolor="#ffffff"/>
+
+    <!-- Parameters -->
+    <parameter name="REPORT_TITLE" class="java.lang.String"/>
+    <parameter name="LOGO" class="java.io.InputStream"/>
+
+    <!-- Fields expected from InspectionReportDto -->
+    <field name="ownerName" class="java.lang.String"/>
+    <field name="buildingAddress" class="java.lang.String"/>
+    <field name="inspectionDate" class="java.lang.String"/>
+    <field name="checklistText" class="java.lang.String"/>
+
+
+    <!-- Title band with logo and title centered -->
+    <title>
+        <band height="120">
+            <image>
+                <reportElement x="20" y="0" width="80" height="80"/>
+                <imageExpression class="java.io.InputStream">$P{LOGO}</imageExpression>
+            </image>
+            <staticText>
+                <reportElement x="120" y="10" width="400" height="30"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="16" isBold="true"/>
+                </textElement>
+                <text><![CDATA[$P{REPORT_TITLE}]]></text>
+            </staticText>
+            <line>
+                <reportElement x="0" y="100" width="555" height="1"/>
+            </line>
+        </band>
+    </title>
+
+    <!-- Column header for a simple two-row info table -->
+    <columnHeader>
+        <band height="90">
+            <frame>
+                <reportElement x="0" y="0" width="555" height="90" mode="Opaque" backcolor="#eaf6ee"/>
+                <!-- Owner name label and value -->
+                <staticText>
+                    <reportElement x="380" y="5" width="80" height="20"/>
+                    <textElement textAlignment="Right">
+                        <font isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[اسم المالك]]></text>
+                </staticText>
+                <textField>
+                    <reportElement x="200" y="5" width="170" height="20"/>
+                    <textElement textAlignment="Right"/>
+                    <textFieldExpression><![CDATA[$F{ownerName}]]></textFieldExpression>
+                </textField>
+
+                <!-- Building address -->
+                <staticText>
+                    <reportElement x="380" y="30" width="80" height="20"/>
+                    <textElement textAlignment="Right">
+                        <font isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[عنوان المشروع]]></text>
+                </staticText>
+                <textField>
+                    <reportElement x="40" y="30" width="330" height="20"/>
+                    <textElement textAlignment="Right"/>
+                    <textFieldExpression><![CDATA[$F{buildingAddress}]]></textFieldExpression>
+                </textField>
+
+                <!-- Inspection date -->
+                <staticText>
+                    <reportElement x="380" y="55" width="80" height="20"/>
+                    <textElement textAlignment="Right">
+                        <font isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[تاريخ التفتيش]]></text>
+                </staticText>
+                <textField>
+                    <reportElement x="300" y="55" width="120" height="20"/>
+                    <textElement textAlignment="Right"/>
+                    <textFieldExpression><![CDATA[$F{inspectionDate}]]></textFieldExpression>
+                </textField>
+            </frame>
+        </band>
+    </columnHeader>
+
+    <!-- Detail: show checklist area (as a single text block for simplicity) -->
+    <detail>
+        <band height="300">
+            <staticText>
+                <reportElement x="0" y="0" width="555" height="20"/>
+                <textElement textAlignment="Center">
+                    <font isBold="true" size="14"/>
+                </textElement>
+                <text><![CDATA[التفاصيل والمهام]]></text>
+            </staticText>
+
+            <box>
+                <reportElement x="0" y="25" width="555" height="260"/>
+            </box>
+
+            <textField isStretchWithOverflow="true">
+                <reportElement x="10" y="30" width="535" height="240"/>
+                <textElement textAlignment="Right"/>
+                <textFieldExpression><![CDATA[$F{checklistText}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+
+    <pageFooter>
+        <band height="80">
+            <line>
+                <reportElement x="0" y="0" width="555" height="1"/>
+            </line>
+            <staticText>
+                <reportElement x="20" y="10" width="200" height="20"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[اسم المكتب]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="350" y="10" width="200" height="20"/>
+                <textElement textAlignment="Right"/>
+                <textFieldExpression><![CDATA["الصفحة " + $V{PAGE_NUMBER}]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageFooter>
+
+</jasperReport>

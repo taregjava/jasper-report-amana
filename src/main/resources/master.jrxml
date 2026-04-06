@@ -1,0 +1,15 @@
+<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
+<parameter name="inspectionData"
+           class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+
+<detail>
+<band height="300">
+    <subreport>
+        <reportElement x="0" y="0" width="555" height="300"/>
+        <dataSourceExpression><![CDATA[$P{inspectionData}]]></dataSourceExpression>
+        <subreportExpression><![CDATA[
+$P{SUBREPORT_DIR} + "inspection_sub.jasper"
+]]></subreportExpression>
+    </subreport>
+</band>
+</detail>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="inspection_conditions_flat"
+              pageWidth="802"
+              pageHeight="600"
+              columnWidth="802"
+              leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+
+    <parameter name="conditionImageRows" class="net.sf.jasperreports.engine.JRDataSource"/>
+
+    <field name="rowNumber" class="java.lang.Integer"/>
+    <field name="conditionText" class="java.lang.String"/>
+    <field name="title" class="java.lang.String"/>
+    <field name="imagePath" class="java.lang.Object"/>
+    <field name="noteText" class="java.lang.String"/>
+
+    <detail>
+        <band height="140">
+
+            <frame>
+                <reportElement x="0" y="0" width="802" height="140"/>
+                <box><pen lineWidth="0.5"/></box>
+
+                <!-- TITLE -->
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="0" y="0" width="552" height="20" positionType="Float"/>
+                    <textElement textAlignment="Right">
+                        <font pdfFontName="fonts/Amiri-Regular.ttf"
+                              pdfEncoding="Identity-H"
+                              isPdfEmbedded="true"
+                              size="10"
+                              isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[
+                    $F{title} != null && !$F{title}.trim().isEmpty()
+                    ? $F{title}
+                    : $F{conditionText}
+                ]]></textFieldExpression>
+                </textField>
+
+                <!-- CONDITION TEXT -->
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="0" y="22" width="552" height="20" positionType="Float"/>
+                    <textElement textAlignment="Right"/>
+                    <textFieldExpression><![CDATA[$F{conditionText}]]></textFieldExpression>
+                </textField>
+
+                <!-- NOTE -->
+                <textField isStretchWithOverflow="true">
+                    <reportElement x="0" y="45" width="552" height="60" positionType="Float"/>
+                    <textElement textAlignment="Right"/>
+                    <textFieldExpression><![CDATA[$F{noteText}]]></textFieldExpression>
+                </textField>
+
+                <!-- IMAGE -->
+                <image scaleImage="FillFrame">
+                    <reportElement x="562" y="0" width="240" height="140" positionType="Float">
+                        <printWhenExpression><![CDATA[$F{imagePath} != null]]></printWhenExpression>
+                    </reportElement>
+                    <imageExpression class="java.lang.Object"><![CDATA[$F{imagePath}]]></imageExpression>
+                </image>
+
+            </frame>
+
+        </band>
+    </detail>
+
+</jasperReport>
+
