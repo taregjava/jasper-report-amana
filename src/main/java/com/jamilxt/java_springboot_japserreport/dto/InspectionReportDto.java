@@ -12,6 +12,7 @@ public class InspectionReportDto {
     private List<InspectionItemDto> checklist;
     // use existing ImageDto
     private List<ImageDto> images;
+    private List<ConditionDto> conditions;
     private String checklistText; // simple combined checklist block for JRXML demo
 
     public String getReportTitle() {
@@ -60,6 +61,14 @@ public class InspectionReportDto {
 
     public void setImages(List<ImageDto> images) {
         this.images = images;
+    }
+
+    public List<ConditionDto> getConditions() {
+        return conditions;
+    }
+
+    public void setConditions(List<ConditionDto> conditions) {
+        this.conditions = conditions;
     }
 
     public String getChecklistText() {

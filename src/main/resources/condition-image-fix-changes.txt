@@ -1,0 +1,48 @@
+TechnicalReportJasperService.java - exact change locations
+File: src/main/java/sa/gov/alriyadh/bcc/report/service/TechnicalReportJasperService.java
+
+1) Added flat datasource list for summary subreport
+Lines: 348-352
+
+348 | List<sa.gov.alriyadh.bcc.dto.InspectionItemDto> tableItems = new ArrayList<>();
+349 | List<sa.gov.alriyadh.bcc.dto.reports.ConditionDto> conditions = new ArrayList<>();
+350 | // Flat rows consumed by inspection_conditions_flat.jrxml summary subreport.
+351 | List<ConditionImageDto> conditionImageRows = new ArrayList<>();
+352 | byte[] siteMapImage = null;
+
+Why:
+- The summary JRXML uses a flat datasource, so we keep separate flat rows in addition to nested condition images.
+
+----------------------------------------------------------------
+
+2) Added each note-image row to flat list during mapping
+Lines: 384-392
+
+384 | ConditionImageDto condImg = new ConditionImageDto();
+385 | condImg.setRowNumber(rowNum);
+386 | // JRXML expects a title/condition text per image row; reuse row title.
+387 | condImg.setConditionText(row.getImageTitle());
+388 | condImg.setImagePath(row.getImageContent());
+389 | condImg.setNoteText(row.getNoteText() != null ? row.getNoteText() : " ");
+390 | conditions.get(conditions.size() - 1).getImages().add(condImg);
+391 | // Keep a flat copy because summary subreport datasource is flat, not nested.
+392 | conditionImageRows.add(condImg);
+
+Why:
+- Keeps existing nested mapping intact.
+- Also builds rows needed by inspection_conditions_flat.jrxml.
+
+----------------------------------------------------------------
+
+3) Replaced null datasource with real datasource
+Lines: 443-447
+
+443 | // Previously null, which made the summary subreport print zero image rows.
+444 | params.put(
+445 |         "conditionImageRows",
+446 |         new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource(
+447 |                 conditionImageRows));
+
+Why:
+- Passing null caused the summary subreport to receive no records, so image rows did not render.
+
