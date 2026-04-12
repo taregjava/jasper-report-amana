@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fonts>
+    <fontFamilies>
+        <fontFamily name="Amiri">
+            <normal>fonts/Amiri-Regular.ttf</normal>
+            <bold>fonts/Amiri-Regular.ttf</bold>
+            <italic>fonts/Amiri-Regular.ttf</italic>
+            <boldItalic>fonts/Amiri-Regular.ttf</boldItalic>
+            <pdfEncoding>Identity-H</pdfEncoding>
+            <pdfEmbedded>true</pdfEmbedded>
+        </fontFamily>
+    </fontFamilies>
+</fonts>
+

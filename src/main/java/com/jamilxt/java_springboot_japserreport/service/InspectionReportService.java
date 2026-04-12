@@ -111,7 +111,7 @@ public class InspectionReportService {
         row.put("notMatch", "");
         return row;
     }
-
+//todo : loop over conditions||| for each condition loop over imageCondition
     private List<Map<String, Object>> buildConditionRows(InspectionReportDto dto) {
         List<ConditionDto> conditions = (dto != null) ? dto.getConditions() : null;
 

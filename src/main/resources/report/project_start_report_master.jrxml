@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="project_start_report_master"
+              pageWidth="842"
+              pageHeight="595"
+              orientation="Landscape"
+              columnWidth="802"
+              leftMargin="20"
+              rightMargin="20"
+              topMargin="20"
+              bottomMargin="20"
+              language="java">
+
+    <property name="net.sf.jasperreports.text.direction" value="RTL"/>
+    <style name="Default" isDefault="true" fontName="SansSerif" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+
+    <!-- Subreport parameters (compiled JasperReport instances) -->
+    <parameter name="headerSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
+    <parameter name="bodySubreport" class="net.sf.jasperreports.engine.JasperReport"/>
+    <parameter name="tableSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
+
+    <!-- datasource for tasks table -->
+    <parameter name="tableData" class="net.sf.jasperreports.engine.JRDataSource"/>
+
+    <!-- propagate other header/body params as needed (declare commonly used ones) -->
+    <parameter name="reportLogo" class="java.lang.Object"/>
+    <parameter name="projectNameAndAddress" class="java.lang.String"/>
+    <parameter name="reportDate" class="java.lang.String"/>
+    <!-- Building params forwarded to body subreport (declare here so master compile sees them) -->
+    <parameter name="buildingType" class="java.lang.String"/>
+    <parameter name="buildingCondition" class="java.lang.String"/>
+    <parameter name="buildingDescription" class="java.lang.String"/>
+    <parameter name="licenseNumber" class="java.lang.String"/>
+    <parameter name="licenseDate" class="java.lang.String"/>
+    <!-- Owner params forwarded to body subreport -->
+    <parameter name="ownerName" class="java.lang.String"/>
+    <parameter name="ownerIdNumber" class="java.lang.String"/>
+    <parameter name="ownerMobile" class="java.lang.String"/>
+    <parameter name="contractorName" class="java.lang.String"/>
+    <parameter name="supervisingEngineeringOffice" class="java.lang.String"/>
+
+    <title>
+        <band height="10"/>
+    </title>
+
+    <detail>
+        <!-- keep detail band small enough to fit page height; subreports inside will stretch across pages as needed -->
+        <band height="540">
+            <!-- header subreport placed at top -->
+            <subreport>
+                <reportElement x="0" y="0" width="802" height="220"/>
+                <subreportParameter name="reportLogo">
+                    <subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression>
+                </subreportParameter>
+                <subreportParameter name="projectNameAndAddress">
+                    <subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression>
+                </subreportParameter>
+                <subreportParameter name="reportDate">
+                    <subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression>
+                </subreportParameter>
+                <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
+                <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{headerSubreport}]]></subreportExpression>
+            </subreport>
+
+            <!-- body subreport (building info) -->
+            <subreport>
+                <reportElement x="0" y="230" width="802" height="160"/>
+                <!-- pass-through parameters (if present in master caller) -->
+                <subreportParameter name="buildingType"><subreportParameterExpression><![CDATA[$P{buildingType}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="buildingCondition"><subreportParameterExpression><![CDATA[$P{buildingCondition}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="buildingDescription"><subreportParameterExpression><![CDATA[$P{buildingDescription}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="licenseNumber"><subreportParameterExpression><![CDATA[$P{licenseNumber}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="licenseDate"><subreportParameterExpression><![CDATA[$P{licenseDate}]]></subreportParameterExpression></subreportParameter>
+                <!-- forward owner params to body subreport -->
+                <subreportParameter name="ownerName"><subreportParameterExpression><![CDATA[$P{ownerName}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="ownerIdNumber"><subreportParameterExpression><![CDATA[$P{ownerIdNumber}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="ownerMobile"><subreportParameterExpression><![CDATA[$P{ownerMobile}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="contractorName"><subreportParameterExpression><![CDATA[$P{contractorName}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="supervisingEngineeringOffice"><subreportParameterExpression><![CDATA[$P{supervisingEngineeringOffice}]]></subreportParameterExpression></subreportParameter>
+                <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
+                <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{bodySubreport}]]></subreportExpression>
+            </subreport>
+
+            <!-- table subreport (tasks) -->
+            <subreport>
+                <reportElement x="0" y="400" width="802" height="140"/>
+                <dataSourceExpression><![CDATA[$P{tableData}]]></dataSourceExpression>
+                <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{tableSubreport}]]></subreportExpression>
+            </subreport>
+        </band>
+    </detail>
+
+</jasperReport>
+

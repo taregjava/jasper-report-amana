@@ -33,6 +33,12 @@
             <artifactId>jasperreports</artifactId>
             <version>6.16.0</version>
         </dependency>
+        <!-- Add Groovy runtime so JasperReports can compile/execute groovy expressions if present in JRXML -->
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy</artifactId>
+            <version>3.0.17</version>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

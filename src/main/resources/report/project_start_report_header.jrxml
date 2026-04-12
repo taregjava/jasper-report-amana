@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="project_start_report_header"
+              pageWidth="842"
+              pageHeight="595"
+              orientation="Landscape"
+              columnWidth="802"
+              leftMargin="20"
+              rightMargin="20"
+              topMargin="20"
+              bottomMargin="20"
+              language="java">
+
+    <property name="net.sf.jasperreports.text.direction" value="RTL"/>
+
+    <style name="Default" isDefault="true" fontName="SansSerif" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+
+    <!-- Parameters used by the header -->
+    <parameter name="reportLogo" class="java.lang.Object"/>
+    <parameter name="projectNameAndAddress" class="java.lang.String"/>
+    <parameter name="reportDate" class="java.lang.String"/>
+    <parameter name="ownerName" class="java.lang.String"/>
+    <parameter name="ownerIdNumber" class="java.lang.String"/>
+    <parameter name="ownerMobile" class="java.lang.String"/>
+    <parameter name="contractorName" class="java.lang.String"/>
+    <parameter name="supervisingEngineeringOffice" class="java.lang.String"/>
+
+    <title>
+        <band height="220">
+            <image>
+                <reportElement x="10" y="10" width="140" height="80"/>
+                <imageExpression class="java.lang.Object"><![CDATA[$P{reportLogo}]]></imageExpression>
+            </image>
+
+            <image>
+                <reportElement x="160" y="10" width="60" height="60"/>
+                <imageExpression class="java.lang.Object"><![CDATA[$P{reportLogo}]]></imageExpression>
+            </image>
+
+            <staticText>
+                <reportElement x="360" y="10" width="120" height="16"/>
+                <textElement textAlignment="Center">
+                    <font size="12"/>
+                </textElement>
+                <text><![CDATA[تقرير رقم 1]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="220" y="30" width="400" height="28"/>
+                <textElement textAlignment="Center">
+                    <font size="18" isBold="true"/>
+                </textElement>
+                <text><![CDATA[تقرير مرحلة بدء المشروع]]></text>
+            </staticText>
+
+            <textField>
+                <reportElement x="200" y="68" width="440" height="18"/>
+                <textElement textAlignment="Center"/>
+                <textFieldExpression><![CDATA[$P{projectNameAndAddress} + "    " + $P{reportDate}]]></textFieldExpression>
+            </textField>
+
+            <!-- ownership block moved to body subreport -->
+
+        </band>
+    </title>
+
+</jasperReport>
+

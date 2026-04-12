@@ -1,0 +1,178 @@
+package com.jamilxt.java_springboot_japserreport.service.report;
+
+import com.jamilxt.java_springboot_japserreport.dto.ProjectStartReportDto;
+import com.jamilxt.java_springboot_japserreport.dto.OwnerInfo;
+import com.jamilxt.java_springboot_japserreport.dto.BuildingInfo;
+import com.jamilxt.java_springboot_japserreport.dto.TaskRow;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.stereotype.Service;
+
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+@Service
+public class ProjectStartReportService {
+
+    private final ResourceLoader resourceLoader;
+
+    public ProjectStartReportService(ResourceLoader resourceLoader) {
+        this.resourceLoader = resourceLoader;
+    }
+// imports omitted for brevity (JasperCompileManager, JasperFillManager, JasperExportManager, JRBeanCollectionDataSource, JasperReport, JasperPrint, etc.)
+
+    public byte[] generateProjectStartPdfStatic() throws Exception {
+        // Load and compile subreports + master
+        try (InputStream headerIs = getClass().getResourceAsStream("/report/project_start_report_header.jrxml");
+             InputStream bodyIs   = getClass().getResourceAsStream("/report/project_start_report_body.jrxml");
+             InputStream tableIs  = getClass().getResourceAsStream("/report/project_start_report_table.jrxml");
+             InputStream masterIs = getClass().getResourceAsStream("/report/project_start_report_master.jrxml")) {
+
+            JasperReport headerRep = JasperCompileManager.compileReport(headerIs);
+            JasperReport bodyRep   = JasperCompileManager.compileReport(bodyIs);
+            JasperReport tableRep  = JasperCompileManager.compileReport(tableIs);
+            JasperReport masterRep = JasperCompileManager.compileReport(masterIs);
+
+            // Build static table rows (POJO or Map). Here's Map-based example:
+            List<Map<String,Object>> rows = new ArrayList<>();
+            Map<String,Object> r1 = new HashMap<>();
+            r1.put("itemNo", 1);
+            r1.put("description", "التأكد من سلامة الأساسات");
+            r1.put("requirement", "");
+            r1.put("status", "☑"); // using '☑' as matched marker; table subreport checks status to render checkboxes
+            r1.put("notes", "ملاحظة توضيحية");
+            rows.add(r1);
+
+            Map<String,Object> r2 = new HashMap<>();
+            r2.put("itemNo", 2);
+            r2.put("description", "مراجعة الرسومات");
+            r2.put("requirement", "");
+            r2.put("status", "☐"); // not matched
+            r2.put("notes", "");
+            rows.add(r2);
+
+            JRBeanCollectionDataSource tableDs = new JRBeanCollectionDataSource(rows);
+
+            Map<String,Object> params = new HashMap<>();
+            // pass compiled subreports
+            params.put("headerSubreport", headerRep);
+            params.put("bodySubreport", bodyRep);
+            params.put("tableSubreport", tableRep);
+            // pass table datasource
+            params.put("tableData", tableDs);
+
+            // header/body params (example)
+            // load logo as byte[] so Jasper/iText can recognize the image format reliably during export
+            try (InputStream logoIs = getClass().getResourceAsStream("/report/logo.png")) {
+                if (logoIs != null) {
+                    byte[] logoBytes = logoIs.readAllBytes();
+                    params.put("reportLogo", logoBytes);
+                }
+            } catch (Exception ignore) {
+                // ignore missing logo
+            }
+            params.put("projectNameAndAddress", "مشروع نموذجي - شارع المثال");
+            params.put("reportDate", "1447/01/01 هـ");
+            params.put("ownerName", "محمود محمد");
+            params.put("ownerIdNumber", "1234567890");
+            params.put("ownerMobile", "0500000000");
+            params.put("contractorName", "شركة المقاول المحدودة");
+            params.put("supervisingEngineeringOffice", "المكتب الهندسي النموذجي");
+            params.put("buildingType", "سكني");
+            params.put("buildingCondition", "جيد");
+            params.put("buildingDescription", "وصف نموذجي للمبنى...");
+            params.put("licenseNumber", "LIC-001");
+            params.put("licenseDate", "1446/12/15");
+
+            // Fill master report. The master places subreports; use empty datasource for master.
+            JasperPrint jasperPrint = JasperFillManager.fillReport(masterRep, params, new net.sf.jasperreports.engine.JREmptyDataSource());
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            JasperExportManager.exportReportToPdfStream(jasperPrint, baos);
+            return baos.toByteArray();
+        }
+    }
+
+    public byte[] generatePdf(ProjectStartReportDto dto) throws JRException {
+        try (java.io.InputStream masterIs = resourceLoader.getResource("classpath:report/project_start_report.jrxml").getInputStream()) {
+
+            JasperReport masterReport = JasperCompileManager.compileReport(masterIs);
+
+            List<Map<String, Object>> tableRows = buildTableRows(dto);
+
+            Map<String, Object> params = new HashMap<>();
+            // owner/building values: prefer OwnerInfo / BuildingInfo when present
+            String ownerName = null;
+            OwnerInfo oi = dto.getOwnerInfo();
+            if (oi != null) ownerName = oi.getOwnerName();
+            if (ownerName == null) ownerName = "";
+            String buildingType = null;
+            BuildingInfo bi = dto.getBuildingInfo();
+            if (bi != null) buildingType = bi.getBuildingType();
+            if (buildingType == null) buildingType = "";
+
+            params.put("ownerName", ownerName);
+            params.put("buildingType", buildingType);
+            // populate additional owner/building params
+            params.put("idNumber", oi == null ? "" : oi.getIdNumber());
+            params.put("mobileNumber", oi == null ? "" : oi.getMobileNumber());
+            params.put("contractorName", oi == null ? "" : oi.getContractorName());
+            params.put("projectName", oi == null ? "" : oi.getProjectName());
+            params.put("reportDate", oi == null ? "" : oi.getReportDate());
+
+            params.put("buildingDescription", bi == null ? "" : bi.getBuildingDescription());
+            params.put("landNumber", bi == null ? "" : bi.getLandNumber());
+            params.put("blockNumber", bi == null ? "" : bi.getBlockNumber());
+            params.put("planNumber", bi == null ? "" : bi.getPlanNumber());
+
+            // load logo resource into report param if available
+            try (java.io.InputStream is = resourceLoader.getResource("classpath:report/logoSite.png").getInputStream()) {
+                byte[] logo = is.readAllBytes();
+                params.put("reportLogo", logo);
+            } catch (Exception ignore) {
+                // ignore missing logo
+            }
+
+            // Fill the master report directly from the tasks datasource so detail fields bind
+            JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(tableRows);
+
+            JasperPrint print = JasperFillManager.fillReport(masterReport, params, ds);
+
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            JasperExportManager.exportReportToPdfStream(print, out);
+            return out.toByteArray();
+        } catch (Exception e) {
+            throw new JRException("Failed to generate project start report", e);
+        }
+    }
+
+    private List<Map<String, Object>> buildTableRows(ProjectStartReportDto dto) {
+        List<TaskRow> tasks = dto.getTasks();
+        if (tasks == null || tasks.isEmpty()) {
+            // create some default rows
+            return java.util.List.of(
+                    tableRow(1, "وضع أساس المبنى", "☑", ""),
+                    tableRow(2, "التأكد من الخرسانة", "☐", "عينه"),
+                    tableRow(3, "اختبارات السلامة", "☑", "")
+            );
+        }
+
+        return tasks.stream().map(r -> tableRow(r.getIndex(), r.getTaskName(), r.getCompliant(), r.getNotes())).collect(Collectors.toList());
+    }
+
+    private Map<String, Object> tableRow(Integer index, String task, String status, String notes) {
+        Map<String, Object> row = new HashMap<>();
+        // Use field names expected by the table subreport/master: itemNo and description
+        row.put("itemNo", index);
+        row.put("description", task);
+        row.put("status", status);
+        row.put("notes", notes == null ? "" : notes);
+        return row;
+    }
+}

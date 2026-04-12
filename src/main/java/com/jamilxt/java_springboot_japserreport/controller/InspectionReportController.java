@@ -55,4 +55,12 @@ public class InspectionReportController {
         response.setContentType(MediaType.APPLICATION_PDF_VALUE);
         reportService.writePdfToResponse(dto, response);
     }
+    @GetMapping(path = "/report-news/pdf", produces = MediaType.APPLICATION_PDF_VALUE)
+    public void report(HttpServletResponse response) throws Exception {
+        // Build a demo InspectionReportDto. In real use, build from DB/service.
+        InspectionReportDto dto = new InspectionReportDto();
+
+        response.setContentType(MediaType.APPLICATION_PDF_VALUE);
+        reportService.writePdfToResponse(dto, response);
+    }
 }

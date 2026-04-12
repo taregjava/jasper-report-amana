@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="project_start_report_table"
+              pageWidth="842"
+              pageHeight="595"
+              orientation="Landscape"
+              columnWidth="802"
+              leftMargin="20"
+              rightMargin="20"
+              topMargin="20"
+              bottomMargin="20"
+              language="java">
+
+    <property name="net.sf.jasperreports.text.direction" value="RTL"/>
+    <style name="Default" isDefault="true" fontName="SansSerif" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+
+    <!-- Fields expected in the table datasource -->
+    <field name="itemNo" class="java.lang.Integer"/>
+    <field name="description" class="java.lang.String"/>
+    <field name="requirement" class="java.lang.String"/>
+    <field name="status" class="java.lang.String"/>
+    <field name="notes" class="java.lang.String"/>
+
+    <!-- Column header for tasks table -->
+    <columnHeader>
+        <band height="36">
+            <rectangle>
+                <reportElement x="10" y="0" width="782" height="36" mode="Opaque" backcolor="#0B5D4F"/>
+            </rectangle>
+
+            <!-- Columns (right-to-left): index | task | مطابق | غير مطابق | لا ينطبق | ملاحظات -->
+            <staticText>
+                <reportElement x="757" y="7" width="35" height="20"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center"><font isBold="true" pdfFontName="fonts/Amiri-Regular.ttf"/></textElement>
+                <text><![CDATA[م]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="450" y="7" width="300" height="20"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center"><font isBold="true" pdfFontName="fonts/Amiri-Regular.ttf"/></textElement>
+                <text><![CDATA[المهمة]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="370" y="7" width="70" height="20"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center"><font isBold="true" pdfFontName="fonts/Amiri-Regular.ttf"/></textElement>
+                <text><![CDATA[مطابق]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="300" y="7" width="70" height="20"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center"><font isBold="true" pdfFontName="fonts/Amiri-Regular.ttf"/></textElement>
+                <text><![CDATA[غير مطابق]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="230" y="7" width="70" height="20"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center"><font isBold="true" pdfFontName="fonts/Amiri-Regular.ttf"/></textElement>
+                <text><![CDATA[لا ينطبق]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="12" y="7" width="210" height="20"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center"><font isBold="true" pdfFontName="fonts/Amiri-Regular.ttf"/></textElement>
+                <text><![CDATA[ملاحظات]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+
+    <detail>
+        <band height="40">
+            <!-- item number (rightmost) -->
+            <textField>
+                <reportElement x="757" y="0" width="35" height="18"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center"/>
+                <textFieldExpression><![CDATA[$F{itemNo}]]></textFieldExpression>
+            </textField>
+
+            <!-- description (middle) -->
+            <textField>
+                <reportElement x="450" y="0" width="300" height="36"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Right"/>
+                <textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+            </textField>
+
+            <!-- matched checkbox -->
+            <textField>
+                <reportElement x="370" y="0" width="70" height="36"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center"/>
+                <textFieldExpression><![CDATA[$F{status} != null && $F{status}.equals("☑") ? "☑" : ""]]></textFieldExpression>
+            </textField>
+
+            <!-- not matched -->
+            <textField>
+                <reportElement x="300" y="0" width="70" height="36"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center"/>
+                <textFieldExpression><![CDATA[$F{status} != null && $F{status}.equals("☐") ? "☐" : ""]]></textFieldExpression>
+            </textField>
+
+            <!-- not applicable -->
+            <textField>
+                <reportElement x="230" y="0" width="70" height="36"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center"/>
+                <textFieldExpression><![CDATA[$F{status} != null && $F{status}.equals("NA") ? "✔" : ""]]></textFieldExpression>
+            </textField>
+
+            <!-- notes (leftmost) -->
+            <textField isStretchWithOverflow="true">
+                <reportElement x="12" y="0" width="210" height="36"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Right"/>
+                <textFieldExpression><![CDATA[$F{notes}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+
+</jasperReport>
+
