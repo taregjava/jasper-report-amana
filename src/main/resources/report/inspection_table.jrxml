@@ -29,112 +29,92 @@
     <field name="status" class="java.lang.String"/>
     <!-- ================= BACKGROUND (images shown on first page only; background doesn't reserve layout space) ================= -->
     <background>
-        <band height="560">
-            <!-- LEFT IMAGE COLUMN -->
+        <!-- Single column of 4 images, each bigger, stacked with a small gap -->
+        <band height="624">
+
+            <!-- Image 1: صوره الموقع من الخريطه -->
             <frame>
-                <reportElement x="0" y="0" width="150" height="140">
+                <reportElement x="0" y="0" width="165" height="153">
                     <printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
                 </reportElement>
-
                 <staticText>
-                    <reportElement x="5" y="3" width="140" height="12"/>
-                    <textElement textAlignment="Center">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf"
-                              pdfEncoding="Identity-H"
-                              isPdfEmbedded="true"
-                              size="9"
-                              isBold="true"/>
+                    <reportElement x="0" y="0" width="165" height="20" mode="Opaque" backcolor="#005B41" forecolor="#FFFFFF"/>
+                    <textElement textAlignment="Center" verticalAlignment="Middle">
+                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true" size="9" isBold="true"/>
                     </textElement>
                     <text><![CDATA[صوره الموقع من الخريطه]]></text>
                 </staticText>
-
                 <frame>
-                    <reportElement x="5" y="16" width="140" height="120"/>
-                    <box><pen lineWidth="0.5"/></box>
-                    <image scaleImage="RetainShape">
-                        <reportElement x="2" y="2" width="136" height="116"/>
+                    <reportElement x="3" y="22" width="159" height="128" mode="Opaque" backcolor="#F8F8F8"/>
+                    <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                    <image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
+                        <reportElement x="3" y="3" width="153" height="122"/>
                         <imageExpression class="java.lang.Object"><![CDATA[$P{siteMapImage}]]></imageExpression>
                     </image>
                 </frame>
             </frame>
 
+            <!-- Image 2: الواجهه الاماميه -->
             <frame>
-                <reportElement x="0" y="140" width="150" height="140">
+                <reportElement x="0" y="156" width="165" height="153">
                     <printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
                 </reportElement>
-
                 <staticText>
-                    <reportElement x="5" y="3" width="140" height="12"/>
-                    <textElement textAlignment="Center">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf"
-                              pdfEncoding="Identity-H"
-                              isPdfEmbedded="true"
-                              size="9"
-                              isBold="true"/>
+                    <reportElement x="0" y="0" width="165" height="20" mode="Opaque" backcolor="#005B41" forecolor="#FFFFFF"/>
+                    <textElement textAlignment="Center" verticalAlignment="Middle">
+                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true" size="9" isBold="true"/>
                     </textElement>
                     <text><![CDATA[الواجهه الاماميه]]></text>
                 </staticText>
-
                 <frame>
-                    <reportElement x="5" y="16" width="140" height="120"/>
-                    <box><pen lineWidth="0.5"/></box>
-                    <image scaleImage="RetainShape">
-                        <reportElement x="2" y="2" width="136" height="116"/>
+                    <reportElement x="3" y="22" width="159" height="128" mode="Opaque" backcolor="#F8F8F8"/>
+                    <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                    <image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
+                        <reportElement x="3" y="3" width="153" height="122"/>
                         <imageExpression class="java.lang.Object"><![CDATA[$P{frontImage}]]></imageExpression>
                     </image>
                 </frame>
             </frame>
 
+            <!-- Image 3: الجانب الايمن -->
             <frame>
-                <reportElement x="0" y="280" width="150" height="120">
+                <reportElement x="0" y="312" width="165" height="153">
                     <printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
                 </reportElement>
-
                 <staticText>
-                    <reportElement x="5" y="3" width="140" height="12"/>
-                    <textElement textAlignment="Center">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf"
-                              pdfEncoding="Identity-H"
-                              isPdfEmbedded="true"
-                              size="9"
-                              isBold="true"/>
+                    <reportElement x="0" y="0" width="165" height="20" mode="Opaque" backcolor="#005B41" forecolor="#FFFFFF"/>
+                    <textElement textAlignment="Center" verticalAlignment="Middle">
+                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true" size="9" isBold="true"/>
                     </textElement>
                     <text><![CDATA[الجانب الايمن]]></text>
                 </staticText>
-
                 <frame>
-                    <reportElement x="5" y="16" width="140" height="100"/>
-                    <box><pen lineWidth="0.5"/></box>
-                    <image scaleImage="RetainShape">
-                        <reportElement x="2" y="2" width="136" height="96"/>
+                    <reportElement x="3" y="22" width="159" height="128" mode="Opaque" backcolor="#F8F8F8"/>
+                    <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                    <image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
+                        <reportElement x="3" y="3" width="153" height="122"/>
                         <imageExpression class="java.lang.Object"><![CDATA[$P{rightImage}]]></imageExpression>
                     </image>
                 </frame>
             </frame>
 
-            <!-- LEFT (new 4th) IMAGE COLUMN -->
+            <!-- Image 4: الجانب الايسر -->
             <frame>
-                <reportElement x="0" y="420" width="150" height="140">
+                <reportElement x="0" y="468" width="165" height="153">
                     <printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
                 </reportElement>
-
                 <staticText>
-                    <reportElement x="5" y="3" width="140" height="12"/>
-                    <textElement textAlignment="Center">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf"
-                              pdfEncoding="Identity-H"
-                              isPdfEmbedded="true"
-                              size="9"
-                              isBold="true"/>
+                    <reportElement x="0" y="0" width="165" height="20" mode="Opaque" backcolor="#005B41" forecolor="#FFFFFF"/>
+                    <textElement textAlignment="Center" verticalAlignment="Middle">
+                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true" size="9" isBold="true"/>
                     </textElement>
                     <text><![CDATA[الجانب الايسر]]></text>
                 </staticText>
-
                 <frame>
-                    <reportElement x="5" y="16" width="140" height="120"/>
-                    <box><pen lineWidth="0.5"/></box>
-                    <image scaleImage="RetainShape">
-                        <reportElement x="2" y="2" width="136" height="116"/>
+                    <reportElement x="3" y="22" width="159" height="128" mode="Opaque" backcolor="#F8F8F8"/>
+                    <box><pen lineWidth="0.5" lineColor="#CCCCCC"/></box>
+                    <image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
+                        <reportElement x="3" y="3" width="153" height="122"/>
                         <imageExpression class="java.lang.Object"><![CDATA[$P{leftImage}]]></imageExpression>
                     </image>
                 </frame>

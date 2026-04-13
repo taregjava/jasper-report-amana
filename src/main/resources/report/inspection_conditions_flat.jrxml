@@ -17,15 +17,15 @@
     <field name="noteText" class="java.lang.String"/>
 
     <detail>
-        <band height="140">
+        <band height="200">
 
             <frame>
-                <reportElement x="0" y="0" width="802" height="140"/>
+                <reportElement x="0" y="0" width="802" height="200"/>
                 <box><pen lineWidth="0.5"/></box>
 
                 <!-- TITLE -->
                 <textField isStretchWithOverflow="true">
-                    <reportElement x="0" y="0" width="552" height="20" positionType="Float"/>
+                    <reportElement x="5" y="5" width="335" height="20" positionType="Float"/>
                     <textElement textAlignment="Right">
                         <font pdfFontName="fonts/Amiri-Regular.ttf"
                               pdfEncoding="Identity-H"
@@ -42,25 +42,52 @@
 
                 <!-- CONDITION TEXT -->
                 <textField isStretchWithOverflow="true">
-                    <reportElement x="0" y="22" width="552" height="20" positionType="Float"/>
+                    <reportElement x="5" y="28" width="335" height="20" positionType="Float"/>
                     <textElement textAlignment="Right"/>
                     <textFieldExpression><![CDATA[$F{conditionText}]]></textFieldExpression>
                 </textField>
 
                 <!-- NOTE -->
                 <textField isStretchWithOverflow="true">
-                    <reportElement x="0" y="45" width="552" height="60" positionType="Float"/>
+                    <reportElement x="5" y="52" width="335" height="130" positionType="Float"/>
                     <textElement textAlignment="Right"/>
                     <textFieldExpression><![CDATA[$F{noteText}]]></textFieldExpression>
                 </textField>
 
-                <!-- IMAGE -->
-                <image scaleImage="FillFrame">
-                    <reportElement x="562" y="0" width="240" height="140" positionType="Float">
+                <!-- Vertical separator -->
+                <line>
+                    <reportElement x="348" y="5" width="0" height="190"/>
+                    <graphicElement>
+                        <pen lineWidth="0.5" lineColor="#CCCCCC"/>
+                    </graphicElement>
+                </line>
+
+                <!-- Image cell background — maximum size -->
+                <rectangle>
+                    <reportElement x="352" y="3" width="447" height="194" mode="Opaque" backcolor="#F8F8F8"/>
+                    <graphicElement>
+                        <pen lineWidth="0.5" lineColor="#DDDDDD"/>
+                    </graphicElement>
+                </rectangle>
+
+                <!-- IMAGE — maximum size, centered -->
+                <image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
+                    <reportElement x="356" y="6" width="439" height="188" positionType="Float">
                         <printWhenExpression><![CDATA[$F{imagePath} != null]]></printWhenExpression>
                     </reportElement>
                     <imageExpression class="java.lang.Object"><![CDATA[$F{imagePath}]]></imageExpression>
                 </image>
+
+                <!-- Placeholder text when no image -->
+                <staticText>
+                    <reportElement x="352" y="3" width="447" height="194" forecolor="#AAAAAA" mode="Transparent">
+                        <printWhenExpression><![CDATA[$F{imagePath} == null]]></printWhenExpression>
+                    </reportElement>
+                    <textElement textAlignment="Center" verticalAlignment="Middle">
+                        <font size="9"/>
+                    </textElement>
+                    <text><![CDATA[لا توجد صورة]]></text>
+                </staticText>
 
             </frame>
 

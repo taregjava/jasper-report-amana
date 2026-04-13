@@ -26,21 +26,35 @@
 
     <detail>
 
-        <band height="150">
+        <band height="158">
 
-            <image>
+            <!-- outer frame: light background + border -->
+            <frame>
+                <reportElement x="4" y="4" width="242" height="150" mode="Opaque" backcolor="#F8F8F8"/>
+                <box>
+                    <pen lineWidth="0.5" lineColor="#CCCCCC"/>
+                </box>
 
-                <reportElement
-                        x="0"
-                        y="0"
-                        width="250"
-                        height="150"/>
+                <!-- image centered inside frame with inner padding -->
+                <image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
+                    <reportElement x="4" y="4" width="234" height="142">
+                        <printWhenExpression><![CDATA[$F{imagePath} != null]]></printWhenExpression>
+                    </reportElement>
+                    <imageExpression class="java.net.URL"><![CDATA[$F{imagePath}]]></imageExpression>
+                </image>
 
-                <imageExpression class="java.net.URL"><![CDATA[
-                $F{imagePath}
-                ]]></imageExpression>
+                <!-- placeholder when no image -->
+                <staticText>
+                    <reportElement x="0" y="0" width="242" height="150" forecolor="#AAAAAA" mode="Transparent">
+                        <printWhenExpression><![CDATA[$F{imagePath} == null]]></printWhenExpression>
+                    </reportElement>
+                    <textElement textAlignment="Center" verticalAlignment="Middle">
+                        <font size="9"/>
+                    </textElement>
+                    <text><![CDATA[لا توجد صورة]]></text>
+                </staticText>
 
-            </image>
+            </frame>
 
         </band>
 
