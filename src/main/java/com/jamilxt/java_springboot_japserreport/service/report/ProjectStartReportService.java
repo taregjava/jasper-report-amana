@@ -32,12 +32,14 @@ public class ProjectStartReportService {
         try (InputStream headerIs = getClass().getResourceAsStream("/report/project_start_report_header.jrxml");
              InputStream ownerIs  = getClass().getResourceAsStream("/report/project_start_report_owner.jrxml");
              InputStream bodyIs   = getClass().getResourceAsStream("/report/project_start_report_body.jrxml");
+             InputStream buildingIs = getClass().getResourceAsStream("/report/project_start_report_building.jrxml");
              InputStream tableIs  = getClass().getResourceAsStream("/report/project_start_report_table.jrxml");
              InputStream masterIs = getClass().getResourceAsStream("/report/project_start_report_master.jrxml")) {
 
             JasperReport headerRep = JasperCompileManager.compileReport(headerIs);
             JasperReport ownerRep  = ownerIs == null ? null : JasperCompileManager.compileReport(ownerIs);
             JasperReport bodyRep   = JasperCompileManager.compileReport(bodyIs);
+            JasperReport buildingRep = JasperCompileManager.compileReport(buildingIs);
             JasperReport tableRep  = JasperCompileManager.compileReport(tableIs);
             JasperReport masterRep = JasperCompileManager.compileReport(masterIs);
 
@@ -66,6 +68,7 @@ public class ProjectStartReportService {
             params.put("headerSubreport", headerRep);
             params.put("ownerSubreport", ownerRep);
             params.put("bodySubreport", bodyRep);
+            params.put("buildingSubreport", buildingRep);
             params.put("tableSubreport", tableRep);
             // pass table datasource
             params.put("tableData", tableDs);
@@ -99,6 +102,13 @@ public class ProjectStartReportService {
             params.put("buildingDescription", "وصف نموذجي للمبنى...");
             params.put("licenseNumber", "LIC-001");
             params.put("licenseDate", "1446/12/15");
+            params.put("planNumber", "PLN-88");
+            params.put("district", "حي النور");
+            params.put("street", "شارع الأمير");
+            params.put("landNumber", "245");
+            params.put("blockNumber", "17");
+            params.put("isFullyFinished", Boolean.TRUE);
+            params.put("isPartiallyBuilt", Boolean.FALSE);
 
             // Fill master report. The master places subreports; use empty datasource for master.
             JasperPrint jasperPrint = JasperFillManager.fillReport(masterRep, params, new net.sf.jasperreports.engine.JREmptyDataSource());
@@ -110,13 +120,31 @@ public class ProjectStartReportService {
     }
 
     public byte[] generatePdf(ProjectStartReportDto dto) throws JRException {
-        try (java.io.InputStream masterIs = resourceLoader.getResource("classpath:report/project_start_report.jrxml").getInputStream()) {
+        try (InputStream headerIs = resourceLoader.getResource("classpath:report/project_start_report_header.jrxml").getInputStream();
+             InputStream ownerIs = resourceLoader.getResource("classpath:report/project_start_report_owner.jrxml").getInputStream();
+             InputStream bodyIs = resourceLoader.getResource("classpath:report/project_start_report_body.jrxml").getInputStream();
+             InputStream buildingIs = resourceLoader.getResource("classpath:report/project_start_report_building.jrxml").getInputStream();
+             InputStream tableIs = resourceLoader.getResource("classpath:report/project_start_report_table.jrxml").getInputStream();
+             InputStream masterIs = resourceLoader.getResource("classpath:report/project_start_report_master.jrxml").getInputStream()) {
 
+            JasperReport headerRep = JasperCompileManager.compileReport(headerIs);
+            JasperReport ownerRep = JasperCompileManager.compileReport(ownerIs);
+            JasperReport bodyRep = JasperCompileManager.compileReport(bodyIs);
+            JasperReport buildingRep = JasperCompileManager.compileReport(buildingIs);
+            JasperReport tableRep = JasperCompileManager.compileReport(tableIs);
             JasperReport masterReport = JasperCompileManager.compileReport(masterIs);
 
             List<Map<String, Object>> tableRows = buildTableRows(dto);
 
             Map<String, Object> params = new HashMap<>();
+            // pass compiled subreports + table datasource expected by master
+            params.put("headerSubreport", headerRep);
+            params.put("ownerSubreport", ownerRep);
+            params.put("bodySubreport", bodyRep);
+            params.put("buildingSubreport", buildingRep);
+            params.put("tableSubreport", tableRep);
+            params.put("tableData", new JRBeanCollectionDataSource(tableRows));
+
             // owner/building values: prefer OwnerInfo / BuildingInfo when present
             String ownerName = null;
             OwnerInfo oi = dto.getOwnerInfo();
@@ -147,11 +175,14 @@ public class ProjectStartReportService {
             params.put("buildingDescription", bi == null ? "" : bi.getBuildingDescription());
             // map building fields to expected names (best-effort)
             params.put("planNumber", bi == null ? "" : bi.getPlanNumber());
-            params.put("plotNumber", bi == null ? "" : bi.getBlockNumber());
+            params.put("landNumber", bi == null ? "" : bi.getLandNumber());
+            params.put("blockNumber", bi == null ? "" : bi.getBlockNumber());
             params.put("licenseNumber", bi == null ? "" : bi.getLicenseNumber());
             params.put("licenseDate", bi == null ? "" : bi.getLicenseDate());
             params.put("district", bi == null ? "" : bi.getDistrict());
             params.put("street", bi == null ? "" : bi.getStreet());
+            params.put("isFullyFinished", bi != null && bi.isFullyBuilt());
+            params.put("isPartiallyBuilt", bi != null && bi.isPartiallyBuilt());
 
             // load logo resource into report param if available
             try (java.io.InputStream is = resourceLoader.getResource("classpath:report/logoSite.png").getInputStream()) {
@@ -161,10 +192,8 @@ public class ProjectStartReportService {
                 // ignore missing logo
             }
 
-            // Fill the master report directly from the tasks datasource so detail fields bind
-            JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(tableRows);
-
-            JasperPrint print = JasperFillManager.fillReport(masterReport, params, ds);
+            // Master contains nested subreports and consumes `tableData` directly.
+            JasperPrint print = JasperFillManager.fillReport(masterReport, params, new net.sf.jasperreports.engine.JREmptyDataSource());
 
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             JasperExportManager.exportReportToPdfStream(print, out);

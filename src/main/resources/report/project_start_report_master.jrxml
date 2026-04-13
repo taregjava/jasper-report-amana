@@ -19,6 +19,7 @@
     <!-- Subreport parameters (compiled JasperReport instances) -->
     <parameter name="headerSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
     <parameter name="bodySubreport" class="net.sf.jasperreports.engine.JasperReport"/>
+    <parameter name="buildingSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
     <parameter name="tableSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
 
     <!-- datasource for tasks table -->
@@ -28,12 +29,19 @@
     <parameter name="reportLogo" class="java.lang.Object"/>
     <parameter name="projectNameAndAddress" class="java.lang.String"/>
     <parameter name="reportDate" class="java.lang.String"/>
-    <!-- Building params forwarded to body subreport (declare here so master compile sees them) -->
+    <!-- Building params forwarded to building subreport -->
     <parameter name="buildingType" class="java.lang.String"/>
     <parameter name="buildingCondition" class="java.lang.String"/>
     <parameter name="buildingDescription" class="java.lang.String"/>
     <parameter name="licenseNumber" class="java.lang.String"/>
     <parameter name="licenseDate" class="java.lang.String"/>
+    <parameter name="planNumber" class="java.lang.String"/>
+    <parameter name="district" class="java.lang.String"/>
+    <parameter name="street" class="java.lang.String"/>
+    <parameter name="landNumber" class="java.lang.String"/>
+    <parameter name="blockNumber" class="java.lang.String"/>
+    <parameter name="isFullyFinished" class="java.lang.Boolean"/>
+    <parameter name="isPartiallyBuilt" class="java.lang.Boolean"/>
     <!-- Owner params forwarded to body subreport -->
     <parameter name="ownerName" class="java.lang.String"/>
     <parameter name="ownerIdNumber" class="java.lang.String"/>
@@ -96,32 +104,23 @@
                 <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{ownerSubreport}]]></subreportExpression>
             </subreport>
 
-            <!-- body subreport (building info) -->
+            <!-- building subreport (separate file) -->
             <subreport>
                 <!-- positioned below header+owner; reduced height so all bands fit on page -->
-                <reportElement x="0" y="310" width="802" height="155"/>
-                <!-- pass-through parameters (if present in master caller) -->
+                <reportElement x="0" y="325" width="802" height="140"/>
                 <subreportParameter name="buildingType"><subreportParameterExpression><![CDATA[$P{buildingType}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="buildingCondition"><subreportParameterExpression><![CDATA[$P{buildingCondition}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="buildingDescription"><subreportParameterExpression><![CDATA[$P{buildingDescription}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="licenseNumber"><subreportParameterExpression><![CDATA[$P{licenseNumber}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="licenseDate"><subreportParameterExpression><![CDATA[$P{licenseDate}]]></subreportParameterExpression></subreportParameter>
-                <!-- forward owner params to body subreport -->
-                <subreportParameter name="ownerName"><subreportParameterExpression><![CDATA[$P{ownerName}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="ownerIdNumber"><subreportParameterExpression><![CDATA[$P{ownerIdNumber}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="ownerMobile"><subreportParameterExpression><![CDATA[$P{ownerMobile}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="deedNumber"><subreportParameterExpression><![CDATA[$P{deedNumber}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="supervisingEngineeringOffice"><subreportParameterExpression><![CDATA[$P{supervisingEngineeringOffice}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="designingEngineeringOffice"><subreportParameterExpression><![CDATA[$P{designingEngineeringOffice}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="contractorName"><subreportParameterExpression><![CDATA[$P{contractorName}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="contractorRecord"><subreportParameterExpression><![CDATA[$P{contractorRecord}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="contractorMobile"><subreportParameterExpression><![CDATA[$P{contractorMobile}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="supervisingEngineerName"><subreportParameterExpression><![CDATA[$P{supervisingEngineerName}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="stageInspectionResult"><subreportParameterExpression><![CDATA[$P{stageInspectionResult}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="stageInspectionNotes"><subreportParameterExpression><![CDATA[$P{stageInspectionNotes}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="planNumber"><subreportParameterExpression><![CDATA[$P{planNumber}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="district"><subreportParameterExpression><![CDATA[$P{district}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="street"><subreportParameterExpression><![CDATA[$P{street}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="landNumber"><subreportParameterExpression><![CDATA[$P{landNumber}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="blockNumber"><subreportParameterExpression><![CDATA[$P{blockNumber}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="isFullyFinished"><subreportParameterExpression><![CDATA[$P{isFullyFinished}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="isPartiallyBuilt"><subreportParameterExpression><![CDATA[$P{isPartiallyBuilt}]]></subreportParameterExpression></subreportParameter>
                 <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
-                <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{bodySubreport}]]></subreportExpression>
+                <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{buildingSubreport}]]></subreportExpression>
             </subreport>
 
             <!-- table subreport (tasks) -->
