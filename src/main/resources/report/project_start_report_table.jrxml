@@ -25,51 +25,51 @@
 
     <!-- Column header for tasks table -->
     <columnHeader>
-        <band height="36">
+        <band height="44">
             <rectangle>
-                <reportElement x="10" y="0" width="782" height="36" mode="Opaque" backcolor="#0B5D4F"/>
+                <reportElement x="10" y="0" width="782" height="44" mode="Opaque" backcolor="#0B5D4F"/>
             </rectangle>
 
             <!-- Columns (right-to-left): index | task | مطابق | غير مطابق | لا ينطبق | ملاحظات -->
             <staticText>
-                <reportElement x="757" y="7" width="35" height="20"/>
+                <reportElement x="757" y="10" width="35" height="24" forecolor="#FFFFFF"/>
                 <box><pen lineWidth="0.5"/></box>
-                <textElement textAlignment="Center"><font isBold="true" pdfFontName="fonts/Amiri-Regular.ttf"/></textElement>
+                <textElement textAlignment="Center"><font isBold="true" pdfFontName="fonts/Amiri-Regular.ttf" size="11"/></textElement>
                 <text><![CDATA[م]]></text>
             </staticText>
 
             <staticText>
-                <reportElement x="450" y="7" width="300" height="20"/>
+                <reportElement x="450" y="10" width="300" height="24" forecolor="#FFFFFF"/>
                 <box><pen lineWidth="0.5"/></box>
-                <textElement textAlignment="Center"><font isBold="true" pdfFontName="fonts/Amiri-Regular.ttf"/></textElement>
+                <textElement textAlignment="Center"><font isBold="true" pdfFontName="fonts/Amiri-Regular.ttf" size="11"/></textElement>
                 <text><![CDATA[المهمة]]></text>
             </staticText>
 
             <staticText>
-                <reportElement x="370" y="7" width="70" height="20"/>
+                <reportElement x="370" y="10" width="70" height="24" forecolor="#FFFFFF"/>
                 <box><pen lineWidth="0.5"/></box>
-                <textElement textAlignment="Center"><font isBold="true" pdfFontName="fonts/Amiri-Regular.ttf"/></textElement>
+                <textElement textAlignment="Center"><font isBold="true" pdfFontName="fonts/Amiri-Regular.ttf" size="11"/></textElement>
                 <text><![CDATA[مطابق]]></text>
             </staticText>
 
             <staticText>
-                <reportElement x="300" y="7" width="70" height="20"/>
+                <reportElement x="300" y="10" width="70" height="24" forecolor="#FFFFFF"/>
                 <box><pen lineWidth="0.5"/></box>
-                <textElement textAlignment="Center"><font isBold="true" pdfFontName="fonts/Amiri-Regular.ttf"/></textElement>
+                <textElement textAlignment="Center"><font isBold="true" pdfFontName="fonts/Amiri-Regular.ttf" size="11"/></textElement>
                 <text><![CDATA[غير مطابق]]></text>
             </staticText>
 
             <staticText>
-                <reportElement x="230" y="7" width="70" height="20"/>
+                <reportElement x="230" y="10" width="70" height="24" forecolor="#FFFFFF"/>
                 <box><pen lineWidth="0.5"/></box>
-                <textElement textAlignment="Center"><font isBold="true" pdfFontName="fonts/Amiri-Regular.ttf"/></textElement>
+                <textElement textAlignment="Center"><font isBold="true" pdfFontName="fonts/Amiri-Regular.ttf" size="11"/></textElement>
                 <text><![CDATA[لا ينطبق]]></text>
             </staticText>
 
             <staticText>
-                <reportElement x="12" y="7" width="210" height="20"/>
+                <reportElement x="12" y="10" width="210" height="24" forecolor="#FFFFFF"/>
                 <box><pen lineWidth="0.5"/></box>
-                <textElement textAlignment="Center"><font isBold="true" pdfFontName="fonts/Amiri-Regular.ttf"/></textElement>
+                <textElement textAlignment="Center"><font isBold="true" pdfFontName="fonts/Amiri-Regular.ttf" size="11"/></textElement>
                 <text><![CDATA[ملاحظات]]></text>
             </staticText>
         </band>

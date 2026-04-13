@@ -30,11 +30,13 @@ public class ProjectStartReportService {
     public byte[] generateProjectStartPdfStatic() throws Exception {
         // Load and compile subreports + master
         try (InputStream headerIs = getClass().getResourceAsStream("/report/project_start_report_header.jrxml");
+             InputStream ownerIs  = getClass().getResourceAsStream("/report/project_start_report_owner.jrxml");
              InputStream bodyIs   = getClass().getResourceAsStream("/report/project_start_report_body.jrxml");
              InputStream tableIs  = getClass().getResourceAsStream("/report/project_start_report_table.jrxml");
              InputStream masterIs = getClass().getResourceAsStream("/report/project_start_report_master.jrxml")) {
 
             JasperReport headerRep = JasperCompileManager.compileReport(headerIs);
+            JasperReport ownerRep  = ownerIs == null ? null : JasperCompileManager.compileReport(ownerIs);
             JasperReport bodyRep   = JasperCompileManager.compileReport(bodyIs);
             JasperReport tableRep  = JasperCompileManager.compileReport(tableIs);
             JasperReport masterRep = JasperCompileManager.compileReport(masterIs);
@@ -62,6 +64,7 @@ public class ProjectStartReportService {
             Map<String,Object> params = new HashMap<>();
             // pass compiled subreports
             params.put("headerSubreport", headerRep);
+            params.put("ownerSubreport", ownerRep);
             params.put("bodySubreport", bodyRep);
             params.put("tableSubreport", tableRep);
             // pass table datasource
@@ -82,6 +85,13 @@ public class ProjectStartReportService {
             params.put("ownerName", "محمود محمد");
             params.put("ownerIdNumber", "1234567890");
             params.put("ownerMobile", "0500000000");
+            params.put("deedNumber", "D-2026-999");
+            params.put("designingEngineeringOffice", "مكتب التصميم العالمي");
+            params.put("contractorRecord", "CR-998877");
+            params.put("contractorMobile", "0550000000");
+            params.put("supervisingEngineerName", "م. علي الحربي");
+            params.put("stageInspectionResult", "مقبول");
+            params.put("stageInspectionNotes", "كل العناصر مطابقة مع ملاحظات طفيفة.");
             params.put("contractorName", "شركة المقاول المحدودة");
             params.put("supervisingEngineeringOffice", "المكتب الهندسي النموذجي");
             params.put("buildingType", "سكني");
@@ -119,17 +129,29 @@ public class ProjectStartReportService {
 
             params.put("ownerName", ownerName);
             params.put("buildingType", buildingType);
-            // populate additional owner/building params
-            params.put("idNumber", oi == null ? "" : oi.getIdNumber());
-            params.put("mobileNumber", oi == null ? "" : oi.getMobileNumber());
+            // populate additional owner/building params using preferred parameter names
+            params.put("ownerIdNumber", oi == null ? "" : (oi.getOwnerIdNumber() != null ? oi.getOwnerIdNumber() : oi.getIdNumber()));
+            params.put("ownerMobile", oi == null ? "" : (oi.getOwnerMobile() != null ? oi.getOwnerMobile() : oi.getMobileNumber()));
+            params.put("deedNumber", oi == null ? "" : oi.getDeedNumber());
+            params.put("supervisingEngineeringOffice", oi == null ? "" : (oi.getSupervisingEngineeringOffice() != null ? oi.getSupervisingEngineeringOffice() : oi.getEngineeringOffice()));
+            params.put("designingEngineeringOffice", oi == null ? "" : oi.getDesigningEngineeringOffice());
             params.put("contractorName", oi == null ? "" : oi.getContractorName());
-            params.put("projectName", oi == null ? "" : oi.getProjectName());
+            params.put("contractorRecord", oi == null ? "" : (oi.getContractorRecord() != null ? oi.getContractorRecord() : oi.getContractorLicense()));
+            params.put("contractorMobile", oi == null ? "" : oi.getContractorMobile());
+            params.put("projectNameAndAddress", oi == null ? "" : (oi.getProjectNameAndAddress() != null ? oi.getProjectNameAndAddress() : oi.getProjectName()));
+            params.put("supervisingEngineerName", dto.getEngineerName() == null ? "" : dto.getEngineerName());
             params.put("reportDate", oi == null ? "" : oi.getReportDate());
+            params.put("stageInspectionResult", dto.getStageResult() == null ? "" : dto.getStageResult());
+            params.put("stageInspectionNotes", oi == null ? "" : oi.getStageInspectionNotes());
 
             params.put("buildingDescription", bi == null ? "" : bi.getBuildingDescription());
-            params.put("landNumber", bi == null ? "" : bi.getLandNumber());
-            params.put("blockNumber", bi == null ? "" : bi.getBlockNumber());
+            // map building fields to expected names (best-effort)
             params.put("planNumber", bi == null ? "" : bi.getPlanNumber());
+            params.put("plotNumber", bi == null ? "" : bi.getBlockNumber());
+            params.put("licenseNumber", bi == null ? "" : bi.getLicenseNumber());
+            params.put("licenseDate", bi == null ? "" : bi.getLicenseDate());
+            params.put("district", bi == null ? "" : bi.getDistrict());
+            params.put("street", bi == null ? "" : bi.getStreet());
 
             // load logo resource into report param if available
             try (java.io.InputStream is = resourceLoader.getResource("classpath:report/logoSite.png").getInputStream()) {

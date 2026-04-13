@@ -38,19 +38,29 @@
     <parameter name="ownerName" class="java.lang.String"/>
     <parameter name="ownerIdNumber" class="java.lang.String"/>
     <parameter name="ownerMobile" class="java.lang.String"/>
-    <parameter name="contractorName" class="java.lang.String"/>
+    <parameter name="deedNumber" class="java.lang.String"/>
     <parameter name="supervisingEngineeringOffice" class="java.lang.String"/>
+    <parameter name="designingEngineeringOffice" class="java.lang.String"/>
+    <parameter name="contractorName" class="java.lang.String"/>
+    <parameter name="contractorRecord" class="java.lang.String"/>
+    <parameter name="contractorMobile" class="java.lang.String"/>
+    <parameter name="supervisingEngineerName" class="java.lang.String"/>
+    <parameter name="stageInspectionResult" class="java.lang.String"/>
+    <parameter name="stageInspectionNotes" class="java.lang.String"/>
+    <!-- compiled owner subreport JasperReport instance -->
+    <parameter name="ownerSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
 
     <title>
         <band height="10"/>
     </title>
 
     <detail>
-        <!-- keep detail band small enough to fit page height; subreports inside will stretch across pages as needed -->
-        <band height="540">
+        <!-- adjust detail band height so compiled subreport placements fit the page height -->
+        <!-- pageHeight(595) - topMargin(20) - bottomMargin(20) - title(10) = 545 -->
+        <band height="545">
             <!-- header subreport placed at top -->
             <subreport>
-                <reportElement x="0" y="0" width="802" height="220"/>
+                <reportElement x="0" y="0" width="802" height="200"/>
                 <subreportParameter name="reportLogo">
                     <subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression>
                 </subreportParameter>
@@ -64,9 +74,32 @@
                 <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{headerSubreport}]]></subreportExpression>
             </subreport>
 
+            <!-- ownership subreport (separate file) -->
+            <subreport>
+                <reportElement x="0" y="210" width="802" height="90"/>
+                <!-- pass ownership parameters into owner subreport -->
+                <subreportParameter name="ownerName"><subreportParameterExpression><![CDATA[$P{ownerName}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="ownerIdNumber"><subreportParameterExpression><![CDATA[$P{ownerIdNumber}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="ownerMobile"><subreportParameterExpression><![CDATA[$P{ownerMobile}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="deedNumber"><subreportParameterExpression><![CDATA[$P{deedNumber}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="supervisingEngineeringOffice"><subreportParameterExpression><![CDATA[$P{supervisingEngineeringOffice}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="designingEngineeringOffice"><subreportParameterExpression><![CDATA[$P{designingEngineeringOffice}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="contractorName"><subreportParameterExpression><![CDATA[$P{contractorName}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="contractorRecord"><subreportParameterExpression><![CDATA[$P{contractorRecord}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="contractorMobile"><subreportParameterExpression><![CDATA[$P{contractorMobile}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="reportDate"><subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="supervisingEngineerName"><subreportParameterExpression><![CDATA[$P{supervisingEngineerName}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="stageInspectionResult"><subreportParameterExpression><![CDATA[$P{stageInspectionResult}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="stageInspectionNotes"><subreportParameterExpression><![CDATA[$P{stageInspectionNotes}]]></subreportParameterExpression></subreportParameter>
+                <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
+                <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{ownerSubreport}]]></subreportExpression>
+            </subreport>
+
             <!-- body subreport (building info) -->
             <subreport>
-                <reportElement x="0" y="230" width="802" height="160"/>
+                <!-- positioned below header+owner; reduced height so all bands fit on page -->
+                <reportElement x="0" y="310" width="802" height="155"/>
                 <!-- pass-through parameters (if present in master caller) -->
                 <subreportParameter name="buildingType"><subreportParameterExpression><![CDATA[$P{buildingType}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="buildingCondition"><subreportParameterExpression><![CDATA[$P{buildingCondition}]]></subreportParameterExpression></subreportParameter>
@@ -77,15 +110,24 @@
                 <subreportParameter name="ownerName"><subreportParameterExpression><![CDATA[$P{ownerName}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="ownerIdNumber"><subreportParameterExpression><![CDATA[$P{ownerIdNumber}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="ownerMobile"><subreportParameterExpression><![CDATA[$P{ownerMobile}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="contractorName"><subreportParameterExpression><![CDATA[$P{contractorName}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="deedNumber"><subreportParameterExpression><![CDATA[$P{deedNumber}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="supervisingEngineeringOffice"><subreportParameterExpression><![CDATA[$P{supervisingEngineeringOffice}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="designingEngineeringOffice"><subreportParameterExpression><![CDATA[$P{designingEngineeringOffice}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="contractorName"><subreportParameterExpression><![CDATA[$P{contractorName}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="contractorRecord"><subreportParameterExpression><![CDATA[$P{contractorRecord}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="contractorMobile"><subreportParameterExpression><![CDATA[$P{contractorMobile}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="supervisingEngineerName"><subreportParameterExpression><![CDATA[$P{supervisingEngineerName}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="stageInspectionResult"><subreportParameterExpression><![CDATA[$P{stageInspectionResult}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="stageInspectionNotes"><subreportParameterExpression><![CDATA[$P{stageInspectionNotes}]]></subreportParameterExpression></subreportParameter>
                 <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
                 <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{bodySubreport}]]></subreportExpression>
             </subreport>
 
             <!-- table subreport (tasks) -->
             <subreport>
-                <reportElement x="0" y="400" width="802" height="140"/>
+                <!-- placed at the bottom of the detail band -->
+                <reportElement x="0" y="465" width="802" height="80"/>
                 <dataSourceExpression><![CDATA[$P{tableData}]]></dataSourceExpression>
                 <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{tableSubreport}]]></subreportExpression>
             </subreport>

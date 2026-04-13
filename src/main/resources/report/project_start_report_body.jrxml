@@ -21,6 +21,14 @@
     <parameter name="ownerName" class="java.lang.String"/>
     <parameter name="ownerIdNumber" class="java.lang.String"/>
     <parameter name="ownerMobile" class="java.lang.String"/>
+    <parameter name="deedNumber" class="java.lang.String"/>
+    <parameter name="designingEngineeringOffice" class="java.lang.String"/>
+    <parameter name="contractorRecord" class="java.lang.String"/>
+    <parameter name="contractorMobile" class="java.lang.String"/>
+    <parameter name="projectNameAndAddress" class="java.lang.String"/>
+    <parameter name="supervisingEngineerName" class="java.lang.String"/>
+    <parameter name="stageInspectionResult" class="java.lang.String"/>
+    <parameter name="stageInspectionNotes" class="java.lang.String"/>
     <parameter name="contractorName" class="java.lang.String"/>
     <parameter name="supervisingEngineeringOffice" class="java.lang.String"/>
     <parameter name="buildingType" class="java.lang.String"/>
@@ -38,7 +46,8 @@
     <parameter name="street" class="java.lang.String"/>
 
     <title>
-        <band height="260">
+        <!-- increased height to fit ownership + building + inspection blocks -->
+        <band height="330">
             <!-- Ownership header banner moved here -->
             <rectangle>
                 <reportElement x="10" y="0" width="782" height="26" mode="Opaque" backcolor="#0B5D4F"/>
@@ -58,8 +67,9 @@
                 <text><![CDATA[اسم المالك:]]></text>
             </staticText>
             <textField>
-                <reportElement x="500" y="36" width="140" height="16"/>
-                <textElement textAlignment="Right"/>
+                <reportElement x="500" y="36" width="140" height="16" mode="Opaque" backcolor="#C6E6C3"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Right"><font pdfFontName="fonts/Amiri-Regular.ttf"/></textElement>
                 <textFieldExpression><![CDATA[$P{ownerName}]]></textFieldExpression>
             </textField>
 
@@ -69,8 +79,9 @@
                 <text><![CDATA[رقم الهوية:]]></text>
             </staticText>
             <textField>
-                <reportElement x="200" y="36" width="140" height="16"/>
-                <textElement textAlignment="Right"/>
+                <reportElement x="200" y="36" width="140" height="16" mode="Opaque" backcolor="#C6E6C3"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Right"><font pdfFontName="fonts/Amiri-Regular.ttf"/></textElement>
                 <textFieldExpression><![CDATA[$P{ownerIdNumber}]]></textFieldExpression>
             </textField>
 
@@ -80,8 +91,9 @@
                 <text><![CDATA[رقم الجوال:]]></text>
             </staticText>
             <textField>
-                <reportElement x="500" y="56" width="140" height="16"/>
-                <textElement textAlignment="Right"/>
+                <reportElement x="500" y="56" width="140" height="16" mode="Opaque" backcolor="#C6E6C3"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Right"><font pdfFontName="fonts/Amiri-Regular.ttf"/></textElement>
                 <textFieldExpression><![CDATA[$P{ownerMobile}]]></textFieldExpression>
             </textField>
 
@@ -91,8 +103,9 @@
                 <text><![CDATA[المقاول:]]></text>
             </staticText>
             <textField>
-                <reportElement x="200" y="56" width="140" height="16"/>
-                <textElement textAlignment="Right"/>
+                <reportElement x="200" y="56" width="140" height="16" mode="Opaque" backcolor="#C6E6C3"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Right"><font pdfFontName="fonts/Amiri-Regular.ttf"/></textElement>
                 <textFieldExpression><![CDATA[$P{contractorName}]]></textFieldExpression>
             </textField>
 
@@ -102,9 +115,59 @@
                 <text><![CDATA[المكتب الهندسي:]]></text>
             </staticText>
             <textField>
-                <reportElement x="500" y="76" width="300" height="16"/>
-                <textElement textAlignment="Right"/>
+                <reportElement x="500" y="76" width="300" height="16" mode="Opaque" backcolor="#C6E6C3"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Right"><font pdfFontName="fonts/Amiri-Regular.ttf"/></textElement>
                 <textFieldExpression><![CDATA[$P{supervisingEngineeringOffice}]]></textFieldExpression>
+            </textField>
+
+            <!-- additional owner fields: deed number, contractor record, contractor mobile -->
+            <staticText>
+                <reportElement x="660" y="96" width="120" height="16"/>
+                <textElement textAlignment="Right"/>
+                <text><![CDATA[رقم الصك:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="500" y="96" width="140" height="16" mode="Opaque" backcolor="#C6E6C3"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Right"><font pdfFontName="fonts/Amiri-Regular.ttf"/></textElement>
+                <textFieldExpression><![CDATA[$P{deedNumber}]]></textFieldExpression>
+            </textField>
+
+            <staticText>
+                <reportElement x="350" y="96" width="140" height="16"/>
+                <textElement textAlignment="Right"/>
+                <text><![CDATA[سجل المقاول:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="200" y="96" width="140" height="16" mode="Opaque" backcolor="#C6E6C3"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Right"><font pdfFontName="fonts/Amiri-Regular.ttf"/></textElement>
+                <textFieldExpression><![CDATA[$P{contractorRecord}]]></textFieldExpression>
+            </textField>
+
+            <staticText>
+                <reportElement x="660" y="116" width="120" height="16"/>
+                <textElement textAlignment="Right"/>
+                <text><![CDATA[جوال المقاول:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="500" y="116" width="140" height="16" mode="Opaque" backcolor="#C6E6C3"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Right"><font pdfFontName="fonts/Amiri-Regular.ttf"/></textElement>
+                <textFieldExpression><![CDATA[$P{contractorMobile}]]></textFieldExpression>
+            </textField>
+
+            <staticText>
+                <reportElement x="350" y="116" width="140" height="16"/>
+                <textElement textAlignment="Right"/>
+                <text><![CDATA[مصمم المكتب الهندسي:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="200" y="116" width="140" height="16" mode="Opaque" backcolor="#C6E6C3"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Right"><font pdfFontName="fonts/Amiri-Regular.ttf"/></textElement>
+                <textFieldExpression><![CDATA[$P{designingEngineeringOffice}]]></textFieldExpression>
             </textField>
 
             <rectangle>
@@ -125,8 +188,9 @@
                 <text><![CDATA[نوع المبنى:]]></text>
             </staticText>
             <textField>
-                <reportElement x="500" y="136" width="140" height="16"/>
-                <textElement textAlignment="Right"/>
+                <reportElement x="500" y="136" width="140" height="16" mode="Opaque" backcolor="#C6E6C3"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Right"><font pdfFontName="fonts/Amiri-Regular.ttf"/></textElement>
                 <textFieldExpression><![CDATA[$P{buildingType}]]></textFieldExpression>
             </textField>
 
@@ -136,8 +200,9 @@
                 <text><![CDATA[حالة المبنى:]]></text>
             </staticText>
             <textField>
-                <reportElement x="200" y="136" width="140" height="16"/>
-                <textElement textAlignment="Right"/>
+                <reportElement x="200" y="136" width="140" height="16" mode="Opaque" backcolor="#C6E6C3"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Right"><font pdfFontName="fonts/Amiri-Regular.ttf"/></textElement>
                 <textFieldExpression><![CDATA[$P{buildingCondition}]]></textFieldExpression>
             </textField>
 
@@ -159,8 +224,9 @@
                 <text><![CDATA[رقم الرخصة:]]></text>
             </staticText>
             <textField>
-                <reportElement x="500" y="208" width="140" height="16"/>
-                <textElement textAlignment="Right"/>
+                <reportElement x="500" y="208" width="140" height="16" mode="Opaque" backcolor="#C6E6C3"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Right"><font pdfFontName="fonts/Amiri-Regular.ttf"/></textElement>
                 <textFieldExpression><![CDATA[$P{licenseNumber}]]></textFieldExpression>
             </textField>
 
@@ -170,9 +236,59 @@
                 <text><![CDATA[تاريخ الرخصة:]]></text>
             </staticText>
             <textField>
-                <reportElement x="200" y="208" width="140" height="16"/>
-                <textElement textAlignment="Right"/>
+                <reportElement x="200" y="208" width="140" height="16" mode="Opaque" backcolor="#C6E6C3"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Right"><font pdfFontName="fonts/Amiri-Regular.ttf"/></textElement>
                 <textFieldExpression><![CDATA[$P{licenseDate}]]></textFieldExpression>
+            </textField>
+
+            <!-- Project name/address and supervising engineer (below building block) -->
+            <staticText>
+                <reportElement x="660" y="234" width="120" height="16"/>
+                <textElement textAlignment="Right"/>
+                <text><![CDATA[اسم المشروع وعنوانه:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="12" y="234" width="640" height="20" mode="Opaque" backcolor="#F8FFF6"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Right"><font pdfFontName="fonts/Amiri-Regular.ttf" size="11"/></textElement>
+                <textFieldExpression><![CDATA[$P{projectNameAndAddress}]]></textFieldExpression>
+            </textField>
+
+            <staticText>
+                <reportElement x="660" y="258" width="120" height="16"/>
+                <textElement textAlignment="Right"/>
+                <text><![CDATA[اسم المهندس المشرف:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="500" y="258" width="300" height="16" mode="Opaque" backcolor="#F8FFF6"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Right"><font pdfFontName="fonts/Amiri-Regular.ttf"/></textElement>
+                <textFieldExpression><![CDATA[$P{supervisingEngineerName}]]></textFieldExpression>
+            </textField>
+
+            <!-- Stage inspection result and notes -->
+            <staticText>
+                <reportElement x="660" y="280" width="120" height="16"/>
+                <textElement textAlignment="Right"/>
+                <text><![CDATA[نتيجة فحص المرحلة:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="500" y="280" width="140" height="16" mode="Opaque" backcolor="#F8FFF6"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Right"><font pdfFontName="fonts/Amiri-Regular.ttf"/></textElement>
+                <textFieldExpression><![CDATA[$P{stageInspectionResult}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="350" y="280" width="140" height="16"/>
+                <textElement textAlignment="Right"/>
+                <text><![CDATA[ملاحظات الفحص:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="12" y="280" width="320" height="36" mode="Opaque" backcolor="#F8FFF6"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Right"><font pdfFontName="fonts/Amiri-Regular.ttf"/></textElement>
+                <textFieldExpression><![CDATA[$P{stageInspectionNotes}]]></textFieldExpression>
             </textField>
 
         </band>

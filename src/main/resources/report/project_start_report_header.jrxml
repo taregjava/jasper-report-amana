@@ -29,13 +29,15 @@
 
     <title>
         <band height="220">
+            <!-- left logo -->
             <image>
-                <reportElement x="10" y="10" width="140" height="80"/>
+                <reportElement x="18" y="12" width="140" height="72"/>
                 <imageExpression class="java.lang.Object"><![CDATA[$P{reportLogo}]]></imageExpression>
             </image>
 
+            <!-- small circular logo to the right of left logo -->
             <image>
-                <reportElement x="160" y="10" width="60" height="60"/>
+                <reportElement x="170" y="20" width="64" height="64"/>
                 <imageExpression class="java.lang.Object"><![CDATA[$P{reportLogo}]]></imageExpression>
             </image>
 
@@ -48,16 +50,18 @@
             </staticText>
 
             <staticText>
-                <reportElement x="220" y="30" width="400" height="28"/>
+                <reportElement x="220" y="22" width="400" height="44"/>
                 <textElement textAlignment="Center">
-                    <font size="18" isBold="true"/>
+                    <font size="22" isBold="true" pdfFontName="fonts/Amiri-Regular.ttf"/>
                 </textElement>
                 <text><![CDATA[تقرير مرحلة بدء المشروع]]></text>
             </staticText>
 
             <textField>
-                <reportElement x="200" y="68" width="440" height="18"/>
-                <textElement textAlignment="Center"/>
+                <reportElement x="200" y="68" width="440" height="20"/>
+                <textElement textAlignment="Center">
+                    <font size="11" pdfFontName="fonts/Amiri-Regular.ttf"/>
+                </textElement>
                 <textFieldExpression><![CDATA[$P{projectNameAndAddress} + "    " + $P{reportDate}]]></textFieldExpression>
             </textField>
 
