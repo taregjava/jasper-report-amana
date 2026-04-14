@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="project_start_report_photos"
+              pageWidth="842"
+              pageHeight="595"
+              orientation="Landscape"
+              columnWidth="802"
+              leftMargin="20"
+              rightMargin="20"
+              topMargin="20"
+              bottomMargin="20"
+              language="java">
+
+    <property name="net.sf.jasperreports.text.direction" value="RTL"/>
+    <style name="Default" isDefault="true" fontName="SansSerif" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+
+    <parameter name="spatialPortalPhoto" class="java.lang.Object"/>
+    <parameter name="implementationPhoto" class="java.lang.Object"/>
+    <parameter name="aerialPhoto" class="java.lang.Object"/>
+    <parameter name="officeName" class="java.lang.String"/>
+    <parameter name="digitalStampPath" class="java.lang.Object"/>
+
+    <detail>
+        <band height="320">
+            <!-- Main title -->
+            <staticText>
+                <reportElement x="0" y="0" width="802" height="25" mode="Opaque" backcolor="#005B41" forecolor="#FFFFFF"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true" size="11" isBold="true"/>
+                </textElement>
+                <text><![CDATA[صور المبنى]]></text>
+            </staticText>
+
+            <!-- Image titles row -->
+            <staticText>
+                <reportElement x="0" y="25" width="267" height="25" mode="Opaque" backcolor="#E8F5E9"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true" size="9"/>
+                </textElement>
+                <text><![CDATA[صورة جوية لموقع المبنى]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="267" y="25" width="267" height="25" mode="Opaque" backcolor="#E8F5E9"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true" size="9"/>
+                </textElement>
+                <text><![CDATA[صور أعمال التنفيذ]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="534" y="25" width="268" height="25" mode="Opaque" backcolor="#E8F5E9"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true" size="9"/>
+                </textElement>
+                <text><![CDATA[صورة الموقع طبقاً للبوابة المكانية]]></text>
+            </staticText>
+
+            <!-- Image boxes -->
+            <frame>
+                <reportElement x="0" y="50" width="267" height="220" mode="Opaque" backcolor="#FFFFFF"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
+                    <reportElement x="4" y="4" width="259" height="212">
+                        <printWhenExpression><![CDATA[$P{aerialPhoto} != null]]></printWhenExpression>
+                    </reportElement>
+                    <imageExpression class="java.lang.Object"><![CDATA[$P{aerialPhoto}]]></imageExpression>
+                </image>
+                <staticText>
+                    <reportElement x="4" y="4" width="259" height="212" forecolor="#999999">
+                        <printWhenExpression><![CDATA[$P{aerialPhoto} == null]]></printWhenExpression>
+                    </reportElement>
+                    <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                    <text><![CDATA[لا توجد صورة]]></text>
+                </staticText>
+            </frame>
+
+            <frame>
+                <reportElement x="267" y="50" width="267" height="220" mode="Opaque" backcolor="#FFFFFF"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
+                    <reportElement x="4" y="4" width="259" height="212">
+                        <printWhenExpression><![CDATA[$P{implementationPhoto} != null]]></printWhenExpression>
+                    </reportElement>
+                    <imageExpression class="java.lang.Object"><![CDATA[$P{implementationPhoto}]]></imageExpression>
+                </image>
+                <staticText>
+                    <reportElement x="4" y="4" width="259" height="212" forecolor="#999999">
+                        <printWhenExpression><![CDATA[$P{implementationPhoto} == null]]></printWhenExpression>
+                    </reportElement>
+                    <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                    <text><![CDATA[لا توجد صورة]]></text>
+                </staticText>
+            </frame>
+
+            <frame>
+                <reportElement x="534" y="50" width="268" height="220" mode="Opaque" backcolor="#FFFFFF"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
+                    <reportElement x="4" y="4" width="260" height="212">
+                        <printWhenExpression><![CDATA[$P{spatialPortalPhoto} != null]]></printWhenExpression>
+                    </reportElement>
+                    <imageExpression class="java.lang.Object"><![CDATA[$P{spatialPortalPhoto}]]></imageExpression>
+                </image>
+                <staticText>
+                    <reportElement x="4" y="4" width="260" height="212" forecolor="#999999">
+                        <printWhenExpression><![CDATA[$P{spatialPortalPhoto} == null]]></printWhenExpression>
+                    </reportElement>
+                    <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                    <text><![CDATA[لا توجد صورة]]></text>
+                </staticText>
+            </frame>
+
+            <!-- Footer labels -->
+            <staticText>
+                <reportElement x="0" y="280" width="120" height="18"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true" size="9" isBold="true"/>
+                </textElement>
+                <text><![CDATA[ختم المكتب]]></text>
+            </staticText>
+
+            <image scaleImage="RetainShape" hAlign="Left" vAlign="Middle">
+                <reportElement x="122" y="273" width="120" height="34">
+                    <printWhenExpression><![CDATA[$P{digitalStampPath} != null]]></printWhenExpression>
+                </reportElement>
+                <imageExpression class="java.lang.Object"><![CDATA[$P{digitalStampPath}]]></imageExpression>
+            </image>
+
+            <textField isBlankWhenNull="true">
+                <reportElement x="592" y="280" width="210" height="18"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true" size="9" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["اسم المكتب: " + ($P{officeName} == null ? "" : $P{officeName})]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+
+</jasperReport>

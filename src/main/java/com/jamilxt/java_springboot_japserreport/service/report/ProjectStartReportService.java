@@ -35,6 +35,11 @@ public class ProjectStartReportService {
              InputStream buildingIs = getClass().getResourceAsStream("/report/project_start_report_building.jrxml");
              InputStream tableIs  = getClass().getResourceAsStream("/report/project_start_report_table.jrxml");
              InputStream photosIs = getClass().getResourceAsStream("/report/project_start_report_photos.jrxml");
+             InputStream photosTopGridIs = getClass().getResourceAsStream("/report/project_start_report_photos_top_grid.jrxml");
+             InputStream photosBottomGridIs = getClass().getResourceAsStream("/report/project_start_report_photos_bottom_grid.jrxml");
+             InputStream mainImagesIs = getClass().getResourceAsStream("/report/project_start_main_images.jrxml");
+             InputStream changesRowsIs = getClass().getResourceAsStream("/report/project_start_changes_rows.jrxml");
+             InputStream changesPageIs = getClass().getResourceAsStream("/report/project_start_changes_page.jrxml");
              InputStream masterIs = getClass().getResourceAsStream("/report/project_start_report_master.jrxml")) {
 
             JasperReport headerRep = JasperCompileManager.compileReport(headerIs);
@@ -43,6 +48,11 @@ public class ProjectStartReportService {
             JasperReport buildingRep = JasperCompileManager.compileReport(buildingIs);
             JasperReport tableRep  = JasperCompileManager.compileReport(tableIs);
             JasperReport photosRep = JasperCompileManager.compileReport(photosIs);
+            JasperReport photosTopGridRep = JasperCompileManager.compileReport(photosTopGridIs);
+            JasperReport photosBottomGridRep = JasperCompileManager.compileReport(photosBottomGridIs);
+            JasperReport mainImagesRep = mainImagesIs == null ? null : JasperCompileManager.compileReport(mainImagesIs);
+            JasperReport changesRowsRep = changesRowsIs == null ? null : JasperCompileManager.compileReport(changesRowsIs);
+            JasperReport changesPageRep = changesPageIs == null ? null : JasperCompileManager.compileReport(changesPageIs);
             JasperReport masterRep = JasperCompileManager.compileReport(masterIs);
 
             // Build static grouped rows so static preview matches dynamic checklist design.
@@ -78,8 +88,23 @@ public class ProjectStartReportService {
             params.put("buildingSubreport", buildingRep);
             params.put("tableSubreport", tableRep);
             params.put("photosSubreport", photosRep);
+            params.put("photosTopGridSubreport", photosTopGridRep);
+            params.put("photosBottomGridSubreport", photosBottomGridRep);
+            params.put("mainImagesSubreport", mainImagesRep);
+            params.put("changesPageSubreport", changesPageRep);
+            params.put("changesRowsSubreport", changesRowsRep);
             // pass table datasource
             params.put("tableData", tableDs);
+            params.put("photosTopData", buildTopPhotoRows(params));
+            params.put("photosBottomData", buildBottomPhotoRows(params));
+            // static sample data for changes tables
+            params.put("changesData",    buildTextRowsDataSource(java.util.List.of(
+                    "تعديل موقع النافذة في الواجهة الشمالية",
+                    "تغيير مقاس باب المدخل الرئيسي من 100 إلى 120 سم"
+            )));
+            params.put("extraItemsData", buildTextRowsDataSource(java.util.List.of(
+                    "لم يتم تركيب حواجز السلامة على السطح"
+            )));
 
             // header/body params (example)
             // load logo as byte[] so Jasper/iText can recognize the image format reliably during export
@@ -128,6 +153,22 @@ public class ProjectStartReportService {
             params.put("spatialPortalPhoto", resolveImageSource("classpath:report/siteMapImage.png"));
             params.put("implementationPhoto", resolveImageSource("classpath:report/front-image.png"));
             params.put("aerialPhoto", resolveImageSource("classpath:report/logoSite.png"));
+            params.put("implementationPhoto1", resolveImageSource("classpath:report/front-image.png"));
+            params.put("implementationPhoto2", resolveImageSource("classpath:report/siteMapImage.png"));
+            params.put("implementationPhoto3", resolveImageSource("classpath:report/front-image.png"));
+            params.put("implementationPhoto4", resolveImageSource("classpath:report/logoSite.png"));
+            params.put("detailPhoto1", resolveImageSource("classpath:report/front-image.png"));
+            params.put("detailPhoto2", resolveImageSource("classpath:report/siteMapImage.png"));
+            params.put("detailPhoto3", resolveImageSource("classpath:report/logoSite.png"));
+            params.put("detailPhoto4", resolveImageSource("classpath:report/front-image.png"));
+            params.put("detailPhoto5", resolveImageSource("classpath:report/siteMapImage.png"));
+            params.put("detailPhoto6", resolveImageSource("classpath:report/logoSite.png"));
+            params.put("detailDescription1", "توضيح الصورة 1");
+            params.put("detailDescription2", "توضيح الصورة 2");
+            params.put("detailDescription3", "توضيح الصورة 3");
+            params.put("detailDescription4", "توضيح الصورة 4");
+            params.put("detailDescription5", "توضيح الصورة 5");
+            params.put("detailDescription6", "توضيح الصورة 6");
             params.put("officeName", "المكتب الهندسي النموذجي");
             params.put("digitalStampPath", resolveImageSource("classpath:report/logo.png"));
 
@@ -146,6 +187,11 @@ public class ProjectStartReportService {
              InputStream buildingIs = resourceLoader.getResource("classpath:report/project_start_report_building.jrxml").getInputStream();
              InputStream tableIs = resourceLoader.getResource("classpath:report/project_start_report_table.jrxml").getInputStream();
              InputStream photosIs = resourceLoader.getResource("classpath:report/project_start_report_photos.jrxml").getInputStream();
+             InputStream photosTopGridIs = resourceLoader.getResource("classpath:report/project_start_report_photos_top_grid.jrxml").getInputStream();
+             InputStream photosBottomGridIs = resourceLoader.getResource("classpath:report/project_start_report_photos_bottom_grid.jrxml").getInputStream();
+             InputStream mainImagesIs = resourceLoader.getResource("classpath:report/project_start_main_images.jrxml").getInputStream();
+             InputStream changesRowsIs = resourceLoader.getResource("classpath:report/project_start_changes_rows.jrxml").getInputStream();
+             InputStream changesPageIs = resourceLoader.getResource("classpath:report/project_start_changes_page.jrxml").getInputStream();
              InputStream masterIs = resourceLoader.getResource("classpath:report/project_start_report_master.jrxml").getInputStream()) {
 
             JasperReport headerRep = JasperCompileManager.compileReport(headerIs);
@@ -154,6 +200,11 @@ public class ProjectStartReportService {
             JasperReport buildingRep = JasperCompileManager.compileReport(buildingIs);
             JasperReport tableRep = JasperCompileManager.compileReport(tableIs);
             JasperReport photosRep = JasperCompileManager.compileReport(photosIs);
+            JasperReport photosTopGridRep = JasperCompileManager.compileReport(photosTopGridIs);
+            JasperReport photosBottomGridRep = JasperCompileManager.compileReport(photosBottomGridIs);
+            JasperReport mainImagesRep = JasperCompileManager.compileReport(mainImagesIs);
+            JasperReport changesRowsRep = JasperCompileManager.compileReport(changesRowsIs);
+            JasperReport changesPageRep = JasperCompileManager.compileReport(changesPageIs);
             JasperReport masterReport = JasperCompileManager.compileReport(masterIs);
 
             List<Map<String, Object>> tableRows = buildTableRows(dto);
@@ -166,7 +217,15 @@ public class ProjectStartReportService {
             params.put("buildingSubreport", buildingRep);
             params.put("tableSubreport", tableRep);
             params.put("photosSubreport", photosRep);
+            params.put("photosTopGridSubreport", photosTopGridRep);
+            params.put("photosBottomGridSubreport", photosBottomGridRep);
+            params.put("mainImagesSubreport", mainImagesRep);
+            params.put("changesPageSubreport", changesPageRep);
+            params.put("changesRowsSubreport", changesRowsRep);
             params.put("tableData", new JRBeanCollectionDataSource(tableRows));
+            // changes & extra items (padded to 8 rows)
+            params.put("changesData",    buildTextRowsDataSource(dto.getChanges()));
+            params.put("extraItemsData", buildTextRowsDataSource(dto.getExtraItems()));
 
             // owner/building values: prefer OwnerInfo / BuildingInfo when present
             String ownerName = null;
@@ -218,8 +277,26 @@ public class ProjectStartReportService {
             params.put("spatialPortalPhoto", photos == null ? null : resolveImageSource(photos.getSpatialPortalPhoto()));
             params.put("implementationPhoto", photos == null ? null : resolveImageSource(photos.getImplementationPhoto()));
             params.put("aerialPhoto", photos == null ? null : resolveImageSource(photos.getAerialPhoto()));
+            params.put("implementationPhoto1", photos == null ? null : resolveImageSource(firstNonBlank(photos.getImplementationPhoto1(), photos.getImplementationPhoto())));
+            params.put("implementationPhoto2", photos == null ? null : resolveImageSource(firstNonBlank(photos.getImplementationPhoto2(), photos.getSpatialPortalPhoto(), photos.getImplementationPhoto())));
+            params.put("implementationPhoto3", photos == null ? null : resolveImageSource(firstNonBlank(photos.getImplementationPhoto3(), photos.getImplementationPhoto())));
+            params.put("implementationPhoto4", photos == null ? null : resolveImageSource(firstNonBlank(photos.getImplementationPhoto4(), photos.getAerialPhoto(), photos.getImplementationPhoto())));
+            params.put("detailPhoto1", photos == null ? null : resolveImageSource(firstNonBlank(photos.getDetailPhoto1(), photos.getImplementationPhoto1(), photos.getImplementationPhoto())));
+            params.put("detailPhoto2", photos == null ? null : resolveImageSource(firstNonBlank(photos.getDetailPhoto2(), photos.getImplementationPhoto2(), photos.getSpatialPortalPhoto())));
+            params.put("detailPhoto3", photos == null ? null : resolveImageSource(firstNonBlank(photos.getDetailPhoto3(), photos.getImplementationPhoto3(), photos.getAerialPhoto())));
+            params.put("detailPhoto4", photos == null ? null : resolveImageSource(firstNonBlank(photos.getDetailPhoto4(), photos.getImplementationPhoto4(), photos.getImplementationPhoto())));
+            params.put("detailPhoto5", photos == null ? null : resolveImageSource(firstNonBlank(photos.getDetailPhoto5(), photos.getSpatialPortalPhoto(), photos.getImplementationPhoto())));
+            params.put("detailPhoto6", photos == null ? null : resolveImageSource(firstNonBlank(photos.getDetailPhoto6(), photos.getAerialPhoto(), photos.getImplementationPhoto())));
+            params.put("detailDescription1", photos == null ? "" : safeText(photos.getDetailDescription1()));
+            params.put("detailDescription2", photos == null ? "" : safeText(photos.getDetailDescription2()));
+            params.put("detailDescription3", photos == null ? "" : safeText(photos.getDetailDescription3()));
+            params.put("detailDescription4", photos == null ? "" : safeText(photos.getDetailDescription4()));
+            params.put("detailDescription5", photos == null ? "" : safeText(photos.getDetailDescription5()));
+            params.put("detailDescription6", photos == null ? "" : safeText(photos.getDetailDescription6()));
             params.put("officeName", photos == null ? "" : photos.getOfficeName());
             params.put("digitalStampPath", photos == null ? null : resolveImageSource(photos.getDigitalStampPath()));
+            params.put("photosTopData", buildTopPhotoRows(params));
+            params.put("photosBottomData", buildBottomPhotoRows(params));
 
             // load logo resource into report param if available
             try (java.io.InputStream is = resourceLoader.getResource("classpath:report/logoSite.png").getInputStream()) {
@@ -294,5 +371,81 @@ public class ProjectStartReportService {
             }
         }
         return value;
+    }
+
+    private String firstNonBlank(String... values) {
+        if (values == null) {
+            return null;
+        }
+        for (String value : values) {
+            if (value != null && !value.trim().isEmpty()) {
+                return value.trim();
+            }
+        }
+        return null;
+    }
+
+    private String safeText(String value) {
+        return value == null ? "" : value;
+    }
+
+    private JRBeanCollectionDataSource buildTopPhotoRows(Map<String, Object> params) {
+        List<Map<String, Object>> rows = new ArrayList<>();
+        rows.add(photoRow("صور أعمال التنفيذ 1", params.get("implementationPhoto1")));
+        rows.add(photoRow("صور أعمال التنفيذ 2", params.get("implementationPhoto2")));
+        rows.add(photoRow("صور أعمال التنفيذ 3", params.get("implementationPhoto3")));
+        rows.add(photoRow("صور أعمال التنفيذ 4", params.get("implementationPhoto4")));
+        return new JRBeanCollectionDataSource(rows);
+    }
+
+    private JRBeanCollectionDataSource buildBottomPhotoRows(Map<String, Object> params) {
+        List<Map<String, Object>> rows = new ArrayList<>();
+        rows.add(detailPhotoRow("1", params.get("detailPhoto1"), (String) params.get("detailDescription1")));
+        rows.add(detailPhotoRow("2", params.get("detailPhoto2"), (String) params.get("detailDescription2")));
+        rows.add(detailPhotoRow("3", params.get("detailPhoto3"), (String) params.get("detailDescription3")));
+        rows.add(detailPhotoRow("4", params.get("detailPhoto4"), (String) params.get("detailDescription4")));
+        rows.add(detailPhotoRow("5", params.get("detailPhoto5"), (String) params.get("detailDescription5")));
+        rows.add(detailPhotoRow("6", params.get("detailPhoto6"), (String) params.get("detailDescription6")));
+        return new JRBeanCollectionDataSource(rows);
+    }
+
+    private Map<String, Object> photoRow(String title, Object image) {
+        Map<String, Object> row = new HashMap<>();
+        row.put("title", title);
+        row.put("image", image);
+        return row;
+    }
+
+    private Map<String, Object> detailPhotoRow(String number, Object image, String description) {
+        Map<String, Object> row = new HashMap<>();
+        row.put("number", number);
+        row.put("image", image);
+        row.put("description", safeText(description));
+        return row;
+    }
+
+    /**
+     * Builds a JRDataSource for the changes / extra-items row subreport.
+     * The list is padded with empty strings so that always exactly {@code PAD_TO} rows
+     * are rendered, keeping the fixed 8-row table grid intact.
+     */
+    private static final int CHANGES_ROW_COUNT = 8;
+
+    private JRDataSource buildTextRowsDataSource(List<String> items) {
+        List<Map<String, Object>> rows = new ArrayList<>();
+        if (items != null) {
+            for (String item : items) {
+                Map<String, Object> row = new HashMap<>();
+                row.put("rowText", item == null ? "" : item);
+                rows.add(row);
+            }
+        }
+        // pad with empty strings to always reach CHANGES_ROW_COUNT rows
+        while (rows.size() < CHANGES_ROW_COUNT) {
+            Map<String, Object> row = new HashMap<>();
+            row.put("rowText", "");
+            rows.add(row);
+        }
+        return new JRBeanCollectionDataSource(rows);
     }
 }
