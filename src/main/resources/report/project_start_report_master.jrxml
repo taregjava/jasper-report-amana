@@ -21,6 +21,7 @@
     <parameter name="bodySubreport" class="net.sf.jasperreports.engine.JasperReport"/>
     <parameter name="buildingSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
     <parameter name="tableSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
+    <parameter name="photosSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
 
     <!-- datasource for tasks table -->
     <parameter name="tableData" class="net.sf.jasperreports.engine.JRDataSource"/>
@@ -62,6 +63,11 @@
     <parameter name="supervisingEngineerName" class="java.lang.String"/>
     <parameter name="stageInspectionResult" class="java.lang.String"/>
     <parameter name="stageInspectionNotes" class="java.lang.String"/>
+    <parameter name="spatialPortalPhoto" class="java.lang.Object"/>
+    <parameter name="implementationPhoto" class="java.lang.Object"/>
+    <parameter name="aerialPhoto" class="java.lang.Object"/>
+    <parameter name="officeName" class="java.lang.String"/>
+    <parameter name="digitalStampPath" class="java.lang.Object"/>
     <!-- compiled owner subreport JasperReport instance -->
     <parameter name="ownerSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
 
@@ -141,12 +147,24 @@
     </detail>
 
     <summary>
-        <band height="90">
+        <band height="540">
             <!-- table subreport moved to summary to free first-page space for owner + building -->
             <subreport>
-                <reportElement x="0" y="0" width="802" height="80"/>
+                <reportElement x="0" y="0" width="802" height="210"/>
                 <dataSourceExpression><![CDATA[$P{tableData}]]></dataSourceExpression>
                 <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{tableSubreport}]]></subreportExpression>
+            </subreport>
+
+            <!-- photos section -->
+            <subreport>
+                <reportElement x="0" y="240" width="802" height="300"/>
+                <subreportParameter name="spatialPortalPhoto"><subreportParameterExpression><![CDATA[$P{spatialPortalPhoto}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="implementationPhoto"><subreportParameterExpression><![CDATA[$P{implementationPhoto}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="aerialPhoto"><subreportParameterExpression><![CDATA[$P{aerialPhoto}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="officeName"><subreportParameterExpression><![CDATA[$P{officeName}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="digitalStampPath"><subreportParameterExpression><![CDATA[$P{digitalStampPath}]]></subreportParameterExpression></subreportParameter>
+                <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
+                <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{photosSubreport}]]></subreportExpression>
             </subreport>
         </band>
     </summary>

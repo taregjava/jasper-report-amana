@@ -45,18 +45,24 @@
     <field name="status" class="java.lang.String"/>
     <field name="notes" class="java.lang.String"/>
 
+    <variable name="ChecklistGroupRowNo" class="java.lang.Integer" resetType="Group" resetGroup="ChecklistGroup" calculation="Count">
+        <variableExpression><![CDATA[1]]></variableExpression>
+    </variable>
+
     <group name="ChecklistGroup" isStartNewPage="false">
         <groupExpression><![CDATA[
-            $F{sideNumber} == null || $F{sideNumber}.trim().isEmpty()
-            ? ($F{itemNo} == null ? "" : String.valueOf($F{itemNo}))
-            : $F{sideNumber}
+            $F{groupTitle} != null && !$F{groupTitle}.trim().isEmpty()
+            ? $F{groupTitle}
+            : ($F{sideNumber} != null && !$F{sideNumber}.trim().isEmpty()
+                ? $F{sideNumber}
+                : ($F{itemNo} == null ? "" : String.valueOf($F{itemNo})))
         ]]></groupExpression>
         <groupHeader>
             <band height="22">
                 <printWhenExpression><![CDATA[$F{groupTitle} != null && !$F{groupTitle}.trim().isEmpty()]]></printWhenExpression>
 
                 <textField isBlankWhenNull="true">
-                    <reportElement style="ChecklistGroupCell" x="30" y="0" width="772" height="22"/>
+                    <reportElement style="ChecklistGroupCell" x="0" y="0" width="802" height="22"/>
                     <textElement textAlignment="Right" verticalAlignment="Middle"/>
                     <textFieldExpression><![CDATA[$F{groupTitle}]]></textFieldExpression>
                 </textField>
@@ -67,37 +73,31 @@
     <columnHeader>
         <band height="32">
             <staticText>
-                <reportElement style="ChecklistHeader" x="0" y="0" width="30" height="32"/>
-                <textElement textAlignment="Center" verticalAlignment="Middle"/>
-                <text><![CDATA[رقم]]></text>
-            </staticText>
-
-            <staticText>
-                <reportElement style="ChecklistHeader" x="30" y="0" width="150" height="32"/>
+                <reportElement style="ChecklistHeader" x="0" y="0" width="160" height="32"/>
                 <textElement textAlignment="Center" verticalAlignment="Middle"/>
                 <text><![CDATA[ملاحظات]]></text>
             </staticText>
 
             <staticText>
-                <reportElement style="ChecklistHeader" x="180" y="0" width="60" height="32"/>
+                <reportElement style="ChecklistHeader" x="160" y="0" width="60" height="32"/>
                 <textElement textAlignment="Center" verticalAlignment="Middle"/>
                 <text><![CDATA[لا ينطبق]]></text>
             </staticText>
 
             <staticText>
-                <reportElement style="ChecklistHeader" x="240" y="0" width="60" height="32"/>
+                <reportElement style="ChecklistHeader" x="220" y="0" width="60" height="32"/>
                 <textElement textAlignment="Center" verticalAlignment="Middle"/>
                 <text><![CDATA[غير مطابق]]></text>
             </staticText>
 
             <staticText>
-                <reportElement style="ChecklistHeader" x="300" y="0" width="60" height="32"/>
+                <reportElement style="ChecklistHeader" x="280" y="0" width="60" height="32"/>
                 <textElement textAlignment="Center" verticalAlignment="Middle"/>
                 <text><![CDATA[مطابق]]></text>
             </staticText>
 
             <staticText>
-                <reportElement style="ChecklistHeader" x="360" y="0" width="412" height="32"/>
+                <reportElement style="ChecklistHeader" x="340" y="0" width="432" height="32"/>
                 <textElement textAlignment="Center" verticalAlignment="Middle"/>
                 <text><![CDATA[المهمة]]></text>
             </staticText>
@@ -116,22 +116,14 @@
             <frame>
                 <reportElement x="0" y="0" width="802" height="30" positionType="Float"/>
 
-                <textField isBlankWhenNull="true">
-                    <reportElement style="ChecklistCenterCell" x="0" y="0" width="30" height="30" isPrintRepeatedValues="false" stretchType="RelativeToTallestObject"/>
-                    <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font size="9" isBold="true" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-                    </textElement>
-                    <textFieldExpression><![CDATA[$F{sideNumber}]]></textFieldExpression>
-                </textField>
-
                 <textField isBlankWhenNull="true" isStretchWithOverflow="true">
-                    <reportElement style="ChecklistCell" x="30" y="0" width="150" height="30" stretchType="RelativeToTallestObject"/>
+                    <reportElement style="ChecklistCell" x="0" y="0" width="160" height="30" stretchType="RelativeToTallestObject"/>
                     <textElement textAlignment="Right" verticalAlignment="Middle"/>
                     <textFieldExpression><![CDATA[$F{notes}]]></textFieldExpression>
                 </textField>
 
                 <textField isBlankWhenNull="true">
-                    <reportElement style="ChecklistCenterCell" x="180" y="0" width="60" height="30" stretchType="RelativeToTallestObject"/>
+                    <reportElement style="ChecklistCenterCell" x="160" y="0" width="60" height="30" stretchType="RelativeToTallestObject"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
                         <font size="11" isBold="true" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
                     </textElement>
@@ -145,7 +137,7 @@
                 </textField>
 
                 <textField isBlankWhenNull="true">
-                    <reportElement style="ChecklistCenterCell" x="240" y="0" width="60" height="30" stretchType="RelativeToTallestObject"/>
+                    <reportElement style="ChecklistCenterCell" x="220" y="0" width="60" height="30" stretchType="RelativeToTallestObject"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
                         <font size="11" isBold="true" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
                     </textElement>
@@ -161,7 +153,7 @@
                 </textField>
 
                 <textField isBlankWhenNull="true">
-                    <reportElement style="ChecklistCenterCell" x="300" y="0" width="60" height="30" stretchType="RelativeToTallestObject"/>
+                    <reportElement style="ChecklistCenterCell" x="280" y="0" width="60" height="30" stretchType="RelativeToTallestObject"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
                         <font size="11" isBold="true" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
                     </textElement>
@@ -176,7 +168,7 @@
                 </textField>
 
                 <textField isBlankWhenNull="true" isStretchWithOverflow="true">
-                    <reportElement style="ChecklistCell" x="360" y="0" width="412" height="30" stretchType="RelativeToTallestObject"/>
+                    <reportElement style="ChecklistCell" x="340" y="0" width="432" height="30" stretchType="RelativeToTallestObject"/>
                     <textElement textAlignment="Right" verticalAlignment="Middle"/>
                     <textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
                 </textField>
@@ -184,7 +176,7 @@
                 <textField isBlankWhenNull="true">
                     <reportElement style="ChecklistCenterCell" x="772" y="0" width="30" height="30" stretchType="RelativeToTallestObject"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle"/>
-                    <textFieldExpression><![CDATA[$F{itemNo} == null ? "" : String.valueOf($F{itemNo})]]></textFieldExpression>
+                    <textFieldExpression><![CDATA[$V{ChecklistGroupRowNo} == null ? "" : String.valueOf($V{ChecklistGroupRowNo})]]></textFieldExpression>
                 </textField>
             </frame>
         </band>

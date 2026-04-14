@@ -15,6 +15,7 @@ public class ProjectStartReportDto {
     private String stageResult;             // نتيجة فحص المرحلة (مقبول – مرفوض – ملاحظات)
 
     private List<TaskRow> tasks;            // جدول المهام
+    private ProjectPhotosDTO projectPhotos; // صور المبنى
 
     // Getters & Setters
 }

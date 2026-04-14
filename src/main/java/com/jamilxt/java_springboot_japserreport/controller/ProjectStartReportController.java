@@ -2,6 +2,7 @@ package com.jamilxt.java_springboot_japserreport.controller;
 
 import com.jamilxt.java_springboot_japserreport.dto.BuildingInfo;
 import com.jamilxt.java_springboot_japserreport.dto.OwnerInfo;
+import com.jamilxt.java_springboot_japserreport.dto.ProjectPhotosDTO;
 import com.jamilxt.java_springboot_japserreport.dto.ProjectStartReportDto;
 import com.jamilxt.java_springboot_japserreport.dto.TaskRow;
 import com.jamilxt.java_springboot_japserreport.service.report.ProjectStartReportService;
@@ -74,6 +75,14 @@ public class ProjectStartReportController {
         t2.setNotes("أخذ عينات للفحص المختبري");
 
         dto.setTasks(Arrays.asList(t1, t2));
+
+        ProjectPhotosDTO photos = new ProjectPhotosDTO();
+        photos.setSpatialPortalPhoto("classpath:report/siteMapImage.png");
+        photos.setImplementationPhoto("classpath:report/front-image.png");
+        photos.setAerialPhoto("classpath:report/logoSite.png");
+        photos.setOfficeName("مكتب الهندسة العربي");
+        photos.setDigitalStampPath("classpath:report/logo.png");
+        dto.setProjectPhotos(photos);
 
         byte[] pdf = service.generatePdf(dto);
         response.setContentType(MediaType.APPLICATION_PDF_VALUE);

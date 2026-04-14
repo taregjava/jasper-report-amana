@@ -3,6 +3,7 @@ package com.jamilxt.java_springboot_japserreport.service.report;
 import com.jamilxt.java_springboot_japserreport.dto.ProjectStartReportDto;
 import com.jamilxt.java_springboot_japserreport.dto.OwnerInfo;
 import com.jamilxt.java_springboot_japserreport.dto.BuildingInfo;
+import com.jamilxt.java_springboot_japserreport.dto.ProjectPhotosDTO;
 import com.jamilxt.java_springboot_japserreport.dto.TaskRow;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -15,7 +16,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 public class ProjectStartReportService {
@@ -34,6 +34,7 @@ public class ProjectStartReportService {
              InputStream bodyIs   = getClass().getResourceAsStream("/report/project_start_report_body.jrxml");
              InputStream buildingIs = getClass().getResourceAsStream("/report/project_start_report_building.jrxml");
              InputStream tableIs  = getClass().getResourceAsStream("/report/project_start_report_table.jrxml");
+             InputStream photosIs = getClass().getResourceAsStream("/report/project_start_report_photos.jrxml");
              InputStream masterIs = getClass().getResourceAsStream("/report/project_start_report_master.jrxml")) {
 
             JasperReport headerRep = JasperCompileManager.compileReport(headerIs);
@@ -41,16 +42,32 @@ public class ProjectStartReportService {
             JasperReport bodyRep   = JasperCompileManager.compileReport(bodyIs);
             JasperReport buildingRep = JasperCompileManager.compileReport(buildingIs);
             JasperReport tableRep  = JasperCompileManager.compileReport(tableIs);
+            JasperReport photosRep = JasperCompileManager.compileReport(photosIs);
             JasperReport masterRep = JasperCompileManager.compileReport(masterIs);
 
             // Build static grouped rows so static preview matches dynamic checklist design.
             List<Map<String,Object>> rows = new ArrayList<>(java.util.List.of(
                     tableRow("متطلبات سور الحماية", "2", 1, "التأكد من سلامة الأساسات", "☑", "ملاحظة توضيحية"),
-                    tableRow(null, "2", 2, "مراجعة الرسومات", "☐", ""),
-                    tableRow("متطلبات الأعمال الخرسانية", "3", 3, "اختبارات السلامة", "NA", ""),
-                    tableRow(null, "3", 4, "توثيق نتائج الفحص الموقعي", "☑", "تم الاستلام")
-            ));
+                    tableRow("متطلبات سور الحماية", "2", 2, "مراجعة الرسومات", "☐", ""),
+                    tableRow("متطلبات سور الحماية", "2", 3, "تحديد حدود الموقع بشكل صحيح", "☑", ""),
+                    tableRow("متطلبات سور الحماية", "2", 4, "التأكد من ارتفاع السور حسب المواصفات", "☐", "يحتاج مراجعة"),
 
+                    tableRow("متطلبات الأعمال الخرسانية", "3", 5, "اختبارات السلامة", "NA", ""),
+                    tableRow("متطلبات الأعمال الخرسانية", "3", 6, "توثيق نتائج الفحص الموقعي", "☑", "تم الاستلام"),
+                    tableRow("متطلبات الأعمال الخرسانية", "3", 7, "فحص جودة الخرسانة", "☑", ""),
+                    tableRow("متطلبات الأعمال الخرسانية", "3", 8, "التأكد من نسب الخلط", "☐", "غير مطابق"),
+
+                    tableRow("متطلبات الأساسات", "4", 9, "فحص التربة", "☑", ""),
+                    tableRow("متطلبات الأساسات", "4", 10, "مطابقة العمق مع المخطط", "☑", ""),
+                    tableRow("متطلبات الأساسات", "4", 11, "التأكد من العزل", "☐", "بحاجة تعديل"),
+
+                    tableRow("متطلبات الهيكل الإنشائي", "5", 12, "مطابقة الأعمدة للمخططات", "☑", ""),
+                    tableRow("متطلبات الهيكل الإنشائي", "5", 13, "فحص الكمرات", "☑", ""),
+                    tableRow("متطلبات الهيكل الإنشائي", "5", 14, "التأكد من استقامة العناصر", "☐", ""),
+
+                    tableRow("متطلبات السلامة العامة", "6", 15, "توفر معدات السلامة", "☑", ""),
+                    tableRow("متطلبات السلامة العامة", "6", 16, "وجود لوحات تحذيرية", "☐", "غير كافي")
+            ));
             JRBeanCollectionDataSource tableDs = new JRBeanCollectionDataSource(rows);
 
             Map<String,Object> params = new HashMap<>();
@@ -60,6 +77,7 @@ public class ProjectStartReportService {
             params.put("bodySubreport", bodyRep);
             params.put("buildingSubreport", buildingRep);
             params.put("tableSubreport", tableRep);
+            params.put("photosSubreport", photosRep);
             // pass table datasource
             params.put("tableData", tableDs);
 
@@ -106,8 +124,13 @@ public class ProjectStartReportService {
             params.put("areaByNature", 338.5d);
             params.put("isFullyFinished", Boolean.TRUE);
             params.put("isPartiallyBuilt", Boolean.FALSE);
+            // sample photos section params
+            params.put("spatialPortalPhoto", resolveImageSource("classpath:report/siteMapImage.png"));
+            params.put("implementationPhoto", resolveImageSource("classpath:report/front-image.png"));
+            params.put("aerialPhoto", resolveImageSource("classpath:report/logoSite.png"));
+            params.put("officeName", "المكتب الهندسي النموذجي");
+            params.put("digitalStampPath", resolveImageSource("classpath:report/logo.png"));
 
-            // Fill master report. The master places subreports; use empty datasource for master.
             JasperPrint jasperPrint = JasperFillManager.fillReport(masterRep, params, new net.sf.jasperreports.engine.JREmptyDataSource());
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -122,6 +145,7 @@ public class ProjectStartReportService {
              InputStream bodyIs = resourceLoader.getResource("classpath:report/project_start_report_body.jrxml").getInputStream();
              InputStream buildingIs = resourceLoader.getResource("classpath:report/project_start_report_building.jrxml").getInputStream();
              InputStream tableIs = resourceLoader.getResource("classpath:report/project_start_report_table.jrxml").getInputStream();
+             InputStream photosIs = resourceLoader.getResource("classpath:report/project_start_report_photos.jrxml").getInputStream();
              InputStream masterIs = resourceLoader.getResource("classpath:report/project_start_report_master.jrxml").getInputStream()) {
 
             JasperReport headerRep = JasperCompileManager.compileReport(headerIs);
@@ -129,6 +153,7 @@ public class ProjectStartReportService {
             JasperReport bodyRep = JasperCompileManager.compileReport(bodyIs);
             JasperReport buildingRep = JasperCompileManager.compileReport(buildingIs);
             JasperReport tableRep = JasperCompileManager.compileReport(tableIs);
+            JasperReport photosRep = JasperCompileManager.compileReport(photosIs);
             JasperReport masterReport = JasperCompileManager.compileReport(masterIs);
 
             List<Map<String, Object>> tableRows = buildTableRows(dto);
@@ -140,6 +165,7 @@ public class ProjectStartReportService {
             params.put("bodySubreport", bodyRep);
             params.put("buildingSubreport", buildingRep);
             params.put("tableSubreport", tableRep);
+            params.put("photosSubreport", photosRep);
             params.put("tableData", new JRBeanCollectionDataSource(tableRows));
 
             // owner/building values: prefer OwnerInfo / BuildingInfo when present
@@ -188,6 +214,13 @@ public class ProjectStartReportService {
             params.put("isFullyFinished", bi != null && bi.isFullyBuilt());
             params.put("isPartiallyBuilt", bi != null && bi.isPartiallyBuilt());
 
+            ProjectPhotosDTO photos = dto.getProjectPhotos();
+            params.put("spatialPortalPhoto", photos == null ? null : resolveImageSource(photos.getSpatialPortalPhoto()));
+            params.put("implementationPhoto", photos == null ? null : resolveImageSource(photos.getImplementationPhoto()));
+            params.put("aerialPhoto", photos == null ? null : resolveImageSource(photos.getAerialPhoto()));
+            params.put("officeName", photos == null ? "" : photos.getOfficeName());
+            params.put("digitalStampPath", photos == null ? null : resolveImageSource(photos.getDigitalStampPath()));
+
             // load logo resource into report param if available
             try (java.io.InputStream is = resourceLoader.getResource("classpath:report/logoSite.png").getInputStream()) {
                 byte[] logo = is.readAllBytes();
@@ -219,9 +252,21 @@ public class ProjectStartReportService {
             );
         }
 
-        return tasks.stream()
-                .map(r -> tableRow(r.getGroupTitle(), r.getSideNumber(), r.getIndex(), r.getTaskName(), r.getCompliant(), r.getNotes()))
-                .collect(Collectors.toList());
+        List<Map<String, Object>> rows = new ArrayList<>();
+        String currentGroupTitle = "";
+        String currentSideNumber = "";
+
+        for (TaskRow r : tasks) {
+            if (r.getGroupTitle() != null && !r.getGroupTitle().trim().isEmpty()) {
+                currentGroupTitle = r.getGroupTitle().trim();
+            }
+            if (r.getSideNumber() != null && !r.getSideNumber().trim().isEmpty()) {
+                currentSideNumber = r.getSideNumber().trim();
+            }
+            rows.add(tableRow(currentGroupTitle, currentSideNumber, r.getIndex(), r.getTaskName(), r.getCompliant(), r.getNotes()));
+        }
+
+        return rows;
     }
 
     private Map<String, Object> tableRow(String groupTitle, String sideNumber, Integer index, String task, String status, String notes) {
@@ -234,5 +279,20 @@ public class ProjectStartReportService {
         row.put("status", status);
         row.put("notes", notes == null ? "" : notes);
         return row;
+    }
+
+    private Object resolveImageSource(String source) {
+        if (source == null || source.trim().isEmpty()) {
+            return null;
+        }
+        String value = source.trim();
+        if (value.startsWith("classpath:")) {
+            try (InputStream is = resourceLoader.getResource(value).getInputStream()) {
+                return is.readAllBytes();
+            } catch (Exception ignore) {
+                return null;
+            }
+        }
+        return value;
     }
 }
