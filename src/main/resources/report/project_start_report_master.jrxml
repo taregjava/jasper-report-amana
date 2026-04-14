@@ -84,7 +84,7 @@
 
             <!-- ownership subreport (separate file) -->
             <subreport>
-                <reportElement x="0" y="210" width="802" height="90"/>
+                <reportElement x="0" y="210" width="802" height="176"/>
                 <!-- pass ownership parameters into owner subreport -->
                 <subreportParameter name="ownerName"><subreportParameterExpression><![CDATA[$P{ownerName}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="ownerIdNumber"><subreportParameterExpression><![CDATA[$P{ownerIdNumber}]]></subreportParameterExpression></subreportParameter>
@@ -107,7 +107,7 @@
             <!-- building subreport (separate file) -->
             <subreport>
                 <!-- positioned below header+owner; reduced height so all bands fit on page -->
-                <reportElement x="0" y="325" width="802" height="140"/>
+                <reportElement x="0" y="400" width="802" height="140"/>
                 <subreportParameter name="buildingType"><subreportParameterExpression><![CDATA[$P{buildingType}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="buildingDescription"><subreportParameterExpression><![CDATA[$P{buildingDescription}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="licenseNumber"><subreportParameterExpression><![CDATA[$P{licenseNumber}]]></subreportParameterExpression></subreportParameter>
@@ -123,15 +123,19 @@
                 <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{buildingSubreport}]]></subreportExpression>
             </subreport>
 
-            <!-- table subreport (tasks) -->
+        </band>
+    </detail>
+
+    <summary>
+        <band height="90">
+            <!-- table subreport moved to summary to free first-page space for owner + building -->
             <subreport>
-                <!-- placed at the bottom of the detail band -->
-                <reportElement x="0" y="465" width="802" height="80"/>
+                <reportElement x="0" y="0" width="802" height="80"/>
                 <dataSourceExpression><![CDATA[$P{tableData}]]></dataSourceExpression>
                 <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{tableSubreport}]]></subreportExpression>
             </subreport>
         </band>
-    </detail>
+    </summary>
 
 </jasperReport>
 
