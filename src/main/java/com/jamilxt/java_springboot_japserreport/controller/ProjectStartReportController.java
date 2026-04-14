@@ -60,12 +60,15 @@ public class ProjectStartReportController {
 
         TaskRow t1 = new TaskRow();
         t1.setIndex(1);
+        t1.setGroupTitle("متطلبات سور الحماية");
+        t1.setSideNumber("2");
         t1.setTaskName("وضع أساس المبنى");
         t1.setCompliant("☑");
         t1.setNotes("تأكيد جودة الخرسانة");
 
         TaskRow t2 = new TaskRow();
         t2.setIndex(2);
+        t2.setSideNumber("2");
         t2.setTaskName("التأكد من الخرسانة");
         t2.setCompliant("☐");
         t2.setNotes("أخذ عينات للفحص المختبري");

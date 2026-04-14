@@ -113,8 +113,8 @@
 
             <!-- building subreport (separate file) -->
             <subreport>
-                <!-- positioned below owner with visible spacing so both sections render fully on page 1 -->
-                <reportElement x="0" y="324" width="802" height="176"/>
+                <!-- moved slightly upward to reduce the gap below the owner section without overlap -->
+                <reportElement x="0" y="314" width="802" height="176"/>
                 <subreportParameter name="buildingType"><subreportParameterExpression><![CDATA[$P{buildingType}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="otherBuildingType"><subreportParameterExpression><![CDATA[$P{otherBuildingType}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="buildingDescription"><subreportParameterExpression><![CDATA[$P{buildingDescription}]]></subreportParameterExpression></subreportParameter>

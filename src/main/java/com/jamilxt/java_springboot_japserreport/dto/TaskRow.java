@@ -9,6 +9,8 @@ public class TaskRow {
     private String taskName;   // اسم المهمة
     private String compliant;  // مطابق / غير مطابق / لا ينطبق
     private String notes;      // ملاحظات
+    private String groupTitle; // عنوان المجموعة مثل: متطلبات سور الحماية
+    private String sideNumber; // الرقم الجانبي المدمج مثل: 2 / 3
 
     // Getters & Setters
 }

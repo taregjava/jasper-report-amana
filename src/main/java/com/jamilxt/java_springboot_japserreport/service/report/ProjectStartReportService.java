@@ -43,23 +43,13 @@ public class ProjectStartReportService {
             JasperReport tableRep  = JasperCompileManager.compileReport(tableIs);
             JasperReport masterRep = JasperCompileManager.compileReport(masterIs);
 
-            // Build static table rows (POJO or Map). Here's Map-based example:
-            List<Map<String,Object>> rows = new ArrayList<>();
-            Map<String,Object> r1 = new HashMap<>();
-            r1.put("itemNo", 1);
-            r1.put("description", "التأكد من سلامة الأساسات");
-            r1.put("requirement", "");
-            r1.put("status", "☑"); // using '☑' as matched marker; table subreport checks status to render checkboxes
-            r1.put("notes", "ملاحظة توضيحية");
-            rows.add(r1);
-
-            Map<String,Object> r2 = new HashMap<>();
-            r2.put("itemNo", 2);
-            r2.put("description", "مراجعة الرسومات");
-            r2.put("requirement", "");
-            r2.put("status", "☐"); // not matched
-            r2.put("notes", "");
-            rows.add(r2);
+            // Build static grouped rows so static preview matches dynamic checklist design.
+            List<Map<String,Object>> rows = new ArrayList<>(java.util.List.of(
+                    tableRow("متطلبات سور الحماية", "2", 1, "التأكد من سلامة الأساسات", "☑", "ملاحظة توضيحية"),
+                    tableRow(null, "2", 2, "مراجعة الرسومات", "☐", ""),
+                    tableRow("متطلبات الأعمال الخرسانية", "3", 3, "اختبارات السلامة", "NA", ""),
+                    tableRow(null, "3", 4, "توثيق نتائج الفحص الموقعي", "☑", "تم الاستلام")
+            ));
 
             JRBeanCollectionDataSource tableDs = new JRBeanCollectionDataSource(rows);
 
@@ -220,20 +210,25 @@ public class ProjectStartReportService {
     private List<Map<String, Object>> buildTableRows(ProjectStartReportDto dto) {
         List<TaskRow> tasks = dto.getTasks();
         if (tasks == null || tasks.isEmpty()) {
-            // create some default rows
+            // create default grouped rows so the checklist layout can be previewed clearly
             return java.util.List.of(
-                    tableRow(1, "وضع أساس المبنى", "☑", ""),
-                    tableRow(2, "التأكد من الخرسانة", "☐", "عينه"),
-                    tableRow(3, "اختبارات السلامة", "☑", "")
+                    tableRow("متطلبات سور الحماية", "2", 1, "التأكد من وجود سور حماية مناسب حول الموقع", "☑", ""),
+                    tableRow(null, "2", 2, "توفر وسائل التنبيه والتحذير حول منطقة العمل", "☐", "يلزم استكمال اللوحات التحذيرية"),
+                    tableRow("متطلبات الأعمال الخرسانية", "3", 3, "مطابقة أعمال صب القواعد والميدات للمخططات المعتمدة", "NA", ""),
+                    tableRow(null, "3", 4, "أخذ العينات اللازمة للفحص المختبري وتوثيق النتائج", "☑", "تم التوثيق")
             );
         }
 
-        return tasks.stream().map(r -> tableRow(r.getIndex(), r.getTaskName(), r.getCompliant(), r.getNotes())).collect(Collectors.toList());
+        return tasks.stream()
+                .map(r -> tableRow(r.getGroupTitle(), r.getSideNumber(), r.getIndex(), r.getTaskName(), r.getCompliant(), r.getNotes()))
+                .collect(Collectors.toList());
     }
 
-    private Map<String, Object> tableRow(Integer index, String task, String status, String notes) {
+    private Map<String, Object> tableRow(String groupTitle, String sideNumber, Integer index, String task, String status, String notes) {
         Map<String, Object> row = new HashMap<>();
         // Use field names expected by the table subreport/master: itemNo and description
+        row.put("groupTitle", groupTitle == null ? "" : groupTitle);
+        row.put("sideNumber", sideNumber == null ? "" : sideNumber);
         row.put("itemNo", index);
         row.put("description", task);
         row.put("status", status);
