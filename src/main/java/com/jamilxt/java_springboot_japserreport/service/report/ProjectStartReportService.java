@@ -98,15 +98,22 @@ public class ProjectStartReportService {
             params.put("contractorName", "شركة المقاول المحدودة");
             params.put("supervisingEngineeringOffice", "المكتب الهندسي النموذجي");
             params.put("buildingType", "سكني");
+            params.put("otherBuildingType", "");
             params.put("buildingCondition", "جيد");
             params.put("buildingDescription", "وصف نموذجي للمبنى...");
             params.put("licenseNumber", "LIC-001");
             params.put("licenseDate", "1446/12/15");
             params.put("planNumber", "PLN-88");
+            params.put("pieceNumber", "45");
+            params.put("floorsCount", "2");
             params.put("district", "حي النور");
             params.put("street", "شارع الأمير");
+            params.put("sector", "قطاع الشمال");
             params.put("landNumber", "245");
             params.put("blockNumber", "17");
+            params.put("areaByDeed", 350.0d);
+            params.put("areaByLicense", 340.0d);
+            params.put("areaByNature", 338.5d);
             params.put("isFullyFinished", Boolean.TRUE);
             params.put("isPartiallyBuilt", Boolean.FALSE);
 
@@ -175,12 +182,19 @@ public class ProjectStartReportService {
             params.put("buildingDescription", bi == null ? "" : bi.getBuildingDescription());
             // map building fields to expected names (best-effort)
             params.put("planNumber", bi == null ? "" : bi.getPlanNumber());
+            params.put("pieceNumber", bi == null ? "" : bi.getPieceNumber());
+            params.put("floorsCount", bi == null ? "" : bi.getFloorsCount());
             params.put("landNumber", bi == null ? "" : bi.getLandNumber());
             params.put("blockNumber", bi == null ? "" : bi.getBlockNumber());
             params.put("licenseNumber", bi == null ? "" : bi.getLicenseNumber());
             params.put("licenseDate", bi == null ? "" : bi.getLicenseDate());
             params.put("district", bi == null ? "" : bi.getDistrict());
             params.put("street", bi == null ? "" : bi.getStreet());
+            params.put("sector", bi == null ? "" : bi.getSector());
+            params.put("otherBuildingType", bi == null ? "" : bi.getOtherBuildingType());
+            params.put("areaByDeed", bi == null ? null : (bi.getAreaByDeed() != null ? bi.getAreaByDeed() : bi.getAreaDeed()));
+            params.put("areaByLicense", bi == null ? null : (bi.getAreaByLicense() != null ? bi.getAreaByLicense() : bi.getAreaLicense()));
+            params.put("areaByNature", bi == null ? null : (bi.getAreaByNature() != null ? bi.getAreaByNature() : bi.getAreaNature()));
             params.put("isFullyFinished", bi != null && bi.isFullyBuilt());
             params.put("isPartiallyBuilt", bi != null && bi.isPartiallyBuilt());
 

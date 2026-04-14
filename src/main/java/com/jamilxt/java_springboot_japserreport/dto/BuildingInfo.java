@@ -31,5 +31,12 @@ public class BuildingInfo {
     // --- الصف الخامس: الموقع ---
     private String sector;              // القطاع
     private String district;            // الحي
-    private String street;              // الشارع
+    private String street;
+
+
+    // مفقود: تفاصيل المساحات الثلاثة (العناوين موجودة بالصورة)
+    private Double areaDeed;    // حسب الصك
+    private Double areaLicense; // حسب الرخصة
+    private Double areaNature;  // حسب الطبيعة
+
 }

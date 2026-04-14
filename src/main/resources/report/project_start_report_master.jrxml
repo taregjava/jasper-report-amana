@@ -31,15 +31,22 @@
     <parameter name="reportDate" class="java.lang.String"/>
     <!-- Building params forwarded to building subreport -->
     <parameter name="buildingType" class="java.lang.String"/>
+    <parameter name="otherBuildingType" class="java.lang.String"/>
     <parameter name="buildingCondition" class="java.lang.String"/>
     <parameter name="buildingDescription" class="java.lang.String"/>
     <parameter name="licenseNumber" class="java.lang.String"/>
     <parameter name="licenseDate" class="java.lang.String"/>
     <parameter name="planNumber" class="java.lang.String"/>
+    <parameter name="pieceNumber" class="java.lang.String"/>
+    <parameter name="floorsCount" class="java.lang.String"/>
     <parameter name="district" class="java.lang.String"/>
     <parameter name="street" class="java.lang.String"/>
+    <parameter name="sector" class="java.lang.String"/>
     <parameter name="landNumber" class="java.lang.String"/>
     <parameter name="blockNumber" class="java.lang.String"/>
+    <parameter name="areaByDeed" class="java.lang.Double"/>
+    <parameter name="areaByLicense" class="java.lang.Double"/>
+    <parameter name="areaByNature" class="java.lang.Double"/>
     <parameter name="isFullyFinished" class="java.lang.Boolean"/>
     <parameter name="isPartiallyBuilt" class="java.lang.Boolean"/>
     <!-- Owner params forwarded to body subreport -->
@@ -68,7 +75,7 @@
         <band height="545">
             <!-- header subreport placed at top -->
             <subreport>
-                <reportElement x="0" y="0" width="802" height="200"/>
+                <reportElement x="0" y="0" width="802" height="118"/>
                 <subreportParameter name="reportLogo">
                     <subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression>
                 </subreportParameter>
@@ -84,7 +91,7 @@
 
             <!-- ownership subreport (separate file) -->
             <subreport>
-                <reportElement x="0" y="210" width="802" height="176"/>
+                <reportElement x="0" y="130" width="802" height="176"/>
                 <!-- pass ownership parameters into owner subreport -->
                 <subreportParameter name="ownerName"><subreportParameterExpression><![CDATA[$P{ownerName}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="ownerIdNumber"><subreportParameterExpression><![CDATA[$P{ownerIdNumber}]]></subreportParameterExpression></subreportParameter>
@@ -106,17 +113,24 @@
 
             <!-- building subreport (separate file) -->
             <subreport>
-                <!-- positioned below header+owner; reduced height so all bands fit on page -->
-                <reportElement x="0" y="400" width="802" height="140"/>
+                <!-- positioned below owner with visible spacing so both sections render fully on page 1 -->
+                <reportElement x="0" y="324" width="802" height="176"/>
                 <subreportParameter name="buildingType"><subreportParameterExpression><![CDATA[$P{buildingType}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="otherBuildingType"><subreportParameterExpression><![CDATA[$P{otherBuildingType}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="buildingDescription"><subreportParameterExpression><![CDATA[$P{buildingDescription}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="licenseNumber"><subreportParameterExpression><![CDATA[$P{licenseNumber}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="licenseDate"><subreportParameterExpression><![CDATA[$P{licenseDate}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="planNumber"><subreportParameterExpression><![CDATA[$P{planNumber}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="pieceNumber"><subreportParameterExpression><![CDATA[$P{pieceNumber}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="floorsCount"><subreportParameterExpression><![CDATA[$P{floorsCount}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="district"><subreportParameterExpression><![CDATA[$P{district}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="street"><subreportParameterExpression><![CDATA[$P{street}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="sector"><subreportParameterExpression><![CDATA[$P{sector}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="landNumber"><subreportParameterExpression><![CDATA[$P{landNumber}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="blockNumber"><subreportParameterExpression><![CDATA[$P{blockNumber}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="areaByDeed"><subreportParameterExpression><![CDATA[$P{areaByDeed}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="areaByLicense"><subreportParameterExpression><![CDATA[$P{areaByLicense}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="areaByNature"><subreportParameterExpression><![CDATA[$P{areaByNature}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="isFullyFinished"><subreportParameterExpression><![CDATA[$P{isFullyFinished}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="isPartiallyBuilt"><subreportParameterExpression><![CDATA[$P{isPartiallyBuilt}]]></subreportParameterExpression></subreportParameter>
                 <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
