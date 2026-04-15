@@ -16,6 +16,7 @@ public class ProjectStartReportDto {
 
     private List<TaskRow> tasks;            // جدول المهام
     private ProjectPhotosDTO projectPhotos; // صور المبنى
+    private InspectionResponsibilityDTO inspectionResponsibility; // إقرار المسؤولية واعتماد جهة التفتيش
 
     private List<String> changes;           // التغييرات على المخططات المعتمدة (max 8 items)
     private List<String> extraItems;        // البنود التي لم تذكر في التقرير (max 8 items)

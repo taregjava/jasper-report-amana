@@ -16,6 +16,11 @@
     <property name="net.sf.jasperreports.text.direction" value="RTL"/>
     <style name="Default" isDefault="true" fontName="SansSerif" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 
+    <parameter name="headerSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
+    <parameter name="reportLogo" class="java.lang.Object"/>
+    <parameter name="projectNameAndAddress" class="java.lang.String"/>
+    <parameter name="reportDate" class="java.lang.String"/>
+
     <parameter name="spatialPortalPhoto" class="java.lang.Object"/>
     <parameter name="implementationPhoto" class="java.lang.Object"/>
     <parameter name="aerialPhoto" class="java.lang.Object"/>
@@ -23,10 +28,20 @@
     <parameter name="digitalStampPath" class="java.lang.Object"/>
 
     <detail>
-        <band height="320">
+        <band height="438">
+            <!-- Shared page header -->
+            <subreport>
+                <reportElement x="0" y="0" width="802" height="118"/>
+                <subreportParameter name="reportLogo"><subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="reportDate"><subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression></subreportParameter>
+                <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
+                <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{headerSubreport}]]></subreportExpression>
+            </subreport>
+
             <!-- Main title -->
             <staticText>
-                <reportElement x="0" y="0" width="802" height="25" mode="Opaque" backcolor="#005B41" forecolor="#FFFFFF"/>
+                <reportElement x="0" y="118" width="802" height="25" mode="Opaque" backcolor="#005B41" forecolor="#FFFFFF"/>
                 <box><pen lineWidth="0.5" lineColor="#000000"/></box>
                 <textElement textAlignment="Center" verticalAlignment="Middle">
                     <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true" size="11" isBold="true"/>
@@ -36,7 +51,7 @@
 
             <!-- Image titles row -->
             <staticText>
-                <reportElement x="0" y="25" width="267" height="25" mode="Opaque" backcolor="#E8F5E9"/>
+                <reportElement x="0" y="143" width="267" height="25" mode="Opaque" backcolor="#E8F5E9"/>
                 <box><pen lineWidth="0.5" lineColor="#000000"/></box>
                 <textElement textAlignment="Center" verticalAlignment="Middle">
                     <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true" size="9"/>
@@ -45,7 +60,7 @@
             </staticText>
 
             <staticText>
-                <reportElement x="267" y="25" width="267" height="25" mode="Opaque" backcolor="#E8F5E9"/>
+                <reportElement x="267" y="143" width="267" height="25" mode="Opaque" backcolor="#E8F5E9"/>
                 <box><pen lineWidth="0.5" lineColor="#000000"/></box>
                 <textElement textAlignment="Center" verticalAlignment="Middle">
                     <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true" size="9"/>
@@ -54,7 +69,7 @@
             </staticText>
 
             <staticText>
-                <reportElement x="534" y="25" width="268" height="25" mode="Opaque" backcolor="#E8F5E9"/>
+                <reportElement x="534" y="143" width="268" height="25" mode="Opaque" backcolor="#E8F5E9"/>
                 <box><pen lineWidth="0.5" lineColor="#000000"/></box>
                 <textElement textAlignment="Center" verticalAlignment="Middle">
                     <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true" size="9"/>
@@ -64,7 +79,7 @@
 
             <!-- Image boxes -->
             <frame>
-                <reportElement x="0" y="50" width="267" height="220" mode="Opaque" backcolor="#FFFFFF"/>
+                <reportElement x="0" y="168" width="267" height="220" mode="Opaque" backcolor="#FFFFFF"/>
                 <box><pen lineWidth="0.5" lineColor="#000000"/></box>
                 <image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
                     <reportElement x="4" y="4" width="259" height="212">
@@ -82,7 +97,7 @@
             </frame>
 
             <frame>
-                <reportElement x="267" y="50" width="267" height="220" mode="Opaque" backcolor="#FFFFFF"/>
+                <reportElement x="267" y="168" width="267" height="220" mode="Opaque" backcolor="#FFFFFF"/>
                 <box><pen lineWidth="0.5" lineColor="#000000"/></box>
                 <image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
                     <reportElement x="4" y="4" width="259" height="212">
@@ -100,7 +115,7 @@
             </frame>
 
             <frame>
-                <reportElement x="534" y="50" width="268" height="220" mode="Opaque" backcolor="#FFFFFF"/>
+                <reportElement x="534" y="168" width="268" height="220" mode="Opaque" backcolor="#FFFFFF"/>
                 <box><pen lineWidth="0.5" lineColor="#000000"/></box>
                 <image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
                     <reportElement x="4" y="4" width="260" height="212">
@@ -119,7 +134,7 @@
 
             <!-- Footer labels -->
             <staticText>
-                <reportElement x="0" y="280" width="120" height="18"/>
+                <reportElement x="0" y="398" width="120" height="18"/>
                 <textElement textAlignment="Left" verticalAlignment="Middle">
                     <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true" size="9" isBold="true"/>
                 </textElement>
@@ -127,14 +142,14 @@
             </staticText>
 
             <image scaleImage="RetainShape" hAlign="Left" vAlign="Middle">
-                <reportElement x="122" y="273" width="120" height="34">
+                <reportElement x="122" y="391" width="120" height="34">
                     <printWhenExpression><![CDATA[$P{digitalStampPath} != null]]></printWhenExpression>
                 </reportElement>
                 <imageExpression class="java.lang.Object"><![CDATA[$P{digitalStampPath}]]></imageExpression>
             </image>
 
             <textField isBlankWhenNull="true">
-                <reportElement x="592" y="280" width="210" height="18"/>
+                <reportElement x="592" y="398" width="210" height="18"/>
                 <textElement textAlignment="Right" verticalAlignment="Middle">
                     <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true" size="9" isBold="true"/>
                 </textElement>
@@ -144,3 +159,4 @@
     </detail>
 
 </jasperReport>
+

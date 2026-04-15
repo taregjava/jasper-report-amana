@@ -98,16 +98,37 @@
     <parameter name="changesRowsSubreport"  class="net.sf.jasperreports.engine.JasperReport"/>
     <parameter name="changesData"           class="net.sf.jasperreports.engine.JRDataSource"/>
     <parameter name="extraItemsData"        class="net.sf.jasperreports.engine.JRDataSource"/>
+    <parameter name="inspectionResponsibilitySubreport" class="net.sf.jasperreports.engine.JasperReport"/>
+    <parameter name="inspectionResponsibilityData" class="net.sf.jasperreports.engine.JRDataSource"/>
 
     <!--
         Group rendering order (innermost footer first, outermost last):
-          1. TableSectionGroup  footer  → checklist table
-          2. MainImagesGroup    footer  → main building images
-          3. ChangesGroup       footer  → changes & extra items   ← NEW (outermost)
+          1. TableSectionGroup            → checklist table
+          2. MainImagesGroup              → main building images
+          3. ChangesGroup                 → changes & extra items
+          4. InspectionResponsibilityGroup→ responsibility & inspection approval
         Declared order in XML: outermost first.
     -->
 
-    <!-- Outermost group: footer renders LAST (changes page, after main images) -->
+    <!-- Outermost group: footer renders LAST (responsibility page) -->
+    <group name="InspectionResponsibilityGroup">
+        <groupExpression><![CDATA[1]]></groupExpression>
+        <groupFooter>
+            <band height="545" splitType="Stretch">
+                <subreport>
+                    <reportElement x="0" y="0" width="802" height="545"/>
+                    <subreportParameter name="headerSubreport"><subreportParameterExpression><![CDATA[$P{headerSubreport}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="reportLogo"><subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="reportDate"><subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression></subreportParameter>
+                    <dataSourceExpression><![CDATA[$P{inspectionResponsibilityData}]]></dataSourceExpression>
+                    <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{inspectionResponsibilitySubreport}]]></subreportExpression>
+                </subreport>
+            </band>
+        </groupFooter>
+    </group>
+
+    <!-- Outer group: footer renders after main images and before responsibility page -->
     <group name="ChangesGroup">
         <groupExpression><![CDATA[1]]></groupExpression>
         <groupFooter>
@@ -137,6 +158,10 @@
             <band height="545" splitType="Stretch">
                 <subreport>
                     <reportElement x="0" y="0" width="802" height="545"/>
+                    <subreportParameter name="headerSubreport"><subreportParameterExpression><![CDATA[$P{headerSubreport}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="reportLogo"><subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="reportDate"><subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="spatialPortalPhoto"><subreportParameterExpression><![CDATA[$P{spatialPortalPhoto}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="implementationPhoto"><subreportParameterExpression><![CDATA[$P{implementationPhoto}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="aerialPhoto"><subreportParameterExpression><![CDATA[$P{aerialPhoto}]]></subreportParameterExpression></subreportParameter>

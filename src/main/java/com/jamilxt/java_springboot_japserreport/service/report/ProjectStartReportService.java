@@ -5,6 +5,7 @@ import com.jamilxt.java_springboot_japserreport.dto.OwnerInfo;
 import com.jamilxt.java_springboot_japserreport.dto.BuildingInfo;
 import com.jamilxt.java_springboot_japserreport.dto.ProjectPhotosDTO;
 import com.jamilxt.java_springboot_japserreport.dto.TaskRow;
+import com.jamilxt.java_springboot_japserreport.dto.InspectionResponsibilityDTO;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.core.io.ResourceLoader;
@@ -40,6 +41,7 @@ public class ProjectStartReportService {
              InputStream mainImagesIs = getClass().getResourceAsStream("/report/projectStart/project_start_main_images.jrxml");
              InputStream changesRowsIs = getClass().getResourceAsStream("/report/projectStart/project_start_changes_rows.jrxml");
              InputStream changesPageIs = getClass().getResourceAsStream("/report/projectStart/project_start_changes_page.jrxml");
+             InputStream inspectionResponsibilityIs = getClass().getResourceAsStream("/report/projectStart/project_start_inspection_responsibility.jrxml");
              InputStream masterIs = getClass().getResourceAsStream("/report/projectStart/project_start_report_master.jrxml")) {
 
             JasperReport headerRep = JasperCompileManager.compileReport(headerIs);
@@ -53,6 +55,7 @@ public class ProjectStartReportService {
             JasperReport mainImagesRep = mainImagesIs == null ? null : JasperCompileManager.compileReport(mainImagesIs);
             JasperReport changesRowsRep = changesRowsIs == null ? null : JasperCompileManager.compileReport(changesRowsIs);
             JasperReport changesPageRep = changesPageIs == null ? null : JasperCompileManager.compileReport(changesPageIs);
+            JasperReport inspectionResponsibilityRep = inspectionResponsibilityIs == null ? null : JasperCompileManager.compileReport(inspectionResponsibilityIs);
             JasperReport masterRep = JasperCompileManager.compileReport(masterIs);
 
             // Build static grouped rows so static preview matches dynamic checklist design.
@@ -93,6 +96,7 @@ public class ProjectStartReportService {
             params.put("mainImagesSubreport", mainImagesRep);
             params.put("changesPageSubreport", changesPageRep);
             params.put("changesRowsSubreport", changesRowsRep);
+            params.put("inspectionResponsibilitySubreport", inspectionResponsibilityRep);
             // pass table datasource
             params.put("tableData", tableDs);
             params.put("photosTopData", buildTopPhotoRows(params));
@@ -105,6 +109,7 @@ public class ProjectStartReportService {
             params.put("extraItemsData", buildTextRowsDataSource(java.util.List.of(
                     "لم يتم تركيب حواجز السلامة على السطح"
             )));
+            params.put("inspectionResponsibilityData", buildInspectionResponsibilityDataSource(buildStaticInspectionResponsibility()));
 
             // header/body params (example)
             // load logo as byte[] so Jasper/iText can recognize the image format reliably during export
@@ -192,6 +197,7 @@ public class ProjectStartReportService {
              InputStream mainImagesIs = resourceLoader.getResource("classpath:report/projectStart/project_start_main_images.jrxml").getInputStream();
              InputStream changesRowsIs = resourceLoader.getResource("classpath:report/projectStart/project_start_changes_rows.jrxml").getInputStream();
              InputStream changesPageIs = resourceLoader.getResource("classpath:report/projectStart/project_start_changes_page.jrxml").getInputStream();
+             InputStream inspectionResponsibilityIs = resourceLoader.getResource("classpath:report/projectStart/project_start_inspection_responsibility.jrxml").getInputStream();
              InputStream masterIs = resourceLoader.getResource("classpath:report/projectStart/project_start_report_master.jrxml").getInputStream()) {
 
             JasperReport headerRep = JasperCompileManager.compileReport(headerIs);
@@ -205,6 +211,7 @@ public class ProjectStartReportService {
             JasperReport mainImagesRep = JasperCompileManager.compileReport(mainImagesIs);
             JasperReport changesRowsRep = JasperCompileManager.compileReport(changesRowsIs);
             JasperReport changesPageRep = JasperCompileManager.compileReport(changesPageIs);
+            JasperReport inspectionResponsibilityRep = JasperCompileManager.compileReport(inspectionResponsibilityIs);
             JasperReport masterReport = JasperCompileManager.compileReport(masterIs);
 
             List<Map<String, Object>> tableRows = buildTableRows(dto);
@@ -222,10 +229,12 @@ public class ProjectStartReportService {
             params.put("mainImagesSubreport", mainImagesRep);
             params.put("changesPageSubreport", changesPageRep);
             params.put("changesRowsSubreport", changesRowsRep);
+            params.put("inspectionResponsibilitySubreport", inspectionResponsibilityRep);
             params.put("tableData", new JRBeanCollectionDataSource(tableRows));
             // changes & extra items (padded to 8 rows)
             params.put("changesData",    buildTextRowsDataSource(dto.getChanges()));
             params.put("extraItemsData", buildTextRowsDataSource(dto.getExtraItems()));
+            params.put("inspectionResponsibilityData", buildInspectionResponsibilityDataSource(dto.getInspectionResponsibility()));
 
             // owner/building values: prefer OwnerInfo / BuildingInfo when present
             String ownerName = null;
@@ -422,6 +431,46 @@ public class ProjectStartReportService {
         row.put("image", image);
         row.put("description", safeText(description));
         return row;
+    }
+
+    private InspectionResponsibilityDTO buildStaticInspectionResponsibility() {
+        InspectionResponsibilityDTO dto = new InspectionResponsibilityDTO();
+        dto.setSupervisorName("م. أحمد عبدالله");
+        dto.setSupervisorIdOrLicense("LIC-445522");
+        dto.setSupervisorSignaturePath("classpath:report/logo.png");
+        dto.setOfficeStampPath("classpath:report/logo.png");
+        dto.setInspectionNotes(java.util.List.of(
+                "يلزم استكمال حواجز السلامة في منطقة السطح.",
+                "مراجعة مطابقة التمديدات الكهربائية مع المخطط.",
+                "تقديم صور توثيقية إضافية بعد الإغلاق النهائي."
+        ));
+        dto.setInspectionStatus("PENDING");
+        dto.setInspectorName("م. خالد العتيبي");
+        dto.setInspectorIdOrLicense("INSP-223311");
+        dto.setInspectorSignaturePath("classpath:report/logo.png");
+        dto.setInspectionBodyStampPath("classpath:report/logo.png");
+        return dto;
+    }
+
+    private JRDataSource buildInspectionResponsibilityDataSource(InspectionResponsibilityDTO data) {
+        InspectionResponsibilityDTO dto = data == null ? new InspectionResponsibilityDTO() : data;
+        List<String> notes = dto.getInspectionNotes() == null ? new ArrayList<>() : new ArrayList<>(dto.getInspectionNotes());
+        while (notes.size() < 3) {
+            notes.add("");
+        }
+
+        Map<String, Object> row = new HashMap<>();
+        row.put("supervisorName", safeText(dto.getSupervisorName()));
+        row.put("supervisorIdOrLicense", safeText(dto.getSupervisorIdOrLicense()));
+        row.put("supervisorSignaturePath", resolveImageSource(dto.getSupervisorSignaturePath()));
+        row.put("officeStampPath", resolveImageSource(dto.getOfficeStampPath()));
+        row.put("inspectionNotes", notes);
+        row.put("inspectionStatus", safeText(dto.getInspectionStatus()));
+        row.put("inspectorName", safeText(dto.getInspectorName()));
+        row.put("inspectorIdOrLicense", safeText(dto.getInspectorIdOrLicense()));
+        row.put("inspectorSignaturePath", resolveImageSource(dto.getInspectorSignaturePath()));
+        row.put("inspectionBodyStampPath", resolveImageSource(dto.getInspectionBodyStampPath()));
+        return new JRBeanCollectionDataSource(java.util.List.of(row));
     }
 
     /**
