@@ -4,7 +4,7 @@
               xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
               name="project_start_inspection_responsibility"
               pageWidth="842"
-              pageHeight="595"
+              pageHeight="545"
               orientation="Landscape"
               columnWidth="802"
               leftMargin="20"

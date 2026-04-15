@@ -4,13 +4,13 @@
               xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
               name="project_start_report_photos"
               pageWidth="842"
-              pageHeight="595"
+              pageHeight="545"
               orientation="Landscape"
               columnWidth="802"
               leftMargin="20"
               rightMargin="20"
-              topMargin="20"
-              bottomMargin="20"
+              topMargin="0"
+              bottomMargin="0"
               language="java">
 
     <property name="net.sf.jasperreports.text.direction" value="RTL"/>
@@ -28,7 +28,7 @@
     <parameter name="digitalStampPath" class="java.lang.Object"/>
 
     <detail>
-        <band height="438">
+        <band height="545">
             <!-- Shared page header -->
             <subreport>
                 <reportElement x="0" y="0" width="802" height="118"/>
@@ -79,16 +79,16 @@
 
             <!-- Image boxes -->
             <frame>
-                <reportElement x="0" y="168" width="267" height="220" mode="Opaque" backcolor="#FFFFFF"/>
+                <reportElement x="0" y="168" width="267" height="356" mode="Opaque" backcolor="#FFFFFF"/>
                 <box><pen lineWidth="0.5" lineColor="#000000"/></box>
                 <image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
-                    <reportElement x="4" y="4" width="259" height="212">
+                    <reportElement x="4" y="4" width="259" height="348">
                         <printWhenExpression><![CDATA[$P{aerialPhoto} != null]]></printWhenExpression>
                     </reportElement>
                     <imageExpression class="java.lang.Object"><![CDATA[$P{aerialPhoto}]]></imageExpression>
                 </image>
                 <staticText>
-                    <reportElement x="4" y="4" width="259" height="212" forecolor="#999999">
+                    <reportElement x="4" y="4" width="259" height="348" forecolor="#999999">
                         <printWhenExpression><![CDATA[$P{aerialPhoto} == null]]></printWhenExpression>
                     </reportElement>
                     <textElement textAlignment="Center" verticalAlignment="Middle"/>
@@ -97,16 +97,16 @@
             </frame>
 
             <frame>
-                <reportElement x="267" y="168" width="267" height="220" mode="Opaque" backcolor="#FFFFFF"/>
+                <reportElement x="267" y="168" width="267" height="356" mode="Opaque" backcolor="#FFFFFF"/>
                 <box><pen lineWidth="0.5" lineColor="#000000"/></box>
                 <image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
-                    <reportElement x="4" y="4" width="259" height="212">
+                    <reportElement x="4" y="4" width="259" height="348">
                         <printWhenExpression><![CDATA[$P{implementationPhoto} != null]]></printWhenExpression>
                     </reportElement>
                     <imageExpression class="java.lang.Object"><![CDATA[$P{implementationPhoto}]]></imageExpression>
                 </image>
                 <staticText>
-                    <reportElement x="4" y="4" width="259" height="212" forecolor="#999999">
+                    <reportElement x="4" y="4" width="259" height="348" forecolor="#999999">
                         <printWhenExpression><![CDATA[$P{implementationPhoto} == null]]></printWhenExpression>
                     </reportElement>
                     <textElement textAlignment="Center" verticalAlignment="Middle"/>
@@ -115,16 +115,16 @@
             </frame>
 
             <frame>
-                <reportElement x="534" y="168" width="268" height="220" mode="Opaque" backcolor="#FFFFFF"/>
+                <reportElement x="534" y="168" width="268" height="356" mode="Opaque" backcolor="#FFFFFF"/>
                 <box><pen lineWidth="0.5" lineColor="#000000"/></box>
                 <image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
-                    <reportElement x="4" y="4" width="260" height="212">
+                    <reportElement x="4" y="4" width="260" height="348">
                         <printWhenExpression><![CDATA[$P{spatialPortalPhoto} != null]]></printWhenExpression>
                     </reportElement>
                     <imageExpression class="java.lang.Object"><![CDATA[$P{spatialPortalPhoto}]]></imageExpression>
                 </image>
                 <staticText>
-                    <reportElement x="4" y="4" width="260" height="212" forecolor="#999999">
+                    <reportElement x="4" y="4" width="260" height="348" forecolor="#999999">
                         <printWhenExpression><![CDATA[$P{spatialPortalPhoto} == null]]></printWhenExpression>
                     </reportElement>
                     <textElement textAlignment="Center" verticalAlignment="Middle"/>
@@ -134,7 +134,7 @@
 
             <!-- Footer labels -->
             <staticText>
-                <reportElement x="0" y="398" width="120" height="18"/>
+                <reportElement x="0" y="527" width="120" height="18"/>
                 <textElement textAlignment="Left" verticalAlignment="Middle">
                     <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true" size="9" isBold="true"/>
                 </textElement>
@@ -142,14 +142,14 @@
             </staticText>
 
             <image scaleImage="RetainShape" hAlign="Left" vAlign="Middle">
-                <reportElement x="122" y="391" width="120" height="34">
+                <reportElement x="122" y="524" width="120" height="20">
                     <printWhenExpression><![CDATA[$P{digitalStampPath} != null]]></printWhenExpression>
                 </reportElement>
                 <imageExpression class="java.lang.Object"><![CDATA[$P{digitalStampPath}]]></imageExpression>
             </image>
 
             <textField isBlankWhenNull="true">
-                <reportElement x="592" y="398" width="210" height="18"/>
+                <reportElement x="552" y="527" width="250" height="15"/>
                 <textElement textAlignment="Right" verticalAlignment="Middle">
                     <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true" size="9" isBold="true"/>
                 </textElement>

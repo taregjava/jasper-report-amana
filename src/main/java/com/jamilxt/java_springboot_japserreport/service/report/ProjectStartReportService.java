@@ -109,7 +109,9 @@ public class ProjectStartReportService {
             params.put("extraItemsData", buildTextRowsDataSource(java.util.List.of(
                     "لم يتم تركيب حواجز السلامة على السطح"
             )));
-            params.put("inspectionResponsibilityData", buildInspectionResponsibilityDataSource(buildStaticInspectionResponsibility()));
+            InspectionResponsibilityDTO staticInspection = buildStaticInspectionResponsibility();
+            params.put("inspectionResponsibilityData", buildInspectionResponsibilityDataSource(staticInspection));
+            params.put("hasInspectionResponsibilityData", hasInspectionResponsibilityData(staticInspection));
 
             // header/body params (example)
             // load logo as byte[] so Jasper/iText can recognize the image format reliably during export
@@ -235,6 +237,7 @@ public class ProjectStartReportService {
             params.put("changesData",    buildTextRowsDataSource(dto.getChanges()));
             params.put("extraItemsData", buildTextRowsDataSource(dto.getExtraItems()));
             params.put("inspectionResponsibilityData", buildInspectionResponsibilityDataSource(dto.getInspectionResponsibility()));
+            params.put("hasInspectionResponsibilityData", hasInspectionResponsibilityData(dto.getInspectionResponsibility()));
 
             // owner/building values: prefer OwnerInfo / BuildingInfo when present
             String ownerName = null;
@@ -471,6 +474,29 @@ public class ProjectStartReportService {
         row.put("inspectorSignaturePath", resolveImageSource(dto.getInspectorSignaturePath()));
         row.put("inspectionBodyStampPath", resolveImageSource(dto.getInspectionBodyStampPath()));
         return new JRBeanCollectionDataSource(java.util.List.of(row));
+    }
+
+    private boolean hasInspectionResponsibilityData(InspectionResponsibilityDTO dto) {
+        if (dto == null) {
+            return false;
+        }
+        if (!safeText(dto.getSupervisorName()).isEmpty()) return true;
+        if (!safeText(dto.getSupervisorIdOrLicense()).isEmpty()) return true;
+        if (!safeText(dto.getSupervisorSignaturePath()).isEmpty()) return true;
+        if (!safeText(dto.getOfficeStampPath()).isEmpty()) return true;
+        if (!safeText(dto.getInspectionStatus()).isEmpty()) return true;
+        if (!safeText(dto.getInspectorName()).isEmpty()) return true;
+        if (!safeText(dto.getInspectorIdOrLicense()).isEmpty()) return true;
+        if (!safeText(dto.getInspectorSignaturePath()).isEmpty()) return true;
+        if (!safeText(dto.getInspectionBodyStampPath()).isEmpty()) return true;
+        if (dto.getInspectionNotes() != null) {
+            for (String note : dto.getInspectionNotes()) {
+                if (note != null && !note.trim().isEmpty()) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**

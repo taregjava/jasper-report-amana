@@ -100,17 +100,19 @@
     <parameter name="extraItemsData"        class="net.sf.jasperreports.engine.JRDataSource"/>
     <parameter name="inspectionResponsibilitySubreport" class="net.sf.jasperreports.engine.JasperReport"/>
     <parameter name="inspectionResponsibilityData" class="net.sf.jasperreports.engine.JRDataSource"/>
+    <parameter name="hasInspectionResponsibilityData" class="java.lang.Boolean"/>
 
     <!--
         Group rendering order (innermost footer first, outermost last):
           1. TableSectionGroup            → checklist table
           2. MainImagesGroup              → main building images
           3. ChangesGroup                 → changes & extra items
-          4. InspectionResponsibilityGroup→ responsibility & inspection approval
+          4. InspectionResponsibilityGroup→ project photos/details
+        Final page is rendered by <summary> (inspection responsibility).
         Declared order in XML: outermost first.
     -->
 
-    <!-- Outermost group: footer renders LAST (responsibility page) -->
+    <!-- Outermost group: footer renders LAST among groups (photos/details page) -->
     <group name="InspectionResponsibilityGroup">
         <groupExpression><![CDATA[1]]></groupExpression>
         <groupFooter>
@@ -118,11 +120,36 @@
                 <subreport>
                     <reportElement x="0" y="0" width="802" height="545"/>
                     <subreportParameter name="headerSubreport"><subreportParameterExpression><![CDATA[$P{headerSubreport}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="topGridSubreport"><subreportParameterExpression><![CDATA[$P{photosTopGridSubreport}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="bottomGridSubreport"><subreportParameterExpression><![CDATA[$P{photosBottomGridSubreport}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="topGridData"><subreportParameterExpression><![CDATA[$P{photosTopData}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="bottomGridData"><subreportParameterExpression><![CDATA[$P{photosBottomData}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="reportLogo"><subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="reportDate"><subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression></subreportParameter>
-                    <dataSourceExpression><![CDATA[$P{inspectionResponsibilityData}]]></dataSourceExpression>
-                    <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{inspectionResponsibilitySubreport}]]></subreportExpression>
+                    <subreportParameter name="spatialPortalPhoto"><subreportParameterExpression><![CDATA[$P{spatialPortalPhoto}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="implementationPhoto"><subreportParameterExpression><![CDATA[$P{implementationPhoto}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="aerialPhoto"><subreportParameterExpression><![CDATA[$P{aerialPhoto}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="implementationPhoto1"><subreportParameterExpression><![CDATA[$P{implementationPhoto1}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="implementationPhoto2"><subreportParameterExpression><![CDATA[$P{implementationPhoto2}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="implementationPhoto3"><subreportParameterExpression><![CDATA[$P{implementationPhoto3}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="implementationPhoto4"><subreportParameterExpression><![CDATA[$P{implementationPhoto4}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="detailPhoto1"><subreportParameterExpression><![CDATA[$P{detailPhoto1}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="detailPhoto2"><subreportParameterExpression><![CDATA[$P{detailPhoto2}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="detailPhoto3"><subreportParameterExpression><![CDATA[$P{detailPhoto3}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="detailPhoto4"><subreportParameterExpression><![CDATA[$P{detailPhoto4}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="detailPhoto5"><subreportParameterExpression><![CDATA[$P{detailPhoto5}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="detailPhoto6"><subreportParameterExpression><![CDATA[$P{detailPhoto6}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="detailDescription1"><subreportParameterExpression><![CDATA[$P{detailDescription1}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="detailDescription2"><subreportParameterExpression><![CDATA[$P{detailDescription2}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="detailDescription3"><subreportParameterExpression><![CDATA[$P{detailDescription3}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="detailDescription4"><subreportParameterExpression><![CDATA[$P{detailDescription4}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="detailDescription5"><subreportParameterExpression><![CDATA[$P{detailDescription5}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="detailDescription6"><subreportParameterExpression><![CDATA[$P{detailDescription6}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="officeName"><subreportParameterExpression><![CDATA[$P{officeName}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="digitalStampPath"><subreportParameterExpression><![CDATA[$P{digitalStampPath}]]></subreportParameterExpression></subreportParameter>
+                    <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
+                    <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{photosSubreport}]]></subreportExpression>
                 </subreport>
             </band>
         </groupFooter>
@@ -181,6 +208,10 @@
             <band height="545" splitType="Stretch">
                 <subreport>
                     <reportElement x="0" y="0" width="802" height="545"/>
+                    <subreportParameter name="headerSubreport"><subreportParameterExpression><![CDATA[$P{headerSubreport}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="reportLogo"><subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="reportDate"><subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression></subreportParameter>
                     <dataSourceExpression><![CDATA[$P{tableData}]]></dataSourceExpression>
                     <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{tableSubreport}]]></subreportExpression>
                 </subreport>
@@ -265,39 +296,15 @@
 
     <summary>
         <band height="545" splitType="Stretch">
+            <printWhenExpression><![CDATA[$P{hasInspectionResponsibilityData} == null || Boolean.TRUE.equals($P{hasInspectionResponsibilityData})]]></printWhenExpression>
             <subreport>
                 <reportElement x="0" y="0" width="802" height="545"/>
                 <subreportParameter name="headerSubreport"><subreportParameterExpression><![CDATA[$P{headerSubreport}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="topGridSubreport"><subreportParameterExpression><![CDATA[$P{photosTopGridSubreport}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="bottomGridSubreport"><subreportParameterExpression><![CDATA[$P{photosBottomGridSubreport}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="topGridData"><subreportParameterExpression><![CDATA[$P{photosTopData}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="bottomGridData"><subreportParameterExpression><![CDATA[$P{photosBottomData}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="reportLogo"><subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="reportDate"><subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="spatialPortalPhoto"><subreportParameterExpression><![CDATA[$P{spatialPortalPhoto}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="implementationPhoto"><subreportParameterExpression><![CDATA[$P{implementationPhoto}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="aerialPhoto"><subreportParameterExpression><![CDATA[$P{aerialPhoto}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="implementationPhoto1"><subreportParameterExpression><![CDATA[$P{implementationPhoto1}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="implementationPhoto2"><subreportParameterExpression><![CDATA[$P{implementationPhoto2}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="implementationPhoto3"><subreportParameterExpression><![CDATA[$P{implementationPhoto3}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="implementationPhoto4"><subreportParameterExpression><![CDATA[$P{implementationPhoto4}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="detailPhoto1"><subreportParameterExpression><![CDATA[$P{detailPhoto1}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="detailPhoto2"><subreportParameterExpression><![CDATA[$P{detailPhoto2}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="detailPhoto3"><subreportParameterExpression><![CDATA[$P{detailPhoto3}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="detailPhoto4"><subreportParameterExpression><![CDATA[$P{detailPhoto4}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="detailPhoto5"><subreportParameterExpression><![CDATA[$P{detailPhoto5}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="detailPhoto6"><subreportParameterExpression><![CDATA[$P{detailPhoto6}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="detailDescription1"><subreportParameterExpression><![CDATA[$P{detailDescription1}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="detailDescription2"><subreportParameterExpression><![CDATA[$P{detailDescription2}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="detailDescription3"><subreportParameterExpression><![CDATA[$P{detailDescription3}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="detailDescription4"><subreportParameterExpression><![CDATA[$P{detailDescription4}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="detailDescription5"><subreportParameterExpression><![CDATA[$P{detailDescription5}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="detailDescription6"><subreportParameterExpression><![CDATA[$P{detailDescription6}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="officeName"><subreportParameterExpression><![CDATA[$P{officeName}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="digitalStampPath"><subreportParameterExpression><![CDATA[$P{digitalStampPath}]]></subreportParameterExpression></subreportParameter>
-                <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
-                <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{photosSubreport}]]></subreportExpression>
+                <dataSourceExpression><![CDATA[$P{inspectionResponsibilityData}]]></dataSourceExpression>
+                <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{inspectionResponsibilitySubreport}]]></subreportExpression>
             </subreport>
         </band>
     </summary>

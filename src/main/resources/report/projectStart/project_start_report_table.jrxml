@@ -9,8 +9,8 @@
               columnWidth="802"
               leftMargin="20"
               rightMargin="20"
-              topMargin="20"
-              bottomMargin="20"
+              topMargin="0"
+              bottomMargin="0"
               language="java">
 
     <property name="net.sf.jasperreports.text.direction" value="RTL"/>
@@ -35,6 +35,11 @@
             <pen lineWidth="0.5" lineColor="#000000"/>
         </box>
     </style>
+
+    <parameter name="headerSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
+    <parameter name="reportLogo" class="java.lang.Object"/>
+    <parameter name="projectNameAndAddress" class="java.lang.String"/>
+    <parameter name="reportDate" class="java.lang.String"/>
 
     <!-- Fields expected in the table datasource -->
     <field name="groupTitle" class="java.lang.String"/>
@@ -69,6 +74,19 @@
             </band>
         </groupHeader>
     </group>
+
+    <title>
+        <band height="118">
+            <subreport>
+                <reportElement x="0" y="0" width="802" height="118"/>
+                <subreportParameter name="reportLogo"><subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="reportDate"><subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression></subreportParameter>
+                <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
+                <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{headerSubreport}]]></subreportExpression>
+            </subreport>
+        </band>
+    </title>
 
     <columnHeader>
         <band height="32">
@@ -183,5 +201,6 @@
     </detail>
 
 </jasperReport>
+
 
 
