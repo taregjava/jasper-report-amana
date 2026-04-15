@@ -29,18 +29,18 @@ public class ProjectStartReportService {
 
     public byte[] generateProjectStartPdfStatic() throws Exception {
         // Load and compile subreports + master
-        try (InputStream headerIs = getClass().getResourceAsStream("/report/project_start_report_header.jrxml");
-             InputStream ownerIs  = getClass().getResourceAsStream("/report/project_start_report_owner.jrxml");
-             InputStream bodyIs   = getClass().getResourceAsStream("/report/project_start_report_body.jrxml");
-             InputStream buildingIs = getClass().getResourceAsStream("/report/project_start_report_building.jrxml");
-             InputStream tableIs  = getClass().getResourceAsStream("/report/project_start_report_table.jrxml");
-             InputStream photosIs = getClass().getResourceAsStream("/report/project_start_report_photos.jrxml");
-             InputStream photosTopGridIs = getClass().getResourceAsStream("/report/project_start_report_photos_top_grid.jrxml");
-             InputStream photosBottomGridIs = getClass().getResourceAsStream("/report/project_start_report_photos_bottom_grid.jrxml");
-             InputStream mainImagesIs = getClass().getResourceAsStream("/report/project_start_main_images.jrxml");
-             InputStream changesRowsIs = getClass().getResourceAsStream("/report/project_start_changes_rows.jrxml");
-             InputStream changesPageIs = getClass().getResourceAsStream("/report/project_start_changes_page.jrxml");
-             InputStream masterIs = getClass().getResourceAsStream("/report/project_start_report_master.jrxml")) {
+        try (InputStream headerIs = getClass().getResourceAsStream("/report/projectStart/project_start_report_header.jrxml");
+             InputStream ownerIs  = getClass().getResourceAsStream("/report/projectStart/project_start_report_owner.jrxml");
+             InputStream bodyIs   = getClass().getResourceAsStream("/report/projectStart/project_start_report_body.jrxml");
+             InputStream buildingIs = getClass().getResourceAsStream("/report/projectStart/project_start_report_building.jrxml");
+             InputStream tableIs  = getClass().getResourceAsStream("/report/projectStart/project_start_report_table.jrxml");
+             InputStream photosIs = getClass().getResourceAsStream("/report/projectStart/project_start_report_photos.jrxml");
+             InputStream photosTopGridIs = getClass().getResourceAsStream("/report/projectStart/project_start_report_photos_top_grid.jrxml");
+             InputStream photosBottomGridIs = getClass().getResourceAsStream("/report/projectStart/project_start_report_photos_bottom_grid.jrxml");
+             InputStream mainImagesIs = getClass().getResourceAsStream("/report/projectStart/project_start_main_images.jrxml");
+             InputStream changesRowsIs = getClass().getResourceAsStream("/report/projectStart/project_start_changes_rows.jrxml");
+             InputStream changesPageIs = getClass().getResourceAsStream("/report/projectStart/project_start_changes_page.jrxml");
+             InputStream masterIs = getClass().getResourceAsStream("/report/projectStart/project_start_report_master.jrxml")) {
 
             JasperReport headerRep = JasperCompileManager.compileReport(headerIs);
             JasperReport ownerRep  = ownerIs == null ? null : JasperCompileManager.compileReport(ownerIs);
@@ -181,18 +181,18 @@ public class ProjectStartReportService {
     }
 
     public byte[] generatePdf(ProjectStartReportDto dto) throws JRException {
-        try (InputStream headerIs = resourceLoader.getResource("classpath:report/project_start_report_header.jrxml").getInputStream();
-             InputStream ownerIs = resourceLoader.getResource("classpath:report/project_start_report_owner.jrxml").getInputStream();
-             InputStream bodyIs = resourceLoader.getResource("classpath:report/project_start_report_body.jrxml").getInputStream();
-             InputStream buildingIs = resourceLoader.getResource("classpath:report/project_start_report_building.jrxml").getInputStream();
-             InputStream tableIs = resourceLoader.getResource("classpath:report/project_start_report_table.jrxml").getInputStream();
-             InputStream photosIs = resourceLoader.getResource("classpath:report/project_start_report_photos.jrxml").getInputStream();
-             InputStream photosTopGridIs = resourceLoader.getResource("classpath:report/project_start_report_photos_top_grid.jrxml").getInputStream();
-             InputStream photosBottomGridIs = resourceLoader.getResource("classpath:report/project_start_report_photos_bottom_grid.jrxml").getInputStream();
-             InputStream mainImagesIs = resourceLoader.getResource("classpath:report/project_start_main_images.jrxml").getInputStream();
-             InputStream changesRowsIs = resourceLoader.getResource("classpath:report/project_start_changes_rows.jrxml").getInputStream();
-             InputStream changesPageIs = resourceLoader.getResource("classpath:report/project_start_changes_page.jrxml").getInputStream();
-             InputStream masterIs = resourceLoader.getResource("classpath:report/project_start_report_master.jrxml").getInputStream()) {
+        try (InputStream headerIs = resourceLoader.getResource("classpath:report/projectStart/project_start_report_header.jrxml").getInputStream();
+             InputStream ownerIs = resourceLoader.getResource("classpath:report/projectStart/project_start_report_owner.jrxml").getInputStream();
+             InputStream bodyIs = resourceLoader.getResource("classpath:report/projectStart/project_start_report_body.jrxml").getInputStream();
+             InputStream buildingIs = resourceLoader.getResource("classpath:report/projectStart/project_start_report_building.jrxml").getInputStream();
+             InputStream tableIs = resourceLoader.getResource("classpath:report/projectStart/project_start_report_table.jrxml").getInputStream();
+             InputStream photosIs = resourceLoader.getResource("classpath:report/projectStart/project_start_report_photos.jrxml").getInputStream();
+             InputStream photosTopGridIs = resourceLoader.getResource("classpath:report/projectStart/project_start_report_photos_top_grid.jrxml").getInputStream();
+             InputStream photosBottomGridIs = resourceLoader.getResource("classpath:report/projectStart/project_start_report_photos_bottom_grid.jrxml").getInputStream();
+             InputStream mainImagesIs = resourceLoader.getResource("classpath:report/projectStart/project_start_main_images.jrxml").getInputStream();
+             InputStream changesRowsIs = resourceLoader.getResource("classpath:report/projectStart/project_start_changes_rows.jrxml").getInputStream();
+             InputStream changesPageIs = resourceLoader.getResource("classpath:report/projectStart/project_start_changes_page.jrxml").getInputStream();
+             InputStream masterIs = resourceLoader.getResource("classpath:report/projectStart/project_start_report_master.jrxml").getInputStream()) {
 
             JasperReport headerRep = JasperCompileManager.compileReport(headerIs);
             JasperReport ownerRep = JasperCompileManager.compileReport(ownerIs);
