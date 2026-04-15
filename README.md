@@ -318,6 +318,33 @@ This is why parameter naming must stay consistent.
 
 If you rename a parameter in the master file but do not update the Java service, the child report may stop receiving data.
 
+### Parameter source map (where parameters come from)
+
+This map answers: for each important parameter in `project_start_report_master.jrxml`, which file creates it, and which file consumes it.
+
+| Master parameter | Comes from (source file) | DTO/Method source | Consumed by (JRXML file) |
+|---|---|---|---|
+| `headerSubreport` | `src/main/java/com/jamilxt/java_springboot_japserreport/service/report/ProjectStartReportService.java` (`JasperCompileManager.compileReport` + `params.put`) | Compiled from `src/main/resources/report/projectStart/project_start_report_header.jrxml` | `project_start_report_master.jrxml` forwards it to `project_start_main_images.jrxml`, `project_start_changes_page.jrxml`, `project_start_report_photos.jrxml`, `project_start_inspection_responsibility.jrxml`; also used in master `detail` |
+| `ownerSubreport` | `ProjectStartReportService.java` (`params.put("ownerSubreport", ...)`) | Compiled from `src/main/resources/report/projectStart/project_start_report_owner.jrxml` | Used in `project_start_report_master.jrxml` `detail` owner block |
+| `tableData` | `ProjectStartReportService.java` (`params.put("tableData", new JRBeanCollectionDataSource(...))`) | Built by `buildTableRows(...)` from `ProjectStartReportDto.getTasks()` / `TaskRow` | Forwarded by `project_start_report_master.jrxml` to `project_start_report_table.jrxml` |
+| `changesData` | `ProjectStartReportService.java` (`params.put("changesData", ...)`) | Built by `buildTextRowsDataSource(dto.getChanges())` from `ProjectStartReportDto.getChanges()` | Forwarded by `project_start_report_master.jrxml` to `project_start_changes_page.jrxml` |
+| `extraItemsData` | `ProjectStartReportService.java` (`params.put("extraItemsData", ...)`) | Built by `buildTextRowsDataSource(dto.getExtraItems())` from `ProjectStartReportDto.getExtraItems()` | Forwarded by `project_start_report_master.jrxml` to `project_start_changes_page.jrxml` |
+| `changesRowsSubreport` | `ProjectStartReportService.java` (`params.put("changesRowsSubreport", ...)`) | Compiled from `src/main/resources/report/projectStart/project_start_changes_rows.jrxml` | Forwarded to `project_start_changes_page.jrxml`, which uses it for row rendering |
+| `photosTopData` | `ProjectStartReportService.java` (`params.put("photosTopData", buildTopPhotoRows(params))`) | Built by `buildTopPhotoRows(...)` from image params | Forwarded by `project_start_report_master.jrxml` to `project_start_report_photos.jrxml` |
+| `photosBottomData` | `ProjectStartReportService.java` (`params.put("photosBottomData", buildBottomPhotoRows(params))`) | Built by `buildBottomPhotoRows(...)` from image params + descriptions | Forwarded by `project_start_report_master.jrxml` to `project_start_report_photos.jrxml` |
+| `inspectionResponsibilityData` | `ProjectStartReportService.java` (`params.put("inspectionResponsibilityData", ...)`) | Built by `buildInspectionResponsibilityDataSource(dto.getInspectionResponsibility())` from `InspectionResponsibilityDTO` | Used by summary subreport in `project_start_report_master.jrxml` -> `project_start_inspection_responsibility.jrxml` |
+| `reportLogo` | `ProjectStartReportService.java` (`params.put("reportLogo", logoBytes)`) | Loaded from classpath resource image (best-effort) | Forwarded to header consumers (`project_start_report_header.jrxml` through parent pages) |
+| `projectNameAndAddress` | `ProjectStartReportService.java` (`params.put("projectNameAndAddress", ...)`) | Mainly from `OwnerInfo` in `ProjectStartReportDto` | Forwarded by master to header-bearing pages/subreports |
+| `officeName` | `ProjectStartReportService.java` (`params.put("officeName", ...)`) | Mainly from `ProjectPhotosDTO.getOfficeName()` | Used in pages with footer office label/stamp (for example `project_start_changes_page.jrxml`, `project_start_main_images.jrxml`, `project_start_report_photos.jrxml`) |
+| `contractorName` | `ProjectStartReportService.java` (`params.put("contractorName", ...)`) | Mainly from `OwnerInfo.getContractorName()` | Forwarded in master owner block to `project_start_report_owner.jrxml` |
+
+Important:
+
+- The master file `project_start_report_master.jrxml` is the wiring hub.
+- Most value/data parameters originate in `ProjectStartReportService.java`.
+- DTO origins are primarily: `ProjectStartReportDto`, `OwnerInfo`, `BuildingInfo`, `ProjectPhotosDTO`, `TaskRow`, `InspectionResponsibilityDTO` under `src/main/java/com/jamilxt/java_springboot_japserreport/dto/`.
+- If a parameter appears blank in PDF, check both the Java `params.put(...)` source and the target child JRXML `subreportParameter`/`$P{...}` usage.
+
 ---
 
 ## Why this file matters so much
