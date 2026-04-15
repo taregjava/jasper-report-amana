@@ -1,186 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
-              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
-              name="project_start_changes_page"
-              pageWidth="842"
-              pageHeight="545"
-              orientation="Landscape"
-              columnWidth="802"
-              leftMargin="20"
-              rightMargin="20"
-              topMargin="0"
-              bottomMargin="0"
-              language="java">
-
-    <property name="net.sf.jasperreports.text.direction" value="RTL"/>
-    <style name="Default" isDefault="true" fontName="SansSerif"
-           pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-
-    <!-- ── Subreport references ── -->
-    <parameter name="headerSubreport"      class="net.sf.jasperreports.engine.JasperReport"/>
-    <parameter name="changesRowsSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
-
-    <!-- ── Datasources for the two dynamic tables ── -->
-    <parameter name="changesData"     class="net.sf.jasperreports.engine.JRDataSource"/>
-    <parameter name="extraItemsData"  class="net.sf.jasperreports.engine.JRDataSource"/>
-
-    <!-- ── Header / identity params forwarded to the header subreport ── -->
-    <parameter name="reportLogo"           class="java.lang.Object"/>
-    <parameter name="projectNameAndAddress" class="java.lang.String"/>
-    <parameter name="reportDate"           class="java.lang.String"/>
-
-    <!-- ── Footer params ── -->
-    <parameter name="officeName"      class="java.lang.String"/>
-    <parameter name="digitalStampPath" class="java.lang.Object"/>
-
-    <detail>
-        <!--
-            Band height budget (topMargin=0, bottomMargin=0):
-              118  header subreport
-              22   table-1 title bar
-              144  table-1 rows   (8 × 18 px)
-              22   table-1 footer note
-              10   [gap – no element]
-              22   table-2 title bar
-              22   table-2 sub-header
-              144  table-2 rows   (8 × 18 px)
-              41   page footer
-            ───
-              545  = pageHeight – topMargin – bottomMargin (595 – 20 – 20 for the master band)
-        -->
-        <band height="545">
-
-            <!-- ════════════════════════════════════════════════════
-                 1. PAGE HEADER (shared header subreport)
-                 y=0 → y=118
-                 ════════════════════════════════════════════════════ -->
-            <subreport>
-                <reportElement x="0" y="0" width="802" height="118"/>
-                <subreportParameter name="reportLogo">
-                    <subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression>
-                </subreportParameter>
-                <subreportParameter name="projectNameAndAddress">
-                    <subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression>
-                </subreportParameter>
-                <subreportParameter name="reportDate">
-                    <subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression>
-                </subreportParameter>
-                <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
-                <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{headerSubreport}]]></subreportExpression>
-            </subreport>
-
-            <!-- ════════════════════════════════════════════════════
-                 2. TABLE 1 – التغييرات على المخططات المعتمدة
-                 ════════════════════════════════════════════════════ -->
-
-            <!-- 2a. Table-1 title bar  (y=118, h=22) -->
-            <staticText>
-                <reportElement x="0" y="118" width="802" height="22"
-                               mode="Opaque" backcolor="#005B41" forecolor="#FFFFFF"/>
-                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
-                <textElement textAlignment="Center" verticalAlignment="Middle">
-                    <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H"
-                          isPdfEmbedded="true" size="10" isBold="true"/>
-                </textElement>
-                <text><![CDATA[التغييرات على المخططات المعتمدة]]></text>
-            </staticText>
-
-            <!-- 2b. Table-1 data rows (y=140, h=144 = 8 × 18) -->
-            <subreport>
-                <reportElement x="0" y="140" width="802" height="144"/>
-                <dataSourceExpression><![CDATA[$P{changesData}]]></dataSourceExpression>
-                <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{changesRowsSubreport}]]></subreportExpression>
-            </subreport>
-
-            <!-- 2c. Table-1 footer note  (y=284, h=22) -->
-            <staticText>
-                <reportElement x="0" y="284" width="802" height="22"
-                               mode="Opaque" backcolor="#EBF1DE" forecolor="#000000"/>
-                <box leftPadding="5" rightPadding="5" topPadding="2" bottomPadding="2">
-                    <pen lineWidth="0.5" lineColor="#000000"/>
-                </box>
-                <textElement textAlignment="Right" verticalAlignment="Middle">
-                    <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H"
-                          isPdfEmbedded="true" size="8" isBold="false"/>
-                </textElement>
-                <text><![CDATA[ترفق صورة من المخططات المعتمدة بعد التغيير من المصمم المعتمد]]></text>
-            </staticText>
-
-            <!-- ════════════════════════════════════════════════════
-                 3. TABLE 2 – البنود التي لم تذكر في التقرير
-                    (starts at y=316 leaving a 10 px visual gap)
-                 ════════════════════════════════════════════════════ -->
-
-            <!-- 3a. Table-2 title bar  (y=316, h=22) -->
-            <staticText>
-                <reportElement x="0" y="316" width="802" height="22"
-                               mode="Opaque" backcolor="#005B41" forecolor="#FFFFFF"/>
-                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
-                <textElement textAlignment="Center" verticalAlignment="Middle">
-                    <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H"
-                          isPdfEmbedded="true" size="10" isBold="true"/>
-                </textElement>
-                <text><![CDATA[البنود التي لم تذكر في التقرير]]></text>
-            </staticText>
-
-            <!-- 3b. Table-2 sub-header row  (y=338, h=22) -->
-            <staticText>
-                <reportElement x="0" y="338" width="802" height="22"
-                               mode="Opaque" backcolor="#EBF1DE" forecolor="#000000"/>
-                <box leftPadding="5" rightPadding="5" topPadding="2" bottomPadding="2">
-                    <pen lineWidth="0.5" lineColor="#000000"/>
-                </box>
-                <textElement textAlignment="Right" verticalAlignment="Middle">
-                    <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H"
-                          isPdfEmbedded="true" size="9" isBold="false"/>
-                </textElement>
-                <text><![CDATA[يذكر المكتب المشرف / المصمم البنود التي لم تُذكر في التقرير]]></text>
-            </staticText>
-
-            <!-- 3c. Table-2 data rows  (y=360, h=144 = 8 × 18) -->
-            <subreport>
-                <reportElement x="0" y="360" width="802" height="144"/>
-                <dataSourceExpression><![CDATA[$P{extraItemsData}]]></dataSourceExpression>
-                <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{changesRowsSubreport}]]></subreportExpression>
-            </subreport>
-
-            <!-- ════════════════════════════════════════════════════
-                 4. PAGE FOOTER
-                    y=504, h=41  (504 + 41 = 545 ✓)
-                 ════════════════════════════════════════════════════ -->
-
-            <!-- Office name (right side) -->
-            <textField isBlankWhenNull="true">
-                <reportElement x="552" y="520" width="250" height="16"/>
-                <textElement textAlignment="Right" verticalAlignment="Middle">
-                    <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H"
-                          isPdfEmbedded="true" size="9" isBold="true"/>
-                </textElement>
-                <textFieldExpression><![CDATA["اسم المكتب: " + ($P{officeName} == null ? "" : $P{officeName})]]></textFieldExpression>
-            </textField>
-
-            <!-- Stamp label (left side) -->
-            <staticText>
-                <reportElement x="0" y="520" width="118" height="16"/>
-                <textElement textAlignment="Left" verticalAlignment="Middle">
-                    <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H"
-                          isPdfEmbedded="true" size="9" isBold="true"/>
-                </textElement>
-                <text><![CDATA[ختم المكتب]]></text>
-            </staticText>
-
-            <!-- Digital stamp image -->
-            <image scaleImage="RetainShape" hAlign="Left" vAlign="Middle">
-                <reportElement x="120" y="504" width="120" height="36">
-                    <printWhenExpression><![CDATA[$P{digitalStampPath} != null]]></printWhenExpression>
-                </reportElement>
-                <imageExpression class="java.lang.Object"><![CDATA[$P{digitalStampPath}]]></imageExpression>
-            </image>
-
-        </band>
-    </detail>
-
+<!-- Created with Jaspersoft Studio version 6.21.5.final using JasperReports Library version 6.21.5-74d586df47b25dbd05bd0957999819196e59934a  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="project_start_changes_page" pageWidth="842" pageHeight="545" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" uuid="6de5fee0-1579-415a-b85a-282cbe9215f4">
+	<property name="net.sf.jasperreports.text.direction" value="RTL"/>
+	<style name="Default" isDefault="true" fontName="SansSerif" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+	<parameter name="headerSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="changesRowsSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="changesData" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<parameter name="extraItemsData" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<parameter name="reportLogo" class="java.lang.Object"/>
+	<parameter name="projectNameAndAddress" class="java.lang.String"/>
+	<parameter name="reportDate" class="java.lang.String"/>
+	<parameter name="officeName" class="java.lang.String"/>
+	<parameter name="digitalStampPath" class="java.lang.Object"/>
+	<detail>
+		<band height="514">
+			<subreport>
+				<reportElement x="-20" y="0" width="822" height="118" uuid="811a5a97-a35b-430d-8a44-f597190aa6d4"/>
+				<subreportParameter name="reportLogo">
+					<subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="projectNameAndAddress">
+					<subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="reportDate">
+					<subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{headerSubreport}]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="118" width="802" height="20" forecolor="#FFFFFF" backcolor="#005B41" uuid="0e747b74-6038-4843-8756-ec9970793d0d"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true" pdfFontName="fonts/ARIALBD.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[التغييرات على المخططات المعتمدة]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="-20" y="138" width="822" height="160" uuid="c3b208ce-3b4f-4b35-bb3f-35b31e6502e9"/>
+				<dataSourceExpression><![CDATA[$P{changesData}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{changesRowsSubreport}]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="298" width="802" height="18" forecolor="#000000" backcolor="#EBF1DE" uuid="91a3a0c0-5b1d-46be-bbd6-4995cc145bc7"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true" pdfFontName="fonts/ARIALBD.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ترفق صورة من المخططات المعتمدة بعد التغيير من المصمم المعتمد]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="316" width="802" height="20" forecolor="#FFFFFF" backcolor="#005B41" uuid="434047ac-7452-40c9-9729-34edff1905d8"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true" pdfFontName="fonts/ARIALBD.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[البنود التي لم تذكر في التقرير]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="336" width="802" height="18" forecolor="#000000" backcolor="#EBF1DE" uuid="3653bbfd-33f5-46e6-b1a2-18fc391e9f98"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true" pdfFontName="fonts/ARIALBD.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[يذكر المكتب المشرف / المصمم البنود التي لم تذكر في التقرير]]></text>
+			</staticText>
+			<subreport>
+				<reportElement positionType="Float" x="-20" y="354" width="822" height="160" uuid="8c5c35a6-315b-4772-89f4-95bcb8ae9d26"/>
+				<dataSourceExpression><![CDATA[$P{extraItemsData}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{changesRowsSubreport}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="31">
+			<textField isBlankWhenNull="true">
+				<reportElement x="540" y="9" width="262" height="16" uuid="8c47865b-5ff8-4a94-aa3e-a054800bc543"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true" pdfFontName="fonts/ARIALBD.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["اسم المكتب: " + ($P{officeName} == null ? "" : $P{officeName})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="9" width="118" height="16" uuid="52a91154-56e6-493b-b45a-34bb932c7e5f"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="9" isBold="true" pdfFontName="fonts/ARIALBD.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ختم المكتب]]></text>
+			</staticText>
+			<image scaleImage="RetainShape" hAlign="Left" vAlign="Middle">
+				<reportElement x="120" y="6" width="120" height="20" uuid="100da12f-35e0-44df-b99b-a8a054b25972">
+					<printWhenExpression><![CDATA[$P{digitalStampPath} != null]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[$P{digitalStampPath}]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
 </jasperReport>
-
-

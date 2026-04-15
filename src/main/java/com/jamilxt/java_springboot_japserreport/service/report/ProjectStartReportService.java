@@ -501,8 +501,8 @@ public class ProjectStartReportService {
 
     /**
      * Builds a JRDataSource for the changes / extra-items row subreport.
-     * The list is padded with empty strings so that always exactly {@code PAD_TO} rows
-     * are rendered, keeping the fixed 8-row table grid intact.
+     * The list is capped and padded with empty strings so that always exactly
+     * {@code CHANGES_ROW_COUNT} rows are rendered, keeping the fixed 8-row table grid intact.
      */
     private static final int CHANGES_ROW_COUNT = 8;
 
@@ -510,6 +510,9 @@ public class ProjectStartReportService {
         List<Map<String, Object>> rows = new ArrayList<>();
         if (items != null) {
             for (String item : items) {
+                if (rows.size() >= CHANGES_ROW_COUNT) {
+                    break;
+                }
                 Map<String, Object> row = new HashMap<>();
                 row.put("rowText", item == null ? "" : item);
                 rows.add(row);
