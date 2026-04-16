@@ -144,6 +144,11 @@ public class ProjectStartReportService {
             params.put("contractorName", "شركة المقاول المحدودة");
             params.put("supervisingEngineeringOffice", "المكتب الهندسي النموذجي");
             params.put("buildingType", "سكني");
+            params.put("buildingTypeResidential", Boolean.TRUE);
+            params.put("buildingTypeResidentialCommercial", Boolean.FALSE);
+            params.put("buildingTypeCommercial", Boolean.FALSE);
+            params.put("buildingTypeVilla", Boolean.FALSE);
+            params.put("buildingTypeOther", Boolean.FALSE);
             params.put("otherBuildingType", "");
             params.put("buildingCondition", "جيد");
             params.put("buildingDescription", "وصف نموذجي للمبنى...");
@@ -260,6 +265,12 @@ public class ProjectStartReportService {
 
             params.put("ownerName", ownerName);
             params.put("buildingType", buildingType);
+            String legacyBuildingType = bi == null ? "" : bi.getBuildingType();
+            params.put("buildingTypeResidential", resolveBuildingTypeFlag(bi == null ? null : bi.getBuildingTypeResidential(), legacyBuildingType, "سكني"));
+            params.put("buildingTypeResidentialCommercial", resolveBuildingTypeFlag(bi == null ? null : bi.getBuildingTypeResidentialCommercial(), legacyBuildingType, "سكني-تجاري", "سكني - تجاري"));
+            params.put("buildingTypeCommercial", resolveBuildingTypeFlag(bi == null ? null : bi.getBuildingTypeCommercial(), legacyBuildingType, "تجاري"));
+            params.put("buildingTypeVilla", resolveBuildingTypeFlag(bi == null ? null : bi.getBuildingTypeVilla(), legacyBuildingType, "فيلا"));
+            params.put("buildingTypeOther", resolveOtherBuildingTypeFlag(bi == null ? null : bi.getBuildingTypeOther(), legacyBuildingType, bi == null ? null : bi.getOtherBuildingType()));
             // populate additional owner/building params using preferred parameter names
             params.put("ownerIdNumber", oi == null ? "" : (oi.getOwnerIdNumber() != null ? oi.getOwnerIdNumber() : oi.getIdNumber()));
             params.put("ownerMobile", oi == null ? "" : (oi.getOwnerMobile() != null ? oi.getOwnerMobile() : oi.getMobileNumber()));
@@ -427,6 +438,33 @@ public class ProjectStartReportService {
             }
         }
         return false;
+    }
+
+    private boolean resolveBuildingTypeFlag(Boolean explicitValue, String legacyBuildingType, String... aliases) {
+        if (explicitValue != null) {
+            return explicitValue;
+        }
+        String normalizedValue = normalizeFlagText(legacyBuildingType);
+        if (normalizedValue.isEmpty() || aliases == null) {
+            return false;
+        }
+        for (String alias : aliases) {
+            if (normalizeFlagText(alias).equals(normalizedValue)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean resolveOtherBuildingTypeFlag(Boolean explicitValue, String legacyBuildingType, String otherBuildingType) {
+        if (explicitValue != null) {
+            return explicitValue;
+        }
+        return !safeText(otherBuildingType).trim().isEmpty() || resolveBuildingTypeFlag(null, legacyBuildingType, "أخرى");
+    }
+
+    private String normalizeFlagText(String text) {
+        return safeText(text).replace("-", "").replace(" ", "").trim().toLowerCase();
     }
 
     private JRBeanCollectionDataSource buildTopPhotoRows(Map<String, Object> params) {

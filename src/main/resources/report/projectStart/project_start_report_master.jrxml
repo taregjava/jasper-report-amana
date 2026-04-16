@@ -39,6 +39,11 @@
     <parameter name="reportDate" class="java.lang.String"/>
     <!-- Building params forwarded to building subreport -->
     <parameter name="buildingType" class="java.lang.String"/>
+    <parameter name="buildingTypeResidential" class="java.lang.Boolean"/>
+    <parameter name="buildingTypeResidentialCommercial" class="java.lang.Boolean"/>
+    <parameter name="buildingTypeCommercial" class="java.lang.Boolean"/>
+    <parameter name="buildingTypeVilla" class="java.lang.Boolean"/>
+    <parameter name="buildingTypeOther" class="java.lang.Boolean"/>
     <parameter name="otherBuildingType" class="java.lang.String"/>
     <parameter name="buildingCondition" class="java.lang.String"/>
     <parameter name="buildingDescription" class="java.lang.String"/>
@@ -303,6 +308,11 @@
                 <!-- moved slightly upward to reduce the gap below the owner section without overlap -->
                 <reportElement x="0" y="314" width="802" height="176"/>
                 <subreportParameter name="buildingType"><subreportParameterExpression><![CDATA[$P{buildingType}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="buildingTypeResidential"><subreportParameterExpression><![CDATA[$P{buildingTypeResidential}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="buildingTypeResidentialCommercial"><subreportParameterExpression><![CDATA[$P{buildingTypeResidentialCommercial}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="buildingTypeCommercial"><subreportParameterExpression><![CDATA[$P{buildingTypeCommercial}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="buildingTypeVilla"><subreportParameterExpression><![CDATA[$P{buildingTypeVilla}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="buildingTypeOther"><subreportParameterExpression><![CDATA[$P{buildingTypeOther}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="otherBuildingType"><subreportParameterExpression><![CDATA[$P{otherBuildingType}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="buildingDescription"><subreportParameterExpression><![CDATA[$P{buildingDescription}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="licenseNumber"><subreportParameterExpression><![CDATA[$P{licenseNumber}]]></subreportParameterExpression></subreportParameter>

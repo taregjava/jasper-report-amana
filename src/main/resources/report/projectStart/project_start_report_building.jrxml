@@ -18,6 +18,11 @@
 
     <!-- BuildingInfo DTO parameters -->
     <parameter name="buildingType" class="java.lang.String"/>
+    <parameter name="buildingTypeResidential" class="java.lang.Boolean"/>
+    <parameter name="buildingTypeResidentialCommercial" class="java.lang.Boolean"/>
+    <parameter name="buildingTypeCommercial" class="java.lang.Boolean"/>
+    <parameter name="buildingTypeVilla" class="java.lang.Boolean"/>
+    <parameter name="buildingTypeOther" class="java.lang.Boolean"/>
     <parameter name="otherBuildingType" class="java.lang.String"/>
     <parameter name="buildingDescription" class="java.lang.String"/>
     <parameter name="isFullyFinished" class="java.lang.Boolean"/>
@@ -68,7 +73,7 @@
                 <textField isBlankWhenNull="true">
                     <reportElement x="395" y="11" width="12" height="12"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle"><font size="9" isBold="true"/></textElement>
-                    <textFieldExpression><![CDATA[$P{buildingType} != null && $P{buildingType}.trim().equals("سكني") ? "✓" : ""]]></textFieldExpression>
+                    <textFieldExpression><![CDATA[Boolean.TRUE.equals($P{buildingTypeResidential}) ? "✓" : ""]]></textFieldExpression>
                 </textField>
                 <staticText>
                     <reportElement x="345" y="11" width="46" height="14"/>
@@ -83,7 +88,7 @@
                 <textField isBlankWhenNull="true">
                     <reportElement x="297" y="11" width="12" height="12"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle"><font size="9" isBold="true"/></textElement>
-                    <textFieldExpression><![CDATA[$P{buildingType} != null && $P{buildingType}.trim().equals("سكني-تجاري") ? "✓" : ""]]></textFieldExpression>
+                    <textFieldExpression><![CDATA[Boolean.TRUE.equals($P{buildingTypeResidentialCommercial}) ? "✓" : ""]]></textFieldExpression>
                 </textField>
                 <staticText>
                     <reportElement x="214" y="11" width="80" height="14"/>
@@ -98,7 +103,7 @@
                 <textField isBlankWhenNull="true">
                     <reportElement x="184" y="11" width="12" height="12"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle"><font size="9" isBold="true"/></textElement>
-                    <textFieldExpression><![CDATA[$P{buildingType} != null && $P{buildingType}.trim().equals("تجاري") ? "✓" : ""]]></textFieldExpression>
+                    <textFieldExpression><![CDATA[Boolean.TRUE.equals($P{buildingTypeCommercial}) ? "✓" : ""]]></textFieldExpression>
                 </textField>
                 <staticText>
                     <reportElement x="133" y="11" width="48" height="14"/>
@@ -113,7 +118,7 @@
                 <textField isBlankWhenNull="true">
                     <reportElement x="105" y="11" width="12" height="12"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle"><font size="9" isBold="true"/></textElement>
-                    <textFieldExpression><![CDATA[$P{buildingType} != null && $P{buildingType}.trim().equals("فيلا") ? "✓" : ""]]></textFieldExpression>
+                    <textFieldExpression><![CDATA[Boolean.TRUE.equals($P{buildingTypeVilla}) ? "✓" : ""]]></textFieldExpression>
                 </textField>
                 <staticText>
                     <reportElement x="61" y="11" width="40" height="14"/>
@@ -128,7 +133,7 @@
                 <textField isBlankWhenNull="true">
                     <reportElement x="35" y="11" width="12" height="12"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle"><font size="9" isBold="true"/></textElement>
-                    <textFieldExpression><![CDATA[(($P{buildingType} != null && $P{buildingType}.trim().equals("أخرى")) || ($P{otherBuildingType} != null && !$P{otherBuildingType}.trim().isEmpty())) ? "✓" : ""]]></textFieldExpression>
+                    <textFieldExpression><![CDATA[(Boolean.TRUE.equals($P{buildingTypeOther}) || ($P{otherBuildingType} != null && !$P{otherBuildingType}.trim().isEmpty())) ? "✓" : ""]]></textFieldExpression>
                 </textField>
                 <staticText>
                     <reportElement x="1" y="6" width="30" height="12"/>

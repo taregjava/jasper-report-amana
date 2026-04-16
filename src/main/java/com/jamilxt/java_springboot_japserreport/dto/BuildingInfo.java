@@ -7,6 +7,11 @@ public class BuildingInfo {
     // --- الصف الأول: نوع المبنى وحالة البناء ---
     private String buildingType;        // نوع المبنى (سكني، سكني-تجاري، تجاري، فيلا، أخرى)
     private String otherBuildingType;   // في حال اختيار "أخرى يحدد..."
+    private Boolean buildingTypeResidential;           // تحديد سكني
+    private Boolean buildingTypeResidentialCommercial; // تحديد سكني-تجاري
+    private Boolean buildingTypeCommercial;            // تحديد تجاري
+    private Boolean buildingTypeVilla;                 // تحديد فيلا
+    private Boolean buildingTypeOther;                 // تحديد أخرى
 
     // حالة البناء على الأرض (Checkboxes في الصورة)
     private boolean isFullyBuilt;       // مبنية بالكامل
