@@ -70,6 +70,9 @@
     <parameter name="supervisingEngineerName" class="java.lang.String"/>
     <parameter name="stageInspectionResult" class="java.lang.String"/>
     <parameter name="stageInspectionNotes" class="java.lang.String"/>
+    <parameter name="stageInspectionAccepted" class="java.lang.Boolean"/>
+    <parameter name="stageInspectionRejected" class="java.lang.Boolean"/>
+    <parameter name="stageInspectionHasNotes" class="java.lang.Boolean"/>
     <parameter name="spatialPortalPhoto" class="java.lang.Object"/>
     <parameter name="implementationPhoto" class="java.lang.Object"/>
     <parameter name="aerialPhoto" class="java.lang.Object"/>
@@ -288,6 +291,9 @@
                 <subreportParameter name="supervisingEngineerName"><subreportParameterExpression><![CDATA[$P{supervisingEngineerName}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="stageInspectionResult"><subreportParameterExpression><![CDATA[$P{stageInspectionResult}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="stageInspectionNotes"><subreportParameterExpression><![CDATA[$P{stageInspectionNotes}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="stageInspectionAccepted"><subreportParameterExpression><![CDATA[$P{stageInspectionAccepted}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="stageInspectionRejected"><subreportParameterExpression><![CDATA[$P{stageInspectionRejected}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="stageInspectionHasNotes"><subreportParameterExpression><![CDATA[$P{stageInspectionHasNotes}]]></subreportParameterExpression></subreportParameter>
                 <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
                 <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{ownerSubreport}]]></subreportExpression>
             </subreport>
@@ -330,6 +336,9 @@
                 <subreportParameter name="reportLogo"><subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="reportDate"><subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="spatialPortalPhoto"><subreportParameterExpression><![CDATA[$P{spatialPortalPhoto}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="implementationPhoto"><subreportParameterExpression><![CDATA[$P{implementationPhoto}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="aerialPhoto"><subreportParameterExpression><![CDATA[$P{aerialPhoto}]]></subreportParameterExpression></subreportParameter>
                 <dataSourceExpression><![CDATA[$P{inspectionResponsibilityData}]]></dataSourceExpression>
                 <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{inspectionResponsibilitySubreport}]]></subreportExpression>
             </subreport>

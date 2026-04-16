@@ -31,6 +31,9 @@
     <parameter name="reportDate" class="java.lang.String"/>
     <parameter name="stageInspectionResult" class="java.lang.String"/>
     <parameter name="stageInspectionNotes" class="java.lang.String"/>
+    <parameter name="stageInspectionAccepted" class="java.lang.Boolean"/>
+    <parameter name="stageInspectionRejected" class="java.lang.Boolean"/>
+    <parameter name="stageInspectionHasNotes" class="java.lang.Boolean"/>
 
     <title>
         <band height="176">
@@ -224,6 +227,11 @@
                 <reportElement x="6" y="116" width="12" height="12" mode="Opaque" backcolor="#FFFFFF"/>
                 <graphicElement><pen lineWidth="1.0" lineColor="#2E7D32"/></graphicElement>
             </rectangle>
+            <textField isBlankWhenNull="true">
+                <reportElement x="6" y="116" width="12" height="12"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="10" isBold="true"/></textElement>
+                <textFieldExpression><![CDATA[Boolean.TRUE.equals($P{stageInspectionAccepted}) ? "X" : ""]]></textFieldExpression>
+            </textField>
             <staticText>
                 <reportElement x="21" y="116" width="74" height="12"/>
                 <textElement textAlignment="Center" verticalAlignment="Middle"><font size="9"/></textElement>
@@ -234,6 +242,11 @@
                 <reportElement x="6" y="132" width="12" height="12" mode="Opaque" backcolor="#FFFFFF"/>
                 <graphicElement><pen lineWidth="1.0" lineColor="#C62828"/></graphicElement>
             </rectangle>
+            <textField isBlankWhenNull="true">
+                <reportElement x="6" y="132" width="12" height="12"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="10" isBold="true"/></textElement>
+                <textFieldExpression><![CDATA[Boolean.TRUE.equals($P{stageInspectionRejected}) ? "X" : ""]]></textFieldExpression>
+            </textField>
             <staticText>
                 <reportElement x="21" y="132" width="74" height="12"/>
                 <textElement textAlignment="Center" verticalAlignment="Middle"><font size="9"/></textElement>
@@ -244,6 +257,11 @@
                 <reportElement x="6" y="148" width="12" height="12" mode="Opaque" backcolor="#FFFFFF"/>
                 <graphicElement><pen lineWidth="1.0" lineColor="#EF6C00"/></graphicElement>
             </rectangle>
+            <textField isBlankWhenNull="true">
+                <reportElement x="6" y="148" width="12" height="12"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="10" isBold="true"/></textElement>
+                <textFieldExpression><![CDATA[Boolean.TRUE.equals($P{stageInspectionHasNotes}) ? "X" : ""]]></textFieldExpression>
+            </textField>
             <staticText>
                 <reportElement x="21" y="148" width="74" height="12"/>
                 <textElement textAlignment="Center" verticalAlignment="Middle"><font size="9"/></textElement>

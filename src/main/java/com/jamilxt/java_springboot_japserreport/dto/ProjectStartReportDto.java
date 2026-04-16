@@ -13,6 +13,9 @@ public class ProjectStartReportDto {
     private String engineerName;            // اسم المهندس المشرف
     private String contractorMobile;        // رقم جوال المقاول
     private String stageResult;             // نتيجة فحص المرحلة (مقبول – مرفوض – ملاحظات)
+    private Boolean stageInspectionAccepted; // اختيار مقبول
+    private Boolean stageInspectionRejected; // اختيار مرفوض
+    private Boolean stageInspectionHasNotes; // اختيار ملاحظات
 
     private List<TaskRow> tasks;            // جدول المهام
     private ProjectPhotosDTO projectPhotos; // صور المبنى

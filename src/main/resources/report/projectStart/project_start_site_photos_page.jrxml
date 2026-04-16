@@ -74,7 +74,7 @@
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font size="7" isBold="true"/>
 					</textElement>
-					<text><![CDATA[وصف الصورة]]></text>
+					<text><![CDATA[وصف الصورة /]]></text>
 				</staticText>
 				<textField isBlankWhenNull="true" isStretchWithOverflow="true">
 					<reportElement x="6" y="13" width="255" height="22" positionType="Float" uuid="3fd6bf7b-16de-48d2-bfb9-7c8434b97df1"/>
@@ -112,7 +112,7 @@
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font size="7" isBold="true"/>
 					</textElement>
-					<text><![CDATA[وصف الصورة]]></text>
+					<text><![CDATA[وصف الصورة /]]></text>
 				</staticText>
 				<textField isBlankWhenNull="true" isStretchWithOverflow="true">
 					<reportElement x="6" y="13" width="255" height="22" positionType="Float" uuid="e9c0f2b0-1984-4743-a099-ec2054cc3e92"/>
@@ -150,7 +150,7 @@
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font size="7" isBold="true"/>
 					</textElement>
-					<text><![CDATA[وصف الصورة]]></text>
+					<text><![CDATA[وصف الصورة /]]></text>
 				</staticText>
 				<textField isBlankWhenNull="true" isStretchWithOverflow="true">
 					<reportElement x="6" y="13" width="256" height="22" positionType="Float" uuid="3c6bb9a3-f8e6-4d45-b3b6-c5f2614a583a"/>
@@ -188,7 +188,7 @@
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font size="7" isBold="true"/>
 					</textElement>
-					<text><![CDATA[وصف الصورة]]></text>
+					<text><![CDATA[وصف الصورة /]]></text>
 				</staticText>
 				<textField isBlankWhenNull="true" isStretchWithOverflow="true">
 					<reportElement x="6" y="13" width="255" height="30" positionType="Float" uuid="9b4089d9-8b2a-442d-a9a9-ee7065c50350"/>
@@ -226,7 +226,7 @@
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font size="7" isBold="true"/>
 					</textElement>
-					<text><![CDATA[وصف الصورة]]></text>
+					<text><![CDATA[وصف الصورة /]]></text>
 				</staticText>
 				<textField isBlankWhenNull="true" isStretchWithOverflow="true">
 					<reportElement x="6" y="13" width="255" height="30" positionType="Float" uuid="b9698ec9-76b6-4472-aa8c-c60ab0992f93"/>
@@ -264,7 +264,7 @@
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font size="7" isBold="true"/>
 					</textElement>
-					<text><![CDATA[وصف الصورة]]></text>
+					<text><![CDATA[وصف الصورة /]]></text>
 				</staticText>
 				<textField isBlankWhenNull="true" isStretchWithOverflow="true">
 					<reportElement x="6" y="13" width="256" height="30" positionType="Float" uuid="42904f8d-bc9f-4904-a6d1-dc3bbdb2bcd7"/>

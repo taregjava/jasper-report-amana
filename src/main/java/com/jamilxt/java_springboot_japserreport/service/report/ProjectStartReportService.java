@@ -138,6 +138,9 @@ public class ProjectStartReportService {
             params.put("supervisingEngineerName", "م. علي الحربي");
             params.put("stageInspectionResult", "مقبول");
             params.put("stageInspectionNotes", "كل العناصر مطابقة مع ملاحظات طفيفة.");
+            params.put("stageInspectionAccepted", Boolean.TRUE);
+            params.put("stageInspectionRejected", Boolean.FALSE);
+            params.put("stageInspectionHasNotes", Boolean.FALSE);
             params.put("contractorName", "شركة المقاول المحدودة");
             params.put("supervisingEngineeringOffice", "المكتب الهندسي النموذجي");
             params.put("buildingType", "سكني");
@@ -271,6 +274,9 @@ public class ProjectStartReportService {
             params.put("reportDate", oi == null ? "" : oi.getReportDate());
             params.put("stageInspectionResult", dto.getStageResult() == null ? "" : dto.getStageResult());
             params.put("stageInspectionNotes", oi == null ? "" : oi.getStageInspectionNotes());
+            params.put("stageInspectionAccepted", resolveStageFlag(dto.getStageInspectionAccepted(), dto.getStageResult(), "accepted", "مقبول"));
+            params.put("stageInspectionRejected", resolveStageFlag(dto.getStageInspectionRejected(), dto.getStageResult(), "rejected", "مرفوض"));
+            params.put("stageInspectionHasNotes", resolveStageFlag(dto.getStageInspectionHasNotes(), dto.getStageResult(), "notes", "ملاحظات"));
 
             params.put("buildingDescription", bi == null ? "" : bi.getBuildingDescription());
             // map building fields to expected names (best-effort)
@@ -405,6 +411,22 @@ public class ProjectStartReportService {
 
     private String safeText(String value) {
         return value == null ? "" : value;
+    }
+
+    private boolean resolveStageFlag(Boolean explicitValue, String legacyStageResult, String... matches) {
+        if (explicitValue != null) {
+            return explicitValue;
+        }
+        String value = safeText(legacyStageResult).trim().toLowerCase();
+        if (value.isEmpty() || matches == null) {
+            return false;
+        }
+        for (String match : matches) {
+            if (match != null && value.equals(match.trim().toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private JRBeanCollectionDataSource buildTopPhotoRows(Map<String, Object> params) {
