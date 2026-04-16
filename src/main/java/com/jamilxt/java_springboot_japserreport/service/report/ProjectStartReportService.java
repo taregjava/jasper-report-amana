@@ -36,6 +36,7 @@ public class ProjectStartReportService {
              InputStream buildingIs = getClass().getResourceAsStream("/report/projectStart/project_start_report_building.jrxml");
              InputStream tableIs  = getClass().getResourceAsStream("/report/projectStart/project_start_report_table.jrxml");
              InputStream photosIs = getClass().getResourceAsStream("/report/projectStart/project_start_report_photos.jrxml");
+             InputStream sitePhotosIs = getClass().getResourceAsStream("/report/projectStart/project_start_site_photos_page.jrxml");
              InputStream photosTopGridIs = getClass().getResourceAsStream("/report/projectStart/project_start_report_photos_top_grid.jrxml");
              InputStream photosBottomGridIs = getClass().getResourceAsStream("/report/projectStart/project_start_report_photos_bottom_grid.jrxml");
              InputStream mainImagesIs = getClass().getResourceAsStream("/report/projectStart/project_start_main_images.jrxml");
@@ -50,6 +51,7 @@ public class ProjectStartReportService {
             JasperReport buildingRep = JasperCompileManager.compileReport(buildingIs);
             JasperReport tableRep  = JasperCompileManager.compileReport(tableIs);
             JasperReport photosRep = JasperCompileManager.compileReport(photosIs);
+            JasperReport sitePhotosRep = sitePhotosIs == null ? null : JasperCompileManager.compileReport(sitePhotosIs);
             JasperReport photosTopGridRep = JasperCompileManager.compileReport(photosTopGridIs);
             JasperReport photosBottomGridRep = JasperCompileManager.compileReport(photosBottomGridIs);
             JasperReport mainImagesRep = mainImagesIs == null ? null : JasperCompileManager.compileReport(mainImagesIs);
@@ -91,6 +93,7 @@ public class ProjectStartReportService {
             params.put("buildingSubreport", buildingRep);
             params.put("tableSubreport", tableRep);
             params.put("photosSubreport", photosRep);
+            params.put("sitePhotosSubreport", sitePhotosRep);
             params.put("photosTopGridSubreport", photosTopGridRep);
             params.put("photosBottomGridSubreport", photosBottomGridRep);
             params.put("mainImagesSubreport", mainImagesRep);
@@ -115,7 +118,7 @@ public class ProjectStartReportService {
 
             // header/body params (example)
             // load logo as byte[] so Jasper/iText can recognize the image format reliably during export
-            try (InputStream logoIs = getClass().getResourceAsStream("/report/logo.png")) {
+            try (InputStream logoIs = getClass().getResourceAsStream("/report/logoSite.png")) {
                 if (logoIs != null) {
                     byte[] logoBytes = logoIs.readAllBytes();
                     params.put("reportLogo", logoBytes);
@@ -194,6 +197,7 @@ public class ProjectStartReportService {
              InputStream buildingIs = resourceLoader.getResource("classpath:report/projectStart/project_start_report_building.jrxml").getInputStream();
              InputStream tableIs = resourceLoader.getResource("classpath:report/projectStart/project_start_report_table.jrxml").getInputStream();
              InputStream photosIs = resourceLoader.getResource("classpath:report/projectStart/project_start_report_photos.jrxml").getInputStream();
+             InputStream sitePhotosIs = resourceLoader.getResource("classpath:report/projectStart/project_start_site_photos_page.jrxml").getInputStream();
              InputStream photosTopGridIs = resourceLoader.getResource("classpath:report/projectStart/project_start_report_photos_top_grid.jrxml").getInputStream();
              InputStream photosBottomGridIs = resourceLoader.getResource("classpath:report/projectStart/project_start_report_photos_bottom_grid.jrxml").getInputStream();
              InputStream mainImagesIs = resourceLoader.getResource("classpath:report/projectStart/project_start_main_images.jrxml").getInputStream();
@@ -208,6 +212,7 @@ public class ProjectStartReportService {
             JasperReport buildingRep = JasperCompileManager.compileReport(buildingIs);
             JasperReport tableRep = JasperCompileManager.compileReport(tableIs);
             JasperReport photosRep = JasperCompileManager.compileReport(photosIs);
+            JasperReport sitePhotosRep = JasperCompileManager.compileReport(sitePhotosIs);
             JasperReport photosTopGridRep = JasperCompileManager.compileReport(photosTopGridIs);
             JasperReport photosBottomGridRep = JasperCompileManager.compileReport(photosBottomGridIs);
             JasperReport mainImagesRep = JasperCompileManager.compileReport(mainImagesIs);
@@ -226,6 +231,7 @@ public class ProjectStartReportService {
             params.put("buildingSubreport", buildingRep);
             params.put("tableSubreport", tableRep);
             params.put("photosSubreport", photosRep);
+            params.put("sitePhotosSubreport", sitePhotosRep);
             params.put("photosTopGridSubreport", photosTopGridRep);
             params.put("photosBottomGridSubreport", photosBottomGridRep);
             params.put("mainImagesSubreport", mainImagesRep);
@@ -311,7 +317,7 @@ public class ProjectStartReportService {
             params.put("photosBottomData", buildBottomPhotoRows(params));
 
             // load logo resource into report param if available
-            try (java.io.InputStream is = resourceLoader.getResource("classpath:report/logoSite.png").getInputStream()) {
+            try (InputStream is = resourceLoader.getResource("classpath:report/logoSite.png").getInputStream()) {
                 byte[] logo = is.readAllBytes();
                 params.put("reportLogo", logo);
             } catch (Exception ignore) {
@@ -418,6 +424,11 @@ public class ProjectStartReportService {
         rows.add(detailPhotoRow("4", params.get("detailPhoto4"), (String) params.get("detailDescription4")));
         rows.add(detailPhotoRow("5", params.get("detailPhoto5"), (String) params.get("detailDescription5")));
         rows.add(detailPhotoRow("6", params.get("detailPhoto6"), (String) params.get("detailDescription6")));
+
+        rows.add(detailPhotoRow("7", params.get("detailPhoto1"), (String) params.get("detailDescription1")));
+        rows.add(detailPhotoRow("8", params.get("detailPhoto2"), (String) params.get("detailDescription2")));
+        rows.add(detailPhotoRow("9", params.get("detailPhoto3"), (String) params.get("detailDescription3")));
+
         return new JRBeanCollectionDataSource(rows);
     }
 

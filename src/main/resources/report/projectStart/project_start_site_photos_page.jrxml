@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="project_start_site_photos_page"
+              pageWidth="842"
+              pageHeight="545"
+              orientation="Landscape"
+              columnWidth="802"
+              leftMargin="20"
+              rightMargin="20"
+              topMargin="0"
+              bottomMargin="0"
+              language="java">
+
+    <property name="net.sf.jasperreports.text.direction" value="RTL"/>
+    <style name="Default" isDefault="true" fontName="SansSerif" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+
+    <parameter name="headerSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
+    <parameter name="reportLogo" class="java.lang.Object"/>
+    <parameter name="projectNameAndAddress" class="java.lang.String"/>
+    <parameter name="reportDate" class="java.lang.String"/>
+    <parameter name="detailPhoto1" class="java.lang.Object"/>
+    <parameter name="detailPhoto2" class="java.lang.Object"/>
+    <parameter name="detailPhoto3" class="java.lang.Object"/>
+    <parameter name="detailPhoto4" class="java.lang.Object"/>
+    <parameter name="detailPhoto5" class="java.lang.Object"/>
+    <parameter name="detailPhoto6" class="java.lang.Object"/>
+    <parameter name="detailDescription1" class="java.lang.String"/>
+    <parameter name="detailDescription2" class="java.lang.String"/>
+    <parameter name="detailDescription3" class="java.lang.String"/>
+    <parameter name="detailDescription4" class="java.lang.String"/>
+    <parameter name="detailDescription5" class="java.lang.String"/>
+    <parameter name="detailDescription6" class="java.lang.String"/>
+    <parameter name="officeName" class="java.lang.String"/>
+    <parameter name="digitalStampPath" class="java.lang.Object"/>
+
+    <detail>
+        <band height="535">
+            <!-- Header -->
+            <subreport>
+                <reportElement x="0" y="0" width="802" height="100"/>
+                <subreportParameter name="reportLogo"><subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="reportDate"><subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression></subreportParameter>
+                <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
+                <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{headerSubreport}]]></subreportExpression>
+            </subreport>
+
+            <!-- Title -->
+            <staticText>
+                <reportElement x="0" y="100" width="802" height="18" mode="Opaque" backcolor="#005B41" forecolor="#FFFFFF"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="9" isBold="true"/></textElement>
+                <text><![CDATA[صور المشروع]]></text>
+            </staticText>
+
+            <!-- Row 1: 3 images in 3 columns -->
+            <!-- Col 1 (Right) -->
+            <staticText>
+                <reportElement x="0" y="118" width="267" height="16" mode="Opaque" backcolor="#EBF1DE"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="8"/></textElement>
+                <text><![CDATA[الواجهة الامامية من الداخل]]></text>
+            </staticText>
+            <image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
+                <reportElement x="2" y="134" width="263" height="110"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <imageExpression class="java.lang.Object"><![CDATA[$P{detailPhoto1}]]></imageExpression>
+            </image>
+            <staticText>
+                <reportElement x="6" y="244" width="60" height="9"/>
+                <textElement textAlignment="Right"><font size="7"/></textElement>
+                <text><![CDATA[وصف الصورة /]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="70" y="244" width="197" height="9"/>
+                <textElement><font size="7"/></textElement>
+                <text><![CDATA[..........................................]]></text>
+            </staticText>
+
+            <!-- Col 2 (Middle) -->
+            <staticText>
+                <reportElement x="267" y="118" width="267" height="16" mode="Opaque" backcolor="#EBF1DE"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="8"/></textElement>
+                <text><![CDATA[الارتداد الجانبي]]></text>
+            </staticText>
+            <image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
+                <reportElement x="269" y="134" width="263" height="110"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <imageExpression class="java.lang.Object"><![CDATA[$P{detailPhoto2}]]></imageExpression>
+            </image>
+            <staticText>
+                <reportElement x="273" y="244" width="60" height="9"/>
+                <textElement textAlignment="Right"><font size="7"/></textElement>
+                <text><![CDATA[وصف الصورة /]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="337" y="244" width="197" height="9"/>
+                <textElement><font size="7"/></textElement>
+                <text><![CDATA[..........................................]]></text>
+            </staticText>
+
+            <!-- Col 3 (Left) -->
+            <staticText>
+                <reportElement x="534" y="118" width="268" height="16" mode="Opaque" backcolor="#EBF1DE"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="8"/></textElement>
+                <text><![CDATA[صور البوابات الداخلية]]></text>
+            </staticText>
+            <image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
+                <reportElement x="536" y="134" width="264" height="110"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <imageExpression class="java.lang.Object"><![CDATA[$P{detailPhoto3}]]></imageExpression>
+            </image>
+            <staticText>
+                <reportElement x="540" y="244" width="60" height="9"/>
+                <textElement textAlignment="Right"><font size="7"/></textElement>
+                <text><![CDATA[وصف الصورة /]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="604" y="244" width="198" height="9"/>
+                <textElement><font size="7"/></textElement>
+                <text><![CDATA[..........................................]]></text>
+            </staticText>
+
+            <!-- Row 2: 3 images in 3 columns -->
+            <!-- Col 1 (Right) -->
+            <staticText>
+                <reportElement x="0" y="253" width="267" height="16" mode="Opaque" backcolor="#EBF1DE"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="8"/></textElement>
+                <text><![CDATA[صور التشطيبات]]></text>
+            </staticText>
+            <image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
+                <reportElement x="2" y="269" width="263" height="110"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <imageExpression class="java.lang.Object"><![CDATA[$P{detailPhoto4}]]></imageExpression>
+            </image>
+            <staticText>
+                <reportElement x="6" y="379" width="60" height="9"/>
+                <textElement textAlignment="Right"><font size="7"/></textElement>
+                <text><![CDATA[وصف الصورة /]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="70" y="379" width="197" height="9"/>
+                <textElement><font size="7"/></textElement>
+                <text><![CDATA[..........................................]]></text>
+            </staticText>
+
+            <!-- Col 2 (Middle) -->
+            <staticText>
+                <reportElement x="267" y="253" width="267" height="16" mode="Opaque" backcolor="#EBF1DE"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="8"/></textElement>
+                <text><![CDATA[المظهر العام]]></text>
+            </staticText>
+            <image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
+                <reportElement x="269" y="269" width="263" height="110"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <imageExpression class="java.lang.Object"><![CDATA[$P{detailPhoto5}]]></imageExpression>
+            </image>
+            <staticText>
+                <reportElement x="273" y="379" width="60" height="9"/>
+                <textElement textAlignment="Right"><font size="7"/></textElement>
+                <text><![CDATA[وصف الصورة /]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="337" y="379" width="197" height="9"/>
+                <textElement><font size="7"/></textElement>
+                <text><![CDATA[..........................................]]></text>
+            </staticText>
+
+            <!-- Col 3 (Left) -->
+            <staticText>
+                <reportElement x="534" y="253" width="268" height="16" mode="Opaque" backcolor="#EBF1DE"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="8"/></textElement>
+                <text><![CDATA[تفاصيل إضافية]]></text>
+            </staticText>
+            <image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
+                <reportElement x="536" y="269" width="264" height="110"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <imageExpression class="java.lang.Object"><![CDATA[$P{detailPhoto6}]]></imageExpression>
+            </image>
+            <staticText>
+                <reportElement x="540" y="379" width="60" height="9"/>
+                <textElement textAlignment="Right"><font size="7"/></textElement>
+                <text><![CDATA[وصف الصورة /]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="604" y="379" width="198" height="9"/>
+                <textElement><font size="7"/></textElement>
+                <text><![CDATA[..........................................]]></text>
+            </staticText>
+
+            <!-- Footer -->
+            <staticText>
+                <reportElement x="0" y="508" width="100" height="14"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle"><font size="8" isBold="true"/></textElement>
+                <text><![CDATA[ختم المكتب]]></text>
+            </staticText>
+            <image scaleImage="RetainShape" hAlign="Left" vAlign="Middle">
+                <reportElement x="100" y="507" width="100" height="16">
+                    <printWhenExpression><![CDATA[$P{digitalStampPath} != null]]></printWhenExpression>
+                </reportElement>
+                <imageExpression class="java.lang.Object"><![CDATA[$P{digitalStampPath}]]></imageExpression>
+            </image>
+            <textField isBlankWhenNull="true">
+                <reportElement x="550" y="508" width="252" height="14"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle"><font size="8" isBold="true"/></textElement>
+                <textFieldExpression><![CDATA["اسم المكتب: " + ($P{officeName} == null ? "" : $P{officeName})]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+</jasperReport>
+

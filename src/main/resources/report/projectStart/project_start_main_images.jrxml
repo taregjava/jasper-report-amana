@@ -77,60 +77,62 @@
                 <text><![CDATA[صورة الموقع طبقاً للبوابة المكانية]]></text>
             </staticText>
 
-            <!-- Image boxes -->
-            <frame>
+            <!-- Image boxes - Right column (Col 1) -->
+            <rectangle>
                 <reportElement x="0" y="168" width="267" height="356" mode="Opaque" backcolor="#FFFFFF"/>
-                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
-                <image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
-                    <reportElement x="4" y="4" width="259" height="348">
-                        <printWhenExpression><![CDATA[$P{aerialPhoto} != null]]></printWhenExpression>
-                    </reportElement>
-                    <imageExpression class="java.lang.Object"><![CDATA[$P{aerialPhoto}]]></imageExpression>
-                </image>
-                <staticText>
-                    <reportElement x="4" y="4" width="259" height="348" forecolor="#999999">
-                        <printWhenExpression><![CDATA[$P{aerialPhoto} == null]]></printWhenExpression>
-                    </reportElement>
-                    <textElement textAlignment="Center" verticalAlignment="Middle"/>
-                    <text><![CDATA[لا توجد صورة]]></text>
-                </staticText>
-            </frame>
+                <graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement>
+            </rectangle>
+            <image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
+                <reportElement x="2" y="170" width="263" height="352">
+                    <printWhenExpression><![CDATA[$P{aerialPhoto} != null]]></printWhenExpression>
+                </reportElement>
+                <imageExpression class="java.lang.Object"><![CDATA[$P{aerialPhoto}]]></imageExpression>
+            </image>
+            <staticText>
+                <reportElement x="2" y="170" width="263" height="352" forecolor="#999999">
+                    <printWhenExpression><![CDATA[$P{aerialPhoto} == null]]></printWhenExpression>
+                </reportElement>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="10"/></textElement>
+                <text><![CDATA[لا توجد صورة]]></text>
+            </staticText>
 
-            <frame>
+            <!-- Image boxes - Middle column (Col 2) -->
+            <rectangle>
                 <reportElement x="267" y="168" width="267" height="356" mode="Opaque" backcolor="#FFFFFF"/>
-                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
-                <image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
-                    <reportElement x="4" y="4" width="259" height="348">
-                        <printWhenExpression><![CDATA[$P{implementationPhoto} != null]]></printWhenExpression>
-                    </reportElement>
-                    <imageExpression class="java.lang.Object"><![CDATA[$P{implementationPhoto}]]></imageExpression>
-                </image>
-                <staticText>
-                    <reportElement x="4" y="4" width="259" height="348" forecolor="#999999">
-                        <printWhenExpression><![CDATA[$P{implementationPhoto} == null]]></printWhenExpression>
-                    </reportElement>
-                    <textElement textAlignment="Center" verticalAlignment="Middle"/>
-                    <text><![CDATA[لا توجد صورة]]></text>
-                </staticText>
-            </frame>
+                <graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement>
+            </rectangle>
+            <image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
+                <reportElement x="269" y="170" width="263" height="352">
+                    <printWhenExpression><![CDATA[$P{implementationPhoto} != null]]></printWhenExpression>
+                </reportElement>
+                <imageExpression class="java.lang.Object"><![CDATA[$P{implementationPhoto}]]></imageExpression>
+            </image>
+            <staticText>
+                <reportElement x="269" y="170" width="263" height="352" forecolor="#999999">
+                    <printWhenExpression><![CDATA[$P{implementationPhoto} == null]]></printWhenExpression>
+                </reportElement>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="10"/></textElement>
+                <text><![CDATA[لا توجد صورة]]></text>
+            </staticText>
 
-            <frame>
+            <!-- Image boxes - Left column (Col 3) -->
+            <rectangle>
                 <reportElement x="534" y="168" width="268" height="356" mode="Opaque" backcolor="#FFFFFF"/>
-                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
-                <image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
-                    <reportElement x="4" y="4" width="260" height="348">
-                        <printWhenExpression><![CDATA[$P{spatialPortalPhoto} != null]]></printWhenExpression>
-                    </reportElement>
-                    <imageExpression class="java.lang.Object"><![CDATA[$P{spatialPortalPhoto}]]></imageExpression>
-                </image>
-                <staticText>
-                    <reportElement x="4" y="4" width="260" height="348" forecolor="#999999">
-                        <printWhenExpression><![CDATA[$P{spatialPortalPhoto} == null]]></printWhenExpression>
-                    </reportElement>
-                    <textElement textAlignment="Center" verticalAlignment="Middle"/>
-                    <text><![CDATA[لا توجد صورة]]></text>
-                </staticText>
-            </frame>
+                <graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement>
+            </rectangle>
+            <image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
+                <reportElement x="536" y="170" width="264" height="352">
+                    <printWhenExpression><![CDATA[$P{spatialPortalPhoto} != null]]></printWhenExpression>
+                </reportElement>
+                <imageExpression class="java.lang.Object"><![CDATA[$P{spatialPortalPhoto}]]></imageExpression>
+            </image>
+            <staticText>
+                <reportElement x="536" y="170" width="264" height="352" forecolor="#999999">
+                    <printWhenExpression><![CDATA[$P{spatialPortalPhoto} == null]]></printWhenExpression>
+                </reportElement>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="10"/></textElement>
+                <text><![CDATA[لا توجد صورة]]></text>
+            </staticText>
 
             <!-- Footer labels -->
             <staticText>
