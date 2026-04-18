@@ -266,11 +266,31 @@ public class ProjectStartReportService {
             params.put("ownerName", ownerName);
             params.put("buildingType", buildingType);
             String legacyBuildingType = bi == null ? "" : bi.getBuildingType();
-            params.put("buildingTypeResidential", resolveBuildingTypeFlag(bi == null ? null : bi.getBuildingTypeResidential(), legacyBuildingType, "سكني"));
-            params.put("buildingTypeResidentialCommercial", resolveBuildingTypeFlag(bi == null ? null : bi.getBuildingTypeResidentialCommercial(), legacyBuildingType, "سكني-تجاري", "سكني - تجاري"));
-            params.put("buildingTypeCommercial", resolveBuildingTypeFlag(bi == null ? null : bi.getBuildingTypeCommercial(), legacyBuildingType, "تجاري"));
-            params.put("buildingTypeVilla", resolveBuildingTypeFlag(bi == null ? null : bi.getBuildingTypeVilla(), legacyBuildingType, "فيلا"));
-            params.put("buildingTypeOther", resolveOtherBuildingTypeFlag(bi == null ? null : bi.getBuildingTypeOther(), legacyBuildingType, bi == null ? null : bi.getOtherBuildingType()));
+            params.put("buildingTypeResidential", resolveBuildingTypeFlag(
+                    bi == null ? null : bi.getBuildingTypeResidential(),
+                    legacyBuildingType,
+                    "سكني", "residential", "residence"
+            ));
+            params.put("buildingTypeResidentialCommercial", resolveBuildingTypeFlag(
+                    bi == null ? null : bi.getBuildingTypeResidentialCommercial(),
+                    legacyBuildingType,
+                    "سكني-تجاري", "سكني - تجاري", "residential-commercial", "residential commercial", "mixed"
+            ));
+            params.put("buildingTypeCommercial", resolveBuildingTypeFlag(
+                    bi == null ? null : bi.getBuildingTypeCommercial(),
+                    legacyBuildingType,
+                    "تجاري", "commercial"
+            ));
+            params.put("buildingTypeVilla", resolveBuildingTypeFlag(
+                    bi == null ? null : bi.getBuildingTypeVilla(),
+                    legacyBuildingType,
+                    "فيلا", "villa"
+            ));
+            params.put("buildingTypeOther", resolveOtherBuildingTypeFlag(
+                    bi == null ? null : bi.getBuildingTypeOther(),
+                    legacyBuildingType,
+                    bi == null ? null : bi.getOtherBuildingType()
+            ));
             // populate additional owner/building params using preferred parameter names
             params.put("ownerIdNumber", oi == null ? "" : (oi.getOwnerIdNumber() != null ? oi.getOwnerIdNumber() : oi.getIdNumber()));
             params.put("ownerMobile", oi == null ? "" : (oi.getOwnerMobile() != null ? oi.getOwnerMobile() : oi.getMobileNumber()));
@@ -460,7 +480,8 @@ public class ProjectStartReportService {
         if (explicitValue != null) {
             return explicitValue;
         }
-        return !safeText(otherBuildingType).trim().isEmpty() || resolveBuildingTypeFlag(null, legacyBuildingType, "أخرى");
+        return !safeText(otherBuildingType).trim().isEmpty()
+                || resolveBuildingTypeFlag(null, legacyBuildingType, "أخرى", "other");
     }
 
     private String normalizeFlagText(String text) {

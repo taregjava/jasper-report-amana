@@ -73,7 +73,7 @@
                 <textField isBlankWhenNull="true">
                     <reportElement x="395" y="11" width="12" height="12"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle"><font size="9" isBold="true"/></textElement>
-                    <textFieldExpression><![CDATA[Boolean.TRUE.equals($P{buildingTypeResidential}) ? "✓" : ""]]></textFieldExpression>
+                    <textFieldExpression><![CDATA[Boolean.TRUE.equals($P{buildingTypeResidential}) ? "X" : ""]]></textFieldExpression>
                 </textField>
                 <staticText>
                     <reportElement x="345" y="11" width="46" height="14"/>
@@ -88,7 +88,7 @@
                 <textField isBlankWhenNull="true">
                     <reportElement x="297" y="11" width="12" height="12"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle"><font size="9" isBold="true"/></textElement>
-                    <textFieldExpression><![CDATA[Boolean.TRUE.equals($P{buildingTypeResidentialCommercial}) ? "✓" : ""]]></textFieldExpression>
+                    <textFieldExpression><![CDATA[Boolean.TRUE.equals($P{buildingTypeResidentialCommercial}) ? "X" : ""]]></textFieldExpression>
                 </textField>
                 <staticText>
                     <reportElement x="214" y="11" width="80" height="14"/>
@@ -103,7 +103,7 @@
                 <textField isBlankWhenNull="true">
                     <reportElement x="184" y="11" width="12" height="12"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle"><font size="9" isBold="true"/></textElement>
-                    <textFieldExpression><![CDATA[Boolean.TRUE.equals($P{buildingTypeCommercial}) ? "✓" : ""]]></textFieldExpression>
+                    <textFieldExpression><![CDATA[Boolean.TRUE.equals($P{buildingTypeCommercial}) ? "X" : ""]]></textFieldExpression>
                 </textField>
                 <staticText>
                     <reportElement x="133" y="11" width="48" height="14"/>
@@ -118,7 +118,7 @@
                 <textField isBlankWhenNull="true">
                     <reportElement x="105" y="11" width="12" height="12"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle"><font size="9" isBold="true"/></textElement>
-                    <textFieldExpression><![CDATA[Boolean.TRUE.equals($P{buildingTypeVilla}) ? "✓" : ""]]></textFieldExpression>
+                    <textFieldExpression><![CDATA[Boolean.TRUE.equals($P{buildingTypeVilla}) ? "X" : ""]]></textFieldExpression>
                 </textField>
                 <staticText>
                     <reportElement x="61" y="11" width="40" height="14"/>
@@ -133,7 +133,7 @@
                 <textField isBlankWhenNull="true">
                     <reportElement x="35" y="11" width="12" height="12"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle"><font size="9" isBold="true"/></textElement>
-                    <textFieldExpression><![CDATA[(Boolean.TRUE.equals($P{buildingTypeOther}) || ($P{otherBuildingType} != null && !$P{otherBuildingType}.trim().isEmpty())) ? "✓" : ""]]></textFieldExpression>
+                    <textFieldExpression><![CDATA[(Boolean.TRUE.equals($P{buildingTypeOther}) || ($P{otherBuildingType} != null && !$P{otherBuildingType}.trim().isEmpty())) ? "X" : ""]]></textFieldExpression>
                 </textField>
                 <staticText>
                     <reportElement x="1" y="6" width="30" height="12"/>
@@ -171,7 +171,7 @@
                 <textField isBlankWhenNull="true">
                     <reportElement x="149" y="11" width="12" height="12"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle"><font size="9" isBold="true"/></textElement>
-                    <textFieldExpression><![CDATA[Boolean.TRUE.equals($P{isFullyFinished}) ? "✓" : ""]]></textFieldExpression>
+                    <textFieldExpression><![CDATA[Boolean.TRUE.equals($P{isFullyFinished}) ? "X" : ""]]></textFieldExpression>
                 </textField>
                 <staticText>
                     <reportElement x="86" y="11" width="60" height="14"/>
@@ -186,7 +186,7 @@
                 <textField isBlankWhenNull="true">
                     <reportElement x="58" y="11" width="12" height="12"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle"><font size="9" isBold="true"/></textElement>
-                    <textFieldExpression><![CDATA[Boolean.TRUE.equals($P{isPartiallyBuilt}) ? "✓" : ""]]></textFieldExpression>
+                    <textFieldExpression><![CDATA[Boolean.TRUE.equals($P{isPartiallyBuilt}) ? "X" : ""]]></textFieldExpression>
                 </textField>
                 <staticText>
                     <reportElement x="1" y="11" width="54" height="14"/>

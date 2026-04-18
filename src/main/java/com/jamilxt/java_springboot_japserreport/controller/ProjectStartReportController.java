@@ -9,6 +9,8 @@ import com.jamilxt.java_springboot_japserreport.service.report.ProjectStartRepor
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,6 +31,16 @@ public class ProjectStartReportController {
         response.setContentType(MediaType.APPLICATION_PDF_VALUE);
         response.setContentLength(pdf.length);
         response.getOutputStream().write(pdf);
+    }
+
+    @PostMapping(path = "/project/pdf", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_PDF_VALUE)
+    public void projectStartPdfFromBody(@RequestBody ProjectStartReportDto dto, HttpServletResponse response) throws Exception {
+        byte[] pdf = service.generatePdf(dto);
+        response.setContentType(MediaType.APPLICATION_PDF_VALUE);
+        response.setHeader("Content-Disposition", "inline; filename=project_start_report.pdf");
+        response.setContentLength(pdf.length);
+        response.getOutputStream().write(pdf);
+        response.getOutputStream().flush();
     }
 
     @GetMapping(path = "/project-start/pdf", produces = MediaType.APPLICATION_PDF_VALUE)
