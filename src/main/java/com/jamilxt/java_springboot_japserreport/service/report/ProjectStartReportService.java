@@ -102,8 +102,6 @@ public class ProjectStartReportService {
             params.put("inspectionResponsibilitySubreport", inspectionResponsibilityRep);
             // pass table datasource
             params.put("tableData", tableDs);
-            params.put("photosTopData", buildTopPhotoRows(params));
-            params.put("photosBottomData", buildBottomPhotoRows(params));
             // static sample data for changes tables
             params.put("changesData",    buildTextRowsDataSource(java.util.List.of(
                     "تعديل موقع النافذة في الواجهة الشمالية",
@@ -189,6 +187,10 @@ public class ProjectStartReportService {
             params.put("detailDescription6", "توضيح الصورة 6");
             params.put("officeName", "المكتب الهندسي النموذجي");
             params.put("digitalStampPath", resolveImageSource("classpath:report/logo.png"));
+
+            // Build photo datasources after photo params are filled.
+            params.put("photosTopData", buildTopPhotoRows(params));
+            params.put("photosBottomData", buildBottomPhotoRows(params));
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(masterRep, params, new net.sf.jasperreports.engine.JREmptyDataSource());
 
