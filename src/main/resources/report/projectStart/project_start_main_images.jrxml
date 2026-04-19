@@ -10,6 +10,7 @@
 	<parameter name="spatialPortalPhoto" class="java.lang.Object"/>
 	<parameter name="implementationPhoto" class="java.lang.Object"/>
 	<parameter name="aerialPhoto" class="java.lang.Object"/>
+	<parameter name="footerSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
 	<parameter name="officeName" class="java.lang.String"/>
 	<parameter name="digitalStampPath" class="java.lang.Object"/>
 	<detail>
@@ -69,19 +70,19 @@
 				<text><![CDATA[صورة الموقع طبقاً للبوابة المكانية]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement mode="Opaque" x="0" y="168" width="267" height="356" backcolor="#FFFFFF" uuid="24dc32e7-947c-4650-8d59-694ef95ffafa"/>
+				<reportElement mode="Opaque" x="0" y="168" width="267" height="346" backcolor="#FFFFFF" uuid="24dc32e7-947c-4650-8d59-694ef95ffafa"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#000000"/>
 				</graphicElement>
 			</rectangle>
 			<image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
-				<reportElement x="2" y="170" width="263" height="352" uuid="9a42ce4e-6163-48da-a272-69aa8aa2455c">
+				<reportElement x="2" y="170" width="263" height="342" uuid="9a42ce4e-6163-48da-a272-69aa8aa2455c">
 					<printWhenExpression><![CDATA[$P{aerialPhoto} != null]]></printWhenExpression>
 				</reportElement>
 				<imageExpression><![CDATA[$P{aerialPhoto}]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="2" y="170" width="263" height="352" forecolor="#999999" uuid="dc52c1ad-9ff0-47fd-b5f2-314d946151b0">
+				<reportElement x="2" y="170" width="263" height="342" forecolor="#999999" uuid="dc52c1ad-9ff0-47fd-b5f2-314d946151b0">
 					<printWhenExpression><![CDATA[$P{aerialPhoto} == null]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -90,19 +91,19 @@
 				<text><![CDATA[لا توجد صورة]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement mode="Opaque" x="267" y="168" width="267" height="356" backcolor="#FFFFFF" uuid="51097e8b-3a80-4dbd-af9e-3a663ac12322"/>
+				<reportElement mode="Opaque" x="267" y="168" width="267" height="346" backcolor="#FFFFFF" uuid="51097e8b-3a80-4dbd-af9e-3a663ac12322"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#000000"/>
 				</graphicElement>
 			</rectangle>
 			<image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
-				<reportElement x="269" y="170" width="263" height="352" uuid="bc6e2374-1f4b-48ee-8c02-eadf7281ea5f">
+				<reportElement x="269" y="170" width="263" height="342" uuid="bc6e2374-1f4b-48ee-8c02-eadf7281ea5f">
 					<printWhenExpression><![CDATA[$P{implementationPhoto} != null]]></printWhenExpression>
 				</reportElement>
 				<imageExpression><![CDATA[$P{implementationPhoto}]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="269" y="170" width="263" height="352" forecolor="#999999" uuid="b9d60dab-c1f0-4064-8133-0e7f2861f1ff">
+				<reportElement x="269" y="170" width="263" height="342" forecolor="#999999" uuid="b9d60dab-c1f0-4064-8133-0e7f2861f1ff">
 					<printWhenExpression><![CDATA[$P{implementationPhoto} == null]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -111,19 +112,19 @@
 				<text><![CDATA[لا توجد صورة]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement mode="Opaque" x="534" y="168" width="268" height="356" backcolor="#FFFFFF" uuid="faf51d14-444a-42d7-a043-c636f2272032"/>
+				<reportElement mode="Opaque" x="534" y="168" width="268" height="346" backcolor="#FFFFFF" uuid="faf51d14-444a-42d7-a043-c636f2272032"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#000000"/>
 				</graphicElement>
 			</rectangle>
 			<image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
-				<reportElement x="536" y="170" width="264" height="352" uuid="99172f2a-5872-4321-bd04-17f87e8fe491">
+				<reportElement x="536" y="170" width="264" height="342" uuid="99172f2a-5872-4321-bd04-17f87e8fe491">
 					<printWhenExpression><![CDATA[$P{spatialPortalPhoto} != null]]></printWhenExpression>
 				</reportElement>
 				<imageExpression><![CDATA[$P{spatialPortalPhoto}]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="536" y="170" width="264" height="352" forecolor="#999999" uuid="9ef51f9f-cc4c-4368-b33c-678c933e8f7e">
+				<reportElement x="536" y="170" width="264" height="342" forecolor="#999999" uuid="9ef51f9f-cc4c-4368-b33c-678c933e8f7e">
 					<printWhenExpression><![CDATA[$P{spatialPortalPhoto} == null]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -131,26 +132,17 @@
 				</textElement>
 				<text><![CDATA[لا توجد صورة]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="0" y="527" width="120" height="18" uuid="022eaace-458d-4522-a1a9-3738bf1facf8"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font size="9" isBold="true" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-				</textElement>
-				<text><![CDATA[ختم المكتب]]></text>
-			</staticText>
-			<image scaleImage="RetainShape" hAlign="Left" vAlign="Middle">
-				<reportElement x="122" y="524" width="120" height="20" uuid="08bad5be-047c-476c-a03c-07aaa0e35c58">
-					<printWhenExpression><![CDATA[$P{digitalStampPath} != null]]></printWhenExpression>
-				</reportElement>
-				<imageExpression><![CDATA[$P{digitalStampPath}]]></imageExpression>
-			</image>
-			<textField isBlankWhenNull="true">
-				<reportElement x="552" y="527" width="250" height="15" uuid="98de5926-debe-451f-8aec-09c1839c2a72"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="9" isBold="true" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA["اسم المكتب: " + ($P{officeName} == null ? "" : $P{officeName})]]></textFieldExpression>
-			</textField>
+			<subreport>
+				<reportElement x="0" y="514" width="802" height="31"/>
+				<subreportParameter name="officeName">
+					<subreportParameterExpression><![CDATA[$P{officeName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="digitalStampPath">
+					<subreportParameterExpression><![CDATA[$P{digitalStampPath}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{footerSubreport}]]></subreportExpression>
+			</subreport>
 		</band>
 	</detail>
 </jasperReport>

@@ -10,6 +10,7 @@
 	<parameter name="reportLogo" class="java.lang.Object"/>
 	<parameter name="projectNameAndAddress" class="java.lang.String"/>
 	<parameter name="reportDate" class="java.lang.String"/>
+	<parameter name="footerSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
 	<parameter name="officeName" class="java.lang.String"/>
 	<parameter name="digitalStampPath" class="java.lang.Object"/>
 	<detail>
@@ -82,26 +83,13 @@
 	</detail>
 	<pageFooter>
 		<band height="31">
-			<textField isBlankWhenNull="true">
-				<reportElement x="540" y="9" width="262" height="16" uuid="8c47865b-5ff8-4a94-aa3e-a054800bc543"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="9" isBold="true" pdfFontName="fonts/ARIALBD.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA["اسم المكتب: " + ($P{officeName} == null ? "" : $P{officeName})]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="0" y="9" width="118" height="16" uuid="52a91154-56e6-493b-b45a-34bb932c7e5f"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font size="9" isBold="true" pdfFontName="fonts/ARIALBD.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-				</textElement>
-				<text><![CDATA[ختم المكتب]]></text>
-			</staticText>
-			<image scaleImage="RetainShape" hAlign="Left" vAlign="Middle">
-				<reportElement x="120" y="6" width="120" height="20" uuid="100da12f-35e0-44df-b99b-a8a054b25972">
-					<printWhenExpression><![CDATA[$P{digitalStampPath} != null]]></printWhenExpression>
-				</reportElement>
-				<imageExpression><![CDATA[$P{digitalStampPath}]]></imageExpression>
-			</image>
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="31"/>
+				<subreportParameter name="officeName"><subreportParameterExpression><![CDATA[$P{officeName}]]></subreportParameterExpression></subreportParameter>
+				<subreportParameter name="digitalStampPath"><subreportParameterExpression><![CDATA[$P{digitalStampPath}]]></subreportParameterExpression></subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{footerSubreport}]]></subreportExpression>
+			</subreport>
 		</band>
 	</pageFooter>
 </jasperReport>

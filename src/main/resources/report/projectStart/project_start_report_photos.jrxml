@@ -44,6 +44,7 @@
     <parameter name="detailDescription4" class="java.lang.String"/>
     <parameter name="detailDescription5" class="java.lang.String"/>
     <parameter name="detailDescription6" class="java.lang.String"/>
+    <parameter name="footerSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
     <parameter name="officeName" class="java.lang.String"/>
     <parameter name="digitalStampPath" class="java.lang.Object"/>
 
@@ -76,28 +77,18 @@
 
             <!-- Bottom grid 3x2 (dynamic loop via datasource) -->
             <subreport>
-                <reportElement x="0" y="338" width="802" height="180"/>
+                <reportElement x="0" y="334" width="802" height="170"/>
                 <dataSourceExpression><![CDATA[$P{bottomGridData}]]></dataSourceExpression>
                 <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{bottomGridSubreport}]]></subreportExpression>
             </subreport>
 
-            <!-- Footer -->
-            <textField isBlankWhenNull="true">
-                <reportElement x="552" y="527" width="250" height="15"/>
-                <textElement textAlignment="Right" verticalAlignment="Middle"><font size="12" isBold="true"/></textElement>
-                <textFieldExpression><![CDATA["اسم المكتب: " + ($P{officeName} == null ? "" : $P{officeName})]]></textFieldExpression>
-            </textField>
-            <staticText>
-                <reportElement x="0" y="527" width="118" height="15"/>
-                <textElement textAlignment="Left" verticalAlignment="Middle"><font size="12" isBold="true"/></textElement>
-                <text><![CDATA[ختم المكتب]]></text>
-            </staticText>
-            <image scaleImage="RetainShape" hAlign="Left" vAlign="Middle">
-                <reportElement x="120" y="524" width="120" height="20">
-                    <printWhenExpression><![CDATA[$P{digitalStampPath} != null]]></printWhenExpression>
-                </reportElement>
-                <imageExpression class="java.lang.Object"><![CDATA[$P{digitalStampPath}]]></imageExpression>
-            </image>
+            <subreport>
+                <reportElement x="0" y="514" width="802" height="31"/>
+                <subreportParameter name="officeName"><subreportParameterExpression><![CDATA[$P{officeName}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="digitalStampPath"><subreportParameterExpression><![CDATA[$P{digitalStampPath}]]></subreportParameterExpression></subreportParameter>
+                <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
+                <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{footerSubreport}]]></subreportExpression>
+            </subreport>
         </band>
     </detail>
 

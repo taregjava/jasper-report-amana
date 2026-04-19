@@ -39,6 +39,7 @@ public class ProjectStartReportService {
              InputStream sitePhotosIs = getClass().getResourceAsStream("/report/projectStart/project_start_site_photos_page.jrxml");
              InputStream photosTopGridIs = getClass().getResourceAsStream("/report/projectStart/project_start_report_photos_top_grid.jrxml");
              InputStream photosBottomGridIs = getClass().getResourceAsStream("/report/projectStart/project_start_report_photos_bottom_grid.jrxml");
+             InputStream footerIs = getClass().getResourceAsStream("/report/projectStart/project_start_shared_footer.jrxml");
              InputStream mainImagesIs = getClass().getResourceAsStream("/report/projectStart/project_start_main_images.jrxml");
              InputStream changesRowsIs = getClass().getResourceAsStream("/report/projectStart/project_start_changes_rows.jrxml");
              InputStream changesPageIs = getClass().getResourceAsStream("/report/projectStart/project_start_changes_page.jrxml");
@@ -54,6 +55,7 @@ public class ProjectStartReportService {
             JasperReport sitePhotosRep = sitePhotosIs == null ? null : JasperCompileManager.compileReport(sitePhotosIs);
             JasperReport photosTopGridRep = JasperCompileManager.compileReport(photosTopGridIs);
             JasperReport photosBottomGridRep = JasperCompileManager.compileReport(photosBottomGridIs);
+            JasperReport footerRep = footerIs == null ? null : JasperCompileManager.compileReport(footerIs);
             JasperReport mainImagesRep = mainImagesIs == null ? null : JasperCompileManager.compileReport(mainImagesIs);
             JasperReport changesRowsRep = changesRowsIs == null ? null : JasperCompileManager.compileReport(changesRowsIs);
             JasperReport changesPageRep = changesPageIs == null ? null : JasperCompileManager.compileReport(changesPageIs);
@@ -96,6 +98,7 @@ public class ProjectStartReportService {
             params.put("sitePhotosSubreport", sitePhotosRep);
             params.put("photosTopGridSubreport", photosTopGridRep);
             params.put("photosBottomGridSubreport", photosBottomGridRep);
+            params.put("footerSubreport", footerRep);
             params.put("mainImagesSubreport", mainImagesRep);
             params.put("changesPageSubreport", changesPageRep);
             params.put("changesRowsSubreport", changesRowsRep);
@@ -210,6 +213,7 @@ public class ProjectStartReportService {
              InputStream sitePhotosIs = resourceLoader.getResource("classpath:report/projectStart/project_start_site_photos_page.jrxml").getInputStream();
              InputStream photosTopGridIs = resourceLoader.getResource("classpath:report/projectStart/project_start_report_photos_top_grid.jrxml").getInputStream();
              InputStream photosBottomGridIs = resourceLoader.getResource("classpath:report/projectStart/project_start_report_photos_bottom_grid.jrxml").getInputStream();
+             InputStream footerIs = resourceLoader.getResource("classpath:report/projectStart/project_start_shared_footer.jrxml").getInputStream();
              InputStream mainImagesIs = resourceLoader.getResource("classpath:report/projectStart/project_start_main_images.jrxml").getInputStream();
              InputStream changesRowsIs = resourceLoader.getResource("classpath:report/projectStart/project_start_changes_rows.jrxml").getInputStream();
              InputStream changesPageIs = resourceLoader.getResource("classpath:report/projectStart/project_start_changes_page.jrxml").getInputStream();
@@ -225,6 +229,7 @@ public class ProjectStartReportService {
             JasperReport sitePhotosRep = JasperCompileManager.compileReport(sitePhotosIs);
             JasperReport photosTopGridRep = JasperCompileManager.compileReport(photosTopGridIs);
             JasperReport photosBottomGridRep = JasperCompileManager.compileReport(photosBottomGridIs);
+            JasperReport footerRep = JasperCompileManager.compileReport(footerIs);
             JasperReport mainImagesRep = JasperCompileManager.compileReport(mainImagesIs);
             JasperReport changesRowsRep = JasperCompileManager.compileReport(changesRowsIs);
             JasperReport changesPageRep = JasperCompileManager.compileReport(changesPageIs);
@@ -244,6 +249,7 @@ public class ProjectStartReportService {
             params.put("sitePhotosSubreport", sitePhotosRep);
             params.put("photosTopGridSubreport", photosTopGridRep);
             params.put("photosBottomGridSubreport", photosBottomGridRep);
+            params.put("footerSubreport", footerRep);
             params.put("mainImagesSubreport", mainImagesRep);
             params.put("changesPageSubreport", changesPageRep);
             params.put("changesRowsSubreport", changesRowsRep);
