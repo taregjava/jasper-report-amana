@@ -12,5 +12,14 @@ public class TaskRow {
     private String groupTitle; // عنوان المجموعة مثل: متطلبات سور الحماية
     private String sideNumber; // الرقم الجانبي المدمج مثل: 2 / 3
 
-    // Getters & Setters
+    // Alias for payloads that send "status" instead of "compliant".
+    public String getStatus() {
+        return compliant;
+    }
+
+    public void setStatus(String status) {
+        this.compliant = status;
+    }
+
+
 }

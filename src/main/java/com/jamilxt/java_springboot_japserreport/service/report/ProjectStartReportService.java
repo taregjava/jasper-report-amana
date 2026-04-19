@@ -403,14 +403,72 @@ public class ProjectStartReportService {
 
     private Map<String, Object> tableRow(String groupTitle, String sideNumber, Integer index, String task, String status, String notes) {
         Map<String, Object> row = new HashMap<>();
+        String statusCode = normalizeChecklistStatus(status);
+        boolean matched = "MATCHED".equals(statusCode);
+        boolean notMatched = "NOT_MATCHED".equals(statusCode);
+        boolean notApplicable = "NOT_APPLICABLE".equals(statusCode);
+
         // Use field names expected by the table subreport/master: itemNo and description
         row.put("groupTitle", groupTitle == null ? "" : groupTitle);
         row.put("sideNumber", sideNumber == null ? "" : sideNumber);
         row.put("itemNo", index);
         row.put("description", task);
-        row.put("status", status);
+        row.put("status", status == null ? "" : status);
+        row.put("statusCode", statusCode);
+        row.put("isMatched", matched);
+        row.put("isNotMatched", notMatched);
+        row.put("isNotApplicable", notApplicable);
+
         row.put("notes", notes == null ? "" : notes);
         return row;
+    }
+
+    private String normalizeChecklistStatus(String status) {
+        String value = safeText(status).trim().toLowerCase();
+        if (value.isEmpty()) {
+            return "";
+        }
+
+        if ("matched".equals(value)
+                || "match".equals(value)
+                || "compliant".equals(value)
+                || "yes".equals(value)
+                || "true".equals(value)
+                || "☑".equals(value)
+                || "✔".equals(value)
+                || "✓".equals(value)
+                || "مطابق".equals(value)) {
+            return "MATCHED";
+        }
+
+        if ("not_matched".equals(value)
+                || "not-matched".equals(value)
+                || "not matched".equals(value)
+                || "non_compliant".equals(value)
+                || "non-compliant".equals(value)
+                || "notcompliant".equals(value)
+                || "no".equals(value)
+                || "false".equals(value)
+                || "☐".equals(value)
+                || "✖".equals(value)
+                || "✗".equals(value)
+                || "x".equals(value)
+                || "غير مطابق".equals(value)
+                || "غيرمطابق".equals(value)) {
+            return "NOT_MATCHED";
+        }
+
+        if ("not_applicable".equals(value)
+                || "not-applicable".equals(value)
+                || "not applicable".equals(value)
+                || "na".equals(value)
+                || "n/a".equals(value)
+                || "لا ينطبق".equals(value)
+                || "لاينطبق".equals(value)) {
+            return "NOT_APPLICABLE";
+        }
+
+        return "";
     }
 
     private Object resolveImageSource(String source) {

@@ -48,6 +48,13 @@
     <field name="description" class="java.lang.String"/>
     <field name="requirement" class="java.lang.String"/>
     <field name="status" class="java.lang.String"/>
+    <field name="statusCode" class="java.lang.String"/>
+    <field name="isMatched" class="java.lang.Boolean"/>
+    <field name="isNotMatched" class="java.lang.Boolean"/>
+    <field name="isNotApplicable" class="java.lang.Boolean"/>
+    <field name="match" class="java.lang.String"/>
+    <field name="notMatch" class="java.lang.String"/>
+    <field name="notApplicable" class="java.lang.String"/>
     <field name="notes" class="java.lang.String"/>
 
     <variable name="ChecklistGroupRowNo" class="java.lang.Integer" resetType="Group" resetGroup="ChecklistGroup" calculation="Count">
@@ -146,11 +153,14 @@
                         <font size="11" isBold="true" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
                     </textElement>
                     <textFieldExpression><![CDATA[
-                        $F{status} != null && (
+                        Boolean.TRUE.equals($F{isNotApplicable})
+                        || ($F{statusCode} != null && "NOT_APPLICABLE".equals($F{statusCode}))
+                        || ($F{status} != null && (
                             "NA".equalsIgnoreCase($F{status}.trim()) ||
                             "N/A".equalsIgnoreCase($F{status}.trim()) ||
                             "لا ينطبق".equals($F{status}.trim())
-                        ) ? "☑" : ""
+                        ))
+                        ? "X" : ""
                     ]]></textFieldExpression>
                 </textField>
 
@@ -160,13 +170,16 @@
                         <font size="11" isBold="true" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
                     </textElement>
                     <textFieldExpression><![CDATA[
-                        $F{status} != null && (
+                        Boolean.TRUE.equals($F{isNotMatched})
+                        || ($F{statusCode} != null && "NOT_MATCHED".equals($F{statusCode}))
+                        || ($F{status} != null && (
                             "☐".equals($F{status}.trim()) ||
                             "✖".equals($F{status}.trim()) ||
                             "✗".equals($F{status}.trim()) ||
                             "X".equalsIgnoreCase($F{status}.trim()) ||
                             "غير مطابق".equals($F{status}.trim())
-                        ) ? "☑" : ""
+                        ))
+                        ? "X" : ""
                     ]]></textFieldExpression>
                 </textField>
 
@@ -176,12 +189,15 @@
                         <font size="11" isBold="true" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
                     </textElement>
                     <textFieldExpression><![CDATA[
-                        $F{status} != null && (
+                        Boolean.TRUE.equals($F{isMatched})
+                        || ($F{statusCode} != null && "MATCHED".equals($F{statusCode}))
+                        || ($F{status} != null && (
                             "☑".equals($F{status}.trim()) ||
                             "✔".equals($F{status}.trim()) ||
                             "✓".equals($F{status}.trim()) ||
                             "مطابق".equals($F{status}.trim())
-                        ) ? "☑" : ""
+                        ))
+                        ? "X" : ""
                     ]]></textFieldExpression>
                 </textField>
 
