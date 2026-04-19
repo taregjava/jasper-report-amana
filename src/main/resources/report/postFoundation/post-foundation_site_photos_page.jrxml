@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.21.5.final using JasperReports Library version 6.21.5-74d586df47b25dbd05bd0957999819196e59934a  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="project_start_site_photos_page" pageWidth="842" pageHeight="545" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" uuid="a98cfb2c-9385-4879-8edd-1b0d7861b39b">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="project_start_site_photos_page" pageWidth="842" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" uuid="a98cfb2c-9385-4879-8edd-1b0d7861b39b">
 	<property name="net.sf.jasperreports.text.direction" value="RTL"/>
 	<style name="Default" isDefault="true" fontName="SansSerif" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 	<parameter name="headerSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
@@ -23,7 +23,7 @@
 	<parameter name="officeName" class="java.lang.String"/>
 	<parameter name="digitalStampPath" class="java.lang.Object"/>
 	<detail>
-		<band height="545">
+		<band height="510">
 			<subreport>
 				<reportElement x="0" y="0" width="802" height="100" uuid="4d63c4a3-6f0e-4f56-b871-0828bad9c987"/>
 				<subreportParameter name="reportLogo">
@@ -276,14 +276,18 @@
 					<textFieldExpression><![CDATA[$P{detailDescription6} == null || $P{detailDescription6}.trim().isEmpty() ? "................................................" : $P{detailDescription6}]]></textFieldExpression>
 				</textField>
 			</frame>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="45">
 			<subreport>
-				<reportElement x="0" y="514" width="802" height="31"/>
+				<reportElement x="0" y="0" width="802" height="45"/>
 				<subreportParameter name="officeName"><subreportParameterExpression><![CDATA[$P{officeName}]]></subreportParameterExpression></subreportParameter>
 				<subreportParameter name="digitalStampPath"><subreportParameterExpression><![CDATA[$P{digitalStampPath}]]></subreportParameterExpression></subreportParameter>
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{footerSubreport}]]></subreportExpression>
 			</subreport>
 		</band>
-	</detail>
+	</pageFooter>
 </jasperReport>
 
