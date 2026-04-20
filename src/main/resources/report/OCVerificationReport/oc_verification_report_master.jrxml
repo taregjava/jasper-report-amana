@@ -113,6 +113,8 @@
     <parameter name="inspectionResponsibilitySubreport" class="net.sf.jasperreports.engine.JasperReport"/>
     <parameter name="inspectionResponsibilityData" class="net.sf.jasperreports.engine.JRDataSource"/>
     <parameter name="hasInspectionResponsibilityData" class="java.lang.Boolean"/>
+    <parameter name="boundaryComplianceData" class="com.jamilxt.java_springboot_japserreport.dto.BoundaryComplianceDTO"/>
+    <parameter name="buildingComponentsData" class="com.jamilxt.java_springboot_japserreport.dto.BuildingComponentsDTO"/>
 
     <!--
         Group rendering order (innermost footer first, outermost last):
@@ -274,6 +276,8 @@
                     <subreportParameter name="reportLogo"><subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="reportDate"><subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="boundaryComplianceData"><subreportParameterExpression><![CDATA[$P{boundaryComplianceData}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="buildingComponentsData"><subreportParameterExpression><![CDATA[$P{buildingComponentsData}]]></subreportParameterExpression></subreportParameter>
                     <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
                     <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{buildingComponentsSubreport}]]></subreportExpression>
                 </subreport>

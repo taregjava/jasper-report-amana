@@ -92,6 +92,8 @@ public class OCVerificationReportService {
                     tableRow("متطلبات السلامة العامة", "6", 16, "وجود لوحات تحذيرية", "☐", "غير كافي")
             ));
             JRBeanCollectionDataSource tableDs = new JRBeanCollectionDataSource(rows);
+            BoundaryComplianceDTO staticBoundaryCompliance = buildStaticBoundaryCompliance();
+            BuildingComponentsDTO staticBuildingComponents = buildStaticBuildingComponents();
 
             Map<String,Object> params = new HashMap<>();
             // pass compiled subreports
@@ -113,6 +115,8 @@ public class OCVerificationReportService {
             params.put("inspectionResponsibilitySubreport", inspectionResponsibilityRep);
             // pass table datasource
             params.put("tableData", tableDs);
+            params.put("boundaryComplianceData", staticBoundaryCompliance);
+            params.put("buildingComponentsData", staticBuildingComponents);
             // static sample data for changes tables
             params.put("changesData",    buildTextRowsDataSource(java.util.List.of(
                     "تعديل موقع النافذة في الواجهة الشمالية",
@@ -274,6 +278,8 @@ public class OCVerificationReportService {
             params.put("extraItemsData", buildTextRowsDataSource(dto.getExtraItems()));
             params.put("inspectionResponsibilityData", buildInspectionResponsibilityDataSource(dto.getInspectionResponsibility()));
             params.put("hasInspectionResponsibilityData", hasInspectionResponsibilityData(dto.getInspectionResponsibility()));
+            params.put("boundaryComplianceData", buildStaticBoundaryCompliance());
+            params.put("buildingComponentsData", buildStaticBuildingComponents());
 
             // owner/building values: prefer OwnerInfo / BuildingInfo when present
             String ownerName = null;
