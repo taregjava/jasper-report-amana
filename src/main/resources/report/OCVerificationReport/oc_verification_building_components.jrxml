@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="oc_verification_building_components"
+              pageWidth="842"
+              pageHeight="555"
+              orientation="Landscape"
+              columnWidth="802"
+              leftMargin="20"
+              rightMargin="20"
+              topMargin="0"
+              bottomMargin="0"
+              language="java">
+
+    <property name="net.sf.jasperreports.text.direction" value="RTL"/>
+    <style name="Default" isDefault="true" fontName="SansSerif" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+
+    <parameter name="headerSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
+    <parameter name="reportLogo" class="java.lang.Object"/>
+    <parameter name="projectNameAndAddress" class="java.lang.String"/>
+    <parameter name="reportDate" class="java.lang.String"/>
+
+    <detail>
+        <band height="510">
+            <subreport>
+                <reportElement x="0" y="0" width="802" height="118"/>
+                <subreportParameter name="reportLogo"><subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="reportDate"><subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression></subreportParameter>
+                <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
+                <subreportExpression><![CDATA[$P{headerSubreport}]]></subreportExpression>
+            </subreport>
+
+            <staticText>
+                <reportElement mode="Opaque" x="0" y="118" width="802" height="20" forecolor="#FFFFFF" backcolor="#005B41"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="11" isBold="true"/></textElement>
+                <text><![CDATA[المخططات والمكونات]]></text>
+            </staticText>
+
+            <!-- SETBACKS TABLE -->
+            <staticText>
+                <reportElement mode="Opaque" x="0" y="138" width="802" height="14" backcolor="#E8F5E9"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Right" verticalAlignment="Middle"><font size="8" isBold="true"/></textElement>
+                <text><![CDATA[الارتدادات]]></text>
+            </staticText>
+            <staticText><reportElement x="692" y="152" width="110" height="14" mode="Opaque" backcolor="#005B41" forecolor="#FFFFFF"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[البند]]></text></staticText>
+            <staticText><reportElement x="622" y="152" width="70" height="14" mode="Opaque" backcolor="#005B41" forecolor="#FFFFFF"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[الاتجاه]]></text></staticText>
+            <staticText><reportElement x="522" y="152" width="100" height="14" mode="Opaque" backcolor="#E8F5E9"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[وصف الحد]]></text></staticText>
+            <staticText><reportElement x="452" y="152" width="70" height="14" mode="Opaque" backcolor="#E8F5E9"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[الرخصة]]></text></staticText>
+            <staticText><reportElement x="382" y="152" width="70" height="14" mode="Opaque" backcolor="#E8F5E9"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[المخطط]]></text></staticText>
+            <staticText><reportElement x="312" y="152" width="70" height="14" mode="Opaque" backcolor="#E8F5E9"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[المنفذ]]></text></staticText>
+            <staticText><reportElement x="258" y="152" width="54" height="14" mode="Opaque" backcolor="#E8F5E9"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[الزيادة]]></text></staticText>
+            <staticText><reportElement x="222" y="152" width="36" height="14" mode="Opaque" backcolor="#E8F5E9"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[مط]]></text></staticText>
+            <staticText><reportElement x="186" y="152" width="36" height="14" mode="Opaque" backcolor="#E8F5E9"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[غم]]></text></staticText>
+            <staticText><reportElement x="150" y="152" width="36" height="14" mode="Opaque" backcolor="#E8F5E9"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[لن]]></text></staticText>
+            <staticText><reportElement x="0" y="152" width="150" height="14" mode="Opaque" backcolor="#E8F5E9"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[ملاحظات]]></text></staticText>
+
+            <!-- Setbacks full grid rows -->
+            <rectangle><reportElement x="0" y="166" width="802" height="11" mode="Opaque" backcolor="#EBF1DE"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <rectangle><reportElement x="0" y="177" width="802" height="11" mode="Opaque" backcolor="#FFFFFF"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <rectangle><reportElement x="0" y="188" width="802" height="11" mode="Opaque" backcolor="#EBF1DE"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <rectangle><reportElement x="0" y="199" width="802" height="11" mode="Opaque" backcolor="#FFFFFF"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <line><reportElement x="150" y="166" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="186" y="166" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="222" y="166" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="258" y="166" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="312" y="166" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="382" y="166" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="452" y="166" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="522" y="166" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="622" y="166" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="692" y="166" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+
+            <staticText><reportElement x="692" y="166" width="110" height="11" mode="Opaque" backcolor="#EBF1DE"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[ارتداد]]></text></staticText>
+            <staticText><reportElement x="622" y="166" width="70" height="11" mode="Opaque" backcolor="#EBF1DE"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[شمال]]></text></staticText>
+            <rectangle><reportElement x="224" y="168" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <rectangle><reportElement x="188" y="168" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <rectangle><reportElement x="152" y="168" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+
+            <staticText><reportElement x="692" y="177" width="110" height="11" mode="Opaque" backcolor="#FFFFFF"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[ارتداد]]></text></staticText>
+            <staticText><reportElement x="622" y="177" width="70" height="11" mode="Opaque" backcolor="#FFFFFF"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[جنوب]]></text></staticText>
+            <rectangle><reportElement x="224" y="179" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <rectangle><reportElement x="188" y="179" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <rectangle><reportElement x="152" y="179" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+
+            <staticText><reportElement x="692" y="188" width="110" height="11" mode="Opaque" backcolor="#EBF1DE"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[ارتداد]]></text></staticText>
+            <staticText><reportElement x="622" y="188" width="70" height="11" mode="Opaque" backcolor="#EBF1DE"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[شرق]]></text></staticText>
+            <rectangle><reportElement x="224" y="190" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <rectangle><reportElement x="188" y="190" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <rectangle><reportElement x="152" y="190" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+
+            <staticText><reportElement x="692" y="199" width="110" height="11" mode="Opaque" backcolor="#FFFFFF"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[ارتداد]]></text></staticText>
+            <staticText><reportElement x="622" y="199" width="70" height="11" mode="Opaque" backcolor="#FFFFFF"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[غرب]]></text></staticText>
+            <rectangle><reportElement x="224" y="201" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <rectangle><reportElement x="188" y="201" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <rectangle><reportElement x="152" y="201" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+
+            <!-- PROTRUSIONS TABLE -->
+            <staticText>
+                <reportElement mode="Opaque" x="0" y="210" width="802" height="14" backcolor="#E8F5E9"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Right" verticalAlignment="Middle"><font size="8" isBold="true"/></textElement>
+                <text><![CDATA[البروزات]]></text>
+            </staticText>
+            <staticText><reportElement x="692" y="224" width="110" height="14" mode="Opaque" backcolor="#005B41" forecolor="#FFFFFF"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[البند]]></text></staticText>
+            <staticText><reportElement x="622" y="224" width="70" height="14" mode="Opaque" backcolor="#005B41" forecolor="#FFFFFF"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[الاتجاه]]></text></staticText>
+            <staticText><reportElement x="522" y="224" width="100" height="14" mode="Opaque" backcolor="#E8F5E9"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[وصف الحد]]></text></staticText>
+            <staticText><reportElement x="452" y="224" width="70" height="14" mode="Opaque" backcolor="#E8F5E9"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[الرخصة]]></text></staticText>
+            <staticText><reportElement x="382" y="224" width="70" height="14" mode="Opaque" backcolor="#E8F5E9"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[المخطط]]></text></staticText>
+            <staticText><reportElement x="312" y="224" width="70" height="14" mode="Opaque" backcolor="#E8F5E9"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[المنفذ]]></text></staticText>
+            <staticText><reportElement x="258" y="224" width="54" height="14" mode="Opaque" backcolor="#E8F5E9"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[الزيادة]]></text></staticText>
+            <staticText><reportElement x="222" y="224" width="36" height="14" mode="Opaque" backcolor="#E8F5E9"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[مط]]></text></staticText>
+            <staticText><reportElement x="186" y="224" width="36" height="14" mode="Opaque" backcolor="#E8F5E9"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[غم]]></text></staticText>
+            <staticText><reportElement x="150" y="224" width="36" height="14" mode="Opaque" backcolor="#E8F5E9"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[لن]]></text></staticText>
+            <staticText><reportElement x="0" y="224" width="150" height="14" mode="Opaque" backcolor="#E8F5E9"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[ملاحظات]]></text></staticText>
+
+            <!-- Protrusions full grid rows -->
+            <rectangle><reportElement x="0" y="238" width="802" height="11" mode="Opaque" backcolor="#EBF1DE"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <rectangle><reportElement x="0" y="249" width="802" height="11" mode="Opaque" backcolor="#FFFFFF"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <rectangle><reportElement x="0" y="260" width="802" height="11" mode="Opaque" backcolor="#EBF1DE"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <rectangle><reportElement x="0" y="271" width="802" height="11" mode="Opaque" backcolor="#FFFFFF"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <line><reportElement x="150" y="238" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="186" y="238" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="222" y="238" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="258" y="238" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="312" y="238" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="382" y="238" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="452" y="238" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="522" y="238" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="622" y="238" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="692" y="238" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+
+            <staticText><reportElement x="692" y="238" width="110" height="11" mode="Opaque" backcolor="#EBF1DE"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[بروز]]></text></staticText>
+            <staticText><reportElement x="622" y="238" width="70" height="11" mode="Opaque" backcolor="#EBF1DE"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[شمال]]></text></staticText>
+            <rectangle><reportElement x="224" y="240" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <rectangle><reportElement x="188" y="240" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <rectangle><reportElement x="152" y="240" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+
+            <staticText><reportElement x="692" y="249" width="110" height="11" mode="Opaque" backcolor="#FFFFFF"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[بروز]]></text></staticText>
+            <staticText><reportElement x="622" y="249" width="70" height="11" mode="Opaque" backcolor="#FFFFFF"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[جنوب]]></text></staticText>
+            <rectangle><reportElement x="224" y="251" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <rectangle><reportElement x="188" y="251" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <rectangle><reportElement x="152" y="251" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+
+            <staticText><reportElement x="692" y="260" width="110" height="11" mode="Opaque" backcolor="#EBF1DE"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[بروز]]></text></staticText>
+            <staticText><reportElement x="622" y="260" width="70" height="11" mode="Opaque" backcolor="#EBF1DE"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[شرق]]></text></staticText>
+            <rectangle><reportElement x="224" y="262" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <rectangle><reportElement x="188" y="262" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <rectangle><reportElement x="152" y="262" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+
+            <staticText><reportElement x="692" y="271" width="110" height="11" mode="Opaque" backcolor="#FFFFFF"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[بروز]]></text></staticText>
+            <staticText><reportElement x="622" y="271" width="70" height="11" mode="Opaque" backcolor="#FFFFFF"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[غرب]]></text></staticText>
+            <rectangle><reportElement x="224" y="273" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <rectangle><reportElement x="188" y="273" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <rectangle><reportElement x="152" y="273" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+
+            <!-- BUILDING COMPONENTS TABLE (dense layout matching form) -->
+            <staticText>
+                <reportElement mode="Opaque" x="0" y="282" width="802" height="14" backcolor="#005B41" forecolor="#FFFFFF"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="8" isBold="true"/></textElement>
+                <text><![CDATA[مكونات المبنى]]></text>
+            </staticText>
+
+            <!-- Header row level 1 -->
+            <staticText><reportElement x="676" y="296" width="126" height="28" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="8" isBold="true"/></textElement><text><![CDATA[مكونات المبنى]]></text></staticText>
+            <staticText><reportElement x="641" y="296" width="35" height="14" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[الاستخدام]]></text></staticText>
+            <staticText><reportElement x="606" y="296" width="35" height="14" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box></staticText>
+            <staticText><reportElement x="571" y="296" width="35" height="14" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[عدد الوحدات]]></text></staticText>
+            <staticText><reportElement x="536" y="296" width="35" height="14" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box></staticText>
+            <staticText><reportElement x="484" y="296" width="52" height="28" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[ارتفاع المكون]]></text></staticText>
+            <staticText><reportElement x="196" y="296" width="288" height="14" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="8" isBold="true"/></textElement><text><![CDATA[المساحات (م2)]]></text></staticText>
+            <staticText><reportElement x="118" y="296" width="78" height="28" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="8" isBold="true"/></textElement><text><![CDATA[الزيادة]]></text></staticText>
+            <staticText><reportElement x="79" y="296" width="39" height="28" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[مطابق]]></text></staticText>
+            <staticText><reportElement x="40" y="296" width="39" height="28" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[غير مطابق]]></text></staticText>
+            <staticText><reportElement x="0" y="296" width="40" height="28" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[لا ينطبق]]></text></staticText>
+
+            <!-- Header row level 2 -->
+            <staticText><reportElement x="641" y="310" width="35" height="14" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[الرخصة]]></text></staticText>
+            <staticText><reportElement x="606" y="310" width="35" height="14" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[المنفذ]]></text></staticText>
+            <staticText><reportElement x="571" y="310" width="35" height="14" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[الرخصة]]></text></staticText>
+            <staticText><reportElement x="536" y="310" width="35" height="14" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[المنفذ]]></text></staticText>
+            <staticText><reportElement x="388" y="310" width="96" height="14" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[حسب الرخصة]]></text></staticText>
+            <staticText><reportElement x="292" y="310" width="96" height="14" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[حسب المخطط المعتمد]]></text></staticText>
+            <staticText><reportElement x="196" y="310" width="96" height="14" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[حسب الطبيعة]]></text></staticText>
+
+            <!-- Body grid -->
+            <rectangle><reportElement x="0" y="324" width="802" height="132" mode="Opaque" backcolor="#FFFFFF"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <rectangle><reportElement x="676" y="324" width="126" height="132" mode="Opaque" backcolor="#DDE6D5"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <line><reportElement x="40" y="324" width="1" height="132"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="79" y="324" width="1" height="132"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="118" y="324" width="1" height="132"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="196" y="324" width="1" height="132"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="292" y="324" width="1" height="132"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="388" y="324" width="1" height="132"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="484" y="324" width="1" height="132"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="536" y="324" width="1" height="132"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="571" y="324" width="1" height="132"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="606" y="324" width="1" height="132"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="641" y="324" width="1" height="132"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="676" y="324" width="1" height="132"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="0" y="335" width="802" height="1"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="0" y="346" width="802" height="1"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="0" y="357" width="802" height="1"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="0" y="368" width="802" height="1"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="0" y="379" width="802" height="1"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="0" y="390" width="802" height="1"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="0" y="401" width="802" height="1"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="0" y="412" width="802" height="1"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="0" y="423" width="802" height="1"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="0" y="434" width="802" height="1"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+            <line><reportElement x="0" y="445" width="802" height="1"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
+
+            <!-- Row labels -->
+            <staticText><reportElement x="676" y="324" width="126" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[قبو]]></text></staticText>
+            <staticText><reportElement x="676" y="335" width="126" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[قبو (متكرر)]]></text></staticText>
+            <staticText><reportElement x="676" y="346" width="126" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[الدور الأرضي]]></text></staticText>
+            <staticText><reportElement x="676" y="357" width="126" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[ملحق الميزانين]]></text></staticText>
+            <staticText><reportElement x="676" y="368" width="126" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[الدور الأول]]></text></staticText>
+            <staticText><reportElement x="676" y="379" width="126" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[الدور الثاني]]></text></staticText>
+            <staticText><reportElement x="676" y="390" width="126" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[الدور الثالث]]></text></staticText>
+            <staticText><reportElement x="676" y="401" width="126" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[الدور الرابع]]></text></staticText>
+            <staticText><reportElement x="676" y="412" width="126" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[الدور المتكرر]]></text></staticText>
+            <staticText><reportElement x="676" y="423" width="126" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[الملحق العلوي]]></text></staticText>
+            <staticText><reportElement x="676" y="434" width="126" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[درج]]></text></staticText>
+            <staticText><reportElement x="676" y="445" width="126" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[أسوار]]></text></staticText>
+
+            <!-- Checkbox markers per row -->
+            <rectangle><reportElement x="94" y="325" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="55" y="325" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="16" y="325" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <rectangle><reportElement x="94" y="336" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="55" y="336" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="16" y="336" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <rectangle><reportElement x="94" y="347" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="55" y="347" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="16" y="347" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <rectangle><reportElement x="94" y="358" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="55" y="358" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="16" y="358" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <rectangle><reportElement x="94" y="369" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="55" y="369" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="16" y="369" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <rectangle><reportElement x="94" y="380" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="55" y="380" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="16" y="380" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <rectangle><reportElement x="94" y="391" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="55" y="391" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="16" y="391" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <rectangle><reportElement x="94" y="402" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="55" y="402" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="16" y="402" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <rectangle><reportElement x="94" y="413" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="55" y="413" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="16" y="413" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <rectangle><reportElement x="94" y="424" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="55" y="424" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="16" y="424" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <rectangle><reportElement x="94" y="435" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="55" y="435" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="16" y="435" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <rectangle><reportElement x="94" y="446" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="55" y="446" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="16" y="446" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+
+            <!-- Total row -->
+            <rectangle><reportElement x="0" y="456" width="802" height="12" mode="Opaque" backcolor="#D9E3D1"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <rectangle><reportElement x="676" y="456" width="126" height="12" mode="Opaque" backcolor="#5A8A35"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <staticText><reportElement x="676" y="456" width="126" height="12" forecolor="#FFFFFF"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[الإجمالي]]></text></staticText>
+
+            <!-- Parking row -->
+            <rectangle><reportElement x="0" y="468" width="802" height="10" mode="Opaque" backcolor="#D9E3D1"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <staticText><reportElement x="676" y="468" width="126" height="10" mode="Opaque" backcolor="#DDE6D5"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[عدد المواقف]]></text></staticText>
+            <staticText><reportElement x="292" y="468" width="384" height="10"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[عدد المواقف المعتمد في المخطط]]></text></staticText>
+            <staticText><reportElement x="196" y="478" width="192" height="10" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[(طبيعة)]]></text></staticText>
+            <staticText><reportElement x="388" y="478" width="288" height="10" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[(مخطط)]]></text></staticText>
+
+            <!-- Electrical room row -->
+            <rectangle><reportElement x="0" y="488" width="802" height="10" mode="Opaque" backcolor="#D9E3D1"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
+            <staticText><reportElement x="676" y="488" width="126" height="10" mode="Opaque" backcolor="#DDE6D5"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[أبعاد غرفة الكهرباء]]></text></staticText>
+            <staticText><reportElement x="292" y="488" width="384" height="10"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[الأبعاد (حسب المخطط)]></text></staticText>
+            <staticText><reportElement x="196" y="498" width="192" height="12" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[(طبيعة)]]></text></staticText>
+            <staticText><reportElement x="388" y="498" width="288" height="12" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[(مخطط)]]></text></staticText>
+        </band>
+    </detail>
+</jasperReport>
+

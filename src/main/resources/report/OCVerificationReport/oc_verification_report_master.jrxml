@@ -21,6 +21,8 @@
     <parameter name="headerSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
     <parameter name="bodySubreport" class="net.sf.jasperreports.engine.JasperReport"/>
     <parameter name="buildingSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
+    <parameter name="boundaryComplianceSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
+    <parameter name="buildingComponentsSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
     <parameter name="tableSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
     <parameter name="photosSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
     <parameter name="sitePhotosSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
@@ -114,13 +116,14 @@
 
     <!--
         Group rendering order (innermost footer first, outermost last):
-          1. TableSectionGroup   → checklist table
-          2. MainImagesGroup     → main building images
-          3. SitePhotosGroup     → site photos page
-          4. PhotosGridGroup     → photos top/bottom grid page
-          5. ChangesGroup        → changes & extra items
-        Final page is rendered by <summary> (inspection responsibility section).
-        Declared order in XML: outermost first.
+          1. BuildingComponentsGroup → combined boundary + building technical sheet
+          2. TableSectionGroup   → checklist table
+          3. MainImagesGroup     → main building images
+          4. SitePhotosGroup     → site photos page
+          5. PhotosGridGroup     → photos top/bottom grid page
+          6. ChangesGroup        → changes & extra items
+         Final page is rendered by <summary> (inspection responsibility section).
+         Declared order in XML: outermost first.
     -->
 
     <!-- Outermost group: footer renders LAST among groups (changes page) -->
@@ -259,6 +262,25 @@
         </groupFooter>
     </group>
 
+
+    <!-- Combined technical sheet (boundaries + building components) -->
+    <group name="BuildingComponentsGroup">
+        <groupExpression><![CDATA[1]]></groupExpression>
+        <groupFooter>
+            <band height="545" splitType="Stretch">
+                <subreport>
+                    <reportElement x="0" y="0" width="802" height="545"/>
+                    <subreportParameter name="headerSubreport"><subreportParameterExpression><![CDATA[$P{headerSubreport}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="reportLogo"><subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="reportDate"><subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression></subreportParameter>
+                    <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
+                    <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{buildingComponentsSubreport}]]></subreportExpression>
+                </subreport>
+            </band>
+        </groupFooter>
+    </group>
+
     <title>
         <band height="10"/>
     </title>
@@ -285,7 +307,7 @@
 
             <!-- ownership subreport (separate file) -->
             <subreport>
-                <reportElement x="0" y="130" width="802" height="176"/>
+                <reportElement x="0" y="130" width="802" height="112"/>
                 <!-- pass ownership parameters into owner subreport -->
                 <subreportParameter name="ownerName"><subreportParameterExpression><![CDATA[$P{ownerName}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="ownerIdNumber"><subreportParameterExpression><![CDATA[$P{ownerIdNumber}]]></subreportParameterExpression></subreportParameter>
@@ -310,8 +332,7 @@
 
             <!-- building subreport (separate file) -->
             <subreport>
-                <!-- moved slightly upward to reduce the gap below the owner section without overlap -->
-                <reportElement x="0" y="314" width="802" height="176"/>
+                <reportElement x="0" y="250" width="802" height="112"/>
                 <subreportParameter name="buildingType"><subreportParameterExpression><![CDATA[$P{buildingType}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="buildingTypeResidential"><subreportParameterExpression><![CDATA[$P{buildingTypeResidential}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="buildingTypeResidentialCommercial"><subreportParameterExpression><![CDATA[$P{buildingTypeResidentialCommercial}]]></subreportParameterExpression></subreportParameter>
@@ -335,6 +356,8 @@
                 <subreportParameter name="areaByNature"><subreportParameterExpression><![CDATA[$P{areaByNature}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="isFullyFinished"><subreportParameterExpression><![CDATA[$P{isFullyFinished}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="isPartiallyBuilt"><subreportParameterExpression><![CDATA[$P{isPartiallyBuilt}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="stageInspectionAccepted"><subreportParameterExpression><![CDATA[$P{stageInspectionAccepted}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="stageInspectionRejected"><subreportParameterExpression><![CDATA[$P{stageInspectionRejected}]]></subreportParameterExpression></subreportParameter>
                 <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
                 <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{buildingSubreport}]]></subreportExpression>
             </subreport>
