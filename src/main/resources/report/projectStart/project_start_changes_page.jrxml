@@ -82,9 +82,9 @@
 		</band>
 	</detail>
 	<summary>
-		<band height="65">
+		<band height="85">
 			<subreport>
-				<reportElement x="0" y="0" width="802" height="65"/>
+				<reportElement x="0" y="0" width="802" height="85"/>
 				<subreportParameter name="officeName"><subreportParameterExpression><![CDATA[$P{officeName}]]></subreportParameterExpression></subreportParameter>
 				<subreportParameter name="digitalStampPath"><subreportParameterExpression><![CDATA[$P{digitalStampPath}]]></subreportParameterExpression></subreportParameter>
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>

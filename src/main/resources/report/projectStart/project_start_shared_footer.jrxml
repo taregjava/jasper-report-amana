@@ -40,21 +40,26 @@
             </textField>
 
             <!-- ========== LEFT SIDE: ختم المكتب ========== -->
-            <!-- Label anchored to top-left — well above the stamp -->
-            <staticText>
-                <reportElement x="5" y="4" width="150" height="16" mode="Opaque" backcolor="#FFFFFF"/>
-                <textElement textAlignment="Left" verticalAlignment="Middle">
-                    <font size="10" isBold="true" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-                </textElement>
-                <text><![CDATA[ختم المكتب :]]></text>
-            </staticText>
-            <!-- Stamp image: y=22 gives 6px gap below the label, height=42 fills the space -->
-            <image scaleImage="RetainShape" hAlign="Left" vAlign="Middle">
-                <reportElement x="5" y="22" width="150" height="42">
-                    <printWhenExpression><![CDATA[$P{digitalStampPath} != null]]></printWhenExpression>
-                </reportElement>
-                <imageExpression class="java.lang.Object"><![CDATA[$P{digitalStampPath}]]></imageExpression>
-            </image>
+            <!-- Compact anchored block: label directly above stamp, same width/x -->
+            <frame>
+                <reportElement x="8" y="4" width="130" height="60" mode="Transparent"/>
+
+                <staticText>
+                    <reportElement x="0" y="0" width="130" height="14" mode="Opaque" backcolor="#FFFFFF"/>
+                    <textElement textAlignment="Right" verticalAlignment="Middle">
+                        <font size="10" isBold="true" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+                    </textElement>
+                    <text><![CDATA[ختم المكتب :]]></text>
+                </staticText>
+
+                <!-- FillFrame avoids ultra-thin rendering when source image is very wide -->
+                <image scaleImage="FillFrame" hAlign="Left" vAlign="Middle">
+                    <reportElement x="0" y="16" width="130" height="44">
+                        <printWhenExpression><![CDATA[$P{digitalStampPath} != null]]></printWhenExpression>
+                    </reportElement>
+                    <imageExpression class="java.lang.Object"><![CDATA[$P{digitalStampPath}]]></imageExpression>
+                </image>
+            </frame>
 
             <!-- ========== DECORATIVE BELT — y=67, safely below all content ========== -->
             <rectangle>
