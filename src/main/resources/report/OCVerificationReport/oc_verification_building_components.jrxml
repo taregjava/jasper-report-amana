@@ -1,397 +1,2164 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
-              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
-              name="oc_verification_building_components"
-              pageWidth="842"
-              pageHeight="555"
-              orientation="Landscape"
-              columnWidth="802"
-              leftMargin="20"
-              rightMargin="20"
-              topMargin="0"
-              bottomMargin="0"
-              language="java">
-
-    <property name="net.sf.jasperreports.text.direction" value="RTL"/>
-    <style name="Default" isDefault="true" fontName="SansSerif" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-
-    <parameter name="headerSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
-    <parameter name="reportLogo" class="java.lang.Object"/>
-    <parameter name="projectNameAndAddress" class="java.lang.String"/>
-    <parameter name="reportDate" class="java.lang.String"/>
-    <parameter name="boundaryComplianceData" class="com.jamilxt.java_springboot_japserreport.dto.BoundaryComplianceDTO"/>
-    <parameter name="buildingComponentsData" class="com.jamilxt.java_springboot_japserreport.dto.BuildingComponentsDTO"/>
-
-    <detail>
-        <band height="510">
-            <subreport>
-                <reportElement x="0" y="0" width="802" height="118"/>
-                <subreportParameter name="reportLogo"><subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="reportDate"><subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression></subreportParameter>
-                <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
-                <subreportExpression><![CDATA[$P{headerSubreport}]]></subreportExpression>
-            </subreport>
-
-            <staticText>
-                <reportElement mode="Opaque" x="0" y="118" width="802" height="20" forecolor="#FFFFFF" backcolor="#005B41"/>
-                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
-                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="11" isBold="true"/></textElement>
-                <text><![CDATA[المخططات والمكونات]]></text>
-            </staticText>
-
-            <!-- SETBACKS TABLE -->
-            <staticText>
-                <reportElement mode="Opaque" x="0" y="138" width="802" height="14" backcolor="#E8F5E9"/>
-                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
-                <textElement textAlignment="Right" verticalAlignment="Middle"><font size="8" isBold="true"/></textElement>
-                <text><![CDATA[الارتدادات]]></text>
-            </staticText>
-            <staticText><reportElement x="692" y="152" width="110" height="14" mode="Opaque" backcolor="#005B41" forecolor="#FFFFFF"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[البند]]></text></staticText>
-            <staticText><reportElement x="622" y="152" width="70" height="14" mode="Opaque" backcolor="#005B41" forecolor="#FFFFFF"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[الاتجاه]]></text></staticText>
-            <staticText><reportElement x="522" y="152" width="100" height="14" mode="Opaque" backcolor="#E8F5E9"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[وصف الحد]]></text></staticText>
-            <staticText><reportElement x="452" y="152" width="70" height="14" mode="Opaque" backcolor="#E8F5E9"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[الرخصة]]></text></staticText>
-            <staticText><reportElement x="382" y="152" width="70" height="14" mode="Opaque" backcolor="#E8F5E9"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[المخطط]]></text></staticText>
-            <staticText><reportElement x="312" y="152" width="70" height="14" mode="Opaque" backcolor="#E8F5E9"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[المنفذ]]></text></staticText>
-            <staticText><reportElement x="258" y="152" width="54" height="14" mode="Opaque" backcolor="#E8F5E9"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[الزيادة]]></text></staticText>
-            <staticText><reportElement x="222" y="152" width="36" height="14" mode="Opaque" backcolor="#E8F5E9"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="6" isBold="true"/></textElement><text><![CDATA[مطابق]]></text></staticText>
-            <staticText><reportElement x="186" y="152" width="36" height="14" mode="Opaque" backcolor="#E8F5E9"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="5" isBold="true"/></textElement><text><![CDATA[غير
-مطابق]]></text></staticText>
-            <staticText><reportElement x="150" y="152" width="36" height="14" mode="Opaque" backcolor="#E8F5E9"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="5" isBold="true"/></textElement><text><![CDATA[لا
-ينطبق]]></text></staticText>
-            <staticText><reportElement x="0" y="152" width="150" height="14" mode="Opaque" backcolor="#E8F5E9"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[ملاحظات]]></text></staticText>
-
-            <!-- Setbacks full grid rows -->
-            <rectangle><reportElement x="0" y="166" width="802" height="11" mode="Opaque" backcolor="#EBF1DE"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <rectangle><reportElement x="0" y="177" width="802" height="11" mode="Opaque" backcolor="#FFFFFF"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <rectangle><reportElement x="0" y="188" width="802" height="11" mode="Opaque" backcolor="#EBF1DE"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <rectangle><reportElement x="0" y="199" width="802" height="11" mode="Opaque" backcolor="#FFFFFF"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <line><reportElement x="150" y="166" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="186" y="166" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="222" y="166" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="258" y="166" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="312" y="166" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="382" y="166" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="452" y="166" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="522" y="166" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="622" y="166" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="692" y="166" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-
-            <staticText><reportElement x="692" y="166" width="110" height="11" mode="Opaque" backcolor="#EBF1DE"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[ارتداد]]></text></staticText>
-            <staticText><reportElement x="622" y="166" width="70" height="11" mode="Opaque" backcolor="#EBF1DE"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[شمال]]></text></staticText>
-            <rectangle><reportElement x="224" y="168" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <rectangle><reportElement x="188" y="168" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <rectangle><reportElement x="152" y="168" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-
-            <staticText><reportElement x="692" y="177" width="110" height="11" mode="Opaque" backcolor="#FFFFFF"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[ارتداد]]></text></staticText>
-            <staticText><reportElement x="622" y="177" width="70" height="11" mode="Opaque" backcolor="#FFFFFF"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[جنوب]]></text></staticText>
-            <rectangle><reportElement x="224" y="179" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <rectangle><reportElement x="188" y="179" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <rectangle><reportElement x="152" y="179" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-
-            <staticText><reportElement x="692" y="188" width="110" height="11" mode="Opaque" backcolor="#EBF1DE"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[ارتداد]]></text></staticText>
-            <staticText><reportElement x="622" y="188" width="70" height="11" mode="Opaque" backcolor="#EBF1DE"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[شرق]]></text></staticText>
-            <rectangle><reportElement x="224" y="190" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <rectangle><reportElement x="188" y="190" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <rectangle><reportElement x="152" y="190" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-
-            <staticText><reportElement x="692" y="199" width="110" height="11" mode="Opaque" backcolor="#FFFFFF"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[ارتداد]]></text></staticText>
-            <staticText><reportElement x="622" y="199" width="70" height="11" mode="Opaque" backcolor="#FFFFFF"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[غرب]]></text></staticText>
-            <rectangle><reportElement x="224" y="201" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <rectangle><reportElement x="188" y="201" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <rectangle><reportElement x="152" y="201" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-
-            <textField isBlankWhenNull="true"><reportElement x="522" y="166" width="100" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getNorthSetback() != null ? $P{boundaryComplianceData}.getNorthSetback().getBoundaryDescription() : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="452" y="166" width="70" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getNorthSetback() != null && $P{boundaryComplianceData}.getNorthSetback().getLicenseMeasure() != null ? String.valueOf($P{boundaryComplianceData}.getNorthSetback().getLicenseMeasure()) : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="382" y="166" width="70" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getNorthSetback() != null && $P{boundaryComplianceData}.getNorthSetback().getPlanMeasure() != null ? String.valueOf($P{boundaryComplianceData}.getNorthSetback().getPlanMeasure()) : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="312" y="166" width="70" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getNorthSetback() != null && $P{boundaryComplianceData}.getNorthSetback().getExecutedMeasure() != null ? String.valueOf($P{boundaryComplianceData}.getNorthSetback().getExecutedMeasure()) : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="258" y="166" width="54" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getNorthSetback() != null && $P{boundaryComplianceData}.getNorthSetback().getIncrease() != null ? String.valueOf($P{boundaryComplianceData}.getNorthSetback().getIncrease()) : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="0" y="166" width="150" height="11"/><textElement textAlignment="Right" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getNorthSetback() != null ? $P{boundaryComplianceData}.getNorthSetback().getNotes() : ""]]></textFieldExpression></textField>
-            <textField><reportElement x="224" y="166" width="8" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getNorthSetback() != null && Boolean.TRUE.equals($P{boundaryComplianceData}.getNorthSetback().getIsCompliant()) ? "X" : ""]]></textFieldExpression></textField>
-            <textField><reportElement x="188" y="166" width="8" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getNorthSetback() != null && Boolean.TRUE.equals($P{boundaryComplianceData}.getNorthSetback().getIsNonCompliant()) ? "X" : ""]]></textFieldExpression></textField>
-
-            <textField isBlankWhenNull="true"><reportElement x="522" y="177" width="100" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getSouthSetback() != null ? $P{boundaryComplianceData}.getSouthSetback().getBoundaryDescription() : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="452" y="177" width="70" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getSouthSetback() != null && $P{boundaryComplianceData}.getSouthSetback().getLicenseMeasure() != null ? String.valueOf($P{boundaryComplianceData}.getSouthSetback().getLicenseMeasure()) : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="382" y="177" width="70" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getSouthSetback() != null && $P{boundaryComplianceData}.getSouthSetback().getPlanMeasure() != null ? String.valueOf($P{boundaryComplianceData}.getSouthSetback().getPlanMeasure()) : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="312" y="177" width="70" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getSouthSetback() != null && $P{boundaryComplianceData}.getSouthSetback().getExecutedMeasure() != null ? String.valueOf($P{boundaryComplianceData}.getSouthSetback().getExecutedMeasure()) : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="258" y="177" width="54" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getSouthSetback() != null && $P{boundaryComplianceData}.getSouthSetback().getIncrease() != null ? String.valueOf($P{boundaryComplianceData}.getSouthSetback().getIncrease()) : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="0" y="177" width="150" height="11"/><textElement textAlignment="Right" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getSouthSetback() != null ? $P{boundaryComplianceData}.getSouthSetback().getNotes() : ""]]></textFieldExpression></textField>
-            <textField><reportElement x="224" y="177" width="8" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getSouthSetback() != null && Boolean.TRUE.equals($P{boundaryComplianceData}.getSouthSetback().getIsCompliant()) ? "X" : ""]]></textFieldExpression></textField>
-            <textField><reportElement x="188" y="177" width="8" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getSouthSetback() != null && Boolean.TRUE.equals($P{boundaryComplianceData}.getSouthSetback().getIsNonCompliant()) ? "X" : ""]]></textFieldExpression></textField>
-
-            <textField isBlankWhenNull="true"><reportElement x="522" y="188" width="100" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getEastSetback() != null ? $P{boundaryComplianceData}.getEastSetback().getBoundaryDescription() : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="452" y="188" width="70" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getEastSetback() != null && $P{boundaryComplianceData}.getEastSetback().getLicenseMeasure() != null ? String.valueOf($P{boundaryComplianceData}.getEastSetback().getLicenseMeasure()) : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="382" y="188" width="70" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getEastSetback() != null && $P{boundaryComplianceData}.getEastSetback().getPlanMeasure() != null ? String.valueOf($P{boundaryComplianceData}.getEastSetback().getPlanMeasure()) : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="312" y="188" width="70" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getEastSetback() != null && $P{boundaryComplianceData}.getEastSetback().getExecutedMeasure() != null ? String.valueOf($P{boundaryComplianceData}.getEastSetback().getExecutedMeasure()) : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="258" y="188" width="54" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getEastSetback() != null && $P{boundaryComplianceData}.getEastSetback().getIncrease() != null ? String.valueOf($P{boundaryComplianceData}.getEastSetback().getIncrease()) : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="0" y="188" width="150" height="11"/><textElement textAlignment="Right" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getEastSetback() != null ? $P{boundaryComplianceData}.getEastSetback().getNotes() : ""]]></textFieldExpression></textField>
-            <textField><reportElement x="224" y="188" width="8" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getEastSetback() != null && Boolean.TRUE.equals($P{boundaryComplianceData}.getEastSetback().getIsCompliant()) ? "X" : ""]]></textFieldExpression></textField>
-            <textField><reportElement x="188" y="188" width="8" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getEastSetback() != null && Boolean.TRUE.equals($P{boundaryComplianceData}.getEastSetback().getIsNonCompliant()) ? "X" : ""]]></textFieldExpression></textField>
-
-            <textField isBlankWhenNull="true"><reportElement x="522" y="199" width="100" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getWestSetback() != null ? $P{boundaryComplianceData}.getWestSetback().getBoundaryDescription() : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="452" y="199" width="70" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getWestSetback() != null && $P{boundaryComplianceData}.getWestSetback().getLicenseMeasure() != null ? String.valueOf($P{boundaryComplianceData}.getWestSetback().getLicenseMeasure()) : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="382" y="199" width="70" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getWestSetback() != null && $P{boundaryComplianceData}.getWestSetback().getPlanMeasure() != null ? String.valueOf($P{boundaryComplianceData}.getWestSetback().getPlanMeasure()) : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="312" y="199" width="70" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getWestSetback() != null && $P{boundaryComplianceData}.getWestSetback().getExecutedMeasure() != null ? String.valueOf($P{boundaryComplianceData}.getWestSetback().getExecutedMeasure()) : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="258" y="199" width="54" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getWestSetback() != null && $P{boundaryComplianceData}.getWestSetback().getIncrease() != null ? String.valueOf($P{boundaryComplianceData}.getWestSetback().getIncrease()) : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="0" y="199" width="150" height="11"/><textElement textAlignment="Right" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getWestSetback() != null ? $P{boundaryComplianceData}.getWestSetback().getNotes() : ""]]></textFieldExpression></textField>
-            <textField><reportElement x="224" y="199" width="8" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getWestSetback() != null && Boolean.TRUE.equals($P{boundaryComplianceData}.getWestSetback().getIsCompliant()) ? "X" : ""]]></textFieldExpression></textField>
-            <textField><reportElement x="188" y="199" width="8" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getWestSetback() != null && Boolean.TRUE.equals($P{boundaryComplianceData}.getWestSetback().getIsNonCompliant()) ? "X" : ""]]></textFieldExpression></textField>
-
-            <!-- PROTRUSIONS TABLE -->
-            <staticText>
-                <reportElement mode="Opaque" x="0" y="210" width="802" height="14" backcolor="#E8F5E9"/>
-                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
-                <textElement textAlignment="Right" verticalAlignment="Middle"><font size="8" isBold="true"/></textElement>
-                <text><![CDATA[البروزات]]></text>
-            </staticText>
-            <staticText><reportElement x="692" y="224" width="110" height="14" mode="Opaque" backcolor="#005B41" forecolor="#FFFFFF"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[البند]]></text></staticText>
-            <staticText><reportElement x="622" y="224" width="70" height="14" mode="Opaque" backcolor="#005B41" forecolor="#FFFFFF"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[الاتجاه]]></text></staticText>
-            <staticText><reportElement x="522" y="224" width="100" height="14" mode="Opaque" backcolor="#E8F5E9"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[وصف الحد]]></text></staticText>
-            <staticText><reportElement x="452" y="224" width="70" height="14" mode="Opaque" backcolor="#E8F5E9"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[الرخصة]]></text></staticText>
-            <staticText><reportElement x="382" y="224" width="70" height="14" mode="Opaque" backcolor="#E8F5E9"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[المخطط]]></text></staticText>
-            <staticText><reportElement x="312" y="224" width="70" height="14" mode="Opaque" backcolor="#E8F5E9"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[المنفذ]]></text></staticText>
-            <staticText><reportElement x="258" y="224" width="54" height="14" mode="Opaque" backcolor="#E8F5E9"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[الزيادة]]></text></staticText>
-            <staticText><reportElement x="222" y="224" width="36" height="14" mode="Opaque" backcolor="#E8F5E9"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="6" isBold="true"/></textElement><text><![CDATA[مطابق]]></text></staticText>
-            <staticText><reportElement x="186" y="224" width="36" height="14" mode="Opaque" backcolor="#E8F5E9"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="5" isBold="true"/></textElement><text><![CDATA[غير
-مطابق]]></text></staticText>
-            <staticText><reportElement x="150" y="224" width="36" height="14" mode="Opaque" backcolor="#E8F5E9"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="5" isBold="true"/></textElement><text><![CDATA[لا
-ينطبق]]></text></staticText>
-            <staticText><reportElement x="0" y="224" width="150" height="14" mode="Opaque" backcolor="#E8F5E9"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[ملاحظات]]></text></staticText>
-
-            <!-- Protrusions full grid rows -->
-            <rectangle><reportElement x="0" y="238" width="802" height="11" mode="Opaque" backcolor="#EBF1DE"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <rectangle><reportElement x="0" y="249" width="802" height="11" mode="Opaque" backcolor="#FFFFFF"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <rectangle><reportElement x="0" y="260" width="802" height="11" mode="Opaque" backcolor="#EBF1DE"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <rectangle><reportElement x="0" y="271" width="802" height="11" mode="Opaque" backcolor="#FFFFFF"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <line><reportElement x="150" y="238" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="186" y="238" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="222" y="238" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="258" y="238" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="312" y="238" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="382" y="238" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="452" y="238" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="522" y="238" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="622" y="238" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="692" y="238" width="1" height="44"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-
-            <staticText><reportElement x="692" y="238" width="110" height="11" mode="Opaque" backcolor="#EBF1DE"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[بروز]]></text></staticText>
-            <staticText><reportElement x="622" y="238" width="70" height="11" mode="Opaque" backcolor="#EBF1DE"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[شمال]]></text></staticText>
-            <rectangle><reportElement x="224" y="240" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <rectangle><reportElement x="188" y="240" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <rectangle><reportElement x="152" y="240" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-
-            <staticText><reportElement x="692" y="249" width="110" height="11" mode="Opaque" backcolor="#FFFFFF"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[بروز]]></text></staticText>
-            <staticText><reportElement x="622" y="249" width="70" height="11" mode="Opaque" backcolor="#FFFFFF"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[جنوب]]></text></staticText>
-            <rectangle><reportElement x="224" y="251" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <rectangle><reportElement x="188" y="251" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <rectangle><reportElement x="152" y="251" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-
-            <staticText><reportElement x="692" y="260" width="110" height="11" mode="Opaque" backcolor="#EBF1DE"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[بروز]]></text></staticText>
-            <staticText><reportElement x="622" y="260" width="70" height="11" mode="Opaque" backcolor="#EBF1DE"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[شرق]]></text></staticText>
-            <rectangle><reportElement x="224" y="262" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <rectangle><reportElement x="188" y="262" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <rectangle><reportElement x="152" y="262" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-
-            <staticText><reportElement x="692" y="271" width="110" height="11" mode="Opaque" backcolor="#FFFFFF"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[بروز]]></text></staticText>
-            <staticText><reportElement x="622" y="271" width="70" height="11" mode="Opaque" backcolor="#FFFFFF"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[غرب]]></text></staticText>
-            <rectangle><reportElement x="224" y="273" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <rectangle><reportElement x="188" y="273" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <rectangle><reportElement x="152" y="273" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-
-            <textField isBlankWhenNull="true"><reportElement x="522" y="238" width="100" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getNorthProtrusion() != null ? $P{boundaryComplianceData}.getNorthProtrusion().getBoundaryDescription() : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="452" y="238" width="70" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getNorthProtrusion() != null && $P{boundaryComplianceData}.getNorthProtrusion().getLicenseMeasure() != null ? String.valueOf($P{boundaryComplianceData}.getNorthProtrusion().getLicenseMeasure()) : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="382" y="238" width="70" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getNorthProtrusion() != null && $P{boundaryComplianceData}.getNorthProtrusion().getPlanMeasure() != null ? String.valueOf($P{boundaryComplianceData}.getNorthProtrusion().getPlanMeasure()) : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="312" y="238" width="70" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getNorthProtrusion() != null && $P{boundaryComplianceData}.getNorthProtrusion().getExecutedMeasure() != null ? String.valueOf($P{boundaryComplianceData}.getNorthProtrusion().getExecutedMeasure()) : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="258" y="238" width="54" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getNorthProtrusion() != null && $P{boundaryComplianceData}.getNorthProtrusion().getIncrease() != null ? String.valueOf($P{boundaryComplianceData}.getNorthProtrusion().getIncrease()) : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="0" y="238" width="150" height="11"/><textElement textAlignment="Right" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getNorthProtrusion() != null ? $P{boundaryComplianceData}.getNorthProtrusion().getNotes() : ""]]></textFieldExpression></textField>
-            <textField><reportElement x="224" y="238" width="8" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getNorthProtrusion() != null && Boolean.TRUE.equals($P{boundaryComplianceData}.getNorthProtrusion().getIsCompliant()) ? "X" : ""]]></textFieldExpression></textField>
-            <textField><reportElement x="188" y="238" width="8" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getNorthProtrusion() != null && Boolean.TRUE.equals($P{boundaryComplianceData}.getNorthProtrusion().getIsNonCompliant()) ? "X" : ""]]></textFieldExpression></textField>
-
-            <!-- BUILDING COMPONENTS TABLE (dense layout matching form) -->
-            <staticText>
-                <reportElement mode="Opaque" x="0" y="282" width="802" height="14" backcolor="#005B41" forecolor="#FFFFFF"/>
-                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
-                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="8" isBold="true"/></textElement>
-                <text><![CDATA[مكونات المبنى]]></text>
-            </staticText>
-
-            <!-- Header row level 1 -->
-            <staticText><reportElement x="676" y="296" width="126" height="28" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="8" isBold="true"/></textElement><text><![CDATA[مكونات المبنى]]></text></staticText>
-            <staticText><reportElement x="641" y="296" width="35" height="14" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[الاستخدام]]></text></staticText>
-            <staticText><reportElement x="606" y="296" width="35" height="14" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box></staticText>
-            <staticText><reportElement x="571" y="296" width="35" height="14" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[عدد الوحدات]]></text></staticText>
-            <staticText><reportElement x="536" y="296" width="35" height="14" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box></staticText>
-            <staticText><reportElement x="484" y="296" width="52" height="28" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[ارتفاع المكون]]></text></staticText>
-            <staticText><reportElement x="196" y="296" width="288" height="14" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="8" isBold="true"/></textElement><text><![CDATA[المساحات (م2)]]></text></staticText>
-            <staticText><reportElement x="118" y="296" width="78" height="28" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="8" isBold="true"/></textElement><text><![CDATA[الزيادة]]></text></staticText>
-            <staticText><reportElement x="79" y="296" width="39" height="28" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[مطابق]]></text></staticText>
-            <staticText><reportElement x="40" y="296" width="39" height="28" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[غير مطابق]]></text></staticText>
-            <staticText><reportElement x="0" y="296" width="40" height="28" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[لا ينطبق]]></text></staticText>
-
-            <!-- Header row level 2 -->
-            <staticText><reportElement x="641" y="310" width="35" height="14" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[الرخصة]]></text></staticText>
-            <staticText><reportElement x="606" y="310" width="35" height="14" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[المنفذ]]></text></staticText>
-            <staticText><reportElement x="571" y="310" width="35" height="14" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[الرخصة]]></text></staticText>
-            <staticText><reportElement x="536" y="310" width="35" height="14" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[المنفذ]]></text></staticText>
-            <staticText><reportElement x="388" y="310" width="96" height="14" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[حسب الرخصة]]></text></staticText>
-            <staticText><reportElement x="292" y="310" width="96" height="14" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[حسب المخطط المعتمد]]></text></staticText>
-            <staticText><reportElement x="196" y="310" width="96" height="14" mode="Opaque" backcolor="#D9E3D1"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[حسب الطبيعة]]></text></staticText>
-
-            <!-- Body grid -->
-            <rectangle><reportElement x="0" y="324" width="802" height="132" mode="Opaque" backcolor="#FFFFFF"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <rectangle><reportElement x="676" y="324" width="126" height="132" mode="Opaque" backcolor="#DDE6D5"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <line><reportElement x="40" y="324" width="1" height="132"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="79" y="324" width="1" height="132"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="118" y="324" width="1" height="132"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="196" y="324" width="1" height="132"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="292" y="324" width="1" height="132"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="388" y="324" width="1" height="132"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="484" y="324" width="1" height="132"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="536" y="324" width="1" height="132"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="571" y="324" width="1" height="132"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="606" y="324" width="1" height="132"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="641" y="324" width="1" height="132"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="676" y="324" width="1" height="132"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="0" y="335" width="802" height="1"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="0" y="346" width="802" height="1"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="0" y="357" width="802" height="1"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="0" y="368" width="802" height="1"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="0" y="379" width="802" height="1"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="0" y="390" width="802" height="1"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="0" y="401" width="802" height="1"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="0" y="412" width="802" height="1"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="0" y="423" width="802" height="1"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="0" y="434" width="802" height="1"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="0" y="445" width="802" height="1"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-
-            <!-- Row labels -->
-            <staticText><reportElement x="676" y="324" width="126" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[قبو]]></text></staticText>
-            <staticText><reportElement x="676" y="335" width="126" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[قبو (متكرر)]]></text></staticText>
-            <staticText><reportElement x="676" y="346" width="126" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[الدور الأرضي]]></text></staticText>
-            <staticText><reportElement x="676" y="357" width="126" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[ملحق الميزانين]]></text></staticText>
-            <staticText><reportElement x="676" y="368" width="126" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[الدور الأول]]></text></staticText>
-            <staticText><reportElement x="676" y="379" width="126" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[الدور الثاني]]></text></staticText>
-            <staticText><reportElement x="676" y="390" width="126" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[الدور الثالث]]></text></staticText>
-            <staticText><reportElement x="676" y="401" width="126" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[الدور الرابع]]></text></staticText>
-            <staticText><reportElement x="676" y="412" width="126" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[الدور المتكرر]]></text></staticText>
-            <staticText><reportElement x="676" y="423" width="126" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[الملحق العلوي]]></text></staticText>
-            <staticText><reportElement x="676" y="434" width="126" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[درج]]></text></staticText>
-            <staticText><reportElement x="676" y="445" width="126" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[أسوار]]></text></staticText>
-
-            <!-- Dynamic values from BuildingComponentsDTO -->
-            <textField isBlankWhenNull="true"><reportElement x="606" y="324" width="35" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getBasement() != null ? $P{buildingComponentsData}.getBasement().getUsage() : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="606" y="346" width="35" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getGroundFloor() != null ? $P{buildingComponentsData}.getGroundFloor().getUsage() : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="606" y="357" width="35" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getMezzanine() != null ? $P{buildingComponentsData}.getMezzanine().getUsage() : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="606" y="368" width="35" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getFirstFloor() != null ? $P{buildingComponentsData}.getFirstFloor().getUsage() : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="606" y="379" width="35" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getSecondFloor() != null ? $P{buildingComponentsData}.getSecondFloor().getUsage() : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="606" y="390" width="35" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getThirdFloor() != null ? $P{buildingComponentsData}.getThirdFloor().getUsage() : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="606" y="401" width="35" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getFourthFloor() != null ? $P{buildingComponentsData}.getFourthFloor().getUsage() : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="606" y="412" width="35" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getRoofAnnex() != null ? $P{buildingComponentsData}.getRoofAnnex().getUsage() : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="606" y="423" width="35" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getStairs() != null ? $P{buildingComponentsData}.getStairs().getUsage() : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="606" y="434" width="35" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getFences() != null ? $P{buildingComponentsData}.getFences().getUsage() : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="606" y="445" width="35" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getElectricityRoom() != null ? $P{buildingComponentsData}.getElectricityRoom().getUsage() : ""]]></textFieldExpression></textField>
-
-            <textField isBlankWhenNull="true"><reportElement x="292" y="324" width="96" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getBasement() != null && $P{buildingComponentsData}.getBasement().getPlanArea() != null ? String.valueOf($P{buildingComponentsData}.getBasement().getPlanArea()) : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="196" y="324" width="96" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getBasement() != null && $P{buildingComponentsData}.getBasement().getExecutedArea() != null ? String.valueOf($P{buildingComponentsData}.getBasement().getExecutedArea()) : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="292" y="346" width="96" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getGroundFloor() != null && $P{buildingComponentsData}.getGroundFloor().getPlanArea() != null ? String.valueOf($P{buildingComponentsData}.getGroundFloor().getPlanArea()) : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="196" y="346" width="96" height="11"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getGroundFloor() != null && $P{buildingComponentsData}.getGroundFloor().getExecutedArea() != null ? String.valueOf($P{buildingComponentsData}.getGroundFloor().getExecutedArea()) : ""]]></textFieldExpression></textField>
-
-            <!-- Checkbox markers per row -->
-            <rectangle><reportElement x="94" y="325" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="55" y="325" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="16" y="325" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <rectangle><reportElement x="94" y="336" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="55" y="336" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="16" y="336" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <rectangle><reportElement x="94" y="347" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="55" y="347" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="16" y="347" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <rectangle><reportElement x="94" y="358" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="55" y="358" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="16" y="358" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <rectangle><reportElement x="94" y="369" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="55" y="369" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="16" y="369" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <rectangle><reportElement x="94" y="380" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="55" y="380" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="16" y="380" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <rectangle><reportElement x="94" y="391" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="55" y="391" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="16" y="391" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <rectangle><reportElement x="94" y="402" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="55" y="402" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="16" y="402" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <rectangle><reportElement x="94" y="413" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="55" y="413" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="16" y="413" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <rectangle><reportElement x="94" y="424" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="55" y="424" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="16" y="424" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <rectangle><reportElement x="94" y="435" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="55" y="435" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="16" y="435" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <rectangle><reportElement x="94" y="446" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="55" y="446" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle><rectangle><reportElement x="16" y="446" width="8" height="8"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-
-            <!-- X markers inside status boxes -->
-            <textField><reportElement x="92" y="323" width="12" height="12"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getBasement() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getBasement().getIsCompliant()) ? "X" : ""]]></textFieldExpression></textField>
-            <textField><reportElement x="53" y="323" width="12" height="12"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getBasement() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getBasement().getIsNonCompliant()) ? "X" : ""]]></textFieldExpression></textField>
-            <textField><reportElement x="14" y="323" width="12" height="12"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getBasement() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getBasement().getIsNotApplicable()) ? "X" : ""]]></textFieldExpression></textField>
-
-            <textField><reportElement x="92" y="344" width="12" height="12"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getGroundFloor() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getGroundFloor().getIsCompliant()) ? "X" : ""]]></textFieldExpression></textField>
-            <textField><reportElement x="53" y="344" width="12" height="12"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getGroundFloor() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getGroundFloor().getIsNonCompliant()) ? "X" : ""]]></textFieldExpression></textField>
-            <textField><reportElement x="14" y="344" width="12" height="12"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getGroundFloor() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getGroundFloor().getIsNotApplicable()) ? "X" : ""]]></textFieldExpression></textField>
-
-            <textField><reportElement x="92" y="355" width="12" height="12"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getMezzanine() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getMezzanine().getIsCompliant()) ? "X" : ""]]></textFieldExpression></textField>
-            <textField><reportElement x="53" y="355" width="12" height="12"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getMezzanine() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getMezzanine().getIsNonCompliant()) ? "X" : ""]]></textFieldExpression></textField>
-            <textField><reportElement x="14" y="355" width="12" height="12"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getMezzanine() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getMezzanine().getIsNotApplicable()) ? "X" : ""]]></textFieldExpression></textField>
-
-            <textField><reportElement x="92" y="366" width="12" height="12"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getFirstFloor() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getFirstFloor().getIsCompliant()) ? "X" : ""]]></textFieldExpression></textField>
-            <textField><reportElement x="53" y="366" width="12" height="12"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getFirstFloor() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getFirstFloor().getIsNonCompliant()) ? "X" : ""]]></textFieldExpression></textField>
-            <textField><reportElement x="14" y="366" width="12" height="12"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getFirstFloor() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getFirstFloor().getIsNotApplicable()) ? "X" : ""]]></textFieldExpression></textField>
-
-            <textField><reportElement x="92" y="377" width="12" height="12"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getSecondFloor() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getSecondFloor().getIsCompliant()) ? "X" : ""]]></textFieldExpression></textField>
-            <textField><reportElement x="53" y="377" width="12" height="12"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getSecondFloor() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getSecondFloor().getIsNonCompliant()) ? "X" : ""]]></textFieldExpression></textField>
-            <textField><reportElement x="14" y="377" width="12" height="12"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getSecondFloor() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getSecondFloor().getIsNotApplicable()) ? "X" : ""]]></textFieldExpression></textField>
-
-            <textField><reportElement x="92" y="388" width="12" height="12"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getThirdFloor() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getThirdFloor().getIsCompliant()) ? "X" : ""]]></textFieldExpression></textField>
-            <textField><reportElement x="53" y="388" width="12" height="12"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getThirdFloor() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getThirdFloor().getIsNonCompliant()) ? "X" : ""]]></textFieldExpression></textField>
-            <textField><reportElement x="14" y="388" width="12" height="12"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getThirdFloor() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getThirdFloor().getIsNotApplicable()) ? "X" : ""]]></textFieldExpression></textField>
-
-            <textField><reportElement x="92" y="399" width="12" height="12"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getFourthFloor() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getFourthFloor().getIsCompliant()) ? "X" : ""]]></textFieldExpression></textField>
-            <textField><reportElement x="53" y="399" width="12" height="12"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getFourthFloor() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getFourthFloor().getIsNonCompliant()) ? "X" : ""]]></textFieldExpression></textField>
-            <textField><reportElement x="14" y="399" width="12" height="12"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getFourthFloor() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getFourthFloor().getIsNotApplicable()) ? "X" : ""]]></textFieldExpression></textField>
-
-            <textField><reportElement x="92" y="421" width="12" height="12"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getRoofAnnex() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getRoofAnnex().getIsCompliant()) ? "X" : ""]]></textFieldExpression></textField>
-            <textField><reportElement x="53" y="421" width="12" height="12"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getRoofAnnex() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getRoofAnnex().getIsNonCompliant()) ? "X" : ""]]></textFieldExpression></textField>
-            <textField><reportElement x="14" y="421" width="12" height="12"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getRoofAnnex() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getRoofAnnex().getIsNotApplicable()) ? "X" : ""]]></textFieldExpression></textField>
-
-            <textField><reportElement x="92" y="432" width="12" height="12"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getStairs() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getStairs().getIsCompliant()) ? "X" : ""]]></textFieldExpression></textField>
-            <textField><reportElement x="53" y="432" width="12" height="12"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getStairs() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getStairs().getIsNonCompliant()) ? "X" : ""]]></textFieldExpression></textField>
-            <textField><reportElement x="14" y="432" width="12" height="12"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getStairs() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getStairs().getIsNotApplicable()) ? "X" : ""]]></textFieldExpression></textField>
-
-            <textField><reportElement x="92" y="443" width="12" height="12"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getFences() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getFences().getIsCompliant()) ? "X" : ""]]></textFieldExpression></textField>
-            <textField><reportElement x="53" y="443" width="12" height="12"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getFences() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getFences().getIsNonCompliant()) ? "X" : ""]]></textFieldExpression></textField>
-            <textField><reportElement x="14" y="443" width="12" height="12"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getFences() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getFences().getIsNotApplicable()) ? "X" : ""]]></textFieldExpression></textField>
-
-            <!-- Total row -->
-            <rectangle><reportElement x="0" y="456" width="802" height="12" mode="Opaque" backcolor="#D9E3D1"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <rectangle><reportElement x="676" y="456" width="126" height="12" mode="Opaque" backcolor="#5A8A35"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <staticText><reportElement x="676" y="456" width="126" height="12" forecolor="#FFFFFF"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><text><![CDATA[الإجمالي]]></text></staticText>
-
-            <!-- Bottom section: aligned and symmetric parking + electricity mini-tables -->
-            <line><reportElement x="0" y="468" width="802" height="1"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="0" y="480" width="802" height="1"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="0" y="489" width="802" height="1"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="0" y="501" width="802" height="1"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="0" y="509" width="802" height="1"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="40" y="468" width="1" height="42"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="79" y="468" width="1" height="42"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="118" y="468" width="1" height="42"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="196" y="468" width="1" height="42"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="436" y="468" width="1" height="42"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-            <line><reportElement x="676" y="468" width="1" height="42"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></line>
-
-            <!-- Parking -->
-            <rectangle><reportElement x="0" y="468" width="802" height="12" mode="Opaque" backcolor="#D9E3D1"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <staticText><reportElement x="676" y="468" width="126" height="12" mode="Opaque" backcolor="#DDE6D5"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[عدد المواقف]]></text></staticText>
-            <staticText><reportElement x="436" y="468" width="240" height="12"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="6"/></textElement><text><![CDATA[عدد المواقف المعتمد في المخطط]]></text></staticText>
-            <staticText><reportElement x="196" y="468" width="240" height="12"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="6"/></textElement><text><![CDATA[عدد المواقف المنفذ في الطبيعة]]></text></staticText>
-
-            <rectangle><reportElement x="0" y="480" width="802" height="9" mode="Opaque" backcolor="#FFFFFF"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <textField isBlankWhenNull="true"><reportElement x="436" y="480" width="240" height="9"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getParking() != null && $P{buildingComponentsData}.getParking().getRequiredNumber() != null ? String.valueOf($P{buildingComponentsData}.getParking().getRequiredNumber()) : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="196" y="480" width="240" height="9"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getParking() != null && $P{buildingComponentsData}.getParking().getExecutedNumber() != null ? String.valueOf($P{buildingComponentsData}.getParking().getExecutedNumber()) : ""]]></textFieldExpression></textField>
-            <textField><reportElement x="90" y="480" width="16" height="9"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getParking() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getParking().getIsCompliant()) ? "X" : ""]]></textFieldExpression></textField>
-            <textField><reportElement x="51" y="480" width="16" height="9"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7" isBold="true"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getParking() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getParking().getIsNonCompliant()) ? "X" : ""]]></textFieldExpression></textField>
-
-            <!-- Electricity room -->
-            <rectangle><reportElement x="0" y="489" width="802" height="12" mode="Opaque" backcolor="#D9E3D1"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <staticText><reportElement x="676" y="489" width="126" height="12" mode="Opaque" backcolor="#DDE6D5"/><box><pen lineWidth="0.5" lineColor="#000000"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><text><![CDATA[أبعاد غرفة الكهرباء]]></text></staticText>
-            <staticText><reportElement x="436" y="489" width="240" height="12"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="6"/></textElement><text><![CDATA[الأبعاد حسب المخطط (طول × عرض)]]></text></staticText>
-            <staticText><reportElement x="196" y="489" width="240" height="12"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="6"/></textElement><text><![CDATA[الأبعاد حسب الطبيعة]]></text></staticText>
-
-            <rectangle><reportElement x="0" y="501" width="802" height="9" mode="Opaque" backcolor="#FFFFFF"/><graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement></rectangle>
-            <textField isBlankWhenNull="true"><reportElement x="436" y="501" width="240" height="9"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getElectricityBox() != null && $P{buildingComponentsData}.getElectricityBox().getPlanLength() != null && $P{buildingComponentsData}.getElectricityBox().getPlanWidth() != null ? String.valueOf($P{buildingComponentsData}.getElectricityBox().getPlanLength()) + " × " + String.valueOf($P{buildingComponentsData}.getElectricityBox().getPlanWidth()) : ""]]></textFieldExpression></textField>
-            <textField isBlankWhenNull="true"><reportElement x="196" y="501" width="240" height="9"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="7"/></textElement><textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getElectricityBox() != null && $P{buildingComponentsData}.getElectricityBox().getExecutedLength() != null && $P{buildingComponentsData}.getElectricityBox().getExecutedWidth() != null ? String.valueOf($P{buildingComponentsData}.getElectricityBox().getExecutedLength()) + " × " + String.valueOf($P{buildingComponentsData}.getElectricityBox().getExecutedWidth()) : ""]]></textFieldExpression></textField>
-        </band>
-    </detail>
+<!-- Created with Jaspersoft Studio version 6.21.5.final using JasperReports Library version 6.21.5-74d586df47b25dbd05bd0957999819196e59934a  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="oc_verification_building_components" pageWidth="842" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" uuid="8ae3f9aa-d7ea-4193-9062-8e03d50b9d24">
+	<property name="net.sf.jasperreports.text.direction" value="RTL"/>
+	<style name="Default" isDefault="true" fontName="SansSerif" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+	<parameter name="headerSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="reportLogo" class="java.lang.Object"/>
+	<parameter name="projectNameAndAddress" class="java.lang.String"/>
+	<parameter name="reportDate" class="java.lang.String"/>
+	<parameter name="boundaryComplianceData" class="com.jamilxt.java_springboot_japserreport.dto.BoundaryComplianceDTO"/>
+	<parameter name="buildingComponentsData" class="com.jamilxt.java_springboot_japserreport.dto.BuildingComponentsDTO"/>
+	<detail>
+		<band height="510">
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="118" uuid="9f2deb75-db12-489f-b5d6-d106ada30425"/>
+				<subreportParameter name="reportLogo">
+					<subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="projectNameAndAddress">
+					<subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="reportDate">
+					<subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{headerSubreport}]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="118" width="802" height="20" forecolor="#FFFFFF" backcolor="#005B41" uuid="94a1b5ca-9227-40d7-b65a-920f065305e7"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[المخططات والمكونات]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="138" width="802" height="14" backcolor="#E8F5E9" uuid="70506b8f-23cc-4547-a224-aa15432e5aed"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[الارتدادات]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="692" y="152" width="110" height="14" forecolor="#FFFFFF" backcolor="#005B41" uuid="7ba17ab2-c266-4d6e-98f3-87cd7a9b0c94"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[البند]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="622" y="152" width="70" height="14" forecolor="#FFFFFF" backcolor="#005B41" uuid="e0b5fdf7-90c9-45d2-8ee3-3103a55cebd4"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[الاتجاه]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="522" y="152" width="100" height="14" backcolor="#E8F5E9" uuid="16bd1237-6e0a-462b-b078-db7e3e9a25f7"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[وصف الحد]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="452" y="152" width="70" height="14" backcolor="#E8F5E9" uuid="417afabf-2b2b-46c9-8e67-3710ca8ed131"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[الرخصة]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="382" y="152" width="70" height="14" backcolor="#E8F5E9" uuid="5dbbc4b6-4ea5-4035-9604-c0440e58d20e"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[المخطط]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="312" y="152" width="70" height="14" backcolor="#E8F5E9" uuid="f83f14c7-5f8b-4d25-8155-ef6810fe6ea6"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[المنفذ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="258" y="152" width="54" height="14" backcolor="#E8F5E9" uuid="243cf2c0-6f9b-4672-837a-15163287f225"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[الزيادة]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="222" y="152" width="36" height="14" backcolor="#E8F5E9" uuid="8fd8e100-1b9a-43ef-b912-57db242ee3ba"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[مط]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="186" y="152" width="36" height="14" backcolor="#E8F5E9" uuid="b24a1096-8172-4759-9a55-fa72bd7d4ab7"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[غم]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="150" y="152" width="36" height="14" backcolor="#E8F5E9" uuid="810127f4-e0ee-4754-aac2-d8ac34744bb9"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[لن]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="152" width="150" height="14" backcolor="#E8F5E9" uuid="fd33a634-d2da-4717-a887-ff39ba0456ec"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ملاحظات]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="166" width="802" height="11" backcolor="#EBF1DE" uuid="d6bf073d-b258-4276-8cba-31f85891d579"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="177" width="802" height="11" backcolor="#FFFFFF" uuid="58f10649-a9bf-46ce-ae40-b4ef8b09e155"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="188" width="802" height="11" backcolor="#EBF1DE" uuid="c1d2b2ac-f3cc-4b83-8810-7ae7c2c8fc39"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="199" width="802" height="11" backcolor="#FFFFFF" uuid="685d83f6-ca48-4d6c-8cde-47a44a72f633"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<line>
+				<reportElement x="150" y="166" width="1" height="44" uuid="fc37459c-05db-46c6-b673-c1e8c23ab79c"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="186" y="166" width="1" height="44" uuid="b321268d-6671-4d28-919b-adbe37ad0983"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="222" y="166" width="1" height="44" uuid="2393eed7-ac27-4e10-adac-926c9b7b130e"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="258" y="166" width="1" height="44" uuid="66bba3ff-1a31-43a8-921d-d54fd7d52527"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="312" y="166" width="1" height="44" uuid="61027312-777b-4bf5-8710-451f783411b0"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="382" y="166" width="1" height="44" uuid="cf61f470-c64d-4b76-9ea9-ffb375305a67"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="452" y="166" width="1" height="44" uuid="79e40994-9965-4d50-910d-2a023c0e3439"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="522" y="166" width="1" height="44" uuid="879c737f-ded7-498b-a490-5f7d3603b64d"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="622" y="166" width="1" height="44" uuid="2002ff3f-7d78-48bf-b34a-3901a0ece8b1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="692" y="166" width="1" height="44" uuid="f0ad7ec6-036a-4503-a79b-f160a651d6d9"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="692" y="166" width="110" height="11" backcolor="#EBF1DE" uuid="a742b193-8a0e-49bf-b6d0-a804d6b0f2cf"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[ارتداد]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="622" y="166" width="70" height="11" backcolor="#EBF1DE" uuid="2474d1f3-e944-45be-af7b-1e4a38eb5e0f"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[شمال]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="224" y="168" width="8" height="8" uuid="050bf9a4-f115-41c8-b314-74a2b1d08193"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="188" y="168" width="8" height="8" uuid="87f0fc9e-16a9-49a7-8d95-6a345da7c05c"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="152" y="168" width="8" height="8" uuid="c78a1782-c553-498d-8751-fab6b068f44f"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Opaque" x="692" y="177" width="110" height="11" backcolor="#FFFFFF" uuid="ca31bc40-4b09-46a2-98a8-6e7cb79b507c"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[ارتداد]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="622" y="177" width="70" height="11" backcolor="#FFFFFF" uuid="cad9af32-b658-4335-875c-b0b33e263699"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[جنوب]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="224" y="179" width="8" height="8" uuid="1550eb81-85a1-470a-a0ea-a71030bdc386"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="188" y="179" width="8" height="8" uuid="908331b2-0efd-428a-81b2-9e5b85ef29fe"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="152" y="179" width="8" height="8" uuid="747bfb50-b9b6-4fa9-9ae0-f22b2ea35b63"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Opaque" x="692" y="188" width="110" height="11" backcolor="#EBF1DE" uuid="1e0362cf-847f-4f0d-93ab-cfad004603b5"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[ارتداد]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="622" y="188" width="70" height="11" backcolor="#EBF1DE" uuid="03f94948-5e5f-4f6f-b33d-f431a9b7a2da"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[شرق]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="224" y="190" width="8" height="8" uuid="3abde676-d3d4-43bd-a4c7-c46a3b8932b9"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="188" y="190" width="8" height="8" uuid="bb132c50-dd3c-4608-a7aa-835fa28a304b"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="152" y="190" width="8" height="8" uuid="886b654c-ce66-4df7-824e-87ba28037c63"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Opaque" x="692" y="199" width="110" height="11" backcolor="#FFFFFF" uuid="99c5886e-0784-48ce-879c-ae74a62ec09c"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[ارتداد]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="622" y="199" width="70" height="11" backcolor="#FFFFFF" uuid="a7047bae-a9f0-48ce-bd0a-f75c8f64dace"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[غرب]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="224" y="201" width="8" height="8" uuid="e1de1081-b0b9-4c11-a141-24ac0b8c03c5"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="188" y="201" width="8" height="8" uuid="aaad07ff-5424-4043-80d0-31343dd0b7bb"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="152" y="201" width="8" height="8" uuid="b93131cc-0f89-48c8-a2e8-1ac89c630db4"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement x="522" y="166" width="100" height="11" uuid="3041f161-9dc4-4db1-8be1-9f34650ad5b6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getNorthSetback() != null ? $P{boundaryComplianceData}.getNorthSetback().getBoundaryDescription() : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="452" y="166" width="70" height="11" uuid="2bfeb407-c3b0-4930-b083-bb0587cbd951"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getNorthSetback() != null && $P{boundaryComplianceData}.getNorthSetback().getLicenseMeasure() != null ? String.valueOf($P{boundaryComplianceData}.getNorthSetback().getLicenseMeasure()) : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="382" y="166" width="70" height="11" uuid="f4171960-4d66-4a94-bb55-9e6f6b346e78"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getNorthSetback() != null && $P{boundaryComplianceData}.getNorthSetback().getPlanMeasure() != null ? String.valueOf($P{boundaryComplianceData}.getNorthSetback().getPlanMeasure()) : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="312" y="166" width="70" height="11" uuid="227c8e8a-0d30-47aa-aba2-afbc54b0c93e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getNorthSetback() != null && $P{boundaryComplianceData}.getNorthSetback().getExecutedMeasure() != null ? String.valueOf($P{boundaryComplianceData}.getNorthSetback().getExecutedMeasure()) : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="258" y="166" width="54" height="11" uuid="0278bcdb-6ff1-4bf0-a47f-5d999910a562"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getNorthSetback() != null && $P{boundaryComplianceData}.getNorthSetback().getIncrease() != null ? String.valueOf($P{boundaryComplianceData}.getNorthSetback().getIncrease()) : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="166" width="150" height="11" uuid="76ca6ab5-3cc1-4904-87c7-73c8bf0cb2fc"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getNorthSetback() != null ? $P{boundaryComplianceData}.getNorthSetback().getNotes() : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="224" y="166" width="8" height="11" uuid="8d1a29f2-e6df-4f75-99da-5060bf68afe6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getNorthSetback() != null && Boolean.TRUE.equals($P{boundaryComplianceData}.getNorthSetback().getIsCompliant()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="188" y="166" width="8" height="11" uuid="b176a84e-cee5-40f0-9c27-21fe64a398d4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getNorthSetback() != null && Boolean.TRUE.equals($P{boundaryComplianceData}.getNorthSetback().getIsNonCompliant()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="522" y="177" width="100" height="11" uuid="bf26dac7-bf4d-47b8-930b-75a0411dcf76"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getSouthSetback() != null ? $P{boundaryComplianceData}.getSouthSetback().getBoundaryDescription() : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="452" y="177" width="70" height="11" uuid="94ee15af-c8c4-4a5c-929e-1739c3565f6e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getSouthSetback() != null && $P{boundaryComplianceData}.getSouthSetback().getLicenseMeasure() != null ? String.valueOf($P{boundaryComplianceData}.getSouthSetback().getLicenseMeasure()) : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="382" y="177" width="70" height="11" uuid="e60a25e5-e42e-4f1f-9c51-b81e3cb44559"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getSouthSetback() != null && $P{boundaryComplianceData}.getSouthSetback().getPlanMeasure() != null ? String.valueOf($P{boundaryComplianceData}.getSouthSetback().getPlanMeasure()) : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="312" y="177" width="70" height="11" uuid="c179226a-fabc-421c-920b-1c1ca0f01c35"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getSouthSetback() != null && $P{boundaryComplianceData}.getSouthSetback().getExecutedMeasure() != null ? String.valueOf($P{boundaryComplianceData}.getSouthSetback().getExecutedMeasure()) : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="258" y="177" width="54" height="11" uuid="8e8a455d-f49b-46c2-b829-1313aa4061fe"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getSouthSetback() != null && $P{boundaryComplianceData}.getSouthSetback().getIncrease() != null ? String.valueOf($P{boundaryComplianceData}.getSouthSetback().getIncrease()) : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="177" width="150" height="11" uuid="ca7a911b-5495-4f5e-99e6-ed8a81a0bc4d"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getSouthSetback() != null ? $P{boundaryComplianceData}.getSouthSetback().getNotes() : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="224" y="177" width="8" height="11" uuid="b473926f-334e-4647-9d2a-570aa1d2c9d0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getSouthSetback() != null && Boolean.TRUE.equals($P{boundaryComplianceData}.getSouthSetback().getIsCompliant()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="188" y="177" width="8" height="11" uuid="cd22c31b-f03d-4040-8865-25c482fdcfcc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getSouthSetback() != null && Boolean.TRUE.equals($P{boundaryComplianceData}.getSouthSetback().getIsNonCompliant()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="522" y="188" width="100" height="11" uuid="3bfa0f58-eadc-4b75-83bc-48c2aa3a69da"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getEastSetback() != null ? $P{boundaryComplianceData}.getEastSetback().getBoundaryDescription() : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="452" y="188" width="70" height="11" uuid="f4db302d-3eb5-46b0-90ca-c29c384b29f5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getEastSetback() != null && $P{boundaryComplianceData}.getEastSetback().getLicenseMeasure() != null ? String.valueOf($P{boundaryComplianceData}.getEastSetback().getLicenseMeasure()) : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="382" y="188" width="70" height="11" uuid="c909fcc6-416e-4aaa-ba3c-83d7864da675"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getEastSetback() != null && $P{boundaryComplianceData}.getEastSetback().getPlanMeasure() != null ? String.valueOf($P{boundaryComplianceData}.getEastSetback().getPlanMeasure()) : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="312" y="188" width="70" height="11" uuid="ff1e1329-6491-447b-afe8-53a543a9a267"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getEastSetback() != null && $P{boundaryComplianceData}.getEastSetback().getExecutedMeasure() != null ? String.valueOf($P{boundaryComplianceData}.getEastSetback().getExecutedMeasure()) : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="258" y="188" width="54" height="11" uuid="0822044c-a2d1-40b7-bfb9-c423cf6a6fea"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getEastSetback() != null && $P{boundaryComplianceData}.getEastSetback().getIncrease() != null ? String.valueOf($P{boundaryComplianceData}.getEastSetback().getIncrease()) : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="188" width="150" height="11" uuid="6b5f746e-623e-45f4-8109-112478e98d21"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getEastSetback() != null ? $P{boundaryComplianceData}.getEastSetback().getNotes() : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="224" y="188" width="8" height="11" uuid="ea648005-25a0-4d55-81e6-f0e50f84a8d1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getEastSetback() != null && Boolean.TRUE.equals($P{boundaryComplianceData}.getEastSetback().getIsCompliant()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="188" y="188" width="8" height="11" uuid="423eb44f-4172-4230-bb43-939fd2b757bd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getEastSetback() != null && Boolean.TRUE.equals($P{boundaryComplianceData}.getEastSetback().getIsNonCompliant()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="522" y="199" width="100" height="11" uuid="92344317-a748-45b9-a872-e34c3d3f78d4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getWestSetback() != null ? $P{boundaryComplianceData}.getWestSetback().getBoundaryDescription() : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="452" y="199" width="70" height="11" uuid="c3178ea6-af8a-46cc-9d16-c3c27954488d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getWestSetback() != null && $P{boundaryComplianceData}.getWestSetback().getLicenseMeasure() != null ? String.valueOf($P{boundaryComplianceData}.getWestSetback().getLicenseMeasure()) : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="382" y="199" width="70" height="11" uuid="574a1e6e-d830-4962-8d70-33c58dd34800"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getWestSetback() != null && $P{boundaryComplianceData}.getWestSetback().getPlanMeasure() != null ? String.valueOf($P{boundaryComplianceData}.getWestSetback().getPlanMeasure()) : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="312" y="199" width="70" height="11" uuid="24cabb5c-4deb-4681-a852-c00f5bef60de"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getWestSetback() != null && $P{boundaryComplianceData}.getWestSetback().getExecutedMeasure() != null ? String.valueOf($P{boundaryComplianceData}.getWestSetback().getExecutedMeasure()) : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="258" y="199" width="54" height="11" uuid="ef61a999-2b62-4838-a53d-3f322bb3245d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getWestSetback() != null && $P{boundaryComplianceData}.getWestSetback().getIncrease() != null ? String.valueOf($P{boundaryComplianceData}.getWestSetback().getIncrease()) : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="199" width="150" height="11" uuid="8e00ca40-f94c-4fba-a4b2-58a7f9489147"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getWestSetback() != null ? $P{boundaryComplianceData}.getWestSetback().getNotes() : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="224" y="199" width="8" height="11" uuid="542350b6-d56a-40d8-b2af-d1a960135cd3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getWestSetback() != null && Boolean.TRUE.equals($P{boundaryComplianceData}.getWestSetback().getIsCompliant()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="188" y="199" width="8" height="11" uuid="58631d44-8988-44dd-84c8-9c88b9222f21"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getWestSetback() != null && Boolean.TRUE.equals($P{boundaryComplianceData}.getWestSetback().getIsNonCompliant()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="210" width="802" height="14" backcolor="#E8F5E9" uuid="6ce5d658-2054-454a-a2c6-e67b21ec19ec"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[البروزات]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="692" y="224" width="110" height="14" forecolor="#FFFFFF" backcolor="#005B41" uuid="6132bdc9-ae70-4063-a37b-9032b36e6cf1"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[البند]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="622" y="224" width="70" height="14" forecolor="#FFFFFF" backcolor="#005B41" uuid="14b6796f-967f-44bd-a9ff-30026151a178"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[الاتجاه]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="522" y="224" width="100" height="14" backcolor="#E8F5E9" uuid="4479f320-5bc9-44d6-9087-257110fc5a96"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[وصف الحد]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="452" y="224" width="70" height="14" backcolor="#E8F5E9" uuid="dee643e5-68c7-4888-829a-00297f96d244"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[الرخصة]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="382" y="224" width="70" height="14" backcolor="#E8F5E9" uuid="5c089775-35bf-4a14-8e78-215ef12d35d6"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[المخطط]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="312" y="224" width="70" height="14" backcolor="#E8F5E9" uuid="210eb0d4-8222-44ef-8cef-3745501cb91a"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[المنفذ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="258" y="224" width="54" height="14" backcolor="#E8F5E9" uuid="4f18798d-6c54-4f9a-bbeb-6d376fd4d3a1"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[الزيادة]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="222" y="224" width="36" height="14" backcolor="#E8F5E9" uuid="18722d75-104a-4f00-b982-b6f446b9fc39"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[مط]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="186" y="224" width="36" height="14" backcolor="#E8F5E9" uuid="9c32a713-a7c9-4c8e-8d02-a3711aed222d"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[غم]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="150" y="224" width="36" height="14" backcolor="#E8F5E9" uuid="4943e73e-8b6a-4a1d-842b-2c57f5b604c3"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[لن]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="224" width="150" height="14" backcolor="#E8F5E9" uuid="410ae194-c2a5-4ca9-a630-97cf2a75deee"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ملاحظات]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="238" width="802" height="11" backcolor="#EBF1DE" uuid="3e2a29bc-c3f7-4560-b930-d1fc71e629d3"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="249" width="802" height="11" backcolor="#FFFFFF" uuid="50aeac67-58b9-48ce-9ae2-66aae298218b"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="260" width="802" height="11" backcolor="#EBF1DE" uuid="6946b8a5-1805-45f6-9e51-ba07d0a323af"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="271" width="802" height="11" backcolor="#FFFFFF" uuid="9c051ac5-ab11-4c8f-9dfe-b7e5dcddb8da"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<line>
+				<reportElement x="150" y="238" width="1" height="44" uuid="abb2dbf7-9ddb-4297-a540-75e31a7240a4"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="186" y="238" width="1" height="44" uuid="774ad5ee-7f1a-4d6f-ba0a-9973b2ee91a4"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="222" y="238" width="1" height="44" uuid="104c91cf-b907-4224-ba80-59bbae75409a"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="258" y="238" width="1" height="44" uuid="df7f58ed-3f98-4fd0-b116-4c5ec01cf829"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="312" y="238" width="1" height="44" uuid="02c572b5-d116-4a2b-a019-2d75013fc025"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="382" y="238" width="1" height="44" uuid="1a60f91b-36f2-4e57-b2fb-e22638e948e3"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="452" y="238" width="1" height="44" uuid="bab39664-c546-4a09-951e-9ce93d67d8a0"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="522" y="238" width="1" height="44" uuid="549cce1e-a654-4011-82d0-58f037e62c4e"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="622" y="238" width="1" height="44" uuid="215dc316-929c-4450-830e-30751485b705"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="692" y="238" width="1" height="44" uuid="dda594db-891f-4221-b968-5c373ea4cb07"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="692" y="238" width="110" height="11" backcolor="#EBF1DE" uuid="0d9e59aa-5a93-4cb1-801d-f5e7d214879f"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[بروز]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="622" y="238" width="70" height="11" backcolor="#EBF1DE" uuid="3ef0a374-a126-45ea-8845-3b60493d1665"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[شمال]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="224" y="240" width="8" height="8" uuid="39d37b60-8314-4ed0-ab5e-9962b3b3cfc6"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="188" y="240" width="8" height="8" uuid="cefee783-4804-47e9-9418-ecb4fea254bf"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="152" y="240" width="8" height="8" uuid="1bd564f9-9842-4b44-92cd-3d8a2179e0e9"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Opaque" x="692" y="249" width="110" height="11" backcolor="#FFFFFF" uuid="b0b5f3d9-39df-4cf1-a1e5-4dd3fbba8f42"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[بروز]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="622" y="249" width="70" height="11" backcolor="#FFFFFF" uuid="f029d9e6-0041-4e51-8759-8fac3572737c"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[جنوب]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="224" y="251" width="8" height="8" uuid="2ed5dacf-1819-42c7-9b6d-3e10bf9ad607"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="188" y="251" width="8" height="8" uuid="7fdcab97-6c4e-45c4-8e05-d4c619bbed83"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="152" y="251" width="8" height="8" uuid="42bebccd-28a3-49e2-8426-2a9c5a81c8f6"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Opaque" x="692" y="260" width="110" height="11" backcolor="#EBF1DE" uuid="6e4c759f-0568-48f5-b4d2-8f827ede6e04"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[بروز]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="622" y="260" width="70" height="11" backcolor="#EBF1DE" uuid="e92c4e21-94c2-4376-b74e-60776d894bde"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[شرق]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="224" y="262" width="8" height="8" uuid="1602f11a-e649-45bc-9c8b-5ddc17e33256"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="188" y="262" width="8" height="8" uuid="73adb86c-b669-44da-a28b-237b08816c21"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="152" y="262" width="8" height="8" uuid="72e28124-3157-497c-9c38-acb9b07da7fe"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Opaque" x="692" y="271" width="110" height="11" backcolor="#FFFFFF" uuid="762ba943-1a0d-45d8-8075-0945f132a370"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[بروز]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="622" y="271" width="70" height="11" backcolor="#FFFFFF" uuid="f0a1d33f-fbf6-4d6a-a327-c3b3a3467358"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[غرب]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="224" y="273" width="8" height="8" uuid="ba006be4-95db-4c50-8a63-8609b0ea17c2"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="188" y="273" width="8" height="8" uuid="fd2ed305-e568-43df-9fe6-895db81efd3e"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="152" y="273" width="8" height="8" uuid="986b04b7-f7dc-41ba-b247-50e3801aca90"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement x="522" y="238" width="100" height="11" uuid="04d19319-1877-41e4-9737-a00977274b49"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getNorthProtrusion() != null ? $P{boundaryComplianceData}.getNorthProtrusion().getBoundaryDescription() : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="452" y="238" width="70" height="11" uuid="4f2bd49e-6091-4e27-ae4e-0de52b098d2a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getNorthProtrusion() != null && $P{boundaryComplianceData}.getNorthProtrusion().getLicenseMeasure() != null ? String.valueOf($P{boundaryComplianceData}.getNorthProtrusion().getLicenseMeasure()) : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="382" y="238" width="70" height="11" uuid="d9fafb97-245a-453f-95a3-f509fed1f636"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getNorthProtrusion() != null && $P{boundaryComplianceData}.getNorthProtrusion().getPlanMeasure() != null ? String.valueOf($P{boundaryComplianceData}.getNorthProtrusion().getPlanMeasure()) : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="312" y="238" width="70" height="11" uuid="afabe5a4-441a-45e9-913b-a3b4c75aaa0a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getNorthProtrusion() != null && $P{boundaryComplianceData}.getNorthProtrusion().getExecutedMeasure() != null ? String.valueOf($P{boundaryComplianceData}.getNorthProtrusion().getExecutedMeasure()) : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="258" y="238" width="54" height="11" uuid="be57b2b5-1f41-440c-8249-9bcf60cf1edc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getNorthProtrusion() != null && $P{boundaryComplianceData}.getNorthProtrusion().getIncrease() != null ? String.valueOf($P{boundaryComplianceData}.getNorthProtrusion().getIncrease()) : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="238" width="150" height="11" uuid="002a5c0a-fa26-4bf6-8ef1-e999854dd429"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getNorthProtrusion() != null ? $P{boundaryComplianceData}.getNorthProtrusion().getNotes() : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="224" y="238" width="8" height="11" uuid="02d211d4-6cde-45a2-9b66-58cc6e79433e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getNorthProtrusion() != null && Boolean.TRUE.equals($P{boundaryComplianceData}.getNorthProtrusion().getIsCompliant()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="188" y="238" width="8" height="11" uuid="2b097900-a8dd-479e-bcef-b83336002e02"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{boundaryComplianceData} != null && $P{boundaryComplianceData}.getNorthProtrusion() != null && Boolean.TRUE.equals($P{boundaryComplianceData}.getNorthProtrusion().getIsNonCompliant()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="282" width="802" height="14" forecolor="#FFFFFF" backcolor="#005B41" uuid="3662c5f8-76ee-4b8b-b3fb-62090cf39b56"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[مكونات المبنى]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="676" y="296" width="126" height="28" backcolor="#D9E3D1" uuid="f2f91324-a50e-4cfa-9aff-6b283f4d080a"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[مكونات المبنى]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="641" y="296" width="35" height="14" backcolor="#D9E3D1" uuid="621a3634-23a3-4c5c-909a-9d2df9f351c2"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[الاستخدام]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="606" y="296" width="35" height="14" backcolor="#D9E3D1" uuid="e1a349df-bfc9-43dc-972d-189e3e954eeb"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="571" y="296" width="35" height="14" backcolor="#D9E3D1" uuid="ee9cb708-9421-441e-9a74-76e61bbd1d78"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[عدد الوحدات]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="536" y="296" width="35" height="14" backcolor="#D9E3D1" uuid="e2c8f685-aed1-4b18-b57c-c64fbed30054"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="484" y="296" width="52" height="28" backcolor="#D9E3D1" uuid="388ed0f9-bb22-410e-bf88-809c035003a9"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ارتفاع المكون]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="196" y="296" width="288" height="14" backcolor="#D9E3D1" uuid="e7ffd617-36aa-496e-8fae-02a06440f894"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[المساحات (م2)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="118" y="296" width="78" height="28" backcolor="#D9E3D1" uuid="2f463c47-24d3-489b-89c7-33aa57e93b5f"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[الزيادة]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="79" y="296" width="39" height="28" backcolor="#D9E3D1" uuid="0d373737-8448-4e13-afa7-deb59c6a9075"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[مطابق]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="40" y="296" width="39" height="28" backcolor="#D9E3D1" uuid="f9df59c1-cf33-40a2-83cc-c9c4c4bed5b9"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[غير مطابق]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="296" width="40" height="28" backcolor="#D9E3D1" uuid="7dab30d9-6b48-4b7e-8409-e7fac0beef4d"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[لا ينطبق]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="641" y="310" width="35" height="14" backcolor="#D9E3D1" uuid="ee0d8c21-35eb-4de6-b8ab-dec5e0897b18"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[الرخصة]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="606" y="310" width="35" height="14" backcolor="#D9E3D1" uuid="12fc78f7-cb87-49dd-acc3-f53ac0cda217"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[المنفذ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="571" y="310" width="35" height="14" backcolor="#D9E3D1" uuid="e32462ad-d547-427b-8e20-21ac8dc816f1"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[الرخصة]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="536" y="310" width="35" height="14" backcolor="#D9E3D1" uuid="c12a8b10-bc1b-4b69-bf8c-69b43a0a5dda"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[المنفذ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="388" y="310" width="96" height="14" backcolor="#D9E3D1" uuid="4d1f12f1-ea3e-4e43-8062-9ad7d68d6eba"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[حسب الرخصة]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="292" y="310" width="96" height="14" backcolor="#D9E3D1" uuid="751b719f-2fa9-4b5b-8b0a-17b2ae231425"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[حسب المخطط المعتمد]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="196" y="310" width="96" height="14" backcolor="#D9E3D1" uuid="e77c702c-c957-4ac4-a220-f109f5d3bf69"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[حسب الطبيعة]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="324" width="802" height="132" backcolor="#FFFFFF" uuid="930595dc-a335-4b18-a84a-d1dca2ed7c7f"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Opaque" x="676" y="324" width="126" height="132" backcolor="#DDE6D5" uuid="72a36b07-656d-4025-83f3-3d0d7d34bff3"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<line>
+				<reportElement x="40" y="324" width="1" height="132" uuid="f10b7ae4-f92c-4f3a-a4a8-cd667a9c0ba3"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="79" y="324" width="1" height="132" uuid="7b167c78-f8c7-418f-aea9-bfe558cdb420"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="118" y="324" width="1" height="132" uuid="d4bb65c6-2948-4d6b-ab4f-7acf4028b1e3"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="196" y="324" width="1" height="132" uuid="5e2bb4b5-f1e2-419f-b762-7ab738b0b8ce"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="292" y="324" width="1" height="132" uuid="1e452407-c6a0-4ea7-a447-54387f48e3f3"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="388" y="324" width="1" height="132" uuid="8f207fe7-01f0-403e-b61c-f4a2de925356"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="484" y="324" width="1" height="132" uuid="a5c32d1f-c404-47df-bf0e-cf165776741c"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="536" y="324" width="1" height="132" uuid="f1374fe6-fd99-4042-acb9-c450ab1b6841"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="571" y="324" width="1" height="132" uuid="8b62eae9-1667-4bb2-bfff-727188ef21e9"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="606" y="324" width="1" height="132" uuid="94aa1437-c90a-437d-adad-baf6794d2359"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="641" y="324" width="1" height="132" uuid="b6704260-330e-43c6-84d9-1b414f232511"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="676" y="324" width="1" height="132" uuid="09e100fc-e4bc-46fa-b365-37b039c982d7"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="335" width="802" height="1" uuid="d7b75dde-7e25-46d4-88ac-1e06a88b5b9c"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="346" width="802" height="1" uuid="e1df9e70-8012-427f-bfdf-7b12fd126915"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="357" width="802" height="1" uuid="ae35f387-666b-47cd-b648-fda2ed49d8fe"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="368" width="802" height="1" uuid="90e50d30-1756-4fb9-b131-a340e6a47efc"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="379" width="802" height="1" uuid="d4dd3a3f-620d-4242-947e-b04af1b5e6f8"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="390" width="802" height="1" uuid="a7bafb23-160e-4a56-ba38-6cdb533abbe4"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="401" width="802" height="1" uuid="452ed747-e6dc-4456-a96e-febd1bf4713c"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="412" width="802" height="1" uuid="9d6943de-ff59-4cfc-9c10-9c4723a025b3"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="423" width="802" height="1" uuid="1abf6ea0-63c4-46d1-b77e-ea49f9d4a396"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="434" width="802" height="1" uuid="7d2d74b3-29f9-41fc-80e0-9d1088b1306d"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="445" width="802" height="1" uuid="a373d2b6-afcb-4c7c-9f56-dfa670e02d73"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="676" y="324" width="126" height="11" uuid="6d9b3a5f-511e-4704-8980-538c00401e61"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[قبو]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="676" y="335" width="126" height="11" uuid="26f956a7-d671-4057-9c65-8710ffe45237"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[قبو (متكرر)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="676" y="346" width="126" height="11" uuid="d41eaf50-3282-4043-8e4a-2e324d6e0a1f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[الدور الأرضي]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="676" y="357" width="126" height="11" uuid="2877d121-4b3a-462e-b899-1aa4b573aaa5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[ملحق الميزانين]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="676" y="368" width="126" height="11" uuid="08b1f4c4-e5b1-4c42-b3bc-ffa16fc96252"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[الدور الأول]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="676" y="379" width="126" height="11" uuid="97af3d29-8181-4d9a-8d82-0a1ae73bcf7f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[الدور الثاني]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="676" y="390" width="126" height="11" uuid="f17e12dc-ae22-487b-8520-7422e7c8fc18"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[الدور الثالث]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="676" y="401" width="126" height="11" uuid="10a84712-5324-405e-9d2e-ec08749d0be7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[الدور الرابع]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="676" y="412" width="126" height="11" uuid="b7f1914b-6d08-4315-bc5a-13cd5f9ea5d0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[الدور المتكرر]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="676" y="423" width="126" height="11" uuid="f9db7941-ee8c-43ca-af24-697771619590"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[الملحق العلوي]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="676" y="434" width="126" height="11" uuid="619801b6-f860-4214-a3a9-4c462caf1e35"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[درج]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="676" y="445" width="126" height="11" uuid="88108c51-90d5-4e1e-a59d-37bd68f9a6b4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[أسوار]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="606" y="324" width="35" height="11" uuid="16d21abc-5106-47c7-91e9-eb9a920931c3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getBasement() != null ? $P{buildingComponentsData}.getBasement().getUsage() : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="606" y="346" width="35" height="11" uuid="0f4f3313-2f05-4ecb-b711-1950b4cc35d2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getGroundFloor() != null ? $P{buildingComponentsData}.getGroundFloor().getUsage() : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="606" y="357" width="35" height="11" uuid="03817bd2-7a7d-4586-90c4-a2039c9fd3bc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getMezzanine() != null ? $P{buildingComponentsData}.getMezzanine().getUsage() : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="606" y="368" width="35" height="11" uuid="2e4f3eb6-b313-476b-8200-ad424ab5ab5b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getFirstFloor() != null ? $P{buildingComponentsData}.getFirstFloor().getUsage() : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="606" y="379" width="35" height="11" uuid="1d40b65f-beeb-4cde-8ef1-a8639840e6e0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getSecondFloor() != null ? $P{buildingComponentsData}.getSecondFloor().getUsage() : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="606" y="390" width="35" height="11" uuid="8df2ae3e-07d7-4ace-a9ca-38b269acff51"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getThirdFloor() != null ? $P{buildingComponentsData}.getThirdFloor().getUsage() : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="606" y="401" width="35" height="11" uuid="59146b01-7a89-4d3b-823e-4fe545a8f848"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getFourthFloor() != null ? $P{buildingComponentsData}.getFourthFloor().getUsage() : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="606" y="412" width="35" height="11" uuid="0a3aac45-0924-4a9e-bc7c-b3bf6ce566c8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getRoofAnnex() != null ? $P{buildingComponentsData}.getRoofAnnex().getUsage() : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="606" y="423" width="35" height="11" uuid="9c45556e-2f4b-4f0a-81a1-d9c56c1b7400"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getStairs() != null ? $P{buildingComponentsData}.getStairs().getUsage() : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="606" y="434" width="35" height="11" uuid="965d3394-059e-461d-a534-7ea7d536d400"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getFences() != null ? $P{buildingComponentsData}.getFences().getUsage() : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="606" y="445" width="35" height="11" uuid="6c02bcc1-36ea-49dd-b6d9-b488813744c4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getElectricityRoom() != null ? $P{buildingComponentsData}.getElectricityRoom().getUsage() : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="292" y="324" width="96" height="11" uuid="846e407d-1ff9-443d-baa5-481ba05df18e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getBasement() != null && $P{buildingComponentsData}.getBasement().getPlanArea() != null ? String.valueOf($P{buildingComponentsData}.getBasement().getPlanArea()) : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="196" y="324" width="96" height="11" uuid="4afc43a5-f5b7-43df-a7d8-4e2e50cfb568"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getBasement() != null && $P{buildingComponentsData}.getBasement().getExecutedArea() != null ? String.valueOf($P{buildingComponentsData}.getBasement().getExecutedArea()) : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="292" y="346" width="96" height="11" uuid="9e3cf9e5-f4ec-433e-b0ef-b03830ddea4f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getGroundFloor() != null && $P{buildingComponentsData}.getGroundFloor().getPlanArea() != null ? String.valueOf($P{buildingComponentsData}.getGroundFloor().getPlanArea()) : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="196" y="346" width="96" height="11" uuid="2cf779d7-7e6d-475c-a6bc-8293136c2f8f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getGroundFloor() != null && $P{buildingComponentsData}.getGroundFloor().getExecutedArea() != null ? String.valueOf($P{buildingComponentsData}.getGroundFloor().getExecutedArea()) : ""]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="94" y="325" width="8" height="8" uuid="50fa1dbf-f3b8-4f2e-b79a-b8114d8f6b5b"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="55" y="325" width="8" height="8" uuid="896a2b60-1136-4cc4-bf6a-90b51d14b31e"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="16" y="325" width="8" height="8" uuid="98906a07-ea32-4ba1-8575-699ef724e5ea"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="94" y="336" width="8" height="8" uuid="08c720ab-1e95-4f9e-9b93-5e2ee94c116a"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="55" y="336" width="8" height="8" uuid="17fdd53b-db96-4b0c-b82c-76503f384255"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="16" y="336" width="8" height="8" uuid="3acceb96-f2f0-428b-ab85-536dae4eddd8"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="94" y="347" width="8" height="8" uuid="4e790e25-82f7-453d-b401-1ba4ab2db195"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="55" y="347" width="8" height="8" uuid="53bc4542-d974-49a7-835b-4fcc5f60f570"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="16" y="347" width="8" height="8" uuid="ebe18229-9f7b-4934-bf12-9aac8fbfce41"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="94" y="358" width="8" height="8" uuid="acb276f6-b14a-4185-a881-156c9ebe6777"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="55" y="358" width="8" height="8" uuid="5cb1b3e2-698e-4f86-8732-350397cd211e"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="16" y="358" width="8" height="8" uuid="1ec3e666-c1bc-44ab-9885-91a4a8e6aa65"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="94" y="369" width="8" height="8" uuid="70bba75d-4a68-4361-b3db-8cf3ea077ecb"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="55" y="369" width="8" height="8" uuid="d9c21fd8-7147-46fa-a148-2b36b7be201a"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="16" y="369" width="8" height="8" uuid="e7b4fddc-b91f-40d5-b7a2-8c8a8f36cfc4"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="94" y="380" width="8" height="8" uuid="401b465f-5f3e-43b3-a1c6-a522476be204"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="55" y="380" width="8" height="8" uuid="f8dafa29-320d-47a3-be17-e1901a6510ac"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="16" y="380" width="8" height="8" uuid="b87973cf-e9c2-4619-ae0d-2af6859eb9a7"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="94" y="391" width="8" height="8" uuid="670a5953-e9dc-42e6-a435-b3726668f8fa"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="55" y="391" width="8" height="8" uuid="a26981ca-8d83-4925-a59b-fc9a4f871271"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="16" y="391" width="8" height="8" uuid="359ad0d3-348b-41a6-a706-6951f6927d5d"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="94" y="402" width="8" height="8" uuid="4651cef4-dd35-4931-bf93-afa67f43dda9"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="55" y="402" width="8" height="8" uuid="6d643a20-09f2-4fd0-97d6-2ff0602cbfe7"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="16" y="402" width="8" height="8" uuid="b4ca2608-947d-43d9-951a-9186e09831ed"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="94" y="413" width="8" height="8" uuid="5a5e5ebc-9cce-450a-91f8-22709054ff90"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="55" y="413" width="8" height="8" uuid="1ecd4635-58d6-4849-afb6-e8a3af20b058"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="16" y="413" width="8" height="8" uuid="6fe7ba60-e920-4e9e-b8d0-db668c32139c"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="94" y="424" width="8" height="8" uuid="6b067871-7b94-49d1-ae29-5ebf015a396c"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="55" y="424" width="8" height="8" uuid="91d42c61-252a-468d-abc5-3b069bda8693"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="16" y="424" width="8" height="8" uuid="550b2349-4cef-42fd-9d7a-e2594bd12ca3"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="94" y="435" width="8" height="8" uuid="4ac929d3-4c96-4352-bd68-2e5714f56d11"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="55" y="435" width="8" height="8" uuid="a2e4203b-bae6-4dc0-80db-9de4479dcea9"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="16" y="435" width="8" height="8" uuid="1d3793cc-c237-4e77-a296-ee1bc50cf90c"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="94" y="446" width="8" height="8" uuid="b8b0d103-e84c-4ae2-9b9f-a88050f42b85"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="55" y="446" width="8" height="8" uuid="0e2ff301-95b5-4e80-a488-cd7902e558a3"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="16" y="446" width="8" height="8" uuid="923b580d-5d00-44f8-921b-978a9815f417"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="92" y="323" width="12" height="12" uuid="e2cf7399-8eb6-40ea-9033-d444ae448c66"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getBasement() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getBasement().getIsCompliant()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="53" y="323" width="12" height="12" uuid="2185e017-577d-4094-9fbd-9d2e506cc845"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getBasement() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getBasement().getIsNonCompliant()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="14" y="323" width="12" height="12" uuid="6c7a5436-1df9-47e2-a313-82cd2df52d62"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getBasement() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getBasement().getIsNotApplicable()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="92" y="344" width="12" height="12" uuid="2ad61856-a4a4-47d5-a6d0-87023830f681"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getGroundFloor() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getGroundFloor().getIsCompliant()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="53" y="344" width="12" height="12" uuid="a7de023f-97a2-457f-8ff5-72d35eea61f7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getGroundFloor() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getGroundFloor().getIsNonCompliant()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="14" y="344" width="12" height="12" uuid="2ed3b300-1c4f-4fa7-9144-f14dd3ff3bce"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getGroundFloor() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getGroundFloor().getIsNotApplicable()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="92" y="355" width="12" height="12" uuid="c1fb01b3-4a92-44e7-89f7-6bc3a8399ef1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getMezzanine() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getMezzanine().getIsCompliant()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="53" y="355" width="12" height="12" uuid="fc5a549c-116b-4e1d-a1dd-fd206c8b6f05"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getMezzanine() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getMezzanine().getIsNonCompliant()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="14" y="355" width="12" height="12" uuid="0b05b385-b984-403b-af1e-c4bf33286e84"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getMezzanine() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getMezzanine().getIsNotApplicable()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="92" y="366" width="12" height="12" uuid="d39b560f-751b-495f-ab15-f13019a71c78"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getFirstFloor() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getFirstFloor().getIsCompliant()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="53" y="366" width="12" height="12" uuid="ab73067d-c695-4b65-aec2-1b41f654a946"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getFirstFloor() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getFirstFloor().getIsNonCompliant()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="14" y="366" width="12" height="12" uuid="dcb53fe3-baf9-41d7-93a2-b6da595a0cd2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getFirstFloor() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getFirstFloor().getIsNotApplicable()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="92" y="377" width="12" height="12" uuid="2d8b6de6-836d-4f73-83e2-74389a8188ca"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getSecondFloor() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getSecondFloor().getIsCompliant()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="53" y="377" width="12" height="12" uuid="fd76a94f-5cde-4758-9b3e-80551d727e25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getSecondFloor() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getSecondFloor().getIsNonCompliant()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="14" y="377" width="12" height="12" uuid="87967ffa-42dd-4972-b4e2-b790f4e90908"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getSecondFloor() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getSecondFloor().getIsNotApplicable()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="92" y="388" width="12" height="12" uuid="081ae97f-a5e1-4d68-b786-0acfe2b31064"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getThirdFloor() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getThirdFloor().getIsCompliant()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="53" y="388" width="12" height="12" uuid="ad7b1136-4018-4e9a-a61c-2bbe1af1e625"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getThirdFloor() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getThirdFloor().getIsNonCompliant()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="14" y="388" width="12" height="12" uuid="f2d037f0-8841-4490-bb31-1b1dc387c64b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getThirdFloor() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getThirdFloor().getIsNotApplicable()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="92" y="399" width="12" height="12" uuid="72d560e0-c381-42af-96a8-ade2e6b44d99"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getFourthFloor() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getFourthFloor().getIsCompliant()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="53" y="399" width="12" height="12" uuid="f1ca9cfd-f7e1-4c32-bdc5-f04a8b33eacc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getFourthFloor() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getFourthFloor().getIsNonCompliant()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="14" y="399" width="12" height="12" uuid="57af7399-ebad-4790-8424-7661c7fd9247"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getFourthFloor() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getFourthFloor().getIsNotApplicable()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="92" y="421" width="12" height="12" uuid="a4b66d6b-91b7-474e-9686-7601c0e63c36"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getRoofAnnex() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getRoofAnnex().getIsCompliant()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="53" y="421" width="12" height="12" uuid="f30b1eca-2fce-4331-b284-8a003bde0e12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getRoofAnnex() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getRoofAnnex().getIsNonCompliant()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="14" y="421" width="12" height="12" uuid="5c8ec779-0f4c-4634-bb70-c10f5156d418"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getRoofAnnex() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getRoofAnnex().getIsNotApplicable()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="92" y="432" width="12" height="12" uuid="b9f7ec7c-5ee7-4757-bc4d-518789d86bc8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getStairs() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getStairs().getIsCompliant()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="53" y="432" width="12" height="12" uuid="40e29ee9-f00c-4522-8601-016725c39c63"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getStairs() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getStairs().getIsNonCompliant()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="14" y="432" width="12" height="12" uuid="087b5f8a-a6ff-4aa2-abe7-960d841b3abc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getStairs() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getStairs().getIsNotApplicable()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="92" y="443" width="12" height="12" uuid="36619cd0-961c-4e1a-b0f8-1dbc468c781b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getFences() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getFences().getIsCompliant()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="53" y="443" width="12" height="12" uuid="b52b6d9c-f4a5-4afd-b7b7-9574f3440235"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getFences() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getFences().getIsNonCompliant()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="14" y="443" width="12" height="12" uuid="ac03d2ee-61a8-4b13-a089-1254fa9e3325"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getFences() != null && Boolean.TRUE.equals($P{buildingComponentsData}.getFences().getIsNotApplicable()) ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="456" width="802" height="12" backcolor="#D9E3D1" uuid="a7036cda-1832-4f97-9533-7ea15d0be579"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Opaque" x="676" y="456" width="126" height="12" backcolor="#5A8A35" uuid="4311be09-d94b-4e2c-8be4-10ce72b16f14"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="676" y="456" width="126" height="12" forecolor="#FFFFFF" uuid="1ba8e5ec-a0e2-400a-9775-433037cacfcc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[الإجمالي]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="468" width="802" height="1" uuid="dcb0ca7c-fc9f-483b-a484-d766af8bf997"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="480" width="802" height="1" uuid="f5b27a33-402f-4e12-bf96-cafda577c20d"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="489" width="802" height="1" uuid="600bb037-22be-49bb-9948-275176d2ffd9"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="501" width="802" height="1" uuid="4a4a071e-3080-4ca0-97d6-36e540c6ccb9"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="509" width="802" height="1" uuid="8bca533f-fae8-426e-94e4-9c033575e003"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="40" y="468" width="1" height="42" uuid="bbf2ba20-df17-4580-9fc2-10f0f561f246"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="79" y="468" width="1" height="42" uuid="61834ed8-2264-441b-8e40-5c361c2a3d9a"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="118" y="468" width="1" height="42" uuid="65625c7d-3d45-4042-ab24-272dc458b98c"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="196" y="468" width="1" height="42" uuid="d1a53870-600f-42d4-9751-ab0724aacd33"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="436" y="468" width="1" height="42" uuid="4db5b6dc-a9a0-42a4-aabb-be58f0e87320"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="676" y="468" width="1" height="42" uuid="b70e9a60-0c18-4b53-9044-786081736347"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="468" width="802" height="12" backcolor="#D9E3D1" uuid="a71e4daa-1c43-451e-a261-0c8035add13e"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Opaque" x="676" y="468" width="126" height="12" backcolor="#DDE6D5" uuid="d519bbdb-d5d9-4c1e-ad77-375d92b39ead"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[عدد المواقف]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="436" y="468" width="240" height="12" uuid="e20ddf81-0c00-4aad-82a1-b083dc5e1245"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[عدد المواقف المعتمد في المخطط]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="196" y="468" width="240" height="12" uuid="fb63b7a6-0001-491b-8b18-7c17ba0a2dfe"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[عدد المواقف المنفذ في الطبيعة]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="480" width="802" height="9" backcolor="#FFFFFF" uuid="043f2ae3-ccd5-478c-a802-aa3d284b2638"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement x="436" y="480" width="240" height="9" uuid="9e7fd9de-5a15-4c4b-b228-1171921882ee"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getParking() != null && $P{buildingComponentsData}.getParking().getRequiredNumber() != null ? String.valueOf($P{buildingComponentsData}.getParking().getRequiredNumber()) : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="196" y="480" width="240" height="9" uuid="4148c4f9-fcfe-4f57-9084-bbebcfe06d6e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getParking() != null && $P{buildingComponentsData}.getParking().getExecutedNumber() != null ? String.valueOf($P{buildingComponentsData}.getParking().getExecutedNumber()) : ""]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="489" width="802" height="12" backcolor="#D9E3D1" uuid="d2e63c0a-37fc-48e1-af35-a8154a6be971"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Opaque" x="676" y="489" width="126" height="12" backcolor="#DDE6D5" uuid="513ccc30-3444-4f83-8ec1-cfd00e311e6b"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[أبعاد غرفة الكهرباء]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="436" y="489" width="240" height="12" uuid="d6e2e1df-0500-4167-9fef-52e134218934"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[الأبعاد حسب المخطط (طول × عرض)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="196" y="489" width="240" height="12" uuid="4cc276b3-1784-4654-a6e8-6bda0069e462"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[الأبعاد حسب الطبيعة]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="501" width="802" height="9" backcolor="#FFFFFF" uuid="029724fb-0908-4acb-8bf9-59aee8e3d5d4"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement x="436" y="501" width="240" height="9" uuid="7b81d9cc-2647-4cfc-98b0-0a7de9664b37"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getElectricityBox() != null && $P{buildingComponentsData}.getElectricityBox().getPlanLength() != null && $P{buildingComponentsData}.getElectricityBox().getPlanWidth() != null ? String.valueOf($P{buildingComponentsData}.getElectricityBox().getPlanLength()) + " × " + String.valueOf($P{buildingComponentsData}.getElectricityBox().getPlanWidth()) : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="196" y="501" width="240" height="9" uuid="d9ac8510-d2cd-4273-a3af-8afa4d2016f9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{buildingComponentsData} != null && $P{buildingComponentsData}.getElectricityBox() != null && $P{buildingComponentsData}.getElectricityBox().getExecutedLength() != null && $P{buildingComponentsData}.getElectricityBox().getExecutedWidth() != null ? String.valueOf($P{buildingComponentsData}.getElectricityBox().getExecutedLength()) + " × " + String.valueOf($P{buildingComponentsData}.getElectricityBox().getExecutedWidth()) : ""]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
 </jasperReport>
-

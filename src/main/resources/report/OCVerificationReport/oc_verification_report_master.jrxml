@@ -119,8 +119,8 @@
     <!--
         Group rendering order (innermost footer first, outermost last):
           1. BuildingComponentsGroup → combined boundary + building technical sheet
-          2. TableSectionGroup   → checklist table
-          3. MainImagesGroup     → main building images
+          2. MainImagesGroup     → main building images
+          3. TableSectionGroup   → checklist table
           4. SitePhotosGroup     → site photos page
           5. PhotosGridGroup     → photos top/bottom grid page
           6. ChangesGroup        → changes & extra items
@@ -210,7 +210,25 @@
         </groupFooter>
     </group>
 
-    <!-- Middle group: footer renders AFTER TableSectionGroup (main images) -->
+    <!-- Middle group: footer renders after MainImagesGroup (checklist table) -->
+    <group name="TableSectionGroup">
+        <groupExpression><![CDATA[1]]></groupExpression>
+        <groupFooter>
+            <band height="545" splitType="Stretch">
+                <subreport>
+                    <reportElement x="0" y="0" width="802" height="545"/>
+                    <subreportParameter name="headerSubreport"><subreportParameterExpression><![CDATA[$P{headerSubreport}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="reportLogo"><subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="reportDate"><subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression></subreportParameter>
+                    <dataSourceExpression><![CDATA[$P{tableData}]]></dataSourceExpression>
+                    <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{tableSubreport}]]></subreportExpression>
+                </subreport>
+            </band>
+        </groupFooter>
+    </group>
+
+    <!-- Inner group: footer renders right after BuildingComponentsGroup (main images) -->
     <group name="MainImagesGroup">
         <groupExpression><![CDATA[1]]></groupExpression>
         <groupFooter>
@@ -241,24 +259,6 @@
                     <subreportParameter name="digitalStampPath"><subreportParameterExpression><![CDATA[$P{digitalStampPath}]]></subreportParameterExpression></subreportParameter>
                     <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
                     <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{mainImagesSubreport}]]></subreportExpression>
-                </subreport>
-            </band>
-        </groupFooter>
-    </group>
-
-    <!-- Innermost group: footer renders FIRST (checklist table) -->
-    <group name="TableSectionGroup">
-        <groupExpression><![CDATA[1]]></groupExpression>
-        <groupFooter>
-            <band height="545" splitType="Stretch">
-                <subreport>
-                    <reportElement x="0" y="0" width="802" height="545"/>
-                    <subreportParameter name="headerSubreport"><subreportParameterExpression><![CDATA[$P{headerSubreport}]]></subreportParameterExpression></subreportParameter>
-                    <subreportParameter name="reportLogo"><subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression></subreportParameter>
-                    <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
-                    <subreportParameter name="reportDate"><subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression></subreportParameter>
-                    <dataSourceExpression><![CDATA[$P{tableData}]]></dataSourceExpression>
-                    <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{tableSubreport}]]></subreportExpression>
                 </subreport>
             </band>
         </groupFooter>
