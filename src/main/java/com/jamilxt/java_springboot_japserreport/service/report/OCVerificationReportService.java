@@ -45,6 +45,7 @@ public class OCVerificationReportService {
              InputStream photosBottomGridIs = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_report_photos_bottom_grid.jrxml");
              InputStream footerIs = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_shared_footer.jrxml");
              InputStream mainImagesIs = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_main_images.jrxml");
+             InputStream requirementsPageIs = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_requirements_page.jrxml");
              InputStream changesRowsIs = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_changes_rows.jrxml");
              InputStream changesPageIs = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_changes_page.jrxml");
              InputStream inspectionResponsibilityIs = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_inspection_responsibility.jrxml");
@@ -63,6 +64,7 @@ public class OCVerificationReportService {
             JasperReport photosBottomGridRep = JasperCompileManager.compileReport(photosBottomGridIs);
             JasperReport footerRep = footerIs == null ? null : JasperCompileManager.compileReport(footerIs);
             JasperReport mainImagesRep = mainImagesIs == null ? null : JasperCompileManager.compileReport(mainImagesIs);
+            JasperReport requirementsPageRep = requirementsPageIs == null ? null : JasperCompileManager.compileReport(requirementsPageIs);
             JasperReport changesRowsRep = changesRowsIs == null ? null : JasperCompileManager.compileReport(changesRowsIs);
             JasperReport changesPageRep = changesPageIs == null ? null : JasperCompileManager.compileReport(changesPageIs);
             JasperReport inspectionResponsibilityRep = inspectionResponsibilityIs == null ? null : JasperCompileManager.compileReport(inspectionResponsibilityIs);
@@ -110,11 +112,13 @@ public class OCVerificationReportService {
             params.put("photosBottomGridSubreport", photosBottomGridRep);
             params.put("footerSubreport", footerRep);
             params.put("mainImagesSubreport", mainImagesRep);
+            params.put("requirementsPageSubreport", requirementsPageRep);
             params.put("changesPageSubreport", changesPageRep);
             params.put("changesRowsSubreport", changesRowsRep);
             params.put("inspectionResponsibilitySubreport", inspectionResponsibilityRep);
             // pass table datasource
             params.put("tableData", tableDs);
+            params.put("requirementsData", new JRBeanCollectionDataSource(rows));
             params.put("boundaryComplianceData", staticBoundaryCompliance);
             params.put("buildingComponentsData", staticBuildingComponents);
             // static sample data for changes tables
@@ -229,6 +233,7 @@ public class OCVerificationReportService {
              InputStream photosBottomGridIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_report_photos_bottom_grid.jrxml").getInputStream();
              InputStream footerIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_shared_footer.jrxml").getInputStream();
              InputStream mainImagesIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_main_images.jrxml").getInputStream();
+             InputStream requirementsPageIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_requirements_page.jrxml").getInputStream();
              InputStream changesRowsIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_changes_rows.jrxml").getInputStream();
              InputStream changesPageIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_changes_page.jrxml").getInputStream();
              InputStream inspectionResponsibilityIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_inspection_responsibility.jrxml").getInputStream();
@@ -247,6 +252,7 @@ public class OCVerificationReportService {
             JasperReport photosBottomGridRep = JasperCompileManager.compileReport(photosBottomGridIs);
             JasperReport footerRep = JasperCompileManager.compileReport(footerIs);
             JasperReport mainImagesRep = JasperCompileManager.compileReport(mainImagesIs);
+            JasperReport requirementsPageRep = JasperCompileManager.compileReport(requirementsPageIs);
             JasperReport changesRowsRep = JasperCompileManager.compileReport(changesRowsIs);
             JasperReport changesPageRep = JasperCompileManager.compileReport(changesPageIs);
             JasperReport inspectionResponsibilityRep = JasperCompileManager.compileReport(inspectionResponsibilityIs);
@@ -269,10 +275,12 @@ public class OCVerificationReportService {
             params.put("photosBottomGridSubreport", photosBottomGridRep);
             params.put("footerSubreport", footerRep);
             params.put("mainImagesSubreport", mainImagesRep);
+            params.put("requirementsPageSubreport", requirementsPageRep);
             params.put("changesPageSubreport", changesPageRep);
             params.put("changesRowsSubreport", changesRowsRep);
             params.put("inspectionResponsibilitySubreport", inspectionResponsibilityRep);
             params.put("tableData", new JRBeanCollectionDataSource(tableRows));
+            params.put("requirementsData", new JRBeanCollectionDataSource(tableRows));
             // changes & extra items (padded to 8 rows)
             params.put("changesData",    buildTextRowsDataSource(dto.getChanges()));
             params.put("extraItemsData", buildTextRowsDataSource(dto.getExtraItems()));
