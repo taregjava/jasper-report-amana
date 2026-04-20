@@ -758,7 +758,7 @@ public class OCVerificationReportService {
             "الدور الأرضي", "مختلط", 4, 3.5, 400.0, 398.0, false, "ناقص بـ 2 م²"
         ));
         dto.setMezzanine(new BuildingComponentsDTO.ComponentVerification(
-            "طابق الميزانين", "تجاري", 2, 2.5, 200.0, 200.0, true, ""
+            "طابق الميزانين", "تجاري", null, null, null, null, false, true, "لا ينطبق على هذا المبنى"
         ));
         dto.setFirstFloor(new BuildingComponentsDTO.ComponentVerification(
             "الدور الأول", "سكني", 4, 3.2, 350.0, 350.0, true, "مطابق"
@@ -792,7 +792,7 @@ public class OCVerificationReportService {
         
         // Utilities
         dto.setElectricityBox(new BuildingComponentsDTO.UtilityRoomVerification(
-            3.0, 2.0, true, "مطابق"
+            3.0, 2.0, 2.9, 2.0, true, "مطابق"
         ));
         
         return dto;

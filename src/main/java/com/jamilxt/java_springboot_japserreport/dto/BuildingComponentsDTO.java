@@ -46,14 +46,22 @@ public class BuildingComponentsDTO {
 
         public ComponentVerification(String name, String usage, Integer units, Double height,
                                      Double planArea, Double execArea, Boolean compliant, String notes) {
+            this(name, usage, units, height, planArea, execArea, compliant, false, notes);
+        }
+
+        public ComponentVerification(String name, String usage, Integer units, Double height,
+                                     Double planArea, Double execArea,
+                                     Boolean compliant, Boolean notApplicable, String notes) {
             this.componentName = name;
             this.usage = usage;
             this.numberOfUnits = units;
             this.componentHeight = height;
             this.planArea = planArea;
             this.executedArea = execArea;
-            this.isCompliant = compliant;
-            this.isNonCompliant = !compliant;
+            boolean applicable = !Boolean.TRUE.equals(notApplicable);
+            this.isNotApplicable = !applicable;
+            this.isCompliant = applicable && Boolean.TRUE.equals(compliant);
+            this.isNonCompliant = applicable && !Boolean.TRUE.equals(compliant);
             this.notes = notes;
         }
     }
@@ -84,14 +92,24 @@ public class BuildingComponentsDTO {
         private String description;              // وصف (غرفة توزيع كهرباء)
         private Double planLength;               // الطول حسب المخطط
         private Double planWidth;                // العرض حسب المخطط
+        private Double executedLength;           // الطول حسب الطبيعة
+        private Double executedWidth;            // العرض حسب الطبيعة
         private Boolean isCompliant;             // مطابق
         private Boolean isNonCompliant;          // غير مطابق
         private String notes;                    // ملاحظات
 
         public UtilityRoomVerification(Double length, Double width, Boolean compliant, String notes) {
+            this(length, width, null, null, compliant, notes);
+        }
+
+        public UtilityRoomVerification(Double planLength, Double planWidth,
+                                       Double executedLength, Double executedWidth,
+                                       Boolean compliant, String notes) {
             this.description = "غرفة التوزيع الكهربائية";
-            this.planLength = length;
-            this.planWidth = width;
+            this.planLength = planLength;
+            this.planWidth = planWidth;
+            this.executedLength = executedLength;
+            this.executedWidth = executedWidth;
             this.isCompliant = compliant;
             this.isNonCompliant = !compliant;
             this.notes = notes;
