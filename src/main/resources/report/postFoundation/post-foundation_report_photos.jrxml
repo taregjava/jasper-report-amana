@@ -84,7 +84,7 @@
         </band>
     </detail>
 
-    <pageFooter>
+    <summary>
         <band height="45">
             <subreport>
                 <reportElement x="0" y="0" width="802" height="45"/>
@@ -94,7 +94,7 @@
                 <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{footerSubreport}]]></subreportExpression>
             </subreport>
         </band>
-    </pageFooter>
+    </summary>
 
 </jasperReport>
 

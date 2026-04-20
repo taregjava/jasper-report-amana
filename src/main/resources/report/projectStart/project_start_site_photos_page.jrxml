@@ -278,15 +278,15 @@
 			</frame>
 		</band>
 	</detail>
-	<pageFooter>
-		<band height="45">
+    <summary>
+		<band height="65">
 			<subreport>
-				<reportElement x="0" y="0" width="802" height="45"/>
+				<reportElement x="0" y="0" width="802" height="65"/>
 				<subreportParameter name="officeName"><subreportParameterExpression><![CDATA[$P{officeName}]]></subreportParameterExpression></subreportParameter>
 				<subreportParameter name="digitalStampPath"><subreportParameterExpression><![CDATA[$P{digitalStampPath}]]></subreportParameterExpression></subreportParameter>
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{footerSubreport}]]></subreportExpression>
 			</subreport>
 		</band>
-	</pageFooter>
+    </summary>
 </jasperReport>

@@ -278,8 +278,8 @@
 			</frame>
 		</band>
 	</detail>
-	<pageFooter>
-		<band height="45">
+<summary>
+    <band height="45">
 			<subreport>
 				<reportElement x="0" y="0" width="802" height="45"/>
 				<subreportParameter name="officeName"><subreportParameterExpression><![CDATA[$P{officeName}]]></subreportParameterExpression></subreportParameter>
@@ -288,6 +288,6 @@
 				<subreportExpression><![CDATA[$P{footerSubreport}]]></subreportExpression>
 			</subreport>
 		</band>
-	</pageFooter>
-</jasperReport>
+</summary>
+    </jasperReport>
 
