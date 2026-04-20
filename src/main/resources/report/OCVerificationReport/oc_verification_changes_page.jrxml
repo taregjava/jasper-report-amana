@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.5.final using JasperReports Library version 6.21.5-74d586df47b25dbd05bd0957999819196e59934a  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="oc_verification_changes_page" pageWidth="842" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" uuid="6de5fee0-1579-415a-b85a-282cbe9215f4">
+	<property name="net.sf.jasperreports.text.direction" value="RTL"/>
+	<style name="Default" isDefault="true" fontName="SansSerif" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+	<parameter name="headerSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="changesRowsSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="changesData" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<parameter name="extraItemsData" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<parameter name="reportLogo" class="java.lang.Object"/>
+	<parameter name="projectNameAndAddress" class="java.lang.String"/>
+	<parameter name="reportDate" class="java.lang.String"/>
+	<parameter name="footerSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="officeName" class="java.lang.String"/>
+	<parameter name="digitalStampPath" class="java.lang.Object"/>
+	<detail>
+		<band height="510">
+			<subreport>
+				<reportElement x="-20" y="0" width="822" height="118" uuid="811a5a97-a35b-430d-8a44-f597190aa6d4"/>
+				<subreportParameter name="reportLogo">
+					<subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="projectNameAndAddress">
+					<subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="reportDate">
+					<subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{headerSubreport}]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="118" width="802" height="18" forecolor="#FFFFFF" backcolor="#005B41" uuid="0e747b74-6038-4843-8756-ec9970793d0d"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true" pdfFontName="fonts/ARIALBD.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[التغييرات على المخططات المعتمدة]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="-20" y="136" width="822" height="160" uuid="c3b208ce-3b4f-4b35-bb3f-35b31e6502e9"/>
+				<dataSourceExpression><![CDATA[$P{changesData}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{changesRowsSubreport}]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="296" width="802" height="16" forecolor="#000000" backcolor="#EBF1DE" uuid="91a3a0c0-5b1d-46be-bbd6-4995cc145bc7"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true" pdfFontName="fonts/ARIALBD.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ترفق صورة من المخططات المعتمدة بعد التغيير من المصمم المعتمد]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="312" width="802" height="18" forecolor="#FFFFFF" backcolor="#005B41" uuid="434047ac-7452-40c9-9729-34edff1905d8"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true" pdfFontName="fonts/ARIALBD.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[البنود التي لم تذكر في التقرير]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="330" width="802" height="16" forecolor="#000000" backcolor="#EBF1DE" uuid="3653bbfd-33f5-46e6-b1a2-18fc391e9f98"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true" pdfFontName="fonts/ARIALBD.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[يذكر المكتب المشرف / المصمم البنود التي لم تذكر في التقرير]]></text>
+			</staticText>
+			<subreport>
+				<reportElement positionType="Float" x="-20" y="346" width="822" height="160" uuid="8c5c35a6-315b-4772-89f4-95bcb8ae9d26"/>
+				<dataSourceExpression><![CDATA[$P{extraItemsData}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{changesRowsSubreport}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<summary>
+		<band height="85">
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="85"/>
+				<subreportParameter name="officeName"><subreportParameterExpression><![CDATA[$P{officeName}]]></subreportParameterExpression></subreportParameter>
+				<subreportParameter name="digitalStampPath"><subreportParameterExpression><![CDATA[$P{digitalStampPath}]]></subreportParameterExpression></subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{footerSubreport}]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>
