@@ -45,6 +45,8 @@
     <parameter name="projectNameAndAddress" class="java.lang.String"/>
     <parameter name="reportDate" class="java.lang.String"/>
     <parameter name="officeName" class="java.lang.String"/>
+    <parameter name="footerSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
+    <parameter name="digitalStampPath" class="java.lang.Object"/>
 
     <field name="itemNo" class="java.lang.Integer"/>
     <field name="description" class="java.lang.String"/>
@@ -174,22 +176,14 @@
     </detail>
 
     <summary>
-        <band height="21">
-            <staticText>
-                <reportElement style="RowCell" x="0" y="0" width="401" height="21"/>
-                <textElement textAlignment="Left" verticalAlignment="Middle">
-                    <font size="10"/>
-                </textElement>
-                <text><![CDATA[ختم المكتب]]></text>
-            </staticText>
-
-            <textField isBlankWhenNull="true">
-                <reportElement style="RowCell" x="401" y="0" width="401" height="21"/>
-                <textElement textAlignment="Right" verticalAlignment="Middle">
-                    <font size="10"/>
-                </textElement>
-                <textFieldExpression><![CDATA["اسم المكتب   " + ($P{officeName} == null ? "" : $P{officeName})]]></textFieldExpression>
-            </textField>
+        <band height="85">
+            <subreport>
+                <reportElement x="0" y="0" width="802" height="85"/>
+                <subreportParameter name="officeName"><subreportParameterExpression><![CDATA[$P{officeName}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="digitalStampPath"><subreportParameterExpression><![CDATA[$P{digitalStampPath}]]></subreportParameterExpression></subreportParameter>
+                <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
+                <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{footerSubreport}]]></subreportExpression>
+            </subreport>
         </band>
     </summary>
 

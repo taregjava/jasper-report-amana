@@ -30,11 +30,13 @@
     <parameter name="photosBottomGridSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
     <parameter name="mainImagesSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
     <parameter name="requirementsPageSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
+    <parameter name="exteriorPhotosSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
     <parameter name="footerSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
 
     <!-- datasource for tasks table -->
     <parameter name="tableData" class="net.sf.jasperreports.engine.JRDataSource"/>
     <parameter name="requirementsData" class="net.sf.jasperreports.engine.JRDataSource"/>
+    <parameter name="exteriorPhotosData" class="net.sf.jasperreports.engine.JRDataSource"/>
     <parameter name="photosTopData" class="net.sf.jasperreports.engine.JRDataSource"/>
     <parameter name="photosBottomData" class="net.sf.jasperreports.engine.JRDataSource"/>
 
@@ -123,10 +125,11 @@
           1. BuildingComponentsGroup → combined boundary + building technical sheet
           2. MainImagesGroup     → main building images
           3. RequirementsPageGroup → requirements checklist page
-          4. TableSectionGroup   → checklist table
-          5. SitePhotosGroup     → site photos page
-          6. PhotosGridGroup     → photos top/bottom grid page
-          7. ChangesGroup        → changes & extra items
+          4. ExteriorPhotosGroup → outside-building photos
+          5. TableSectionGroup   → checklist table
+          6. SitePhotosGroup     → site photos page
+          7. PhotosGridGroup     → photos top/bottom grid page
+          8. ChangesGroup        → changes & extra items
          Final page is rendered by <summary> (inspection responsibility section).
          Declared order in XML: outermost first.
     -->
@@ -213,7 +216,7 @@
         </groupFooter>
     </group>
 
-    <!-- Middle group: footer renders after RequirementsPageGroup (checklist table) -->
+    <!-- Middle group: footer renders after ExteriorPhotosGroup (checklist table) -->
     <group name="TableSectionGroup">
         <groupExpression><![CDATA[1]]></groupExpression>
         <groupFooter>
@@ -226,6 +229,25 @@
                     <subreportParameter name="reportDate"><subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression></subreportParameter>
                     <dataSourceExpression><![CDATA[$P{tableData}]]></dataSourceExpression>
                     <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{tableSubreport}]]></subreportExpression>
+                </subreport>
+            </band>
+        </groupFooter>
+    </group>
+
+    <!-- Inner-middle group: footer renders after RequirementsPageGroup (exterior photos) -->
+    <group name="ExteriorPhotosGroup">
+        <groupExpression><![CDATA[1]]></groupExpression>
+        <groupFooter>
+            <band height="545" splitType="Stretch">
+                <subreport>
+                    <reportElement x="0" y="0" width="802" height="545"/>
+                    <subreportParameter name="headerSubreport"><subreportParameterExpression><![CDATA[$P{headerSubreport}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="reportLogo"><subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="reportDate"><subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="officeName"><subreportParameterExpression><![CDATA[$P{officeName}]]></subreportParameterExpression></subreportParameter>
+                    <dataSourceExpression><![CDATA[$P{exteriorPhotosData}]]></dataSourceExpression>
+                    <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{exteriorPhotosSubreport}]]></subreportExpression>
                 </subreport>
             </band>
         </groupFooter>

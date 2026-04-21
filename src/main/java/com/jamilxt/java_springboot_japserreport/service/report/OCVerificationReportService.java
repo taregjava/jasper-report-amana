@@ -46,6 +46,7 @@ public class OCVerificationReportService {
              InputStream footerIs = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_shared_footer.jrxml");
              InputStream mainImagesIs = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_main_images.jrxml");
              InputStream requirementsPageIs = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_requirements_page.jrxml");
+             InputStream exteriorPhotosIs = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_exterior_photos_page.jrxml");
              InputStream changesRowsIs = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_changes_rows.jrxml");
              InputStream changesPageIs = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_changes_page.jrxml");
              InputStream inspectionResponsibilityIs = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_inspection_responsibility.jrxml");
@@ -65,6 +66,7 @@ public class OCVerificationReportService {
             JasperReport footerRep = footerIs == null ? null : JasperCompileManager.compileReport(footerIs);
             JasperReport mainImagesRep = mainImagesIs == null ? null : JasperCompileManager.compileReport(mainImagesIs);
             JasperReport requirementsPageRep = requirementsPageIs == null ? null : JasperCompileManager.compileReport(requirementsPageIs);
+            JasperReport exteriorPhotosRep = exteriorPhotosIs == null ? null : JasperCompileManager.compileReport(exteriorPhotosIs);
             JasperReport changesRowsRep = changesRowsIs == null ? null : JasperCompileManager.compileReport(changesRowsIs);
             JasperReport changesPageRep = changesPageIs == null ? null : JasperCompileManager.compileReport(changesPageIs);
             JasperReport inspectionResponsibilityRep = inspectionResponsibilityIs == null ? null : JasperCompileManager.compileReport(inspectionResponsibilityIs);
@@ -113,12 +115,14 @@ public class OCVerificationReportService {
             params.put("footerSubreport", footerRep);
             params.put("mainImagesSubreport", mainImagesRep);
             params.put("requirementsPageSubreport", requirementsPageRep);
+            params.put("exteriorPhotosSubreport", exteriorPhotosRep);
             params.put("changesPageSubreport", changesPageRep);
             params.put("changesRowsSubreport", changesRowsRep);
             params.put("inspectionResponsibilitySubreport", inspectionResponsibilityRep);
             // pass table datasource
             params.put("tableData", tableDs);
             params.put("requirementsData", new JRBeanCollectionDataSource(rows));
+            params.put("exteriorPhotosData", buildExteriorPhotosData(params));
             params.put("boundaryComplianceData", staticBoundaryCompliance);
             params.put("buildingComponentsData", staticBuildingComponents);
             // static sample data for changes tables
@@ -234,6 +238,7 @@ public class OCVerificationReportService {
              InputStream footerIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_shared_footer.jrxml").getInputStream();
              InputStream mainImagesIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_main_images.jrxml").getInputStream();
              InputStream requirementsPageIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_requirements_page.jrxml").getInputStream();
+             InputStream exteriorPhotosIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_exterior_photos_page.jrxml").getInputStream();
              InputStream changesRowsIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_changes_rows.jrxml").getInputStream();
              InputStream changesPageIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_changes_page.jrxml").getInputStream();
              InputStream inspectionResponsibilityIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_inspection_responsibility.jrxml").getInputStream();
@@ -253,6 +258,7 @@ public class OCVerificationReportService {
             JasperReport footerRep = JasperCompileManager.compileReport(footerIs);
             JasperReport mainImagesRep = JasperCompileManager.compileReport(mainImagesIs);
             JasperReport requirementsPageRep = JasperCompileManager.compileReport(requirementsPageIs);
+            JasperReport exteriorPhotosRep = JasperCompileManager.compileReport(exteriorPhotosIs);
             JasperReport changesRowsRep = JasperCompileManager.compileReport(changesRowsIs);
             JasperReport changesPageRep = JasperCompileManager.compileReport(changesPageIs);
             JasperReport inspectionResponsibilityRep = JasperCompileManager.compileReport(inspectionResponsibilityIs);
@@ -276,11 +282,13 @@ public class OCVerificationReportService {
             params.put("footerSubreport", footerRep);
             params.put("mainImagesSubreport", mainImagesRep);
             params.put("requirementsPageSubreport", requirementsPageRep);
+            params.put("exteriorPhotosSubreport", exteriorPhotosRep);
             params.put("changesPageSubreport", changesPageRep);
             params.put("changesRowsSubreport", changesRowsRep);
             params.put("inspectionResponsibilitySubreport", inspectionResponsibilityRep);
             params.put("tableData", new JRBeanCollectionDataSource(tableRows));
             params.put("requirementsData", new JRBeanCollectionDataSource(tableRows));
+            params.put("exteriorPhotosData", buildExteriorPhotosData(params));
             // changes & extra items (padded to 8 rows)
             params.put("changesData",    buildTextRowsDataSource(dto.getChanges()));
             params.put("extraItemsData", buildTextRowsDataSource(dto.getExtraItems()));
@@ -607,10 +615,43 @@ public class OCVerificationReportService {
         return new JRBeanCollectionDataSource(rows);
     }
 
+    private JRBeanCollectionDataSource buildExteriorPhotosData(Map<String, Object> params) {
+        List<Map<String, Object>> base = new ArrayList<>();
+        base.add(exteriorPhotoRow("1", params.get("detailPhoto1"), (String) params.get("detailDescription1")));
+        base.add(exteriorPhotoRow("2", params.get("detailPhoto2"), (String) params.get("detailDescription2")));
+        base.add(exteriorPhotoRow("3", params.get("detailPhoto3"), (String) params.get("detailDescription3")));
+        base.add(exteriorPhotoRow("4", params.get("detailPhoto4"), (String) params.get("detailDescription4")));
+        base.add(exteriorPhotoRow("5", params.get("detailPhoto5"), (String) params.get("detailDescription5")));
+        base.add(exteriorPhotoRow("6", params.get("detailPhoto6"), (String) params.get("detailDescription6")));
+        base.add(exteriorPhotoRow("7", params.get("implementationPhoto1"), ""));
+        base.add(exteriorPhotoRow("8", params.get("implementationPhoto2"), ""));
+        base.add(exteriorPhotoRow("9", params.get("implementationPhoto3"), ""));
+        base.add(exteriorPhotoRow("10", params.get("implementationPhoto4"), ""));
+        base.add(exteriorPhotoRow("11", params.get("spatialPortalPhoto"), ""));
+
+        // Keep visual numbering RTL per row (e.g. 3,2,1 then 6,5,4).
+        List<Map<String, Object>> ordered = new ArrayList<>();
+        for (int i = 0; i < base.size(); i += 3) {
+            int end = Math.min(i + 3, base.size());
+            for (int j = end - 1; j >= i; j--) {
+                ordered.add(base.get(j));
+            }
+        }
+        return new JRBeanCollectionDataSource(ordered);
+    }
+
     private Map<String, Object> photoRow(String title, Object image) {
         Map<String, Object> row = new HashMap<>();
         row.put("title", title);
         row.put("image", image);
+        return row;
+    }
+
+    private Map<String, Object> exteriorPhotoRow(String number, Object image, String description) {
+        Map<String, Object> row = new HashMap<>();
+        row.put("number", number);
+        row.put("image", image);
+        row.put("description", safeText(description));
         return row;
     }
 
