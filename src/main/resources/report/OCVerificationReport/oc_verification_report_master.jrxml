@@ -5,7 +5,7 @@
               name="oc_verification_report_master"
               pageWidth="842"
               pageHeight="595"
-              isSummaryNewPage="true"
+              isSummaryNewPage="false"
               orientation="Landscape"
               columnWidth="802"
               leftMargin="20"
@@ -126,11 +126,33 @@
     -->
 
 
+    <!-- Final group: render inspection responsibility as last page without summary pagination side-effects -->
+    <group name="InspectionResponsibilityGroup">
+        <groupExpression><![CDATA[1]]></groupExpression>
+        <groupFooter>
+            <band height="545" splitType="Prevent">
+                <printWhenExpression><![CDATA[Boolean.TRUE.equals($P{hasInspectionResponsibilityData})]]></printWhenExpression>
+                <subreport>
+                    <reportElement x="0" y="0" width="802" height="545"/>
+                    <subreportParameter name="headerSubreport"><subreportParameterExpression><![CDATA[$P{headerSubreport}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="reportLogo"><subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="reportDate"><subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="spatialPortalPhoto"><subreportParameterExpression><![CDATA[$P{spatialPortalPhoto}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="implementationPhoto"><subreportParameterExpression><![CDATA[$P{implementationPhoto}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="aerialPhoto"><subreportParameterExpression><![CDATA[$P{aerialPhoto}]]></subreportParameterExpression></subreportParameter>
+                    <dataSourceExpression><![CDATA[$P{inspectionResponsibilityData}]]></dataSourceExpression>
+                    <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{inspectionResponsibilitySubreport}]]></subreportExpression>
+                </subreport>
+            </band>
+        </groupFooter>
+    </group>
+
     <!-- Inner-middle group: render internal photos as the second page in this pair -->
     <group name="InternalPhotosGroup">
         <groupExpression><![CDATA[1]]></groupExpression>
         <groupFooter>
-            <band height="595" splitType="Stretch">
+            <band height="595" splitType="Prevent">
                 <printWhenExpression><![CDATA[Boolean.TRUE.equals($P{hasInternalPhotosPage})]]></printWhenExpression>
                 <subreport>
                     <reportElement x="0" y="0" width="802" height="595"/>
@@ -164,7 +186,7 @@
     <group name="ExteriorPhotosGroup">
         <groupExpression><![CDATA[1]]></groupExpression>
         <groupFooter>
-            <band height="595" splitType="Stretch">
+            <band height="595" splitType="Prevent">
                 <printWhenExpression><![CDATA[Boolean.TRUE.equals($P{hasExteriorPhotosPage})]]></printWhenExpression>
                 <subreport>
                     <reportElement x="0" y="0" width="802" height="595"/>
@@ -186,7 +208,7 @@
     <group name="RequirementsPageGroup">
         <groupExpression><![CDATA[1]]></groupExpression>
         <groupFooter>
-            <band height="595" splitType="Stretch">
+            <band height="595" splitType="Prevent">
                 <printWhenExpression><![CDATA[Boolean.TRUE.equals($P{hasRequirementsPage})]]></printWhenExpression>
                 <subreport>
                     <reportElement x="0" y="0" width="802" height="595"/>
@@ -208,7 +230,7 @@
     <group name="MainImagesGroup">
         <groupExpression><![CDATA[1]]></groupExpression>
         <groupFooter>
-            <band height="595" splitType="Stretch">
+            <band height="595" splitType="Prevent">
                 <subreport>
                     <reportElement x="0" y="0" width="802" height="595"/>
                     <subreportParameter name="headerSubreport"><subreportParameterExpression><![CDATA[$P{headerSubreport}]]></subreportParameterExpression></subreportParameter>
@@ -245,7 +267,7 @@
     <group name="BuildingComponentsGroup">
         <groupExpression><![CDATA[1]]></groupExpression>
         <groupFooter>
-            <band height="595" splitType="Stretch">
+            <band height="595" splitType="Prevent">
                 <subreport>
                     <reportElement x="0" y="0" width="802" height="595"/>
                     <subreportParameter name="headerSubreport"><subreportParameterExpression><![CDATA[$P{headerSubreport}]]></subreportParameterExpression></subreportParameter>
@@ -345,23 +367,6 @@
         </band>
     </detail>
 
-    <summary>
-        <band height="545" splitType="Stretch">
-            <printWhenExpression><![CDATA[Boolean.TRUE.equals($P{hasInspectionResponsibilityData})]]></printWhenExpression>
-            <subreport>
-                <reportElement x="0" y="0" width="802" height="545"/>
-                <subreportParameter name="headerSubreport"><subreportParameterExpression><![CDATA[$P{headerSubreport}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="reportLogo"><subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="reportDate"><subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="spatialPortalPhoto"><subreportParameterExpression><![CDATA[$P{spatialPortalPhoto}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="implementationPhoto"><subreportParameterExpression><![CDATA[$P{implementationPhoto}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="aerialPhoto"><subreportParameterExpression><![CDATA[$P{aerialPhoto}]]></subreportParameterExpression></subreportParameter>
-                <dataSourceExpression><![CDATA[$P{inspectionResponsibilityData}]]></dataSourceExpression>
-                <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{inspectionResponsibilitySubreport}]]></subreportExpression>
-            </subreport>
-        </band>
-    </summary>
 
 </jasperReport>
 

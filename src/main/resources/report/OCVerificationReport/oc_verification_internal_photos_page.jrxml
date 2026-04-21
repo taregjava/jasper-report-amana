@@ -23,7 +23,7 @@
 	<parameter name="officeName" class="java.lang.String"/>
 	<parameter name="digitalStampPath" class="java.lang.Object"/>
 	<detail>
-		<band height="510">
+		<band height="545">
 			<subreport>
 				<reportElement x="0" y="0" width="802" height="100" uuid="4d63c4a3-6f0e-4f56-b871-0828bad9c987"/>
 				<subreportParameter name="reportLogo">
@@ -276,19 +276,13 @@
 					<textFieldExpression><![CDATA[$P{detailDescription6} == null || $P{detailDescription6}.trim().isEmpty() ? "................................................" : $P{detailDescription6}]]></textFieldExpression>
 				</textField>
 			</frame>
-		</band>
-	</detail>
-	<pageFooter>
-		<band height="85">
 			<subreport>
-				<reportElement x="0" y="0" width="802" height="85">
-					<printWhenExpression><![CDATA[$V{PAGE_NUMBER}.intValue() == 1]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="0" y="460" width="802" height="85" uuid="0c0d4d27-9cf7-462c-b1cf-1d9ed7b1f04b"/>
 				<subreportParameter name="officeName"><subreportParameterExpression><![CDATA[$P{officeName}]]></subreportParameterExpression></subreportParameter>
 				<subreportParameter name="digitalStampPath"><subreportParameterExpression><![CDATA[$P{digitalStampPath}]]></subreportParameterExpression></subreportParameter>
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{footerSubreport}]]></subreportExpression>
 			</subreport>
 		</band>
-	</pageFooter>
+	</detail>
 </jasperReport>

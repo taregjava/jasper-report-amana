@@ -698,7 +698,7 @@ public class OCVerificationReportService {
     private JRDataSource buildInspectionResponsibilityDataSource(InspectionResponsibilityDTO data) {
         InspectionResponsibilityDTO dto = data == null ? new InspectionResponsibilityDTO() : data;
         List<String> notes = dto.getInspectionNotes() == null ? new ArrayList<>() : new ArrayList<>(dto.getInspectionNotes());
-        while (notes.size() < 3) {
+        while (notes.size() < 12) {
             notes.add("");
         }
 
