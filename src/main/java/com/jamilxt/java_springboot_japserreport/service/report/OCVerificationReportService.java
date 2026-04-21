@@ -38,15 +38,11 @@ public class OCVerificationReportService {
              InputStream buildingIs = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_report_building.jrxml");
              InputStream boundaryComplianceIs = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_boundary_compliance.jrxml");
              InputStream buildingComponentsIs = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_building_components.jrxml");
-             InputStream tableIs  = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_report_table.jrxml");
-             InputStream photosIs = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_report_photos.jrxml");
-             InputStream sitePhotosIs = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_site_photos_page.jrxml");
-             InputStream photosTopGridIs = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_report_photos_top_grid.jrxml");
-             InputStream photosBottomGridIs = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_report_photos_bottom_grid.jrxml");
              InputStream footerIs = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_shared_footer.jrxml");
              InputStream mainImagesIs = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_main_images.jrxml");
              InputStream requirementsPageIs = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_requirements_page.jrxml");
              InputStream exteriorPhotosIs = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_exterior_photos_page.jrxml");
+             InputStream internalPhotosIs = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_internal_photos_page.jrxml");
              InputStream changesRowsIs = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_changes_rows.jrxml");
              InputStream changesPageIs = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_changes_page.jrxml");
              InputStream inspectionResponsibilityIs = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_inspection_responsibility.jrxml");
@@ -58,15 +54,11 @@ public class OCVerificationReportService {
             JasperReport buildingRep = JasperCompileManager.compileReport(buildingIs);
             JasperReport boundaryComplianceRep = boundaryComplianceIs == null ? null : JasperCompileManager.compileReport(boundaryComplianceIs);
             JasperReport buildingComponentsRep = buildingComponentsIs == null ? null : JasperCompileManager.compileReport(buildingComponentsIs);
-            JasperReport tableRep  = JasperCompileManager.compileReport(tableIs);
-            JasperReport photosRep = JasperCompileManager.compileReport(photosIs);
-            JasperReport sitePhotosRep = sitePhotosIs == null ? null : JasperCompileManager.compileReport(sitePhotosIs);
-            JasperReport photosTopGridRep = JasperCompileManager.compileReport(photosTopGridIs);
-            JasperReport photosBottomGridRep = JasperCompileManager.compileReport(photosBottomGridIs);
             JasperReport footerRep = footerIs == null ? null : JasperCompileManager.compileReport(footerIs);
             JasperReport mainImagesRep = mainImagesIs == null ? null : JasperCompileManager.compileReport(mainImagesIs);
             JasperReport requirementsPageRep = requirementsPageIs == null ? null : JasperCompileManager.compileReport(requirementsPageIs);
             JasperReport exteriorPhotosRep = exteriorPhotosIs == null ? null : JasperCompileManager.compileReport(exteriorPhotosIs);
+            JasperReport internalPhotosRep = internalPhotosIs == null ? null : JasperCompileManager.compileReport(internalPhotosIs);
             JasperReport changesRowsRep = changesRowsIs == null ? null : JasperCompileManager.compileReport(changesRowsIs);
             JasperReport changesPageRep = changesPageIs == null ? null : JasperCompileManager.compileReport(changesPageIs);
             JasperReport inspectionResponsibilityRep = inspectionResponsibilityIs == null ? null : JasperCompileManager.compileReport(inspectionResponsibilityIs);
@@ -107,22 +99,16 @@ public class OCVerificationReportService {
             params.put("buildingSubreport", buildingRep);
             params.put("boundaryComplianceSubreport", boundaryComplianceRep);
             params.put("buildingComponentsSubreport", buildingComponentsRep);
-            params.put("tableSubreport", tableRep);
-            params.put("photosSubreport", photosRep);
-            params.put("sitePhotosSubreport", sitePhotosRep);
-            params.put("photosTopGridSubreport", photosTopGridRep);
-            params.put("photosBottomGridSubreport", photosBottomGridRep);
             params.put("footerSubreport", footerRep);
             params.put("mainImagesSubreport", mainImagesRep);
             params.put("requirementsPageSubreport", requirementsPageRep);
             params.put("exteriorPhotosSubreport", exteriorPhotosRep);
+            params.put("internalPhotosSubreport", internalPhotosRep);
             params.put("changesPageSubreport", changesPageRep);
             params.put("changesRowsSubreport", changesRowsRep);
             params.put("inspectionResponsibilitySubreport", inspectionResponsibilityRep);
             // pass table datasource
-            params.put("tableData", tableDs);
             params.put("requirementsData", new JRBeanCollectionDataSource(rows));
-            params.put("exteriorPhotosData", buildExteriorPhotosData(params));
             params.put("boundaryComplianceData", staticBoundaryCompliance);
             params.put("buildingComponentsData", staticBuildingComponents);
             // static sample data for changes tables
@@ -212,8 +198,9 @@ public class OCVerificationReportService {
             params.put("digitalStampPath", resolveImageSource("classpath:report/logo.png"));
 
             // Build photo datasources after photo params are filled.
-            params.put("photosTopData", buildTopPhotoRows(params));
-            params.put("photosBottomData", buildBottomPhotoRows(params));
+            params.put("exteriorPhotosData", buildExteriorPhotosData(params));
+            params.put("internalPhotosData", buildInternalPhotosData(params));
+            // photos top/bottom grid page was removed for OC verification.
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(masterRep, params, new net.sf.jasperreports.engine.JREmptyDataSource());
 
@@ -230,15 +217,11 @@ public class OCVerificationReportService {
              InputStream buildingIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_report_building.jrxml").getInputStream();
              InputStream boundaryComplianceIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_boundary_compliance.jrxml").getInputStream();
              InputStream buildingComponentsIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_building_components.jrxml").getInputStream();
-             InputStream tableIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_report_table.jrxml").getInputStream();
-             InputStream photosIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_report_photos.jrxml").getInputStream();
-             InputStream sitePhotosIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_site_photos_page.jrxml").getInputStream();
-             InputStream photosTopGridIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_report_photos_top_grid.jrxml").getInputStream();
-             InputStream photosBottomGridIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_report_photos_bottom_grid.jrxml").getInputStream();
              InputStream footerIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_shared_footer.jrxml").getInputStream();
              InputStream mainImagesIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_main_images.jrxml").getInputStream();
              InputStream requirementsPageIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_requirements_page.jrxml").getInputStream();
              InputStream exteriorPhotosIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_exterior_photos_page.jrxml").getInputStream();
+             InputStream internalPhotosIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_internal_photos_page.jrxml").getInputStream();
              InputStream changesRowsIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_changes_rows.jrxml").getInputStream();
              InputStream changesPageIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_changes_page.jrxml").getInputStream();
              InputStream inspectionResponsibilityIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_inspection_responsibility.jrxml").getInputStream();
@@ -250,15 +233,11 @@ public class OCVerificationReportService {
             JasperReport buildingRep = JasperCompileManager.compileReport(buildingIs);
             JasperReport boundaryComplianceRep = JasperCompileManager.compileReport(boundaryComplianceIs);
             JasperReport buildingComponentsRep = JasperCompileManager.compileReport(buildingComponentsIs);
-            JasperReport tableRep = JasperCompileManager.compileReport(tableIs);
-            JasperReport photosRep = JasperCompileManager.compileReport(photosIs);
-            JasperReport sitePhotosRep = JasperCompileManager.compileReport(sitePhotosIs);
-            JasperReport photosTopGridRep = JasperCompileManager.compileReport(photosTopGridIs);
-            JasperReport photosBottomGridRep = JasperCompileManager.compileReport(photosBottomGridIs);
             JasperReport footerRep = JasperCompileManager.compileReport(footerIs);
             JasperReport mainImagesRep = JasperCompileManager.compileReport(mainImagesIs);
             JasperReport requirementsPageRep = JasperCompileManager.compileReport(requirementsPageIs);
             JasperReport exteriorPhotosRep = JasperCompileManager.compileReport(exteriorPhotosIs);
+            JasperReport internalPhotosRep = JasperCompileManager.compileReport(internalPhotosIs);
             JasperReport changesRowsRep = JasperCompileManager.compileReport(changesRowsIs);
             JasperReport changesPageRep = JasperCompileManager.compileReport(changesPageIs);
             JasperReport inspectionResponsibilityRep = JasperCompileManager.compileReport(inspectionResponsibilityIs);
@@ -274,21 +253,15 @@ public class OCVerificationReportService {
             params.put("buildingSubreport", buildingRep);
             params.put("boundaryComplianceSubreport", boundaryComplianceRep);
             params.put("buildingComponentsSubreport", buildingComponentsRep);
-            params.put("tableSubreport", tableRep);
-            params.put("photosSubreport", photosRep);
-            params.put("sitePhotosSubreport", sitePhotosRep);
-            params.put("photosTopGridSubreport", photosTopGridRep);
-            params.put("photosBottomGridSubreport", photosBottomGridRep);
             params.put("footerSubreport", footerRep);
             params.put("mainImagesSubreport", mainImagesRep);
             params.put("requirementsPageSubreport", requirementsPageRep);
             params.put("exteriorPhotosSubreport", exteriorPhotosRep);
+            params.put("internalPhotosSubreport", internalPhotosRep);
             params.put("changesPageSubreport", changesPageRep);
             params.put("changesRowsSubreport", changesRowsRep);
             params.put("inspectionResponsibilitySubreport", inspectionResponsibilityRep);
-            params.put("tableData", new JRBeanCollectionDataSource(tableRows));
             params.put("requirementsData", new JRBeanCollectionDataSource(tableRows));
-            params.put("exteriorPhotosData", buildExteriorPhotosData(params));
             // changes & extra items (padded to 8 rows)
             params.put("changesData",    buildTextRowsDataSource(dto.getChanges()));
             params.put("extraItemsData", buildTextRowsDataSource(dto.getExtraItems()));
@@ -394,8 +367,9 @@ public class OCVerificationReportService {
             params.put("detailDescription6", photos == null ? "" : safeText(photos.getDetailDescription6()));
             params.put("officeName", photos == null ? "" : photos.getOfficeName());
             params.put("digitalStampPath", photos == null ? null : resolveImageSource(photos.getDigitalStampPath()));
-            params.put("photosTopData", buildTopPhotoRows(params));
-            params.put("photosBottomData", buildBottomPhotoRows(params));
+            params.put("exteriorPhotosData", buildExteriorPhotosData(params));
+            params.put("internalPhotosData", buildInternalPhotosData(params));
+            // photos top/bottom grid page was removed for OC verification.
 
             // load logo resource into report param if available
             try (InputStream is = resourceLoader.getResource("classpath:report/logoSite.png").getInputStream()) {
@@ -638,6 +612,17 @@ public class OCVerificationReportService {
             }
         }
         return new JRBeanCollectionDataSource(ordered);
+    }
+
+    private JRBeanCollectionDataSource buildInternalPhotosData(Map<String, Object> params) {
+        List<Map<String, Object>> rows = new ArrayList<>();
+        rows.add(exteriorPhotoRow("1", params.get("detailPhoto1"), (String) params.get("detailDescription1")));
+        rows.add(exteriorPhotoRow("2", params.get("detailPhoto2"), (String) params.get("detailDescription2")));
+        rows.add(exteriorPhotoRow("3", params.get("detailPhoto3"), (String) params.get("detailDescription3")));
+        rows.add(exteriorPhotoRow("4", params.get("detailPhoto4"), (String) params.get("detailDescription4")));
+        rows.add(exteriorPhotoRow("5", params.get("detailPhoto5"), (String) params.get("detailDescription5")));
+        rows.add(exteriorPhotoRow("6", params.get("detailPhoto6"), (String) params.get("detailDescription6")));
+        return new JRBeanCollectionDataSource(rows);
     }
 
     private Map<String, Object> photoRow(String title, Object image) {
