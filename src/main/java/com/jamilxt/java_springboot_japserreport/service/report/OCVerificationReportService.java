@@ -43,8 +43,6 @@ public class OCVerificationReportService {
              InputStream requirementsPageIs = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_requirements_page.jrxml");
              InputStream exteriorPhotosIs = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_exterior_photos_page.jrxml");
              InputStream internalPhotosIs = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_internal_photos_page.jrxml");
-             InputStream changesRowsIs = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_changes_rows.jrxml");
-             InputStream changesPageIs = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_changes_page.jrxml");
              InputStream inspectionResponsibilityIs = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_inspection_responsibility.jrxml");
              InputStream masterIs = getClass().getResourceAsStream("/report/OCVerificationReport/oc_verification_report_master.jrxml")) {
 
@@ -59,8 +57,6 @@ public class OCVerificationReportService {
             JasperReport requirementsPageRep = requirementsPageIs == null ? null : JasperCompileManager.compileReport(requirementsPageIs);
             JasperReport exteriorPhotosRep = exteriorPhotosIs == null ? null : JasperCompileManager.compileReport(exteriorPhotosIs);
             JasperReport internalPhotosRep = internalPhotosIs == null ? null : JasperCompileManager.compileReport(internalPhotosIs);
-            JasperReport changesRowsRep = changesRowsIs == null ? null : JasperCompileManager.compileReport(changesRowsIs);
-            JasperReport changesPageRep = changesPageIs == null ? null : JasperCompileManager.compileReport(changesPageIs);
             JasperReport inspectionResponsibilityRep = inspectionResponsibilityIs == null ? null : JasperCompileManager.compileReport(inspectionResponsibilityIs);
             JasperReport masterRep = JasperCompileManager.compileReport(masterIs);
 
@@ -104,24 +100,16 @@ public class OCVerificationReportService {
             params.put("requirementsPageSubreport", requirementsPageRep);
             params.put("exteriorPhotosSubreport", exteriorPhotosRep);
             params.put("internalPhotosSubreport", internalPhotosRep);
-            params.put("changesPageSubreport", changesPageRep);
-            params.put("changesRowsSubreport", changesRowsRep);
             params.put("inspectionResponsibilitySubreport", inspectionResponsibilityRep);
             // pass table datasource
             params.put("requirementsData", new JRBeanCollectionDataSource(rows));
             params.put("boundaryComplianceData", staticBoundaryCompliance);
             params.put("buildingComponentsData", staticBuildingComponents);
-            // static sample data for changes tables
-            params.put("changesData",    buildTextRowsDataSource(java.util.List.of(
-                    "تعديل موقع النافذة في الواجهة الشمالية",
-                    "تغيير مقاس باب المدخل الرئيسي من 100 إلى 120 سم"
-            )));
-            params.put("extraItemsData", buildTextRowsDataSource(java.util.List.of(
-                    "لم يتم تركيب حواجز السلامة على السطح"
-            )));
+            // Changes page removed from OC verification flow.
             InspectionResponsibilityDTO staticInspection = buildStaticInspectionResponsibility();
             params.put("inspectionResponsibilityData", buildInspectionResponsibilityDataSource(staticInspection));
             params.put("hasInspectionResponsibilityData", hasInspectionResponsibilityData(staticInspection));
+            params.put("hasRequirementsPage", !rows.isEmpty());
 
             // header/body params (example)
             // load logo as byte[] so Jasper/iText can recognize the image format reliably during export
@@ -196,6 +184,17 @@ public class OCVerificationReportService {
             params.put("detailDescription6", "توضيح الصورة 6");
             params.put("officeName", "المكتب الهندسي النموذجي");
             params.put("digitalStampPath", resolveImageSource("classpath:report/logo.png"));
+            params.put("hasExteriorPhotosPage", hasAnyPhoto(
+                    params.get("detailPhoto1"), params.get("detailPhoto2"), params.get("detailPhoto3"),
+                    params.get("detailPhoto4"), params.get("detailPhoto5"), params.get("detailPhoto6"),
+                    params.get("implementationPhoto1"), params.get("implementationPhoto2"),
+                    params.get("implementationPhoto3"), params.get("implementationPhoto4"),
+                    params.get("spatialPortalPhoto"), params.get("implementationPhoto"), params.get("aerialPhoto")
+            ));
+            params.put("hasInternalPhotosPage", hasAnyPhoto(
+                    params.get("detailPhoto1"), params.get("detailPhoto2"), params.get("detailPhoto3"),
+                    params.get("detailPhoto4"), params.get("detailPhoto5"), params.get("detailPhoto6")
+            ));
 
             // Build photo datasources after photo params are filled.
             params.put("exteriorPhotosData", buildExteriorPhotosData(params));
@@ -222,8 +221,6 @@ public class OCVerificationReportService {
              InputStream requirementsPageIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_requirements_page.jrxml").getInputStream();
              InputStream exteriorPhotosIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_exterior_photos_page.jrxml").getInputStream();
              InputStream internalPhotosIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_internal_photos_page.jrxml").getInputStream();
-             InputStream changesRowsIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_changes_rows.jrxml").getInputStream();
-             InputStream changesPageIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_changes_page.jrxml").getInputStream();
              InputStream inspectionResponsibilityIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_inspection_responsibility.jrxml").getInputStream();
              InputStream masterIs = resourceLoader.getResource("classpath:report/OCVerificationReport/oc_verification_report_master.jrxml").getInputStream()) {
 
@@ -238,8 +235,6 @@ public class OCVerificationReportService {
             JasperReport requirementsPageRep = JasperCompileManager.compileReport(requirementsPageIs);
             JasperReport exteriorPhotosRep = JasperCompileManager.compileReport(exteriorPhotosIs);
             JasperReport internalPhotosRep = JasperCompileManager.compileReport(internalPhotosIs);
-            JasperReport changesRowsRep = JasperCompileManager.compileReport(changesRowsIs);
-            JasperReport changesPageRep = JasperCompileManager.compileReport(changesPageIs);
             JasperReport inspectionResponsibilityRep = JasperCompileManager.compileReport(inspectionResponsibilityIs);
             JasperReport masterReport = JasperCompileManager.compileReport(masterIs);
 
@@ -258,17 +253,14 @@ public class OCVerificationReportService {
             params.put("requirementsPageSubreport", requirementsPageRep);
             params.put("exteriorPhotosSubreport", exteriorPhotosRep);
             params.put("internalPhotosSubreport", internalPhotosRep);
-            params.put("changesPageSubreport", changesPageRep);
-            params.put("changesRowsSubreport", changesRowsRep);
             params.put("inspectionResponsibilitySubreport", inspectionResponsibilityRep);
             params.put("requirementsData", new JRBeanCollectionDataSource(tableRows));
-            // changes & extra items (padded to 8 rows)
-            params.put("changesData",    buildTextRowsDataSource(dto.getChanges()));
-            params.put("extraItemsData", buildTextRowsDataSource(dto.getExtraItems()));
+            // Changes page removed from OC verification flow.
             params.put("inspectionResponsibilityData", buildInspectionResponsibilityDataSource(dto.getInspectionResponsibility()));
             params.put("hasInspectionResponsibilityData", hasInspectionResponsibilityData(dto.getInspectionResponsibility()));
             params.put("boundaryComplianceData", buildStaticBoundaryCompliance());
             params.put("buildingComponentsData", buildStaticBuildingComponents());
+            params.put("hasRequirementsPage", !tableRows.isEmpty());
 
             // owner/building values: prefer OwnerInfo / BuildingInfo when present
             String ownerName = null;
@@ -367,6 +359,17 @@ public class OCVerificationReportService {
             params.put("detailDescription6", photos == null ? "" : safeText(photos.getDetailDescription6()));
             params.put("officeName", photos == null ? "" : photos.getOfficeName());
             params.put("digitalStampPath", photos == null ? null : resolveImageSource(photos.getDigitalStampPath()));
+            params.put("hasExteriorPhotosPage", hasAnyPhoto(
+                    params.get("detailPhoto1"), params.get("detailPhoto2"), params.get("detailPhoto3"),
+                    params.get("detailPhoto4"), params.get("detailPhoto5"), params.get("detailPhoto6"),
+                    params.get("implementationPhoto1"), params.get("implementationPhoto2"),
+                    params.get("implementationPhoto3"), params.get("implementationPhoto4"),
+                    params.get("spatialPortalPhoto"), params.get("implementationPhoto"), params.get("aerialPhoto")
+            ));
+            params.put("hasInternalPhotosPage", hasAnyPhoto(
+                    params.get("detailPhoto1"), params.get("detailPhoto2"), params.get("detailPhoto3"),
+                    params.get("detailPhoto4"), params.get("detailPhoto5"), params.get("detailPhoto6")
+            ));
             params.put("exteriorPhotosData", buildExteriorPhotosData(params));
             params.put("internalPhotosData", buildInternalPhotosData(params));
             // photos top/bottom grid page was removed for OC verification.
@@ -562,6 +565,31 @@ public class OCVerificationReportService {
 
     private String normalizeFlagText(String text) {
         return safeText(text).replace("-", "").replace(" ", "").trim().toLowerCase();
+    }
+
+    private boolean hasAnyPhoto(Object... values) {
+        if (values == null) {
+            return false;
+        }
+        for (Object value : values) {
+            if (value == null) {
+                continue;
+            }
+            if (value instanceof byte[]) {
+                if (((byte[]) value).length > 0) {
+                    return true;
+                }
+                continue;
+            }
+            if (value instanceof String) {
+                if (!((String) value).trim().isEmpty()) {
+                    return true;
+                }
+                continue;
+            }
+            return true;
+        }
+        return false;
     }
 
     private JRBeanCollectionDataSource buildTopPhotoRows(Map<String, Object> params) {

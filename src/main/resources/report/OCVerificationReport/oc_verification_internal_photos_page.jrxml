@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.21.5.final using JasperReports Library version 6.21.5-74d586df47b25dbd05bd0957999819196e59934a  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="oc_verification_internal_photos_page" pageWidth="842" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" uuid="a98cfb2c-9385-4879-8edd-1b0d7861b39b">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="oc_verification_internal_photos_page" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" uuid="a98cfb2c-9385-4879-8edd-1b0d7861b39b">
 	<property name="net.sf.jasperreports.text.direction" value="RTL"/>
 	<style name="Default" isDefault="true" fontName="SansSerif" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 	<parameter name="headerSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
@@ -77,8 +77,8 @@
 					</textElement>
 					<text><![CDATA[وصف الصورة /]]></text>
 				</staticText>
-				<textField isBlankWhenNull="true" isStretchWithOverflow="true">
-					<reportElement x="6" y="13" width="255" height="22" positionType="Float" uuid="3fd6bf7b-16de-48d2-bfb9-7c8434b97df1"/>
+				<textField isBlankWhenNull="true">
+					<reportElement x="6" y="13" width="255" height="22" uuid="3fd6bf7b-16de-48d2-bfb9-7c8434b97df1"/>
 					<box leftPadding="2" rightPadding="4" topPadding="1" bottomPadding="1"/>
 					<textElement textAlignment="Right" verticalAlignment="Top">
 						<font size="7"/>
@@ -115,8 +115,8 @@
 					</textElement>
 					<text><![CDATA[وصف الصورة /]]></text>
 				</staticText>
-				<textField isBlankWhenNull="true" isStretchWithOverflow="true">
-					<reportElement x="6" y="13" width="255" height="22" positionType="Float" uuid="e9c0f2b0-1984-4743-a099-ec2054cc3e92"/>
+				<textField isBlankWhenNull="true">
+					<reportElement x="6" y="13" width="255" height="22" uuid="e9c0f2b0-1984-4743-a099-ec2054cc3e92"/>
 					<box leftPadding="2" rightPadding="4" topPadding="1" bottomPadding="1"/>
 					<textElement textAlignment="Right" verticalAlignment="Top">
 						<font size="7"/>
@@ -153,8 +153,8 @@
 					</textElement>
 					<text><![CDATA[وصف الصورة /]]></text>
 				</staticText>
-				<textField isBlankWhenNull="true" isStretchWithOverflow="true">
-					<reportElement x="6" y="13" width="256" height="22" positionType="Float" uuid="3c6bb9a3-f8e6-4d45-b3b6-c5f2614a583a"/>
+				<textField isBlankWhenNull="true">
+					<reportElement x="6" y="13" width="256" height="22" uuid="3c6bb9a3-f8e6-4d45-b3b6-c5f2614a583a"/>
 					<box leftPadding="2" rightPadding="4" topPadding="1" bottomPadding="1"/>
 					<textElement textAlignment="Right" verticalAlignment="Top">
 						<font size="7"/>
@@ -191,8 +191,8 @@
 					</textElement>
 					<text><![CDATA[وصف الصورة /]]></text>
 				</staticText>
-				<textField isBlankWhenNull="true" isStretchWithOverflow="true">
-					<reportElement x="6" y="13" width="255" height="30" positionType="Float" uuid="9b4089d9-8b2a-442d-a9a9-ee7065c50350"/>
+				<textField isBlankWhenNull="true">
+					<reportElement x="6" y="13" width="255" height="30" uuid="9b4089d9-8b2a-442d-a9a9-ee7065c50350"/>
 					<box leftPadding="2" rightPadding="4" topPadding="1" bottomPadding="1"/>
 					<textElement textAlignment="Right" verticalAlignment="Top">
 						<font size="7"/>
@@ -229,8 +229,8 @@
 					</textElement>
 					<text><![CDATA[وصف الصورة /]]></text>
 				</staticText>
-				<textField isBlankWhenNull="true" isStretchWithOverflow="true">
-					<reportElement x="6" y="13" width="255" height="30" positionType="Float" uuid="b9698ec9-76b6-4472-aa8c-c60ab0992f93"/>
+				<textField isBlankWhenNull="true">
+					<reportElement x="6" y="13" width="255" height="30" uuid="b9698ec9-76b6-4472-aa8c-c60ab0992f93"/>
 					<box leftPadding="2" rightPadding="4" topPadding="1" bottomPadding="1"/>
 					<textElement textAlignment="Right" verticalAlignment="Top">
 						<font size="7"/>
@@ -267,8 +267,8 @@
 					</textElement>
 					<text><![CDATA[وصف الصورة /]]></text>
 				</staticText>
-				<textField isBlankWhenNull="true" isStretchWithOverflow="true">
-					<reportElement x="6" y="13" width="256" height="30" positionType="Float" uuid="42904f8d-bc9f-4904-a6d1-dc3bbdb2bcd7"/>
+				<textField isBlankWhenNull="true">
+					<reportElement x="6" y="13" width="256" height="30" uuid="42904f8d-bc9f-4904-a6d1-dc3bbdb2bcd7"/>
 					<box leftPadding="2" rightPadding="4" topPadding="1" bottomPadding="1"/>
 					<textElement textAlignment="Right" verticalAlignment="Top">
 						<font size="7"/>
@@ -278,15 +278,17 @@
 			</frame>
 		</band>
 	</detail>
-    <summary>
+	<pageFooter>
 		<band height="85">
 			<subreport>
-				<reportElement x="0" y="0" width="802" height="85"/>
+				<reportElement x="0" y="0" width="802" height="85">
+					<printWhenExpression><![CDATA[$V{PAGE_NUMBER}.intValue() == 1]]></printWhenExpression>
+				</reportElement>
 				<subreportParameter name="officeName"><subreportParameterExpression><![CDATA[$P{officeName}]]></subreportParameterExpression></subreportParameter>
 				<subreportParameter name="digitalStampPath"><subreportParameterExpression><![CDATA[$P{digitalStampPath}]]></subreportParameterExpression></subreportParameter>
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{footerSubreport}]]></subreportExpression>
 			</subreport>
 		</band>
-    </summary>
+	</pageFooter>
 </jasperReport>

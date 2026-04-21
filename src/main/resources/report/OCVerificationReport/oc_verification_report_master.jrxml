@@ -10,8 +10,8 @@
               columnWidth="802"
               leftMargin="20"
               rightMargin="20"
-              topMargin="20"
-              bottomMargin="20"
+              topMargin="0"
+              bottomMargin="0"
               language="java">
 
     <property name="net.sf.jasperreports.text.direction" value="RTL"/>
@@ -33,6 +33,9 @@
     <parameter name="requirementsData" class="net.sf.jasperreports.engine.JRDataSource"/>
     <parameter name="exteriorPhotosData" class="net.sf.jasperreports.engine.JRDataSource"/>
     <parameter name="internalPhotosData" class="net.sf.jasperreports.engine.JRDataSource"/>
+    <parameter name="hasRequirementsPage" class="java.lang.Boolean"/>
+    <parameter name="hasExteriorPhotosPage" class="java.lang.Boolean"/>
+    <parameter name="hasInternalPhotosPage" class="java.lang.Boolean"/>
 
     <!-- propagate other header/body params as needed (declare commonly used ones) -->
     <parameter name="reportLogo" class="java.lang.Object"/>
@@ -103,11 +106,7 @@
     <!-- compiled owner subreport JasperReport instance -->
     <parameter name="ownerSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
 
-    <!-- Changes page subreports + datasources -->
-    <parameter name="changesPageSubreport"  class="net.sf.jasperreports.engine.JasperReport"/>
-    <parameter name="changesRowsSubreport"  class="net.sf.jasperreports.engine.JasperReport"/>
-    <parameter name="changesData"           class="net.sf.jasperreports.engine.JRDataSource"/>
-    <parameter name="extraItemsData"        class="net.sf.jasperreports.engine.JRDataSource"/>
+    <!-- Changes page removed from OC verification flow -->
     <parameter name="inspectionResponsibilitySubreport" class="net.sf.jasperreports.engine.JasperReport"/>
     <parameter name="inspectionResponsibilityData" class="net.sf.jasperreports.engine.JRDataSource"/>
     <parameter name="hasInspectionResponsibilityData" class="java.lang.Boolean"/>
@@ -121,42 +120,20 @@
           3. RequirementsPageGroup → requirements checklist page
           4. ExteriorPhotosGroup → outside-building photos
           5. InternalPhotosGroup → inside-building photos
-          6. ChangesGroup        → changes & extra items
+          6. (removed) changes page
          Final page is rendered by <summary> (inspection responsibility section).
          Declared order in XML: outermost first.
     -->
 
-    <!-- Outermost group: footer renders LAST among groups (changes page) -->
-    <group name="ChangesGroup">
-        <groupExpression><![CDATA[1]]></groupExpression>
-        <groupFooter>
-            <band height="545" splitType="Stretch">
-                <subreport>
-                    <reportElement x="0" y="0" width="802" height="545"/>
-                    <subreportParameter name="headerSubreport"><subreportParameterExpression><![CDATA[$P{headerSubreport}]]></subreportParameterExpression></subreportParameter>
-                    <subreportParameter name="changesRowsSubreport"><subreportParameterExpression><![CDATA[$P{changesRowsSubreport}]]></subreportParameterExpression></subreportParameter>
-                    <subreportParameter name="changesData"><subreportParameterExpression><![CDATA[$P{changesData}]]></subreportParameterExpression></subreportParameter>
-                    <subreportParameter name="extraItemsData"><subreportParameterExpression><![CDATA[$P{extraItemsData}]]></subreportParameterExpression></subreportParameter>
-                    <subreportParameter name="reportLogo"><subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression></subreportParameter>
-                    <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
-                    <subreportParameter name="reportDate"><subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression></subreportParameter>
-                    <subreportParameter name="footerSubreport"><subreportParameterExpression><![CDATA[$P{footerSubreport}]]></subreportParameterExpression></subreportParameter>
-                    <subreportParameter name="officeName"><subreportParameterExpression><![CDATA[$P{officeName}]]></subreportParameterExpression></subreportParameter>
-                    <subreportParameter name="digitalStampPath"><subreportParameterExpression><![CDATA[$P{digitalStampPath}]]></subreportParameterExpression></subreportParameter>
-                    <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
-                    <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{changesPageSubreport}]]></subreportExpression>
-                </subreport>
-            </band>
-        </groupFooter>
-    </group>
 
     <!-- Inner-middle group: render internal photos as the second page in this pair -->
     <group name="InternalPhotosGroup">
         <groupExpression><![CDATA[1]]></groupExpression>
         <groupFooter>
-            <band height="545" splitType="Stretch">
+            <band height="595" splitType="Stretch">
+                <printWhenExpression><![CDATA[Boolean.TRUE.equals($P{hasInternalPhotosPage})]]></printWhenExpression>
                 <subreport>
-                    <reportElement x="0" y="0" width="802" height="545"/>
+                    <reportElement x="0" y="0" width="802" height="595"/>
                     <subreportParameter name="headerSubreport"><subreportParameterExpression><![CDATA[$P{headerSubreport}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="reportLogo"><subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
@@ -187,9 +164,10 @@
     <group name="ExteriorPhotosGroup">
         <groupExpression><![CDATA[1]]></groupExpression>
         <groupFooter>
-            <band height="545" splitType="Stretch">
+            <band height="595" splitType="Stretch">
+                <printWhenExpression><![CDATA[Boolean.TRUE.equals($P{hasExteriorPhotosPage})]]></printWhenExpression>
                 <subreport>
-                    <reportElement x="0" y="0" width="802" height="545"/>
+                    <reportElement x="0" y="0" width="802" height="595"/>
                     <subreportParameter name="headerSubreport"><subreportParameterExpression><![CDATA[$P{headerSubreport}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="reportLogo"><subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
@@ -208,9 +186,10 @@
     <group name="RequirementsPageGroup">
         <groupExpression><![CDATA[1]]></groupExpression>
         <groupFooter>
-            <band height="545" splitType="Stretch">
+            <band height="595" splitType="Stretch">
+                <printWhenExpression><![CDATA[Boolean.TRUE.equals($P{hasRequirementsPage})]]></printWhenExpression>
                 <subreport>
-                    <reportElement x="0" y="0" width="802" height="545"/>
+                    <reportElement x="0" y="0" width="802" height="595"/>
                     <subreportParameter name="headerSubreport"><subreportParameterExpression><![CDATA[$P{headerSubreport}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="reportLogo"><subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
@@ -229,9 +208,9 @@
     <group name="MainImagesGroup">
         <groupExpression><![CDATA[1]]></groupExpression>
         <groupFooter>
-            <band height="545" splitType="Stretch">
+            <band height="595" splitType="Stretch">
                 <subreport>
-                    <reportElement x="0" y="0" width="802" height="545"/>
+                    <reportElement x="0" y="0" width="802" height="595"/>
                     <subreportParameter name="headerSubreport"><subreportParameterExpression><![CDATA[$P{headerSubreport}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="reportLogo"><subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
@@ -266,9 +245,9 @@
     <group name="BuildingComponentsGroup">
         <groupExpression><![CDATA[1]]></groupExpression>
         <groupFooter>
-            <band height="545" splitType="Stretch">
+            <band height="595" splitType="Stretch">
                 <subreport>
-                    <reportElement x="0" y="0" width="802" height="545"/>
+                    <reportElement x="0" y="0" width="802" height="595"/>
                     <subreportParameter name="headerSubreport"><subreportParameterExpression><![CDATA[$P{headerSubreport}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="reportLogo"><subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
@@ -283,12 +262,12 @@
     </group>
 
     <title>
-        <band height="10"/>
+        <band height="0"/>
     </title>
 
     <detail>
         <!-- adjust detail band height so compiled subreport placements fit the page height -->
-        <!-- pageHeight(595) - topMargin(20) - bottomMargin(20) - title(10) = 545 -->
+        <!-- pageHeight(595) - topMargin(0) - bottomMargin(0) - title(10) = 585; band kept at 545 to match subreport container layout -->
         <band height="545">
             <!-- header subreport placed at top -->
             <subreport>
@@ -368,7 +347,7 @@
 
     <summary>
         <band height="545" splitType="Stretch">
-            <printWhenExpression><![CDATA[$P{hasInspectionResponsibilityData} == null || Boolean.TRUE.equals($P{hasInspectionResponsibilityData})]]></printWhenExpression>
+            <printWhenExpression><![CDATA[Boolean.TRUE.equals($P{hasInspectionResponsibilityData})]]></printWhenExpression>
             <subreport>
                 <reportElement x="0" y="0" width="802" height="545"/>
                 <subreportParameter name="headerSubreport"><subreportParameterExpression><![CDATA[$P{headerSubreport}]]></subreportParameterExpression></subreportParameter>
