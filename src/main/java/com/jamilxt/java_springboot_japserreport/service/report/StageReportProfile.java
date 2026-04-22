@@ -2,7 +2,8 @@ package com.jamilxt.java_springboot_japserreport.service.report;
 
 public enum StageReportProfile {
     PROJECT_START("project start", "تقرير رقم 1", "تقرير مرحلة بدء المشروع"),
-    POST_FOUNDATION("post-foundation casting stage", "تقرير رقم 1", "تقرير مرحلة ما بعد صب الأساسات");
+    POST_FOUNDATION("post-foundation casting stage", "تقرير رقم 1", "تقرير مرحلة ما بعد صب الأساسات"),
+    PRE_FOUNDATION("pre-foundation stage", "تقرير رقم 1", "تقرير مرحلة ما قبل صب الأساسات");
 
     private final String displayName;
     private final String reportNumberLabel;
