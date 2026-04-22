@@ -313,6 +313,7 @@ public class ProjectStartReportService {
              InputStream changesRowsIs = resourceLoader.getResource(profile.reportPath("changes_rows")).getInputStream();
              InputStream changesPageIs = resourceLoader.getResource(profile.reportPath("changes_page")).getInputStream();
              InputStream inspectionResponsibilityIs = resourceLoader.getResource(profile.reportPath("inspection_responsibility")).getInputStream();
+             InputStream stageBuildingComponentsIs = resourceLoader.getResource("classpath:report/prePouring/stage_building_components.jrxml").getInputStream();
              InputStream masterIs = resourceLoader.getResource(profile.reportPath("report_master")).getInputStream()) {
 
             return new StageCompiledReports(
@@ -330,6 +331,7 @@ public class ProjectStartReportService {
                     JasperCompileManager.compileReport(changesRowsIs),
                     JasperCompileManager.compileReport(changesPageIs),
                     JasperCompileManager.compileReport(inspectionResponsibilityIs),
+                    JasperCompileManager.compileReport(stageBuildingComponentsIs),
                     JasperCompileManager.compileReport(masterIs)
             );
         }
@@ -351,6 +353,7 @@ public class ProjectStartReportService {
              InputStream changesRowsIs = resourceLoader.getResource(profile.reportPath("changes_rows")).getInputStream();
              InputStream changesPageIs = resourceLoader.getResource(profile.reportPath("changes_page")).getInputStream();
              InputStream inspectionResponsibilityIs = resourceLoader.getResource(profile.reportPath("inspection_responsibility")).getInputStream();
+             InputStream stageBuildingComponentsIs = resourceLoader.getResource("classpath:report/prePouring/stage_building_components.jrxml").getInputStream();
              InputStream masterIs = resourceLoader.getResource(profile.reportPath("report_master")).getInputStream()) {
 
             return new StageCompiledReports(
@@ -368,6 +371,7 @@ public class ProjectStartReportService {
                     JasperCompileManager.compileReport(changesRowsIs),
                     JasperCompileManager.compileReport(changesPageIs),
                     JasperCompileManager.compileReport(inspectionResponsibilityIs),
+                    JasperCompileManager.compileReport(stageBuildingComponentsIs),
                     JasperCompileManager.compileReport(masterIs)
             );
         }
@@ -390,6 +394,7 @@ public class ProjectStartReportService {
         params.put("changesPageSubreport", reports.changesPage);
         params.put("changesRowsSubreport", reports.changesRows);
         params.put("inspectionResponsibilitySubreport", reports.inspectionResponsibility);
+        params.put("stageBuildingComponentsSubreport", reports.stageBuildingComponentsSubreport);
         params.put("tableData", tableData);
         return params;
     }
@@ -409,6 +414,7 @@ public class ProjectStartReportService {
         private final JasperReport changesRows;
         private final JasperReport changesPage;
         private final JasperReport inspectionResponsibility;
+        private final JasperReport stageBuildingComponentsSubreport;
         private final JasperReport master;
 
         private StageCompiledReports(
@@ -426,6 +432,7 @@ public class ProjectStartReportService {
                 JasperReport changesRows,
                 JasperReport changesPage,
                 JasperReport inspectionResponsibility,
+                JasperReport stageBuildingComponentsSubreport,
                 JasperReport master
         ) {
             this.header = header;
@@ -442,6 +449,7 @@ public class ProjectStartReportService {
             this.changesRows = changesRows;
             this.changesPage = changesPage;
             this.inspectionResponsibility = inspectionResponsibility;
+            this.stageBuildingComponentsSubreport = stageBuildingComponentsSubreport;
             this.master = master;
         }
     }

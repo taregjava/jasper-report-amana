@@ -14,10 +14,12 @@ public class PrePouringService {
     }
 
     public byte[] generatePrePouringPdfStatic() throws Exception {
+        // Uses the static data method for PRE_POURING profile
         return stageReportService.generateStatic(StageReportProfile.PRE_POURING);
     }
 
     public byte[] generatePdf(ProjectStartReportDto dto) throws JRException {
-        return stageReportService.generatePdf(dto, StageReportProfile.PRE_FOUNDATION);
+        // Use PRE_POURING profile for prePouring reports
+        return stageReportService.generatePdf(dto, StageReportProfile.PRE_POURING);
     }
 }
