@@ -29,38 +29,11 @@ public class ProjectStartReportService {
 // imports omitted for brevity (JasperCompileManager, JasperFillManager, JasperExportManager, JRBeanCollectionDataSource, JasperReport, JasperPrint, etc.)
 
     public byte[] generateProjectStartPdfStatic() throws Exception {
-        // Load and compile subreports + master
-        try (InputStream headerIs = getClass().getResourceAsStream("/report/projectStart/project_start_report_header.jrxml");
-             InputStream ownerIs  = getClass().getResourceAsStream("/report/projectStart/project_start_report_owner.jrxml");
-             InputStream bodyIs   = getClass().getResourceAsStream("/report/projectStart/project_start_report_body.jrxml");
-             InputStream buildingIs = getClass().getResourceAsStream("/report/projectStart/project_start_report_building.jrxml");
-             InputStream tableIs  = getClass().getResourceAsStream("/report/projectStart/project_start_report_table.jrxml");
-             InputStream photosIs = getClass().getResourceAsStream("/report/projectStart/project_start_report_photos.jrxml");
-             InputStream sitePhotosIs = getClass().getResourceAsStream("/report/projectStart/project_start_site_photos_page.jrxml");
-             InputStream photosTopGridIs = getClass().getResourceAsStream("/report/projectStart/project_start_report_photos_top_grid.jrxml");
-             InputStream photosBottomGridIs = getClass().getResourceAsStream("/report/projectStart/project_start_report_photos_bottom_grid.jrxml");
-             InputStream footerIs = getClass().getResourceAsStream("/report/projectStart/project_start_shared_footer.jrxml");
-             InputStream mainImagesIs = getClass().getResourceAsStream("/report/projectStart/project_start_main_images.jrxml");
-             InputStream changesRowsIs = getClass().getResourceAsStream("/report/projectStart/project_start_changes_rows.jrxml");
-             InputStream changesPageIs = getClass().getResourceAsStream("/report/projectStart/project_start_changes_page.jrxml");
-             InputStream inspectionResponsibilityIs = getClass().getResourceAsStream("/report/projectStart/project_start_inspection_responsibility.jrxml");
-             InputStream masterIs = getClass().getResourceAsStream("/report/projectStart/project_start_report_master.jrxml")) {
+        return generateStatic(StageReportProfile.PROJECT_START);
+    }
 
-            JasperReport headerRep = JasperCompileManager.compileReport(headerIs);
-            JasperReport ownerRep  = ownerIs == null ? null : JasperCompileManager.compileReport(ownerIs);
-            JasperReport bodyRep   = JasperCompileManager.compileReport(bodyIs);
-            JasperReport buildingRep = JasperCompileManager.compileReport(buildingIs);
-            JasperReport tableRep  = JasperCompileManager.compileReport(tableIs);
-            JasperReport photosRep = JasperCompileManager.compileReport(photosIs);
-            JasperReport sitePhotosRep = sitePhotosIs == null ? null : JasperCompileManager.compileReport(sitePhotosIs);
-            JasperReport photosTopGridRep = JasperCompileManager.compileReport(photosTopGridIs);
-            JasperReport photosBottomGridRep = JasperCompileManager.compileReport(photosBottomGridIs);
-            JasperReport footerRep = footerIs == null ? null : JasperCompileManager.compileReport(footerIs);
-            JasperReport mainImagesRep = mainImagesIs == null ? null : JasperCompileManager.compileReport(mainImagesIs);
-            JasperReport changesRowsRep = changesRowsIs == null ? null : JasperCompileManager.compileReport(changesRowsIs);
-            JasperReport changesPageRep = changesPageIs == null ? null : JasperCompileManager.compileReport(changesPageIs);
-            JasperReport inspectionResponsibilityRep = inspectionResponsibilityIs == null ? null : JasperCompileManager.compileReport(inspectionResponsibilityIs);
-            JasperReport masterRep = JasperCompileManager.compileReport(masterIs);
+    public byte[] generateStatic(StageReportProfile profile) throws Exception {
+        StageCompiledReports reports = compileStageReports(profile);
 
             // Build static grouped rows so static preview matches dynamic checklist design.
             List<Map<String,Object>> rows = new ArrayList<>(java.util.List.of(
@@ -87,24 +60,7 @@ public class ProjectStartReportService {
             ));
             JRBeanCollectionDataSource tableDs = new JRBeanCollectionDataSource(rows);
 
-            Map<String,Object> params = new HashMap<>();
-            // pass compiled subreports
-            params.put("headerSubreport", headerRep);
-            params.put("ownerSubreport", ownerRep);
-            params.put("bodySubreport", bodyRep);
-            params.put("buildingSubreport", buildingRep);
-            params.put("tableSubreport", tableRep);
-            params.put("photosSubreport", photosRep);
-            params.put("sitePhotosSubreport", sitePhotosRep);
-            params.put("photosTopGridSubreport", photosTopGridRep);
-            params.put("photosBottomGridSubreport", photosBottomGridRep);
-            params.put("footerSubreport", footerRep);
-            params.put("mainImagesSubreport", mainImagesRep);
-            params.put("changesPageSubreport", changesPageRep);
-            params.put("changesRowsSubreport", changesRowsRep);
-            params.put("inspectionResponsibilitySubreport", inspectionResponsibilityRep);
-            // pass table datasource
-            params.put("tableData", tableDs);
+            Map<String, Object> params = createBaseParams(reports, tableDs);
             // static sample data for changes tables
             params.put("changesData",    buildTextRowsDataSource(java.util.List.of(
                     "تعديل موقع النافذة في الواجهة الشمالية",
@@ -195,66 +151,24 @@ public class ProjectStartReportService {
             params.put("photosTopData", buildTopPhotoRows(params));
             params.put("photosBottomData", buildBottomPhotoRows(params));
 
-            JasperPrint jasperPrint = JasperFillManager.fillReport(masterRep, params, new net.sf.jasperreports.engine.JREmptyDataSource());
+            JasperPrint jasperPrint = JasperFillManager.fillReport(reports.master, params, new net.sf.jasperreports.engine.JREmptyDataSource());
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             JasperExportManager.exportReportToPdfStream(jasperPrint, baos);
             return baos.toByteArray();
-        }
     }
 
     public byte[] generatePdf(ProjectStartReportDto dto) throws JRException {
-        try (InputStream headerIs = resourceLoader.getResource("classpath:report/projectStart/project_start_report_header.jrxml").getInputStream();
-             InputStream ownerIs = resourceLoader.getResource("classpath:report/projectStart/project_start_report_owner.jrxml").getInputStream();
-             InputStream bodyIs = resourceLoader.getResource("classpath:report/projectStart/project_start_report_body.jrxml").getInputStream();
-             InputStream buildingIs = resourceLoader.getResource("classpath:report/projectStart/project_start_report_building.jrxml").getInputStream();
-             InputStream tableIs = resourceLoader.getResource("classpath:report/projectStart/project_start_report_table.jrxml").getInputStream();
-             InputStream photosIs = resourceLoader.getResource("classpath:report/projectStart/project_start_report_photos.jrxml").getInputStream();
-             InputStream sitePhotosIs = resourceLoader.getResource("classpath:report/projectStart/project_start_site_photos_page.jrxml").getInputStream();
-             InputStream photosTopGridIs = resourceLoader.getResource("classpath:report/projectStart/project_start_report_photos_top_grid.jrxml").getInputStream();
-             InputStream photosBottomGridIs = resourceLoader.getResource("classpath:report/projectStart/project_start_report_photos_bottom_grid.jrxml").getInputStream();
-             InputStream footerIs = resourceLoader.getResource("classpath:report/projectStart/project_start_shared_footer.jrxml").getInputStream();
-             InputStream mainImagesIs = resourceLoader.getResource("classpath:report/projectStart/project_start_main_images.jrxml").getInputStream();
-             InputStream changesRowsIs = resourceLoader.getResource("classpath:report/projectStart/project_start_changes_rows.jrxml").getInputStream();
-             InputStream changesPageIs = resourceLoader.getResource("classpath:report/projectStart/project_start_changes_page.jrxml").getInputStream();
-             InputStream inspectionResponsibilityIs = resourceLoader.getResource("classpath:report/projectStart/project_start_inspection_responsibility.jrxml").getInputStream();
-             InputStream masterIs = resourceLoader.getResource("classpath:report/projectStart/project_start_report_master.jrxml").getInputStream()) {
+        return generatePdf(dto, StageReportProfile.PROJECT_START);
+    }
 
-            JasperReport headerRep = JasperCompileManager.compileReport(headerIs);
-            JasperReport ownerRep = JasperCompileManager.compileReport(ownerIs);
-            JasperReport bodyRep = JasperCompileManager.compileReport(bodyIs);
-            JasperReport buildingRep = JasperCompileManager.compileReport(buildingIs);
-            JasperReport tableRep = JasperCompileManager.compileReport(tableIs);
-            JasperReport photosRep = JasperCompileManager.compileReport(photosIs);
-            JasperReport sitePhotosRep = JasperCompileManager.compileReport(sitePhotosIs);
-            JasperReport photosTopGridRep = JasperCompileManager.compileReport(photosTopGridIs);
-            JasperReport photosBottomGridRep = JasperCompileManager.compileReport(photosBottomGridIs);
-            JasperReport footerRep = JasperCompileManager.compileReport(footerIs);
-            JasperReport mainImagesRep = JasperCompileManager.compileReport(mainImagesIs);
-            JasperReport changesRowsRep = JasperCompileManager.compileReport(changesRowsIs);
-            JasperReport changesPageRep = JasperCompileManager.compileReport(changesPageIs);
-            JasperReport inspectionResponsibilityRep = JasperCompileManager.compileReport(inspectionResponsibilityIs);
-            JasperReport masterReport = JasperCompileManager.compileReport(masterIs);
+    public byte[] generatePdf(ProjectStartReportDto dto, StageReportProfile profile) throws JRException {
+        try {
+            StageCompiledReports reports = compileStageReports(profile);
 
             List<Map<String, Object>> tableRows = buildTableRows(dto);
 
-            Map<String, Object> params = new HashMap<>();
-            // pass compiled subreports + table datasource expected by master
-            params.put("headerSubreport", headerRep);
-            params.put("ownerSubreport", ownerRep);
-            params.put("bodySubreport", bodyRep);
-            params.put("buildingSubreport", buildingRep);
-            params.put("tableSubreport", tableRep);
-            params.put("photosSubreport", photosRep);
-            params.put("sitePhotosSubreport", sitePhotosRep);
-            params.put("photosTopGridSubreport", photosTopGridRep);
-            params.put("photosBottomGridSubreport", photosBottomGridRep);
-            params.put("footerSubreport", footerRep);
-            params.put("mainImagesSubreport", mainImagesRep);
-            params.put("changesPageSubreport", changesPageRep);
-            params.put("changesRowsSubreport", changesRowsRep);
-            params.put("inspectionResponsibilitySubreport", inspectionResponsibilityRep);
-            params.put("tableData", new JRBeanCollectionDataSource(tableRows));
+            Map<String, Object> params = createBaseParams(reports, new JRBeanCollectionDataSource(tableRows));
             // changes & extra items (padded to 8 rows)
             params.put("changesData",    buildTextRowsDataSource(dto.getChanges()));
             params.put("extraItemsData", buildTextRowsDataSource(dto.getExtraItems()));
@@ -370,13 +284,122 @@ public class ProjectStartReportService {
             }
 
             // Master contains nested subreports and consumes `tableData` directly.
-            JasperPrint print = JasperFillManager.fillReport(masterReport, params, new net.sf.jasperreports.engine.JREmptyDataSource());
+            JasperPrint print = JasperFillManager.fillReport(reports.master, params, new net.sf.jasperreports.engine.JREmptyDataSource());
 
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             JasperExportManager.exportReportToPdfStream(print, out);
             return out.toByteArray();
         } catch (Exception e) {
-            throw new JRException("Failed to generate project start report", e);
+            throw new JRException("Failed to generate " + profile.displayName() + " report", e);
+        }
+    }
+
+    private StageCompiledReports compileStageReports(StageReportProfile profile) throws Exception {
+        try (InputStream headerIs = resourceLoader.getResource(profile.reportPath("report_header")).getInputStream();
+             InputStream ownerIs = resourceLoader.getResource(profile.reportPath("report_owner")).getInputStream();
+             InputStream bodyIs = resourceLoader.getResource(profile.reportPath("report_body")).getInputStream();
+             InputStream buildingIs = resourceLoader.getResource(profile.reportPath("report_building")).getInputStream();
+             InputStream tableIs = resourceLoader.getResource(profile.reportPath("report_table")).getInputStream();
+             InputStream photosIs = resourceLoader.getResource(profile.reportPath("report_photos")).getInputStream();
+             InputStream sitePhotosIs = resourceLoader.getResource(profile.reportPath("site_photos_page")).getInputStream();
+             InputStream photosTopGridIs = resourceLoader.getResource(profile.reportPath("report_photos_top_grid")).getInputStream();
+             InputStream photosBottomGridIs = resourceLoader.getResource(profile.reportPath("report_photos_bottom_grid")).getInputStream();
+             InputStream footerIs = resourceLoader.getResource(profile.reportPath("shared_footer")).getInputStream();
+             InputStream mainImagesIs = resourceLoader.getResource(profile.reportPath("main_images")).getInputStream();
+             InputStream changesRowsIs = resourceLoader.getResource(profile.reportPath("changes_rows")).getInputStream();
+             InputStream changesPageIs = resourceLoader.getResource(profile.reportPath("changes_page")).getInputStream();
+             InputStream inspectionResponsibilityIs = resourceLoader.getResource(profile.reportPath("inspection_responsibility")).getInputStream();
+             InputStream masterIs = resourceLoader.getResource(profile.reportPath("report_master")).getInputStream()) {
+
+            return new StageCompiledReports(
+                    JasperCompileManager.compileReport(headerIs),
+                    JasperCompileManager.compileReport(ownerIs),
+                    JasperCompileManager.compileReport(bodyIs),
+                    JasperCompileManager.compileReport(buildingIs),
+                    JasperCompileManager.compileReport(tableIs),
+                    JasperCompileManager.compileReport(photosIs),
+                    JasperCompileManager.compileReport(sitePhotosIs),
+                    JasperCompileManager.compileReport(photosTopGridIs),
+                    JasperCompileManager.compileReport(photosBottomGridIs),
+                    JasperCompileManager.compileReport(footerIs),
+                    JasperCompileManager.compileReport(mainImagesIs),
+                    JasperCompileManager.compileReport(changesRowsIs),
+                    JasperCompileManager.compileReport(changesPageIs),
+                    JasperCompileManager.compileReport(inspectionResponsibilityIs),
+                    JasperCompileManager.compileReport(masterIs)
+            );
+        }
+    }
+
+    private Map<String, Object> createBaseParams(StageCompiledReports reports, JRBeanCollectionDataSource tableData) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("headerSubreport", reports.header);
+        params.put("ownerSubreport", reports.owner);
+        params.put("bodySubreport", reports.body);
+        params.put("buildingSubreport", reports.building);
+        params.put("tableSubreport", reports.table);
+        params.put("photosSubreport", reports.photos);
+        params.put("sitePhotosSubreport", reports.sitePhotos);
+        params.put("photosTopGridSubreport", reports.photosTopGrid);
+        params.put("photosBottomGridSubreport", reports.photosBottomGrid);
+        params.put("footerSubreport", reports.footer);
+        params.put("mainImagesSubreport", reports.mainImages);
+        params.put("changesPageSubreport", reports.changesPage);
+        params.put("changesRowsSubreport", reports.changesRows);
+        params.put("inspectionResponsibilitySubreport", reports.inspectionResponsibility);
+        params.put("tableData", tableData);
+        return params;
+    }
+
+    private static final class StageCompiledReports {
+        private final JasperReport header;
+        private final JasperReport owner;
+        private final JasperReport body;
+        private final JasperReport building;
+        private final JasperReport table;
+        private final JasperReport photos;
+        private final JasperReport sitePhotos;
+        private final JasperReport photosTopGrid;
+        private final JasperReport photosBottomGrid;
+        private final JasperReport footer;
+        private final JasperReport mainImages;
+        private final JasperReport changesRows;
+        private final JasperReport changesPage;
+        private final JasperReport inspectionResponsibility;
+        private final JasperReport master;
+
+        private StageCompiledReports(
+                JasperReport header,
+                JasperReport owner,
+                JasperReport body,
+                JasperReport building,
+                JasperReport table,
+                JasperReport photos,
+                JasperReport sitePhotos,
+                JasperReport photosTopGrid,
+                JasperReport photosBottomGrid,
+                JasperReport footer,
+                JasperReport mainImages,
+                JasperReport changesRows,
+                JasperReport changesPage,
+                JasperReport inspectionResponsibility,
+                JasperReport master
+        ) {
+            this.header = header;
+            this.owner = owner;
+            this.body = body;
+            this.building = building;
+            this.table = table;
+            this.photos = photos;
+            this.sitePhotos = sitePhotos;
+            this.photosTopGrid = photosTopGrid;
+            this.photosBottomGrid = photosBottomGrid;
+            this.footer = footer;
+            this.mainImages = mainImages;
+            this.changesRows = changesRows;
+            this.changesPage = changesPage;
+            this.inspectionResponsibility = inspectionResponsibility;
+            this.master = master;
         }
     }
 
