@@ -21,6 +21,10 @@
     <parameter name="headerSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
     <parameter name="bodySubreport" class="net.sf.jasperreports.engine.JasperReport"/>
     <parameter name="buildingSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
+    <parameter name="buildingComponentsSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
+    <parameter name="stageBuildingComponentsSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
+    <parameter name="boundaryComplianceData" class="net.sf.jasperreports.engine.JRDataSource"/>
+    <parameter name="buildingComponentsData" class="net.sf.jasperreports.engine.JRDataSource"/>
     <parameter name="tableSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
     <parameter name="photosSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
     <parameter name="sitePhotosSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
@@ -266,6 +270,26 @@
                     <subreportParameter name="stageReportTitle"><subreportParameterExpression><![CDATA[$P{stageReportTitle}]]></subreportParameterExpression></subreportParameter>
                     <dataSourceExpression><![CDATA[$P{tableData}]]></dataSourceExpression>
                     <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{tableSubreport}]]></subreportExpression>
+                </subreport>
+            </band>
+        </groupFooter>
+    </group>
+
+    <!-- Combined technical sheet (boundaries + building components) -->
+    <group name="BuildingComponentsGroup">
+        <groupExpression><![CDATA[1]]></groupExpression>
+        <groupFooter>
+            <band height="300" splitType="Stretch">
+                <subreport>
+                    <reportElement x="0" y="0" width="802" height="300"/>
+                    <subreportParameter name="headerSubreport"><subreportParameterExpression><![CDATA[$P{headerSubreport}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="reportLogo"><subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="reportDate"><subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="boundaryComplianceData"><subreportParameterExpression><![CDATA[$P{boundaryComplianceData}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="buildingComponentsData"><subreportParameterExpression><![CDATA[$P{buildingComponentsData}]]></subreportParameterExpression></subreportParameter>
+                    <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
+                    <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{stageBuildingComponentsSubreport}]]></subreportExpression>
                 </subreport>
             </band>
         </groupFooter>
