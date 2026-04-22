@@ -40,6 +40,8 @@
     <parameter name="reportLogo" class="java.lang.Object"/>
     <parameter name="projectNameAndAddress" class="java.lang.String"/>
     <parameter name="reportDate" class="java.lang.String"/>
+    <parameter name="stageReportNumber" class="java.lang.String"/>
+    <parameter name="stageReportTitle" class="java.lang.String"/>
 
     <!-- Fields expected in the table datasource -->
     <field name="groupTitle" class="java.lang.String"/>
@@ -89,6 +91,8 @@
                 <subreportParameter name="reportLogo"><subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="reportDate"><subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="stageReportNumber"><subreportParameterExpression><![CDATA[$P{stageReportNumber}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="stageReportTitle"><subreportParameterExpression><![CDATA[$P{stageReportTitle}]]></subreportParameterExpression></subreportParameter>
                 <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
                 <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{headerSubreport}]]></subreportExpression>
             </subreport>
@@ -217,7 +221,6 @@
     </detail>
 
 </jasperReport>
-
 
 
 

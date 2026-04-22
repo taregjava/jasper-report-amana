@@ -38,6 +38,8 @@
     <parameter name="reportLogo" class="java.lang.Object"/>
     <parameter name="projectNameAndAddress" class="java.lang.String"/>
     <parameter name="reportDate" class="java.lang.String"/>
+    <parameter name="stageReportNumber" class="java.lang.String"/>
+    <parameter name="stageReportTitle" class="java.lang.String"/>
     <!-- Building params forwarded to building subreport -->
     <parameter name="buildingType" class="java.lang.String"/>
     <parameter name="buildingTypeResidential" class="java.lang.Boolean"/>
@@ -137,6 +139,8 @@
                     <subreportParameter name="reportLogo"><subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="reportDate"><subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="stageReportNumber"><subreportParameterExpression><![CDATA[$P{stageReportNumber}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="stageReportTitle"><subreportParameterExpression><![CDATA[$P{stageReportTitle}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="footerSubreport"><subreportParameterExpression><![CDATA[$P{footerSubreport}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="officeName"><subreportParameterExpression><![CDATA[$P{officeName}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="digitalStampPath"><subreportParameterExpression><![CDATA[$P{digitalStampPath}]]></subreportParameterExpression></subreportParameter>
@@ -162,6 +166,8 @@
                     <subreportParameter name="reportLogo"><subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="reportDate"><subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="stageReportNumber"><subreportParameterExpression><![CDATA[$P{stageReportNumber}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="stageReportTitle"><subreportParameterExpression><![CDATA[$P{stageReportTitle}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="footerSubreport"><subreportParameterExpression><![CDATA[$P{footerSubreport}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="officeName"><subreportParameterExpression><![CDATA[$P{officeName}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="digitalStampPath"><subreportParameterExpression><![CDATA[$P{digitalStampPath}]]></subreportParameterExpression></subreportParameter>
@@ -183,6 +189,8 @@
                     <subreportParameter name="reportLogo"><subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="reportDate"><subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="stageReportNumber"><subreportParameterExpression><![CDATA[$P{stageReportNumber}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="stageReportTitle"><subreportParameterExpression><![CDATA[$P{stageReportTitle}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="detailPhoto1"><subreportParameterExpression><![CDATA[$P{detailPhoto1}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="detailPhoto2"><subreportParameterExpression><![CDATA[$P{detailPhoto2}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="detailPhoto3"><subreportParameterExpression><![CDATA[$P{detailPhoto3}]]></subreportParameterExpression></subreportParameter>
@@ -216,6 +224,8 @@
                     <subreportParameter name="reportLogo"><subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="reportDate"><subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="stageReportNumber"><subreportParameterExpression><![CDATA[$P{stageReportNumber}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="stageReportTitle"><subreportParameterExpression><![CDATA[$P{stageReportTitle}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="spatialPortalPhoto"><subreportParameterExpression><![CDATA[$P{spatialPortalPhoto}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="implementationPhoto"><subreportParameterExpression><![CDATA[$P{implementationPhoto}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="aerialPhoto"><subreportParameterExpression><![CDATA[$P{aerialPhoto}]]></subreportParameterExpression></subreportParameter>
@@ -252,6 +262,8 @@
                     <subreportParameter name="reportLogo"><subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
                     <subreportParameter name="reportDate"><subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="stageReportNumber"><subreportParameterExpression><![CDATA[$P{stageReportNumber}]]></subreportParameterExpression></subreportParameter>
+                    <subreportParameter name="stageReportTitle"><subreportParameterExpression><![CDATA[$P{stageReportTitle}]]></subreportParameterExpression></subreportParameter>
                     <dataSourceExpression><![CDATA[$P{tableData}]]></dataSourceExpression>
                     <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{tableSubreport}]]></subreportExpression>
                 </subreport>
@@ -278,6 +290,12 @@
                 </subreportParameter>
                 <subreportParameter name="reportDate">
                     <subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression>
+                </subreportParameter>
+                <subreportParameter name="stageReportNumber">
+                    <subreportParameterExpression><![CDATA[$P{stageReportNumber}]]></subreportParameterExpression>
+                </subreportParameter>
+                <subreportParameter name="stageReportTitle">
+                    <subreportParameterExpression><![CDATA[$P{stageReportTitle}]]></subreportParameterExpression>
                 </subreportParameter>
                 <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
                 <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{headerSubreport}]]></subreportExpression>
@@ -351,6 +369,8 @@
                 <subreportParameter name="reportLogo"><subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="reportDate"><subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="stageReportNumber"><subreportParameterExpression><![CDATA[$P{stageReportNumber}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="stageReportTitle"><subreportParameterExpression><![CDATA[$P{stageReportTitle}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="spatialPortalPhoto"><subreportParameterExpression><![CDATA[$P{spatialPortalPhoto}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="implementationPhoto"><subreportParameterExpression><![CDATA[$P{implementationPhoto}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="aerialPhoto"><subreportParameterExpression><![CDATA[$P{aerialPhoto}]]></subreportParameterExpression></subreportParameter>

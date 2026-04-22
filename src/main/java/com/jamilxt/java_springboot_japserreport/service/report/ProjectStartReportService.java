@@ -61,6 +61,8 @@ public class ProjectStartReportService {
             JRBeanCollectionDataSource tableDs = new JRBeanCollectionDataSource(rows);
 
             Map<String, Object> params = createBaseParams(reports, tableDs);
+            params.put("stageReportNumber", profile.reportNumberLabel());
+            params.put("stageReportTitle", profile.stageTitle());
             // static sample data for changes tables
             params.put("changesData",    buildTextRowsDataSource(java.util.List.of(
                     "تعديل موقع النافذة في الواجهة الشمالية",
@@ -169,6 +171,8 @@ public class ProjectStartReportService {
             List<Map<String, Object>> tableRows = buildTableRows(dto);
 
             Map<String, Object> params = createBaseParams(reports, new JRBeanCollectionDataSource(tableRows));
+            params.put("stageReportNumber", profile.reportNumberLabel());
+            params.put("stageReportTitle", profile.stageTitle());
             // changes & extra items (padded to 8 rows)
             params.put("changesData",    buildTextRowsDataSource(dto.getChanges()));
             params.put("extraItemsData", buildTextRowsDataSource(dto.getExtraItems()));
