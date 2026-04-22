@@ -335,6 +335,45 @@ public class ProjectStartReportService {
         }
     }
 
+
+    private StageCompiledReports compileStageChanges(StageReportProfile profile) throws Exception {
+        try (InputStream headerIs = resourceLoader.getResource(profile.reportPath("report_header")).getInputStream();
+             InputStream ownerIs = resourceLoader.getResource(profile.reportPath("report_owner")).getInputStream();
+             InputStream bodyIs = resourceLoader.getResource(profile.reportPath("report_body")).getInputStream();
+             InputStream buildingIs = resourceLoader.getResource(profile.reportPath("report_building")).getInputStream();
+             InputStream tableIs = resourceLoader.getResource(profile.reportPath("report_table")).getInputStream();
+             InputStream photosIs = resourceLoader.getResource(profile.reportPath("report_photos")).getInputStream();
+             InputStream sitePhotosIs = resourceLoader.getResource(profile.reportPath("site_photos_page")).getInputStream();
+             InputStream photosTopGridIs = resourceLoader.getResource(profile.reportPath("report_photos_top_grid")).getInputStream();
+             InputStream photosBottomGridIs = resourceLoader.getResource(profile.reportPath("report_photos_bottom_grid")).getInputStream();
+             InputStream footerIs = resourceLoader.getResource(profile.reportPath("shared_footer")).getInputStream();
+             InputStream mainImagesIs = resourceLoader.getResource(profile.reportPath("main_images")).getInputStream();
+             InputStream changesRowsIs = resourceLoader.getResource(profile.reportPath("changes_rows")).getInputStream();
+             InputStream changesPageIs = resourceLoader.getResource(profile.reportPath("changes_page")).getInputStream();
+             InputStream inspectionResponsibilityIs = resourceLoader.getResource(profile.reportPath("inspection_responsibility")).getInputStream();
+             InputStream masterIs = resourceLoader.getResource(profile.reportPath("report_master")).getInputStream()) {
+
+            return new StageCompiledReports(
+                    JasperCompileManager.compileReport(headerIs),
+                    JasperCompileManager.compileReport(ownerIs),
+                    JasperCompileManager.compileReport(bodyIs),
+                    JasperCompileManager.compileReport(buildingIs),
+                    JasperCompileManager.compileReport(tableIs),
+                    JasperCompileManager.compileReport(photosIs),
+                    JasperCompileManager.compileReport(sitePhotosIs),
+                    JasperCompileManager.compileReport(photosTopGridIs),
+                    JasperCompileManager.compileReport(photosBottomGridIs),
+                    JasperCompileManager.compileReport(footerIs),
+                    JasperCompileManager.compileReport(mainImagesIs),
+                    JasperCompileManager.compileReport(changesRowsIs),
+                    JasperCompileManager.compileReport(changesPageIs),
+                    JasperCompileManager.compileReport(inspectionResponsibilityIs),
+                    JasperCompileManager.compileReport(masterIs)
+            );
+        }
+    }
+
+
     private Map<String, Object> createBaseParams(StageCompiledReports reports, JRBeanCollectionDataSource tableData) {
         Map<String, Object> params = new HashMap<>();
         params.put("headerSubreport", reports.header);

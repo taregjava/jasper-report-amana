@@ -1,18 +1,20 @@
 package com.jamilxt.java_springboot_japserreport.service.report;
 
 public enum StageReportProfile {
-    PROJECT_START("project start", "تقرير رقم 1", "تقرير مرحلة بدء المشروع"),
-    POST_FOUNDATION("post-foundation casting stage", "تقرير رقم 1", "تقرير مرحلة ما بعد صب الأساسات"),
-    PRE_FOUNDATION("pre-foundation stage", "تقرير رقم 1", "تقرير مرحلة ما قبل صب الأساسات");
+    PROJECT_START("project start", "تقرير رقم 1", "تقرير مرحلة بدء المشروع", "stageShared"),
+    POST_FOUNDATION("post-foundation casting stage", "تقرير رقم 1", "تقرير مرحلة ما بعد صب الأساسات", "stageShared"),
+    PRE_FOUNDATION("pre-foundation stage", "تقرير رقم 1", "تقرير مرحلة ما قبل صب الأساسات", "preFoundation");
 
     private final String displayName;
     private final String reportNumberLabel;
     private final String stageTitle;
+    private final String templateFolder;
 
-    StageReportProfile(String displayName, String reportNumberLabel, String stageTitle) {
+    StageReportProfile(String displayName, String reportNumberLabel, String stageTitle, String templateFolder) {
         this.displayName = displayName;
         this.reportNumberLabel = reportNumberLabel;
         this.stageTitle = stageTitle;
+        this.templateFolder = templateFolder;
     }
 
     public String displayName() {
@@ -27,8 +29,12 @@ public enum StageReportProfile {
         return stageTitle;
     }
 
+    public String templateFolder() {
+        return templateFolder;
+    }
+
     public String reportPath(String suffix) {
-        return "classpath:report/stageShared/stage_" + suffix + ".jrxml";
+        return "classpath:report/" + templateFolder + "/stage_" + suffix + ".jrxml";
     }
 }
 
