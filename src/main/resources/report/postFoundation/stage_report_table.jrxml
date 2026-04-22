@@ -40,13 +40,6 @@
     <parameter name="reportLogo" class="java.lang.Object"/>
     <parameter name="projectNameAndAddress" class="java.lang.String"/>
     <parameter name="reportDate" class="java.lang.String"/>
-    <parameter name="stageReportNumber" class="java.lang.String"/>
-    <parameter name="stageReportTitle" class="java.lang.String"/>
-
-    <!-- Added missing parameters for summary/footer subreport -->
-    <parameter name="officeName" class="java.lang.String"/>
-    <parameter name="digitalStampPath" class="java.lang.String"/>
-    <parameter name="footerSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
 
     <!-- Fields expected in the table datasource -->
     <field name="groupTitle" class="java.lang.String"/>
@@ -96,8 +89,6 @@
                 <subreportParameter name="reportLogo"><subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="reportDate"><subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="stageReportNumber"><subreportParameterExpression><![CDATA[$P{stageReportNumber}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="stageReportTitle"><subreportParameterExpression><![CDATA[$P{stageReportTitle}]]></subreportParameterExpression></subreportParameter>
                 <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
                 <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{headerSubreport}]]></subreportExpression>
             </subreport>
@@ -225,18 +216,8 @@
         </band>
     </detail>
 
-    <summary>
-        <band height="85">
-            <subreport>
-                <reportElement x="0" y="0" width="802" height="85"/>
-                <subreportParameter name="officeName"><subreportParameterExpression><![CDATA[$P{officeName}]]></subreportParameterExpression></subreportParameter>
-                <subreportParameter name="digitalStampPath"><subreportParameterExpression><![CDATA[$P{digitalStampPath}]]></subreportParameterExpression></subreportParameter>
-                <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
-                <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{footerSubreport}]]></subreportExpression>
-            </subreport>
-        </band>
-    </summary>
 </jasperReport>
+
 
 
 

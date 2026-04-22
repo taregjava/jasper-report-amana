@@ -5,6 +5,7 @@ import com.jamilxt.java_springboot_japserreport.dto.OwnerInfo;
 import com.jamilxt.java_springboot_japserreport.dto.ProjectPhotosDTO;
 import com.jamilxt.java_springboot_japserreport.dto.ProjectStartReportDto;
 import com.jamilxt.java_springboot_japserreport.dto.TaskRow;
+import com.jamilxt.java_springboot_japserreport.service.report.PrePouringService;
 import com.jamilxt.java_springboot_japserreport.service.report.ProjectStartReportService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.MediaType;
@@ -22,11 +23,22 @@ public class ProjectStartReportController {
 
     private final ProjectStartReportService service;
 
-    public ProjectStartReportController(ProjectStartReportService service) {
+    private final PrePouringService prePouringService;
+
+    public ProjectStartReportController(ProjectStartReportService service, PrePouringService prePouringService) {
         this.service = service;
+        this.prePouringService = prePouringService;
     }
-    @GetMapping(path = "/project/pdf", produces = MediaType.APPLICATION_PDF_VALUE)
+    @GetMapping(path = "/pre-pouring/pdf", produces = MediaType.APPLICATION_PDF_VALUE)
     public void projectStartPdfsss(HttpServletResponse response) throws Exception {
+        byte[] pdf = prePouringService.generatePrePouringPdfStatic();
+        response.setContentType(MediaType.APPLICATION_PDF_VALUE);
+        response.setContentLength(pdf.length);
+        response.getOutputStream().write(pdf);
+    }
+
+    @GetMapping(path = "/project/pdf", produces = MediaType.APPLICATION_PDF_VALUE)
+    public void generatePrePouringPdfStatic(HttpServletResponse response) throws Exception {
         byte[] pdf = service.generateProjectStartPdfStatic();
         response.setContentType(MediaType.APPLICATION_PDF_VALUE);
         response.setContentLength(pdf.length);

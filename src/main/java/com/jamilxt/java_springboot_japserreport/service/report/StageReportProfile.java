@@ -2,8 +2,11 @@ package com.jamilxt.java_springboot_japserreport.service.report;
 
 public enum StageReportProfile {
     PROJECT_START("project start", "تقرير رقم 1", "تقرير مرحلة بدء المشروع", "stageShared"),
-    POST_FOUNDATION("post-foundation casting stage", "تقرير رقم 1", "تقرير مرحلة ما بعد صب الأساسات", "stageShared"),
-    PRE_FOUNDATION("pre-foundation stage", "تقرير رقم 1", "تقرير مرحلة ما قبل صب الأساسات", "preFoundation");
+    POST_FOUNDATION("post-foundation casting stage", "تقرير رقم 1", "تقرير مرحلة ما بعد صب الأساسات", "postFoundation"),
+    PRE_FOUNDATION("pre-foundation stage", "تقرير رقم 1", "تقرير مرحلة ما قبل صب الأساسات", "preFoundation"),
+
+    PRE_POURING("pre-pouring stage", "تقرير رقم 1", "تقرير مرحلة ما قبل صب الميدات", "prePouring");//prePouring
+
 
     private final String displayName;
     private final String reportNumberLabel;

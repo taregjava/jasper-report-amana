@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="project_start_report_owner"
+              pageWidth="842"
+              pageHeight="595"
+              orientation="Landscape"
+              columnWidth="802"
+              leftMargin="20"
+              rightMargin="20"
+              topMargin="0"
+              bottomMargin="0"
+              language="java">
+
+    <property name="net.sf.jasperreports.text.direction" value="RTL"/>
+    <style name="Default" isDefault="true" fontName="Arial" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+
+    <!-- Ownership parameters (preferred names from OwnerInfo DTO) -->
+    <parameter name="ownerName" class="java.lang.String"/>
+    <parameter name="ownerIdNumber" class="java.lang.String"/>
+    <parameter name="ownerMobile" class="java.lang.String"/>
+    <parameter name="deedNumber" class="java.lang.String"/>
+    <parameter name="supervisingEngineeringOffice" class="java.lang.String"/>
+    <parameter name="designingEngineeringOffice" class="java.lang.String"/>
+    <parameter name="contractorName" class="java.lang.String"/>
+    <parameter name="contractorRecord" class="java.lang.String"/>
+    <parameter name="contractorMobile" class="java.lang.String"/>
+    <parameter name="projectNameAndAddress" class="java.lang.String"/>
+    <parameter name="supervisingEngineerName" class="java.lang.String"/>
+    <parameter name="reportDate" class="java.lang.String"/>
+    <parameter name="stageInspectionResult" class="java.lang.String"/>
+    <parameter name="stageInspectionNotes" class="java.lang.String"/>
+    <parameter name="stageInspectionAccepted" class="java.lang.Boolean"/>
+    <parameter name="stageInspectionRejected" class="java.lang.Boolean"/>
+    <parameter name="stageInspectionHasNotes" class="java.lang.Boolean"/>
+
+    <title>
+        <band height="176">
+            <!-- 8-column base grid: each column = 100px, total width = 800px -->
+            <staticText>
+                <reportElement x="1" y="0" width="800" height="28" mode="Opaque" backcolor="#005B41" forecolor="#FFFFFF"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Arial" pdfFontName="fonts/ARIAL.TTF" size="13" isBold="true"/>
+                </textElement>
+                <text><![CDATA[بيانات الملكية]]></text>
+            </staticText>
+
+            <!-- Row 2 -->
+            <staticText>
+                <reportElement x="701" y="28" width="100" height="28" mode="Opaque" backcolor="#E8F5E9"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="9" isBold="true"/></textElement>
+                <text><![CDATA[اسم المالك]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="601" y="28" width="100" height="28" mode="Opaque" backcolor="#FFFFFF"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="10"/></textElement>
+                <textFieldExpression><![CDATA[$P{ownerName}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="501" y="28" width="100" height="28" mode="Opaque" backcolor="#E8F5E9"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="9" isBold="true"/></textElement>
+                <text><![CDATA[رقم الهوية]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="401" y="28" width="100" height="28" mode="Opaque" backcolor="#FFFFFF"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="10"/></textElement>
+                <textFieldExpression><![CDATA[$P{ownerIdNumber}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="301" y="28" width="100" height="28" mode="Opaque" backcolor="#E8F5E9"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="9" isBold="true"/></textElement>
+                <text><![CDATA[رقم الصك]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="201" y="28" width="100" height="28" mode="Opaque" backcolor="#FFFFFF"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="10"/></textElement>
+                <textFieldExpression><![CDATA[$P{deedNumber}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="101" y="28" width="100" height="28" mode="Opaque" backcolor="#E8F5E9"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="9" isBold="true"/></textElement>
+                <text><![CDATA[رقم الجوال]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="1" y="28" width="100" height="28" mode="Opaque" backcolor="#FFFFFF"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="10"/></textElement>
+                <textFieldExpression><![CDATA[$P{ownerMobile}]]></textFieldExpression>
+            </textField>
+
+            <!-- Row 3 -->
+            <staticText>
+                <reportElement x="701" y="56" width="100" height="28" mode="Opaque" backcolor="#E8F5E9"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="9" isBold="true"/></textElement>
+                <text><![CDATA[المكتب الهندسي مقدم الطلب]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="401" y="56" width="300" height="28" mode="Opaque" backcolor="#FFFFFF"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="10"/></textElement>
+                <textFieldExpression><![CDATA[$P{supervisingEngineeringOffice}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="301" y="56" width="100" height="28" mode="Opaque" backcolor="#E8F5E9"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="9" isBold="true"/></textElement>
+                <text><![CDATA[المكتب الهندسي المصمم]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="201" y="56" width="100" height="28" mode="Opaque" backcolor="#FFFFFF"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="10"/></textElement>
+                <textFieldExpression><![CDATA[$P{designingEngineeringOffice}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="101" y="56" width="100" height="28" mode="Opaque" backcolor="#E8F5E9"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="9" isBold="true"/></textElement>
+                <text><![CDATA[المكتب الهندسي المشرف]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="1" y="56" width="100" height="28" mode="Opaque" backcolor="#FFFFFF"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="10"/></textElement>
+                <textFieldExpression><![CDATA[$P{supervisingEngineeringOffice}]]></textFieldExpression>
+            </textField>
+
+            <!-- Row 4 -->
+            <staticText>
+                <reportElement x="701" y="84" width="100" height="28" mode="Opaque" backcolor="#E8F5E9"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="9" isBold="true"/></textElement>
+                <text><![CDATA[اسم المقاول]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="601" y="84" width="100" height="28" mode="Opaque" backcolor="#FFFFFF"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="10"/></textElement>
+                <textFieldExpression><![CDATA[$P{contractorName}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="501" y="84" width="100" height="28" mode="Opaque" backcolor="#E8F5E9"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="9" isBold="true"/></textElement>
+                <text><![CDATA[سجل المقاول]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="401" y="84" width="100" height="28" mode="Opaque" backcolor="#FFFFFF"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="10"/></textElement>
+                <textFieldExpression><![CDATA[$P{contractorRecord}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="301" y="84" width="100" height="28" mode="Opaque" backcolor="#E8F5E9"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="9" isBold="true"/></textElement>
+                <text><![CDATA[رقم جوال المقاول]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="201" y="84" width="100" height="28" mode="Opaque" backcolor="#FFFFFF"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="10"/></textElement>
+                <textFieldExpression><![CDATA[$P{contractorMobile}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="101" y="84" width="100" height="28" mode="Opaque" backcolor="#E8F5E9"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="9" isBold="true"/></textElement>
+                <text><![CDATA[تاريخ التقرير]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="1" y="84" width="100" height="28" mode="Opaque" backcolor="#FFFFFF"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="10"/></textElement>
+                <textFieldExpression><![CDATA[$P{reportDate}]]></textFieldExpression>
+            </textField>
+
+            <!-- Row 5: three sections (right 40%, middle 20%, left status options) -->
+            <staticText>
+                <reportElement x="701" y="112" width="100" height="52" mode="Opaque" backcolor="#E8F5E9"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="9" isBold="true"/></textElement>
+                <text><![CDATA[اسم المشروع وعنوانه]]></text>
+            </staticText>
+            <textField textAdjust="StretchHeight">
+                <reportElement x="401" y="112" width="300" height="52" mode="Opaque" backcolor="#FFFFFF"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="10"/></textElement>
+                <textFieldExpression><![CDATA[$P{projectNameAndAddress}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="301" y="112" width="100" height="52" mode="Opaque" backcolor="#E8F5E9"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="9" isBold="true"/></textElement>
+                <text><![CDATA[اسم المهندس المشرف]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="201" y="112" width="100" height="52" mode="Opaque" backcolor="#FFFFFF"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="10"/></textElement>
+                <textFieldExpression><![CDATA[$P{supervisingEngineerName}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="101" y="112" width="100" height="52" mode="Opaque" backcolor="#E8F5E9"/>
+                <box><pen lineWidth="0.5" lineColor="#000000"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="9" isBold="true"/></textElement>
+                <text><![CDATA[نتيجة فحص المرحلة]]></text>
+            </staticText>
+
+            <!-- status options in last data cell -->
+            <rectangle>
+                <reportElement x="1" y="112" width="100" height="52" mode="Opaque" backcolor="#FFFFFF"/>
+                <graphicElement><pen lineWidth="0.5" lineColor="#000000"/></graphicElement>
+            </rectangle>
+
+            <rectangle>
+                <reportElement x="6" y="116" width="12" height="12" mode="Opaque" backcolor="#FFFFFF"/>
+                <graphicElement><pen lineWidth="1.0" lineColor="#2E7D32"/></graphicElement>
+            </rectangle>
+            <textField isBlankWhenNull="true">
+                <reportElement x="6" y="116" width="12" height="12"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="10" isBold="true"/></textElement>
+                <textFieldExpression><![CDATA[Boolean.TRUE.equals($P{stageInspectionAccepted}) ? "X" : ""]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="21" y="116" width="74" height="12"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="9"/></textElement>
+                <text><![CDATA[مقبول]]></text>
+            </staticText>
+
+            <rectangle>
+                <reportElement x="6" y="132" width="12" height="12" mode="Opaque" backcolor="#FFFFFF"/>
+                <graphicElement><pen lineWidth="1.0" lineColor="#C62828"/></graphicElement>
+            </rectangle>
+            <textField isBlankWhenNull="true">
+                <reportElement x="6" y="132" width="12" height="12"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="10" isBold="true"/></textElement>
+                <textFieldExpression><![CDATA[Boolean.TRUE.equals($P{stageInspectionRejected}) ? "X" : ""]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="21" y="132" width="74" height="12"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="9"/></textElement>
+                <text><![CDATA[مرفوض]]></text>
+            </staticText>
+
+            <rectangle>
+                <reportElement x="6" y="148" width="12" height="12" mode="Opaque" backcolor="#FFFFFF"/>
+                <graphicElement><pen lineWidth="1.0" lineColor="#EF6C00"/></graphicElement>
+            </rectangle>
+            <textField isBlankWhenNull="true">
+                <reportElement x="6" y="148" width="12" height="12"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="10" isBold="true"/></textElement>
+                <textFieldExpression><![CDATA[Boolean.TRUE.equals($P{stageInspectionHasNotes}) ? "X" : ""]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="21" y="148" width="74" height="12"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="9"/></textElement>
+                <text><![CDATA[ملاحظات]]></text>
+            </staticText>
+
+        </band>
+    </title>
+
+</jasperReport>
+
+
