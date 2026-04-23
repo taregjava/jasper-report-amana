@@ -11,8 +11,8 @@
     <parameter name="conditionImageRows" class="net.sf.jasperreports.engine.JRDataSource"/>
 
     <field name="rowNumber" class="java.lang.Integer"/>
-    <field name="conditionText" class="java.lang.String"/>
     <field name="title" class="java.lang.String"/>
+    <field name="conditionText" class="java.lang.String"/>
     <field name="imagePath" class="java.lang.Object"/>
     <field name="noteText" class="java.lang.String"/>
 
@@ -25,8 +25,8 @@
 
                 <!-- TITLE -->
                 <textField isStretchWithOverflow="true">
-                    <reportElement x="5" y="5" width="335" height="20" positionType="Float"/>
-                    <textElement textAlignment="Right">
+                    <reportElement x="5" y="5" width="335" height="20" positionType="Float" mode="Opaque" backcolor="#DDDDDD"/>
+                    <textElement textAlignment="Center">
                         <font pdfFontName="fonts/Amiri-Regular.ttf"
                               pdfEncoding="Identity-H"
                               isPdfEmbedded="true"
@@ -36,21 +36,19 @@
                     <textFieldExpression><![CDATA[
                     $F{title} != null && !$F{title}.trim().isEmpty()
                     ? $F{title}
-                    : $F{conditionText}
+                    : $F{title}
                 ]]></textFieldExpression>
-                </textField>
-
-                <!-- CONDITION TEXT -->
-                <textField isStretchWithOverflow="true">
-                    <reportElement x="5" y="28" width="335" height="20" positionType="Float"/>
-                    <textElement textAlignment="Right"/>
-                    <textFieldExpression><![CDATA[$F{conditionText}]]></textFieldExpression>
                 </textField>
 
                 <!-- NOTE -->
                 <textField isStretchWithOverflow="true">
-                    <reportElement x="5" y="52" width="335" height="130" positionType="Float"/>
-                    <textElement textAlignment="Right"/>
+                    <reportElement x="5" y="35" width="335" height="143" positionType="Float"/>
+                    <textElement textAlignment="Right">
+                        <font pdfFontName="fonts/Amiri-Regular.ttf"
+                              pdfEncoding="Identity-H"
+                              isPdfEmbedded="true"
+                              size="10"/>
+                    </textElement>
                     <textFieldExpression><![CDATA[$F{noteText}]]></textFieldExpression>
                 </textField>
 
@@ -84,7 +82,10 @@
                         <printWhenExpression><![CDATA[$F{imagePath} == null]]></printWhenExpression>
                     </reportElement>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font size="9"/>
+                        <font pdfFontName="fonts/Amiri-Regular.ttf"
+                              pdfEncoding="Identity-H"
+                              isPdfEmbedded="true"
+                              size="9"/>
                     </textElement>
                     <text><![CDATA[لا توجد صورة]]></text>
                 </staticText>
@@ -95,4 +96,3 @@
     </detail>
 
 </jasperReport>
-
