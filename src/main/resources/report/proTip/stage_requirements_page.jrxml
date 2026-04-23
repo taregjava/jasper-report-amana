@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="oc_verification_requirements_page"
+              pageWidth="842"
+              pageHeight="595"
+              orientation="Landscape"
+              columnWidth="802"
+              leftMargin="20"
+              rightMargin="20"
+              topMargin="0"
+              bottomMargin="0"
+              language="java">
+
+    <property name="net.sf.jasperreports.text.direction" value="RTL"/>
+    <style name="Default" isDefault="true" fontName="SansSerif" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+
+    <style name="SecHeader" mode="Opaque" backcolor="#005B41" forecolor="#FFFFFF" fontSize="10" isBold="true" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true">
+        <box leftPadding="2" rightPadding="2" topPadding="2" bottomPadding="2">
+            <pen lineWidth="0.5" lineColor="#000000"/>
+        </box>
+    </style>
+
+    <style name="ColHeader" mode="Opaque" backcolor="#DDE7DD" forecolor="#000000" fontSize="8" isBold="true" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true">
+        <box leftPadding="2" rightPadding="2" topPadding="1" bottomPadding="1">
+            <pen lineWidth="0.5" lineColor="#000000"/>
+        </box>
+    </style>
+
+    <style name="RowCell" mode="Opaque" backcolor="#FFFFFF" forecolor="#000000" fontSize="7" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true">
+        <box leftPadding="2" rightPadding="2" topPadding="1" bottomPadding="1">
+            <pen lineWidth="0.5" lineColor="#000000"/>
+        </box>
+    </style>
+
+    <style name="MarkCell" style="RowCell" fontSize="8" isBold="true">
+        <box leftPadding="0" rightPadding="0" topPadding="0" bottomPadding="0">
+            <pen lineWidth="0.5" lineColor="#000000"/>
+        </box>
+    </style>
+
+    <parameter name="headerSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
+    <parameter name="reportLogo" class="java.lang.Object"/>
+    <parameter name="projectNameAndAddress" class="java.lang.String"/>
+    <parameter name="reportDate" class="java.lang.String"/>
+    <parameter name="officeName" class="java.lang.String"/>
+    <parameter name="footerSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
+    <parameter name="digitalStampPath" class="java.lang.Object"/>
+
+    <field name="itemNo" class="java.lang.Integer"/>
+    <field name="description" class="java.lang.String"/>
+    <field name="status" class="java.lang.String"/>
+    <field name="statusCode" class="java.lang.String"/>
+    <field name="isMatched" class="java.lang.Boolean"/>
+    <field name="isNotMatched" class="java.lang.Boolean"/>
+    <field name="isNotApplicable" class="java.lang.Boolean"/>
+
+    <title>
+        <band height="144">
+            <subreport>
+                <reportElement x="0" y="0" width="802" height="118"/>
+                <subreportParameter name="reportLogo"><subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="projectNameAndAddress"><subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="reportDate"><subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression></subreportParameter>
+                <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
+                <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{headerSubreport}]]></subreportExpression>
+            </subreport>
+
+            <staticText>
+                <reportElement style="SecHeader" x="0" y="118" width="802" height="26"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle"/>
+                <text><![CDATA[مطابقة المبنى للاشتراطات]]></text>
+            </staticText>
+        </band>
+    </title>
+
+    <columnHeader>
+        <band height="20">
+            <staticText>
+                <reportElement style="ColHeader" x="0" y="0" width="55" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[لا ينطبق]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement style="ColHeader" x="55" y="0" width="55" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[غير مطابق]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement style="ColHeader" x="110" y="0" width="55" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[مطابق]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement style="ColHeader" x="165" y="0" width="607" height="20"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle"/>
+                <text><![CDATA[الاشتراطات العامة لجميع المباني]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement style="ColHeader" x="772" y="0" width="30" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[#]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+
+    <detail>
+        <band height="10" splitType="Stretch">
+            <textField isBlankWhenNull="true">
+                <reportElement style="MarkCell" x="0" y="0" width="55" height="10"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[
+                    Boolean.TRUE.equals($F{isNotApplicable})
+                    || ($F{statusCode} != null && "NOT_APPLICABLE".equals($F{statusCode}))
+                    || ($F{status} != null && (
+                        "NA".equalsIgnoreCase($F{status}.trim())
+                        || "N/A".equalsIgnoreCase($F{status}.trim())
+                        || "لا ينطبق".equals($F{status}.trim())
+                    ))
+                    ? "X" : ""
+                ]]></textFieldExpression>
+            </textField>
+
+            <textField isBlankWhenNull="true">
+                <reportElement style="MarkCell" x="55" y="0" width="55" height="10"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[
+                    Boolean.TRUE.equals($F{isNotMatched})
+                    || ($F{statusCode} != null && "NOT_MATCHED".equals($F{statusCode}))
+                    || ($F{status} != null && (
+                        "☐".equals($F{status}.trim())
+                        || "✖".equals($F{status}.trim())
+                        || "✗".equals($F{status}.trim())
+                        || "X".equalsIgnoreCase($F{status}.trim())
+                        || "غير مطابق".equals($F{status}.trim())
+                    ))
+                    ? "X" : ""
+                ]]></textFieldExpression>
+            </textField>
+
+            <textField isBlankWhenNull="true">
+                <reportElement style="MarkCell" x="110" y="0" width="55" height="10"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[
+                    Boolean.TRUE.equals($F{isMatched})
+                    || ($F{statusCode} != null && "MATCHED".equals($F{statusCode}))
+                    || ($F{status} != null && (
+                        "☑".equals($F{status}.trim())
+                        || "✔".equals($F{status}.trim())
+                        || "✓".equals($F{status}.trim())
+                        || "مطابق".equals($F{status}.trim())
+                    ))
+                    ? "X" : ""
+                ]]></textFieldExpression>
+            </textField>
+
+            <textField isBlankWhenNull="true">
+                <reportElement style="RowCell" x="165" y="0" width="607" height="10"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="6"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+            </textField>
+
+            <textField isBlankWhenNull="true">
+                <reportElement style="RowCell" x="772" y="0" width="30" height="10"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{itemNo} == null ? "" : String.valueOf($F{itemNo})]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+
+    <summary>
+        <band height="85">
+            <subreport>
+                <reportElement x="0" y="0" width="802" height="85"/>
+                <subreportParameter name="officeName"><subreportParameterExpression><![CDATA[$P{officeName}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="digitalStampPath"><subreportParameterExpression><![CDATA[$P{digitalStampPath}]]></subreportParameterExpression></subreportParameter>
+                <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
+                <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{footerSubreport}]]></subreportExpression>
+            </subreport>
+        </band>
+    </summary>
+
+</jasperReport>
+

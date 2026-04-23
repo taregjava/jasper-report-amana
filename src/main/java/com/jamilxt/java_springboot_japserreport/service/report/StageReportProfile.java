@@ -5,9 +5,10 @@ public enum StageReportProfile {
     POST_FOUNDATION("post-foundation casting stage", "تقرير رقم 1", "تقرير مرحلة ما بعد صب الأساسات", "postFoundation"),
     PRE_FOUNDATION("pre-foundation stage", "تقرير رقم 1", "تقرير مرحلة ما قبل صب الأساسات", "preFoundation"),
 
-    PRE_POURING("pre-pouring stage", "تقرير رقم 1", "تقرير مرحلة ما قبل صب الميدات", "prePouring");//prePouring
+    PRE_POURING("pre-pouring stage", "تقرير رقم 1", "تقرير مرحلة ما قبل صب الميدات", "prePouring"),//prePouring
 
 
+    PRO_TIP("pro tip stage", "تقرير رقم 1", "تقرير مرحلة ما قبل صب الأعمدة\n", "proTip");
     private final String displayName;
     private final String reportNumberLabel;
     private final String stageTitle;

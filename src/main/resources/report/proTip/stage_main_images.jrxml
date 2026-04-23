@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.5.final using JasperReports Library version 6.21.5-74d586df47b25dbd05bd0957999819196e59934a  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="oc_verification_report_photos" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" uuid="9721244c-83a7-4ab7-83ba-0d2d0db8db90">
+	<property name="net.sf.jasperreports.text.direction" value="RTL"/>
+	<style name="Default" isDefault="true" fontName="SansSerif" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+	<parameter name="headerSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="reportLogo" class="java.lang.Object"/>
+	<parameter name="projectNameAndAddress" class="java.lang.String"/>
+	<parameter name="reportDate" class="java.lang.String"/>
+	<parameter name="spatialPortalPhoto" class="java.lang.Object"/>
+	<parameter name="implementationPhoto" class="java.lang.Object"/>
+	<parameter name="aerialPhoto" class="java.lang.Object"/>
+	<parameter name="footerSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="officeName" class="java.lang.String"/>
+	<parameter name="digitalStampPath" class="java.lang.Object"/>
+	<detail>
+		<band height="510">
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="118" uuid="6ae003bb-4343-446a-9638-a01e61bca281"/>
+				<subreportParameter name="reportLogo">
+					<subreportParameterExpression><![CDATA[$P{reportLogo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="projectNameAndAddress">
+					<subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="reportDate">
+					<subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{headerSubreport}]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="118" width="802" height="25" forecolor="#FFFFFF" backcolor="#005B41" uuid="89361717-b219-40ef-babc-b4d14df7b3c0"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[صور المبنى]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="143" width="267" height="25" backcolor="#E8F5E9" uuid="92359873-a80a-4732-bdcf-c7425e0febcd"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[صورة جوية لموقع المبنى]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="267" y="143" width="267" height="25" backcolor="#E8F5E9" uuid="7016df64-8e20-4d11-8a42-216487633626"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[صور أعمال التنفيذ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="534" y="143" width="268" height="25" backcolor="#E8F5E9" uuid="d20a7d49-79be-41a2-b143-871a4ece091d"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[صورة الموقع طبقاً للبوابة المكانية]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="168" width="267" height="342" backcolor="#FFFFFF" uuid="24dc32e7-947c-4650-8d59-694ef95ffafa"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
+				<reportElement x="2" y="170" width="263" height="338" uuid="9a42ce4e-6163-48da-a272-69aa8aa2455c">
+					<printWhenExpression><![CDATA[$P{aerialPhoto} != null]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[$P{aerialPhoto}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="2" y="170" width="263" height="338" forecolor="#999999" uuid="dc52c1ad-9ff0-47fd-b5f2-314d946151b0">
+					<printWhenExpression><![CDATA[$P{aerialPhoto} == null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[لا توجد صورة]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Opaque" x="267" y="168" width="267" height="342" backcolor="#FFFFFF" uuid="51097e8b-3a80-4dbd-af9e-3a663ac12322"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
+				<reportElement x="269" y="170" width="263" height="338" uuid="bc6e2374-1f4b-48ee-8c02-eadf7281ea5f">
+					<printWhenExpression><![CDATA[$P{implementationPhoto} != null]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[$P{implementationPhoto}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="269" y="170" width="263" height="338" forecolor="#999999" uuid="b9d60dab-c1f0-4064-8133-0e7f2861f1ff">
+					<printWhenExpression><![CDATA[$P{implementationPhoto} == null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[لا توجد صورة]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Opaque" x="534" y="168" width="268" height="342" backcolor="#FFFFFF" uuid="faf51d14-444a-42d7-a043-c636f2272032"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
+				<reportElement x="536" y="170" width="264" height="338" uuid="99172f2a-5872-4321-bd04-17f87e8fe491">
+					<printWhenExpression><![CDATA[$P{spatialPortalPhoto} != null]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[$P{spatialPortalPhoto}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="536" y="170" width="264" height="338" forecolor="#999999" uuid="9ef51f9f-cc4c-4368-b33c-678c933e8f7e">
+					<printWhenExpression><![CDATA[$P{spatialPortalPhoto} == null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[لا توجد صورة]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="85">
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="85">
+					<printWhenExpression><![CDATA[$V{PAGE_NUMBER}.intValue() == 1]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="officeName">
+					<subreportParameterExpression><![CDATA[$P{officeName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="digitalStampPath">
+					<subreportParameterExpression><![CDATA[$P{digitalStampPath}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{footerSubreport}]]></subreportExpression>
+			</subreport>
+		</band>
+	</pageFooter>
+</jasperReport>

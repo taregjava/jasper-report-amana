@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.5.final using JasperReports Library version 6.21.5-74d586df47b25dbd05bd0957999819196e59934a  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="oc_verification_report_header" pageWidth="842" pageHeight="118" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" uuid="8468c1ef-c06d-4627-81dd-89c190229f51">
+	<property name="net.sf.jasperreports.text.direction" value="RTL"/>
+	<style name="Default" isDefault="true" fontName="SansSerif" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+	<parameter name="reportLogo" class="java.lang.Object"/>
+	<parameter name="projectNameAndAddress" class="java.lang.String"/>
+	<parameter name="reportDate" class="java.lang.String"/>
+	<parameter name="ownerName" class="java.lang.String"/>
+	<parameter name="ownerIdNumber" class="java.lang.String"/>
+	<parameter name="ownerMobile" class="java.lang.String"/>
+	<parameter name="contractorName" class="java.lang.String"/>
+	<parameter name="supervisingEngineeringOffice" class="java.lang.String"/>
+	<title>
+		<band height="118">
+			<image scaleImage="RetainShape" hAlign="Left" vAlign="Middle">
+				<reportElement x="0" y="12" width="180" height="68" uuid="7cfa3ed8-91d0-4634-be85-a6ce9121905c"/>
+				<imageExpression><![CDATA[$P{reportLogo}]]></imageExpression>
+			</image>
+			<image scaleImage="RetainShape" hAlign="Right" vAlign="Middle">
+				<reportElement x="630" y="12" width="130" height="68" uuid="9d730454-394a-416e-a5a4-ac4911627c16"/>
+				<imageExpression><![CDATA[$P{reportLogo}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="191" y="18" width="420" height="30" uuid="aac157a2-ec03-475b-b6db-17a906a4c487"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[نموذج التقرير الموحد]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="191" y="50" width="420" height="30" uuid="7880790e-47b2-45e3-86c2-8c8203e9cf9d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="false" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[للتحقق من متطلبات شهادة الاشغال]]></text>
+			</staticText>
+		</band>
+	</title>
+</jasperReport>

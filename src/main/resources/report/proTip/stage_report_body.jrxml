@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="oc_verification_report_body"
+              pageWidth="842"
+              pageHeight="595"
+              orientation="Landscape"
+              columnWidth="802"
+              leftMargin="20"
+              rightMargin="20"
+              topMargin="20"
+              bottomMargin="20"
+              language="java">
+
+    <property name="net.sf.jasperreports.text.direction" value="RTL"/>
+    <style name="Default" isDefault="true" fontName="SansSerif" pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+
+    <!-- Building / body parameters -->
+    <!-- Owner parameters (moved from header) -->
+    <parameter name="ownerName" class="java.lang.String"/>
+    <parameter name="ownerIdNumber" class="java.lang.String"/>
+    <parameter name="ownerMobile" class="java.lang.String"/>
+    <parameter name="deedNumber" class="java.lang.String"/>
+    <parameter name="designingEngineeringOffice" class="java.lang.String"/>
+    <parameter name="contractorRecord" class="java.lang.String"/>
+    <parameter name="contractorMobile" class="java.lang.String"/>
+    <parameter name="projectNameAndAddress" class="java.lang.String"/>
+    <parameter name="supervisingEngineerName" class="java.lang.String"/>
+    <parameter name="stageInspectionResult" class="java.lang.String"/>
+    <parameter name="stageInspectionNotes" class="java.lang.String"/>
+    <parameter name="contractorName" class="java.lang.String"/>
+    <parameter name="supervisingEngineeringOffice" class="java.lang.String"/>
+    <parameter name="buildingType" class="java.lang.String"/>
+    <parameter name="buildingCondition" class="java.lang.String"/>
+    <parameter name="buildingDescription" class="java.lang.String"/>
+    <parameter name="licenseNumber" class="java.lang.String"/>
+    <parameter name="licenseDate" class="java.lang.String"/>
+    <parameter name="planNumber" class="java.lang.String"/>
+    <parameter name="plotNumber" class="java.lang.String"/>
+    <parameter name="floorsCount" class="java.lang.String"/>
+    <parameter name="landAreaDeed" class="java.lang.String"/>
+    <parameter name="landAreaLicense" class="java.lang.String"/>
+    <parameter name="landAreaActual" class="java.lang.String"/>
+    <parameter name="district" class="java.lang.String"/>
+    <parameter name="street" class="java.lang.String"/>
+
+    <title>
+        <!-- increased height to fit ownership + building + inspection blocks -->
+        <band height="330">
+
+
+            <!-- Project name/address and supervising engineer (below building block) -->
+            <staticText>
+                <reportElement x="660" y="234" width="120" height="16"/>
+                <textElement textAlignment="Right"/>
+                <text><![CDATA[اسم المشروع وعنوانه:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="12" y="234" width="640" height="20" mode="Opaque" backcolor="#F8FFF6"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Right"><font pdfFontName="fonts/Amiri-Regular.ttf" size="11"/></textElement>
+                <textFieldExpression><![CDATA[$P{projectNameAndAddress}]]></textFieldExpression>
+            </textField>
+
+            <staticText>
+                <reportElement x="660" y="258" width="120" height="16"/>
+                <textElement textAlignment="Right"/>
+                <text><![CDATA[اسم المهندس المشرف:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="500" y="258" width="300" height="16" mode="Opaque" backcolor="#F8FFF6"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Right"><font pdfFontName="fonts/Amiri-Regular.ttf"/></textElement>
+                <textFieldExpression><![CDATA[$P{supervisingEngineerName}]]></textFieldExpression>
+            </textField>
+
+            <!-- Stage inspection result and notes -->
+            <staticText>
+                <reportElement x="660" y="280" width="120" height="16"/>
+                <textElement textAlignment="Right"/>
+                <text><![CDATA[نتيجة فحص المرحلة:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="500" y="280" width="140" height="16" mode="Opaque" backcolor="#F8FFF6"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Right"><font pdfFontName="fonts/Amiri-Regular.ttf"/></textElement>
+                <textFieldExpression><![CDATA[$P{stageInspectionResult}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="350" y="280" width="140" height="16"/>
+                <textElement textAlignment="Right"/>
+                <text><![CDATA[ملاحظات الفحص:]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="12" y="280" width="320" height="36" mode="Opaque" backcolor="#F8FFF6"/>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Right"><font pdfFontName="fonts/Amiri-Regular.ttf"/></textElement>
+                <textFieldExpression><![CDATA[$P{stageInspectionNotes}]]></textFieldExpression>
+            </textField>
+
+        </band>
+    </title>
+
+</jasperReport>
+
+
