@@ -7,6 +7,8 @@
 	<parameter name="reportLogo" class="java.lang.Object"/>
 	<parameter name="projectNameAndAddress" class="java.lang.String"/>
 	<parameter name="reportDate" class="java.lang.String"/>
+    <parameter name="stageReportNumber" class="java.lang.String"/>
+    <parameter name="stageReportTitle" class="java.lang.String"/>
 	<parameter name="boundaryComplianceData" class="com.jamilxt.java_springboot_japserreport.dto.BoundaryComplianceDTO"/>
 	<parameter name="buildingComponentsData" class="com.jamilxt.java_springboot_japserreport.dto.BuildingComponentsDTO"/>
 	<detail>
@@ -22,7 +24,10 @@
 				<subreportParameter name="reportDate">
 					<subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression>
 				</subreportParameter>
-				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
+                <subreportParameter name="stageReportNumber"><subreportParameterExpression><![CDATA[$P{stageReportNumber}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="stageReportTitle"><subreportParameterExpression><![CDATA[$P{stageReportTitle}]]></subreportParameterExpression></subreportParameter>
+
+                <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{headerSubreport}]]></subreportExpression>
 			</subreport>
 			<staticText>

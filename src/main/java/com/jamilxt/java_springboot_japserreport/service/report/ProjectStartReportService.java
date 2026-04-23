@@ -1,11 +1,6 @@
 package com.jamilxt.java_springboot_japserreport.service.report;
 
-import com.jamilxt.java_springboot_japserreport.dto.ProjectStartReportDto;
-import com.jamilxt.java_springboot_japserreport.dto.OwnerInfo;
-import com.jamilxt.java_springboot_japserreport.dto.BuildingInfo;
-import com.jamilxt.java_springboot_japserreport.dto.ProjectPhotosDTO;
-import com.jamilxt.java_springboot_japserreport.dto.TaskRow;
-import com.jamilxt.java_springboot_japserreport.dto.InspectionResponsibilityDTO;
+import com.jamilxt.java_springboot_japserreport.dto.*;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.core.io.ResourceLoader;
@@ -74,6 +69,14 @@ public class ProjectStartReportService {
             InspectionResponsibilityDTO staticInspection = buildStaticInspectionResponsibility();
             params.put("inspectionResponsibilityData", buildInspectionResponsibilityDataSource(staticInspection));
             params.put("hasInspectionResponsibilityData", hasInspectionResponsibilityData(staticInspection));
+            BoundaryComplianceDTO staticBoundaryCompliance = buildStaticBoundaryCompliance();
+            BuildingComponentsDTO staticBuildingComponents = buildStaticBuildingComponents();
+
+             List<BoundaryComplianceDTO.SetbackDirection> setbackList = new java.util.ArrayList<>();
+            if (staticBoundaryCompliance.getNorthSetback() != null) setbackList.add(staticBoundaryCompliance.getNorthSetback());
+           if (staticBoundaryCompliance.getSouthSetback() != null) setbackList.add(staticBoundaryCompliance.getSouthSetback());
+          if (staticBoundaryCompliance.getEastSetback() != null) setbackList.add(staticBoundaryCompliance.getEastSetback());
+           if (staticBoundaryCompliance.getWestSetback() != null) setbackList.add(staticBoundaryCompliance.getWestSetback());
 
             // header/body params (example)
             // load logo as byte[] so Jasper/iText can recognize the image format reliably during export
@@ -178,7 +181,14 @@ public class ProjectStartReportService {
             params.put("extraItemsData", buildTextRowsDataSource(dto.getExtraItems()));
             params.put("inspectionResponsibilityData", buildInspectionResponsibilityDataSource(dto.getInspectionResponsibility()));
             params.put("hasInspectionResponsibilityData", hasInspectionResponsibilityData(dto.getInspectionResponsibility()));
-
+            BoundaryComplianceDTO staticBoundaryCompliance = buildStaticBoundaryCompliance();
+            BuildingComponentsDTO staticBuildingComponents = buildStaticBuildingComponents();
+            // Wrap staticBoundaryCompliance in a list for JRBeanCollectionDataSource
+            List<BoundaryComplianceDTO.SetbackDirection> setbackList = new java.util.ArrayList<>();
+            if (staticBoundaryCompliance.getNorthSetback() != null) setbackList.add(staticBoundaryCompliance.getNorthSetback());
+            if (staticBoundaryCompliance.getSouthSetback() != null) setbackList.add(staticBoundaryCompliance.getSouthSetback());
+            if (staticBoundaryCompliance.getEastSetback() != null) setbackList.add(staticBoundaryCompliance.getEastSetback());
+            if (staticBoundaryCompliance.getWestSetback() != null) setbackList.add(staticBoundaryCompliance.getWestSetback());
             // owner/building values: prefer OwnerInfo / BuildingInfo when present
             String ownerName = null;
             OwnerInfo oi = dto.getOwnerInfo();
@@ -197,6 +207,8 @@ public class ProjectStartReportService {
                     legacyBuildingType,
                     "سكني", "residential", "residence"
             ));
+            params.put("boundaryComplianceData", new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource(setbackList));
+            params.put("buildingComponentsData", staticBuildingComponents);
             params.put("buildingTypeResidentialCommercial", resolveBuildingTypeFlag(
                     bi == null ? null : bi.getBuildingTypeResidentialCommercial(),
                     legacyBuildingType,
@@ -235,9 +247,13 @@ public class ProjectStartReportService {
             params.put("stageInspectionRejected", resolveStageFlag(dto.getStageInspectionRejected(), dto.getStageResult(), "rejected", "مرفوض"));
             params.put("stageInspectionHasNotes", resolveStageFlag(dto.getStageInspectionHasNotes(), dto.getStageResult(), "notes", "ملاحظات"));
 
+            params.put("hasRequirementsPage", !tableRows.isEmpty());
             params.put("buildingDescription", bi == null ? "" : bi.getBuildingDescription());
             // map building fields to expected names (best-effort)
             params.put("planNumber", bi == null ? "" : bi.getPlanNumber());
+
+           // params.put("boundaryComplianceData", staticBoundaryCompliance);
+           // params.put("buildingComponentsData", staticBuildingComponents);
             params.put("pieceNumber", bi == null ? "" : bi.getPieceNumber());
             params.put("floorsCount", bi == null ? "" : bi.getFloorsCount());
             params.put("landNumber", bi == null ? "" : bi.getLandNumber());
@@ -758,4 +774,97 @@ public class ProjectStartReportService {
         }
         return new JRBeanCollectionDataSource(rows);
     }
+
+    /**
+     * Builds a static BoundaryComplianceDTO with sample data
+     */
+    private BoundaryComplianceDTO buildStaticBoundaryCompliance() {
+        BoundaryComplianceDTO dto = new BoundaryComplianceDTO();
+
+        // Setbacks (Boundary distances from property limits)
+        dto.setNorthSetback(new BoundaryComplianceDTO.SetbackDirection(
+                "شمال", "شارع", 5.0, 5.0, 5.0, 0.0, true, "مطابق"
+        ));
+        dto.setSouthSetback(new BoundaryComplianceDTO.SetbackDirection(
+                "جنوب", "جار", 3.0, 3.0, 2.8, 0.0, false, "ناقص بـ 20 سم"
+        ));
+        dto.setEastSetback(new BoundaryComplianceDTO.SetbackDirection(
+                "شرق", "شارع ثانوي", 4.0, 4.0, 4.0, 0.0, true, ""
+        ));
+        dto.setWestSetback(new BoundaryComplianceDTO.SetbackDirection(
+                "غرب", "جار", 3.5, 3.5, 3.5, 0.0, true, "مطابق"
+        ));
+
+        // Protrusions (Balconies, overhangs)
+        dto.setNorthProtrusion(new BoundaryComplianceDTO.ProtrustionDirection(
+                "شمال", "بلكونة", 1.5, 1.5, 1.6, 0.1, false, "زيادة 10 سم غير مسموح"
+        ));
+        dto.setSouthProtrusion(new BoundaryComplianceDTO.ProtrustionDirection(
+                "جنوب", "شمسية", 1.0, 1.0, 1.0, 0.0, true, ""
+        ));
+        dto.setEastProtrusion(new BoundaryComplianceDTO.ProtrustionDirection(
+                "شرق", "بلكونة", 1.5, 1.5, 1.5, 0.0, true, "مطابق"
+        ));
+        dto.setWestProtrusion(new BoundaryComplianceDTO.ProtrustionDirection(
+                "غرب", "كسرة", 0.8, 0.8, 0.8, 0.0, true, ""
+        ));
+
+        return dto;
+    }
+
+    /**
+     * Builds a static BuildingComponentsDTO with sample data
+     */
+    private BuildingComponentsDTO buildStaticBuildingComponents() {
+        BuildingComponentsDTO dto = new BuildingComponentsDTO();
+
+        // Building floors
+        dto.setBasement(new BuildingComponentsDTO.ComponentVerification(
+                "قبو", "مستودع", 1, 2.8, 350.0, 350.0, true, ""
+        ));
+        dto.setGroundFloor(new BuildingComponentsDTO.ComponentVerification(
+                "الدور الأرضي", "مختلط", 4, 3.5, 400.0, 398.0, false, "ناقص بـ 2 م²"
+        ));
+        dto.setMezzanine(new BuildingComponentsDTO.ComponentVerification(
+                "طابق الميزانين", "تجاري", null, null, null, null, false, true, "لا ينطبق على هذا المبنى"
+        ));
+        dto.setFirstFloor(new BuildingComponentsDTO.ComponentVerification(
+                "الدور الأول", "سكني", 4, 3.2, 350.0, 350.0, true, "مطابق"
+        ));
+        dto.setSecondFloor(new BuildingComponentsDTO.ComponentVerification(
+                "الدور الثاني", "سكني", 4, 3.2, 350.0, 350.0, true, ""
+        ));
+        dto.setThirdFloor(new BuildingComponentsDTO.ComponentVerification(
+                "الدور الثالث", "سكني", 4, 3.2, 350.0, 350.0, true, ""
+        ));
+        dto.setFourthFloor(new BuildingComponentsDTO.ComponentVerification(
+                "الدور الرابع", "سكني", 3, 3.2, 280.0, 280.0, true, ""
+        ));
+        dto.setRoofAnnex(new BuildingComponentsDTO.ComponentVerification(
+                "الملحق العلوي", "خزان", 1, 2.0, 100.0, 100.0, true, ""
+        ));
+        dto.setStairs(new BuildingComponentsDTO.ComponentVerification(
+                "درج", "دوران", 0, 3.5, 50.0, 50.0, true, ""
+        ));
+        dto.setFences(new BuildingComponentsDTO.ComponentVerification(
+                "أسوار", "حماية", 0, 2.0, 150.0, 150.0, true, ""
+        ));
+        dto.setElectricityRoom(new BuildingComponentsDTO.ComponentVerification(
+                "غرفة كهرباء", "خدمات", 1, 2.5, 20.0, 20.0, true, ""
+        ));
+
+        // Parking
+        dto.setParking(new BuildingComponentsDTO.ParkingVerification(
+                15, 14, false, "ناقص مقف واحد"
+        ));
+
+        // Utilities
+        dto.setElectricityBox(new BuildingComponentsDTO.UtilityRoomVerification(
+                3.0, 2.0, 2.9, 2.0, true, "مطابق"
+        ));
+
+        return dto;
+    }
+
+
 }

@@ -25,7 +25,8 @@
     <parameter name="projectNameAndAddress" class="java.lang.String"/>
     <parameter name="reportDate" class="java.lang.String"/>
     <parameter name="officeName" class="java.lang.String"/>
-
+    <parameter name="stageReportNumber" class="java.lang.String"/>
+    <parameter name="stageReportTitle" class="java.lang.String"/>
     <field name="number" class="java.lang.String"/>
     <field name="image" class="java.lang.Object"/>
     <field name="description" class="java.lang.String"/>

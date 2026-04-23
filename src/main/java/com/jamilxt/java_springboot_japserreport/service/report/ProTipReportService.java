@@ -84,6 +84,20 @@ public byte[] generateProjectStartPdfStatic() throws Exception {
             BuildingComponentsDTO staticBuildingComponents = buildStaticBuildingComponents();
 
             Map<String,Object> params = new HashMap<>();
+
+            params.put(
+                    "stageReportNumber",
+                    profile.reportNumberLabel() == null || profile.reportNumberLabel().isBlank()
+                            ? "تقرير رقم 1"
+                            : profile.reportNumberLabel()
+            );
+
+            params.put(
+                    "stageReportTitle",
+                    profile.stageTitle() == null || profile.stageTitle().isBlank()
+                            ? "نموذج التقرير الموحد"
+                            : profile.stageTitle()
+            );
             // pass compiled subreports
             params.put("headerSubreport", headerRep);
             params.put("ownerSubreport", ownerRep);
@@ -97,6 +111,8 @@ public byte[] generateProjectStartPdfStatic() throws Exception {
             params.put("exteriorPhotosSubreport", exteriorPhotosRep);
             params.put("internalPhotosSubreport", internalPhotosRep);
             params.put("inspectionResponsibilitySubreport", inspectionResponsibilityRep);
+
+
             // pass table datasource
             params.put("requirementsData", new JRBeanCollectionDataSource(rows));
             params.put("boundaryComplianceData", staticBoundaryCompliance);
@@ -628,96 +644,59 @@ public byte[] generateProjectStartPdfStatic() throws Exception {
     }
 
 
-    private static final class StageCompiledReports {
-        private final JasperReport header;
-        private final JasperReport owner;
-        private final JasperReport body;
-        private final JasperReport building;
-        private final JasperReport table;
-        private final JasperReport photos;
-        private final JasperReport sitePhotos;
-        private final JasperReport photosTopGrid;
-        private final JasperReport photosBottomGrid;
-        private final JasperReport footer;
-        private final JasperReport mainImages;
-        private final JasperReport changesRows;
-        private final JasperReport changesPage;
-        private final JasperReport inspectionResponsibility;
-        private final JasperReport stageBuildingComponentsSubreport;
-        private final JasperReport master;
+//    private static final class StageCompiledReports {
+//        private final JasperReport header;
+//        private final JasperReport owner;
+//        private final JasperReport body;
+//        private final JasperReport building;
+//        private final JasperReport table;
+//        private final JasperReport photos;
+//        private final JasperReport sitePhotos;
+//        private final JasperReport photosTopGrid;
+//        private final JasperReport photosBottomGrid;
+//        private final JasperReport footer;
+//        private final JasperReport mainImages;
+//        private final JasperReport changesRows;
+//        private final JasperReport changesPage;
+//        private final JasperReport inspectionResponsibility;
+//        private final JasperReport stageBuildingComponentsSubreport;
+//        private final JasperReport master;
+//
+//        private StageCompiledReports(
+//                JasperReport header,
+//                JasperReport owner,
+//                JasperReport body,
+//                JasperReport building,
+//                JasperReport table,
+//                JasperReport photos,
+//                JasperReport sitePhotos,
+//                JasperReport photosTopGrid,
+//                JasperReport photosBottomGrid,
+//                JasperReport footer,
+//                JasperReport mainImages,
+//                JasperReport changesRows,
+//                JasperReport changesPage,
+//                JasperReport inspectionResponsibility,
+//                JasperReport stageBuildingComponentsSubreport,
+//                JasperReport master
+//        ) {
+//            this.header = header;
+//            this.owner = owner;
+//            this.body = body;
+//            this.building = building;
+//            this.table = table;
+//            this.photos = photos;
+//            this.sitePhotos = sitePhotos;
+//            this.photosTopGrid = photosTopGrid;
+//            this.photosBottomGrid = photosBottomGrid;
+//            this.footer = footer;
+//            this.mainImages = mainImages;
+//            this.changesRows = changesRows;
+//            this.changesPage = changesPage;
+//            this.inspectionResponsibility = inspectionResponsibility;
+//            this.stageBuildingComponentsSubreport = stageBuildingComponentsSubreport;
+//            this.master = master;
+//        }
+//    }
 
-        private StageCompiledReports(
-                JasperReport header,
-                JasperReport owner,
-                JasperReport body,
-                JasperReport building,
-                JasperReport table,
-                JasperReport photos,
-                JasperReport sitePhotos,
-                JasperReport photosTopGrid,
-                JasperReport photosBottomGrid,
-                JasperReport footer,
-                JasperReport mainImages,
-                JasperReport changesRows,
-                JasperReport changesPage,
-                JasperReport inspectionResponsibility,
-                JasperReport stageBuildingComponentsSubreport,
-                JasperReport master
-        ) {
-            this.header = header;
-            this.owner = owner;
-            this.body = body;
-            this.building = building;
-            this.table = table;
-            this.photos = photos;
-            this.sitePhotos = sitePhotos;
-            this.photosTopGrid = photosTopGrid;
-            this.photosBottomGrid = photosBottomGrid;
-            this.footer = footer;
-            this.mainImages = mainImages;
-            this.changesRows = changesRows;
-            this.changesPage = changesPage;
-            this.inspectionResponsibility = inspectionResponsibility;
-            this.stageBuildingComponentsSubreport = stageBuildingComponentsSubreport;
-            this.master = master;
-        }
-    }
-    private ProTipReportService.StageCompiledReports compileStageReports(StageReportProfile profile) throws Exception {
-        try (InputStream headerIs = resourceLoader.getResource(profile.reportPath("report_header")).getInputStream();
-             InputStream ownerIs = resourceLoader.getResource(profile.reportPath("report_owner")).getInputStream();
-             InputStream bodyIs = resourceLoader.getResource(profile.reportPath("report_body")).getInputStream();
-             InputStream buildingIs = resourceLoader.getResource(profile.reportPath("report_building")).getInputStream();
-             InputStream tableIs = resourceLoader.getResource(profile.reportPath("report_table")).getInputStream();
-             InputStream photosIs = resourceLoader.getResource(profile.reportPath("report_photos")).getInputStream();
-             InputStream sitePhotosIs = resourceLoader.getResource(profile.reportPath("site_photos_page")).getInputStream();
-             InputStream photosTopGridIs = resourceLoader.getResource(profile.reportPath("report_photos_top_grid")).getInputStream();
-             InputStream photosBottomGridIs = resourceLoader.getResource(profile.reportPath("report_photos_bottom_grid")).getInputStream();
-             InputStream footerIs = resourceLoader.getResource(profile.reportPath("shared_footer")).getInputStream();
-             InputStream mainImagesIs = resourceLoader.getResource(profile.reportPath("main_images")).getInputStream();
-             InputStream changesRowsIs = resourceLoader.getResource(profile.reportPath("changes_rows")).getInputStream();
-             InputStream changesPageIs = resourceLoader.getResource(profile.reportPath("changes_page")).getInputStream();
-             InputStream inspectionResponsibilityIs = resourceLoader.getResource(profile.reportPath("inspection_responsibility")).getInputStream();
-             InputStream stageBuildingComponentsIs = resourceLoader.getResource("classpath:report/prePouring/stage_building_components.jrxml").getInputStream();
-             InputStream masterIs = resourceLoader.getResource(profile.reportPath("report_master")).getInputStream()) {
-
-            return new ProTipReportService.StageCompiledReports(
-                    JasperCompileManager.compileReport(headerIs),
-                    JasperCompileManager.compileReport(ownerIs),
-                    JasperCompileManager.compileReport(bodyIs),
-                    JasperCompileManager.compileReport(buildingIs),
-                    JasperCompileManager.compileReport(tableIs),
-                    JasperCompileManager.compileReport(photosIs),
-                    JasperCompileManager.compileReport(sitePhotosIs),
-                    JasperCompileManager.compileReport(photosTopGridIs),
-                    JasperCompileManager.compileReport(photosBottomGridIs),
-                    JasperCompileManager.compileReport(footerIs),
-                    JasperCompileManager.compileReport(mainImagesIs),
-                    JasperCompileManager.compileReport(changesRowsIs),
-                    JasperCompileManager.compileReport(changesPageIs),
-                    JasperCompileManager.compileReport(inspectionResponsibilityIs),
-                    JasperCompileManager.compileReport(stageBuildingComponentsIs),
-                    JasperCompileManager.compileReport(masterIs)
-            );
-        }
-    }
 }

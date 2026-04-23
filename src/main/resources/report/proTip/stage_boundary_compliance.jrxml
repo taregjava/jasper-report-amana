@@ -20,7 +20,8 @@
     <parameter name="reportLogo" class="java.lang.Object"/>
     <parameter name="projectNameAndAddress" class="java.lang.String"/>
     <parameter name="reportDate" class="java.lang.String"/>
-
+    <parameter name="stageReportNumber" class="java.lang.String"/>
+    <parameter name="stageReportTitle" class="java.lang.String"/>
     <detail>
         <band height="510">
             <!-- Header -->
@@ -31,6 +32,12 @@
                 </subreportParameter>
                 <subreportParameter name="projectNameAndAddress">
                     <subreportParameterExpression><![CDATA[$P{projectNameAndAddress}]]></subreportParameterExpression>
+                </subreportParameter>
+                <subreportParameter name="stageReportNumber">
+                    <subreportParameterExpression><![CDATA[$P{stageReportNumber}]]></subreportParameterExpression>
+                </subreportParameter>
+                <subreportParameter name="stageReportTitle">
+                    <subreportParameterExpression><![CDATA[$P{stageReportTitle}]]></subreportParameterExpression>
                 </subreportParameter>
                 <subreportParameter name="reportDate">
                     <subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression>

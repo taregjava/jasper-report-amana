@@ -13,6 +13,8 @@
 	<parameter name="footerSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
 	<parameter name="officeName" class="java.lang.String"/>
 	<parameter name="digitalStampPath" class="java.lang.Object"/>
+    <parameter name="stageReportNumber" class="java.lang.String"/>
+    <parameter name="stageReportTitle" class="java.lang.String"/>
 	<detail>
 		<band height="510">
 			<subreport>
@@ -26,6 +28,12 @@
 				<subreportParameter name="reportDate">
 					<subreportParameterExpression><![CDATA[$P{reportDate}]]></subreportParameterExpression>
 				</subreportParameter>
+                <subreportParameter name="stageReportNumber">
+                    <subreportParameterExpression><![CDATA[$P{stageReportNumber}]]></subreportParameterExpression>
+                </subreportParameter>
+                <subreportParameter name="stageReportTitle">
+                    <subreportParameterExpression><![CDATA[$P{stageReportTitle}]]></subreportParameterExpression>
+                </subreportParameter>
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{headerSubreport}]]></subreportExpression>
 			</subreport>
