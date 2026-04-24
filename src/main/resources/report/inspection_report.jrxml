@@ -565,7 +565,7 @@
                         <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H"
                               isPdfEmbedded="true" size="11"/>
                     </textElement>
-                    <textFieldExpression><![CDATA[$P{supervisingOffice}]]></textFieldExpression>
+                    <textFieldExpression><![CDATA[$P{regulatoryPlan}]]></textFieldExpression>
                 </textField>
 
                 <rectangle>
@@ -577,7 +577,7 @@
                         <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H"
                               isPdfEmbedded="true" size="11" isBold="true"/>
                     </textElement>
-                    <text><![CDATA[المكتب المشرف]]></text>
+                    <text><![CDATA[المخطط التنظيمي]]></text>
                 </staticText>
 
                 <rectangle>
@@ -620,7 +620,7 @@
                               isPdfEmbedded="true"
                               size="11"/>
                     </textElement>
-                    <textFieldExpression><![CDATA[$P{regulatoryPlan}]]></textFieldExpression>
+                    <textFieldExpression><![CDATA[$P{reportType}]]></textFieldExpression>
                 </textField>
 
                 <!-- COLUMN 1 LABEL -->
