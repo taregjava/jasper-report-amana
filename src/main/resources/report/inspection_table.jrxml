@@ -241,16 +241,21 @@
 					</reportElement>
 				</ellipse>
 			</frame>
-			<textField textAdjust="StretchHeight">
-				<reportElement x="597" y="0" width="170" height="25" uuid="7e0fd415-df53-42dd-894f-ac4d44f89525"/>
-				<box>
-					<pen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
-			</textField>
+            <!-- Use padding INSIDE textElement, not box attributes -->
+
+            <textField>
+                <reportElement x="597" y="0" width="170" height="25"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font pdfFontName="fonts/Amiri-Regular.ttf"
+                          pdfEncoding="Identity-H"
+                          isPdfEmbedded="true"/>
+                    <paragraph rightIndent="6" leftIndent="6"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+            </textField>
 			<textField>
 				<reportElement x="767" y="0" width="35" height="25" uuid="3ff81f95-3780-4b1b-b276-96915e4b382b"/>
 				<box>

@@ -274,7 +274,7 @@
                     <textElement textAlignment="Right" verticalAlignment="Middle">
                         <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true" size="9"/>
                     </textElement>
-                    <text><![CDATA[الإدارة العليا / الوكالة / القطاع للموظف]]></text>
+                    <text><![CDATA[إدارة الخدمات الرقمية]]></text>
                 </staticText>
 
                 <staticText>
