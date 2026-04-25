@@ -24,7 +24,7 @@
 				<textElement textAlignment="Center">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{stageReportNumber} != null ? $P{stageReportNumber} : "تقرير رقم 1"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{stageReportNumber} != null ? $P{stageReportNumber} : ""]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="220" y="40" width="400" height="44" uuid="f17a9fc7-fef2-4cc7-bd6a-6598e2b5e3d8"/>

@@ -22,9 +22,9 @@ public class ProTipReportService {
         this.resourceLoader = resourceLoader;
     }
 // imports omitted for brevity (JasperCompileManager, JasperFillManager, JasperExportManager, JRBeanCollectionDataSource, JasperReport, JasperPrint, etc.)
-public byte[] generateProjectStartPdfStatic() throws Exception {
+    public byte[] generateProjectStartPdfStatic() throws Exception {
     return generateOCVerificationPdfStatic(StageReportProfile.PRO_TIP);
-}
+    }
     public byte[] generateOCVerificationPdfStatic(StageReportProfile profile) throws Exception {
         // Load and compile subreports + master
         try (
@@ -87,16 +87,11 @@ public byte[] generateProjectStartPdfStatic() throws Exception {
 
             params.put(
                     "stageReportNumber",
-                    profile.reportNumberLabel() == null || profile.reportNumberLabel().isBlank()
-                            ? "تقرير رقم 1"
-                            : profile.reportNumberLabel()
+                 profile.reportNumberLabel()
             );
 
             params.put(
-                    "stageReportTitle",
-                    profile.stageTitle() == null || profile.stageTitle().isBlank()
-                            ? "نموذج التقرير الموحد"
-                            : profile.stageTitle()
+                    "stageReportTitle",profile.stageTitle()
             );
             // pass compiled subreports
             params.put("headerSubreport", headerRep);
