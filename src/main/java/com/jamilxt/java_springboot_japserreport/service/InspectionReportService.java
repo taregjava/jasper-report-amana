@@ -6,7 +6,7 @@ import com.jamilxt.java_springboot_japserreport.dto.InspectionItemDto;
 import com.jamilxt.java_springboot_japserreport.dto.InspectionReportDto;
 import jakarta.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.data.JRMapCollectionDataSource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
@@ -32,14 +32,46 @@ public class InspectionReportService {
             JasperReport conditionsSubreport = JasperCompileManager.compileReport(conditionsIs);
 
             List<Map<String, Object>> tableRows = buildTableRows(dto);
+            // DEBUG: inspect incoming dto conditions to see what's being passed in
+            if (dto == null) {
+                System.out.println("[DEBUG] incoming dto is null");
+            } else if (dto.getConditions() == null) {
+                System.out.println("[DEBUG] dto.getConditions() == null");
+            } else {
+                System.out.println("[DEBUG] dto.getConditions().size() = " + dto.getConditions().size());
+                for (int ci = 0; ci < dto.getConditions().size(); ci++) {
+                    ConditionDto c = dto.getConditions().get(ci);
+                    int imgCount = (c == null || c.getImages() == null) ? 0 : c.getImages().size();
+                    System.out.println("[DEBUG] condition[" + ci + "] imageCount = " + imgCount);
+                    if (c != null && c.getImages() != null) {
+                        for (int ii = 0; ii < c.getImages().size(); ii++) {
+                            Object ip = c.getImages().get(ii).getImagePath();
+                            System.out.println("[DEBUG] condition[" + ci + "].image[" + ii + "].imagePath = " + (ip == null ? "<null>" : ip.toString()));
+                        }
+                    }
+                }
+            }
             List<Map<String, Object>> conditionRows = buildConditionRows(dto);
+
+            // DEBUG: conditionRows is always non-null (buildConditionRows returns a list)
+            System.out.println("[DEBUG] conditionRows.size() = " + conditionRows.size());
+            for (int i = 0; i < Math.min(conditionRows.size(), 5); i++) {
+                Object p = conditionRows.get(i).get("imagePath");
+                System.out.println("[DEBUG] conditionRows[" + i + "].imagePath = " + (p == null ? "<null>" : p.toString()));
+            }
 
             Map<String, Object> params = new HashMap<>();
             params.put("inspectionTableSubreport", tableSubreport);
             params.put("inspectionConditionsSubreport", conditionsSubreport);
-            params.put("tableData", new JRBeanCollectionDataSource(tableRows));
-            params.put("conditionsData", new JRBeanCollectionDataSource(conditionRows));
-            params.put("conditionImageRows", new JRBeanCollectionDataSource(conditionRows));
+            // Prepare typed collections for JRMapCollectionDataSource to avoid generic mismatch
+            @SuppressWarnings("unchecked")
+            Collection<Map<String, ?>> tableData = (Collection<Map<String, ?>>) (Collection) tableRows;
+            @SuppressWarnings("unchecked")
+            Collection<Map<String, ?>> conditionsDataColl = (Collection<Map<String, ?>>) (Collection) conditionRows;
+
+            params.put("tableData", new JRMapCollectionDataSource(tableData));
+            params.put("conditionsData", new JRMapCollectionDataSource(conditionsDataColl));
+            params.put("conditionImageRows", new JRMapCollectionDataSource(conditionsDataColl));
 
             params.put("entity", "أمانة منطقة الرياض");
             params.put("controlNumber", "رقم 328872");
@@ -111,28 +143,74 @@ public class InspectionReportService {
         row.put("notMatch", "");
         return row;
     }
-//todo : loop over conditions||| for each condition loop over imageCondition
+
+    //todo : loop over conditions||| for each condition loop over imageCondition
     private List<Map<String, Object>> buildConditionRows(InspectionReportDto dto) {
         List<ConditionDto> conditions = (dto != null) ? dto.getConditions() : null;
 
-        if (conditions != null && !conditions.isEmpty()) {
-            return conditions.stream()
-                    .map(this::toConditionRow)
-                    .collect(Collectors.toList());
+        // If there are no conditions provided, fall back to defaults
+        if (conditions == null || conditions.isEmpty()) {
+            conditions = defaultConditions();
         }
 
-        return defaultConditions().stream()
-                .map(this::toConditionRow)
-                .collect(Collectors.toList());
+        List<Map<String, Object>> rows = new ArrayList<>();
+
+        // For each condition, if it has images produce one row per image so the report can show them all.
+        for (ConditionDto condition : conditions) {
+            if (condition == null) continue;
+
+            if (condition.getImages() != null && !condition.getImages().isEmpty()) {
+                for (ConditionImageDto img : condition.getImages()) {
+                    rows.add(toConditionRow(condition, img));
+                }
+            } else {
+                // No images -> produce a single row with default image
+                rows.add(toConditionRow(condition, null));
+            }
+        }
+
+        return rows;
     }
 
     private Map<String, Object> toConditionRow(ConditionDto condition) {
+        // Keep backward-compatible single-image behavior by using the first image if present
+        ConditionImageDto firstImage = (condition != null && condition.getImages() != null && !condition.getImages().isEmpty())
+                ? condition.getImages().get(0)
+                : null;
+        return toConditionRow(condition, firstImage);
+    }
+
+    private Map<String, Object> toConditionRow(ConditionDto condition, ConditionImageDto image) {
         Map<String, Object> row = new HashMap<>();
+        if (condition == null) return row;
+
         row.put("rowNumber", condition.getRowNumber());
         row.put("title", buildConditionTitle(condition));
         row.put("conditionText", condition.getConditionText());
         row.put("noteText", buildConditionNote(condition));
-        row.put("imagePath", firstImageOrDefault(condition));
+
+        // Determine image path: prefer the provided image, else fall back to any image in condition, then to default
+        Object imagePath = null;
+        if (image != null && image.getImagePath() != null) {
+            imagePath = image.getImagePath();
+        } else if (condition.getImages() != null) {
+            for (ConditionImageDto ci : condition.getImages()) {
+                if (ci != null && ci.getImagePath() != null) {
+                    imagePath = ci.getImagePath();
+                    break;
+                }
+            }
+        }
+        if (imagePath == null) {
+            imagePath = resourceUrlOrNull("classpath:report/front-image.png");
+        }
+
+        row.put("imagePath", imagePath);
+        // Add optional image-specific metadata so templates can render captions or notes per image
+        // ConditionImageDto fields are: rowNumber, conditionText, imagePath, noteText
+        row.put("imageDescription", image != null ? safe(image.getConditionText(), "") : "");
+        row.put("imageNote", image != null ? safe(image.getNoteText(), "") : "");
+
         return row;
     }
 
@@ -160,7 +238,27 @@ public class InspectionReportService {
                 "الواجهة الامامية",
                 Collections.singletonList(image1)
         );
+        ConditionDto tt = new ConditionDto(
+                1,
+                "مطلوب استكمال اعمال العزل حسب المخطط المعتمد.",
+                Boolean.FALSE,
+                Boolean.TRUE,
+                "سكني",
+                1,
+                "الواجهة الامامية",
+                Collections.singletonList(image1)
+        );
 
+        ConditionDto tt22 = new ConditionDto(
+                1,
+                "مطلوب استكمال اعمال العزل حسب المخطط المعتمد.",
+                Boolean.FALSE,
+                Boolean.TRUE,
+                "سكني",
+                1,
+                "الواجهة الامامية",
+                Collections.singletonList(image1)
+        );
         ConditionDto second = new ConditionDto(
                 2,
                 "معالجة التشققات في الجدار الجنوبي قبل الاغلاق.",
@@ -172,7 +270,7 @@ public class InspectionReportService {
                 Collections.singletonList(image2)
         );
 
-        return Arrays.asList(first, second);
+        return Arrays.asList(first, second, tt, tt22);
     }
 
     private String buildConditionTitle(ConditionDto condition) {
