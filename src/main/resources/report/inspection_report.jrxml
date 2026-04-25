@@ -14,6 +14,8 @@
               bottomMargin="20">
     <property name="net.sf.jasperreports.element.padding" value="2"/>
 
+    <style name="BaseStyle" isDefault="true" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" fontSize="10"/>
+
     <!-- PARAMETERS -->
     <parameter name="siteMapImage" class="java.lang.Object"/>
     <parameter name="frontImage" class="java.lang.Object"/>
@@ -74,17 +76,17 @@
                 <textField>
                     <reportElement x="5" y="0" width="90" height="20"/>
                     <textElement textAlignment="Right" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true" size="9"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="9"/>
                     </textElement>
                     <textFieldExpression><![CDATA[$P{entity}]]></textFieldExpression>
                 </textField>
                 <rectangle>
-                    <reportElement x="110" y="0" width="60" height="20" mode="Opaque" backcolor="#EFEFEF"/>
+                    <reportElement x="110" y="0" width="60" height="20" mode="Opaque" backcolor="#A6A6A6"/>
                 </rectangle>
                 <staticText>
                     <reportElement x="110" y="0" width="55" height="20"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true" size="9" isBold="true"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true"/>
                     </textElement>
                     <text><![CDATA[البلدية]]></text>
                 </staticText>
@@ -100,17 +102,17 @@
                 <textField>
                     <reportElement x="5" y="0" width="90" height="20"/>
                     <textElement textAlignment="Right" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10"/>
                     </textElement>
                     <textFieldExpression><![CDATA[$P{supervisingOffice}]]></textFieldExpression>
                 </textField>
                 <rectangle>
-                    <reportElement x="110" y="0" width="60" height="20" mode="Opaque" backcolor="#EFEFEF"/>
+                    <reportElement x="110" y="0" width="60" height="20" mode="Opaque" backcolor="#A6A6A6"/>
                 </rectangle>
                 <staticText>
                     <reportElement x="110" y="0" width="55" height="20"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true"/>
                     </textElement>
                     <text><![CDATA[مكتب]]></text>
                 </staticText>
@@ -121,17 +123,17 @@
                 <textField>
                     <reportElement x="5" y="22" width="90" height="20"/>
                     <textElement textAlignment="Right" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10"/>
                     </textElement>
                     <textFieldExpression><![CDATA[$P{dateAndControl}]]></textFieldExpression>
                 </textField>
                 <rectangle>
-                    <reportElement x="110" y="22" width="60" height="20" mode="Opaque" backcolor="#EFEFEF"/>
+                    <reportElement x="110" y="22" width="60" height="20" mode="Opaque" backcolor="#A6A6A6"/>
                 </rectangle>
                 <staticText>
                     <reportElement x="110" y="22" width="55" height="20"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true"/>
                     </textElement>
                     <text><![CDATA[التاريخ والرقابة]]></text>
                 </staticText>
@@ -142,17 +144,17 @@
                 <textField>
                     <reportElement x="5" y="44" width="90" height="20"/>
                     <textElement textAlignment="Right" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10"/>
                     </textElement>
                     <textFieldExpression><![CDATA[$P{controlNumber}]]></textFieldExpression>
                 </textField>
                 <rectangle>
-                    <reportElement x="110" y="44" width="60" height="20" mode="Opaque" backcolor="#EFEFEF"/>
+                    <reportElement x="110" y="44" width="60" height="20" mode="Opaque" backcolor="#A6A6A6"/>
                 </rectangle>
                 <staticText>
                     <reportElement x="110" y="44" width="55" height="20"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true"/>
                     </textElement>
                     <text><![CDATA[رقم الرقابة]]></text>
                 </staticText>
@@ -163,17 +165,17 @@
                 <textField>
                     <reportElement x="5" y="66" width="90" height="20"/>
                     <textElement textAlignment="Right" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10"/>
                     </textElement>
                     <textFieldExpression><![CDATA[$P{pageInfo}]]></textFieldExpression>
                 </textField>
                 <rectangle>
-                    <reportElement x="110" y="66" width="60" height="20" mode="Opaque" backcolor="#EFEFEF"/>
+                    <reportElement x="110" y="66" width="60" height="20" mode="Opaque" backcolor="#A6A6A6"/>
                 </rectangle>
                 <staticText>
                     <reportElement x="110" y="66" width="55" height="20"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true"/>
                     </textElement>
                     <text><![CDATA[الصفحة]]></text>
                 </staticText>
@@ -184,10 +186,10 @@
             <staticText>
                 <reportElement x="40" y="0" width="742" height="30"/>
                 <textElement textAlignment="Center">
-                    <font pdfFontName="fonts/Amiri-Regular.ttf"
+                    <font pdfFontName="fonts/ARIAL.TTF"
                           pdfEncoding="Identity-H"
                           isPdfEmbedded="true"
-                          size="18"
+                          size="20"
                           isBold="true"/>
                 </textElement>
                 <text><![CDATA[التقرير الفني لامتثال المباني]]></text>
@@ -197,21 +199,16 @@
                 <reportElement x="10" y="30" width="782" height="35"/>
 
                 <rectangle>
-                    <reportElement x="280" y="5" width="140" height="25"
-                                   mode="Opaque" backcolor="#E6E6E6"/>
+                    <reportElement x="280" y="5" width="140" height="25" mode="Opaque" backcolor="#D9D9D9"/>
                     <graphicElement>
-                        <pen lineWidth="0.5" lineColor="#AAAAAA"/>
+                        <pen lineWidth="1.0" lineColor="#000000"/>
                     </graphicElement>
                 </rectangle>
 
                 <staticText>
                     <reportElement x="300" y="5" width="100" height="25"/>
                     <textElement textAlignment="Right" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf"
-                              pdfEncoding="Identity-H"
-                              isPdfEmbedded="true"
-                              size="11"
-                              isBold="true"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true"/>
                     </textElement>
                     <text><![CDATA[تقرير إلكتروني]]></text>
                 </staticText>
@@ -224,27 +221,21 @@
                 </ellipse>
 
                 <ellipse>
-                    <reportElement x="413" y="13" width="8" height="8"
-                                   mode="Opaque" backcolor="#555555"/>
+                    <reportElement x="413" y="13" width="8" height="8" mode="Opaque" backcolor="#555555"/>
                 </ellipse>
 
 
                 <rectangle>
-                    <reportElement x="440" y="5" width="140" height="25"
-                                   mode="Opaque" backcolor="#E6E6E6"/>
+                    <reportElement x="440" y="5" width="140" height="25" mode="Opaque" backcolor="#D9D9D9"/>
                     <graphicElement>
-                        <pen lineWidth="0.5" lineColor="#AAAAAA"/>
+                        <pen lineWidth="1.0" lineColor="#000000"/>
                     </graphicElement>
                 </rectangle>
 
                 <staticText>
                     <reportElement x="460" y="5" width="100" height="25"/>
                     <textElement textAlignment="Right" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf"
-                              pdfEncoding="Identity-H"
-                              isPdfEmbedded="true"
-                              size="11"
-                              isBold="true"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true"/>
                     </textElement>
                     <text><![CDATA[جولة استطلاعية]]></text>
                 </staticText>
@@ -265,7 +256,7 @@
                 <staticText>
                     <reportElement x="0" y="0" width="160" height="14"/>
                     <textElement textAlignment="Right" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true" size="11" isBold="true"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="12" isBold="true"/>
                     </textElement>
                     <text><![CDATA[أمانة منطقة الرياض]]></text>
                 </staticText>
@@ -273,7 +264,7 @@
                 <staticText>
                     <reportElement x="0" y="14" width="160" height="12"/>
                     <textElement textAlignment="Right" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true" size="9"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="9"/>
                     </textElement>
                     <text><![CDATA[الإدارة العامة لخدمات البنية الرقمية]]></text>
                 </staticText>
@@ -281,7 +272,7 @@
                 <staticText>
                     <reportElement x="0" y="26" width="160" height="12"/>
                     <textElement textAlignment="Right" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true" size="9"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="9"/>
                     </textElement>
                     <text><![CDATA[إدارة الخدمات الرقمية]]></text>
                 </staticText>
@@ -296,7 +287,7 @@
                 <rectangle>
                     <reportElement x="0" y="0" width="765" height="150"/>
                     <graphicElement>
-                        <pen lineWidth="0.8" lineColor="#2E2E2E"/>
+                        <pen lineWidth="1.0" lineColor="#000000"/>
                     </graphicElement>
                 </rectangle>
 
@@ -305,74 +296,68 @@
                 <!-- ================================================= -->
 
                 <rectangle>
-                    <reportElement x="0" y="0" width="160" height="30" mode="Opaque" backcolor="#F2F2F2"/>
-                    <graphicElement><pen lineWidth="0.7" lineColor="#2E2E2E"/></graphicElement>
+                    <reportElement x="0" y="0" width="160" height="30" mode="Opaque" backcolor="#FFFFFF"/>
+                    <graphicElement><pen lineWidth="1.0" lineColor="#000000"/></graphicElement>
                 </rectangle>
                 <textField>
                     <reportElement x="0" y="0" width="160" height="30"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H"
-                              isPdfEmbedded="true" size="11"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10"/>
                     </textElement>
                     <textFieldExpression><![CDATA[$P{requestNumber}]]></textFieldExpression>
                 </textField>
 
                 <rectangle>
-                    <reportElement x="160" y="0" width="95" height="30" mode="Opaque" backcolor="#D9D9D9"/>
+                    <reportElement x="160" y="0" width="95" height="30" mode="Opaque" backcolor="#A6A6A6"/>
                 </rectangle>
                 <staticText>
                     <reportElement x="160" y="0" width="95" height="30"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H"
-                              isPdfEmbedded="true" size="11" isBold="true"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true"/>
                     </textElement>
                     <text><![CDATA[رقم المعاملة]]></text>
                 </staticText>
 
                 <rectangle>
-                    <reportElement x="255" y="0" width="160" height="30" mode="Opaque" backcolor="#F2F2F2"/>
+                    <reportElement x="255" y="0" width="160" height="30" mode="Opaque" backcolor="#FFFFFF"/>
                 </rectangle>
                 <textField>
                     <reportElement x="255" y="0" width="160" height="30"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H"
-                              isPdfEmbedded="true" size="11"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10"/>
                     </textElement>
                     <textFieldExpression><![CDATA[$P{proofNumber}]]></textFieldExpression>
                 </textField>
 
                 <rectangle>
-                    <reportElement x="415" y="0" width="95" height="30" mode="Opaque" backcolor="#D9D9D9"/>
+                    <reportElement x="415" y="0" width="95" height="30" mode="Opaque" backcolor="#A6A6A6"/>
                 </rectangle>
                 <staticText>
                     <reportElement x="415" y="0" width="95" height="30"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H"
-                              isPdfEmbedded="true" size="11" isBold="true"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true"/>
                     </textElement>
                     <text><![CDATA[رقم الإثبات]]></text>
                 </staticText>
 
                 <rectangle>
-                    <reportElement x="510" y="0" width="160" height="30" mode="Opaque" backcolor="#F2F2F2"/>
+                    <reportElement x="510" y="0" width="160" height="30" mode="Opaque" backcolor="#FFFFFF"/>
                 </rectangle>
                 <textField>
                     <reportElement x="510" y="0" width="160" height="30"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H"
-                              isPdfEmbedded="true" size="11"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10"/>
                     </textElement>
                     <textFieldExpression><![CDATA[$P{ownerName}]]></textFieldExpression>
                 </textField>
 
                 <rectangle>
-                    <reportElement x="670" y="0" width="95" height="30" mode="Opaque" backcolor="#D9D9D9"/>
+                    <reportElement x="670" y="0" width="95" height="30" mode="Opaque" backcolor="#A6A6A6"/>
                 </rectangle>
                 <staticText>
                     <reportElement x="670" y="0" width="95" height="30"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H"
-                              isPdfEmbedded="true" size="11" isBold="true"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true"/>
                     </textElement>
                     <text><![CDATA[اسم المالك]]></text>
                 </staticText>
@@ -382,73 +367,67 @@
                 <!-- ================================================= -->
 
                 <rectangle>
-                    <reportElement x="0" y="30" width="160" height="30" mode="Opaque" backcolor="#F2F2F2"/>
+                    <reportElement x="0" y="30" width="160" height="30" mode="Opaque" backcolor="#FFFFFF"/>
                 </rectangle>
                 <textField>
                     <reportElement x="0" y="30" width="160" height="30"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H"
-                              isPdfEmbedded="true" size="11"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10"/>
                     </textElement>
                     <textFieldExpression><![CDATA[$P{districtName}]]></textFieldExpression>
                 </textField>
 
                 <rectangle>
-                    <reportElement x="160" y="30" width="95" height="30" mode="Opaque" backcolor="#D9D9D9"/>
+                    <reportElement x="160" y="30" width="95" height="30" mode="Opaque" backcolor="#A6A6A6"/>
                 </rectangle>
                 <staticText>
                     <reportElement x="160" y="30" width="95" height="30"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H"
-                              isPdfEmbedded="true" size="11" isBold="true"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true"/>
                     </textElement>
                     <text><![CDATA[اسم الحي]]></text>
                 </staticText>
 
                 <rectangle>
-                    <reportElement x="255" y="30" width="160" height="30" mode="Opaque" backcolor="#F2F2F2"/>
+                    <reportElement x="255" y="30" width="160" height="30" mode="Opaque" backcolor="#FFFFFF"/>
                 </rectangle>
                 <textField>
                     <reportElement x="255" y="30" width="160" height="30"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H"
-                              isPdfEmbedded="true" size="11"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10"/>
                     </textElement>
                     <textFieldExpression><![CDATA[$P{plotNumber}]]></textFieldExpression>
                 </textField>
 
                 <rectangle>
-                    <reportElement x="415" y="30" width="95" height="30" mode="Opaque" backcolor="#D9D9D9"/>
+                    <reportElement x="415" y="30" width="95" height="30" mode="Opaque" backcolor="#A6A6A6"/>
                 </rectangle>
                 <staticText>
                     <reportElement x="415" y="30" width="95" height="30"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H"
-                              isPdfEmbedded="true" size="11" isBold="true"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true"/>
                     </textElement>
                     <text><![CDATA[رقم القطعة]]></text>
                 </staticText>
 
                 <rectangle>
-                    <reportElement x="510" y="30" width="160" height="30" mode="Opaque" backcolor="#F2F2F2"/>
+                    <reportElement x="510" y="30" width="160" height="30" mode="Opaque" backcolor="#FFFFFF"/>
                 </rectangle>
                 <textField>
                     <reportElement x="510" y="30" width="160" height="30"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H"
-                              isPdfEmbedded="true" size="11"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10"/>
                     </textElement>
                     <textFieldExpression><![CDATA[$P{licenseNumber}]]></textFieldExpression>
                 </textField>
 
                 <rectangle>
-                    <reportElement x="670" y="30" width="95" height="30" mode="Opaque" backcolor="#D9D9D9"/>
+                    <reportElement x="670" y="30" width="95" height="30" mode="Opaque" backcolor="#A6A6A6"/>
                 </rectangle>
                 <staticText>
                     <reportElement x="670" y="30" width="95" height="30"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H"
-                              isPdfEmbedded="true" size="11" isBold="true"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true" />
                     </textElement>
                     <text><![CDATA[رخصة البناء]]></text>
                 </staticText>
@@ -458,73 +437,67 @@
                 <!-- ================================================= -->
 
                 <rectangle>
-                    <reportElement x="0" y="60" width="160" height="30" mode="Opaque" backcolor="#F2F2F2"/>
+                    <reportElement x="0" y="60" width="160" height="30" mode="Opaque" backcolor="#FFFFFF"/>
                 </rectangle>
                 <textField>
                     <reportElement x="0" y="60" width="160" height="30"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H"
-                              isPdfEmbedded="true" size="11"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10"/>
                     </textElement>
                     <textFieldExpression><![CDATA[$P{regulatoryPlan}]]></textFieldExpression>
                 </textField>
 
                 <rectangle>
-                    <reportElement x="160" y="60" width="95" height="30" mode="Opaque" backcolor="#D9D9D9"/>
+                    <reportElement x="160" y="60" width="95" height="30" mode="Opaque" backcolor="#A6A6A6"/>
                 </rectangle>
                 <staticText>
                     <reportElement x="160" y="60" width="95" height="30"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H"
-                              isPdfEmbedded="true" size="11" isBold="true"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true" />
                     </textElement>
                     <text><![CDATA[عصب تجاري]]></text>
                 </staticText>
 
                 <rectangle>
-                    <reportElement x="255" y="60" width="160" height="30" mode="Opaque" backcolor="#F2F2F2"/>
+                    <reportElement x="255" y="60" width="160" height="30" mode="Opaque" backcolor="#FFFFFF"/>
                 </rectangle>
                 <textField>
                     <reportElement x="255" y="60" width="160" height="30"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H"
-                              isPdfEmbedded="true" size="10"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" />
                     </textElement>
                     <textFieldExpression><![CDATA[$P{streetName}]]></textFieldExpression>
                 </textField>
 
                 <rectangle>
-                    <reportElement x="415" y="60" width="95" height="30" mode="Opaque" backcolor="#D9D9D9"/>
+                    <reportElement x="415" y="60" width="95" height="30" mode="Opaque" backcolor="#A6A6A6"/>
                 </rectangle>
                 <staticText>
                     <reportElement x="415" y="60" width="95" height="30"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H"
-                              isPdfEmbedded="true" size="11" isBold="true"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true" />
                     </textElement>
                     <text><![CDATA[اسم الشارع]]></text>
                 </staticText>
 
                 <rectangle>
-                    <reportElement x="510" y="60" width="160" height="30" mode="Opaque" backcolor="#F2F2F2"/>
+                    <reportElement x="510" y="60" width="160" height="30" mode="Opaque" backcolor="#FFFFFF"/>
                 </rectangle>
                 <textField>
                     <reportElement x="510" y="60" width="160" height="30"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H"
-                              isPdfEmbedded="true" size="11"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10"/>
                     </textElement>
                     <textFieldExpression><![CDATA[$P{reportType}]]></textFieldExpression>
                 </textField>
 
                 <rectangle>
-                    <reportElement x="670" y="60" width="95" height="30" mode="Opaque" backcolor="#D9D9D9"/>
+                    <reportElement x="670" y="60" width="95" height="30" mode="Opaque" backcolor="#A6A6A6"/>
                 </rectangle>
                 <staticText>
                     <reportElement x="670" y="60" width="95" height="30"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H"
-                              isPdfEmbedded="true" size="11" isBold="true"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true"/>
                     </textElement>
                     <text><![CDATA[نوع التقرير]]></text>
                 </staticText>
@@ -534,73 +507,67 @@
                 <!-- ================================================= -->
 
                 <rectangle>
-                    <reportElement x="0" y="90" width="160" height="30" mode="Opaque" backcolor="#F2F2F2"/>
+                    <reportElement x="0" y="90" width="160" height="30" mode="Opaque" backcolor="#FFFFFF"/>
                 </rectangle>
                 <textField>
                     <reportElement x="0" y="90" width="160" height="30"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H"
-                              isPdfEmbedded="true" size="11"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" />
                     </textElement>
                     <textFieldExpression><![CDATA[$P{landArea}]]></textFieldExpression>
                 </textField>
 
                 <rectangle>
-                    <reportElement x="160" y="90" width="95" height="30" mode="Opaque" backcolor="#D9D9D9"/>
+                    <reportElement x="160" y="90" width="95" height="30" mode="Opaque" backcolor="#A6A6A6"/>
                 </rectangle>
                 <staticText>
                     <reportElement x="160" y="90" width="95" height="30"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H"
-                              isPdfEmbedded="true" size="11" isBold="true"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true" />
                     </textElement>
                     <text><![CDATA[اتمام بناء رقم]]></text>
                 </staticText>
 
                 <rectangle>
-                    <reportElement x="255" y="90" width="160" height="30" mode="Opaque" backcolor="#F2F2F2"/>
+                    <reportElement x="255" y="90" width="160" height="30" mode="Opaque" backcolor="#FFFFFF"/>
                 </rectangle>
                 <textField>
                     <reportElement x="255" y="90" width="160" height="30"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H"
-                              isPdfEmbedded="true" size="11"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" />
                     </textElement>
                     <textFieldExpression><![CDATA[$P{regulatoryPlan}]]></textFieldExpression>
                 </textField>
 
                 <rectangle>
-                    <reportElement x="415" y="90" width="95" height="30" mode="Opaque" backcolor="#D9D9D9"/>
+                    <reportElement x="415" y="90" width="95" height="30" mode="Opaque" backcolor="#A6A6A6"/>
                 </rectangle>
                 <staticText>
                     <reportElement x="415" y="90" width="95" height="30"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H"
-                              isPdfEmbedded="true" size="11" isBold="true"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true"/>
                     </textElement>
                     <text><![CDATA[المخطط التنظيمي]]></text>
                 </staticText>
 
                 <rectangle>
-                    <reportElement x="510" y="90" width="160" height="30" mode="Opaque" backcolor="#F2F2F2"/>
+                    <reportElement x="510" y="90" width="160" height="30" mode="Opaque" backcolor="#FFFFFF"/>
                 </rectangle>
                 <textField>
                     <reportElement x="510" y="90" width="160" height="30"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H"
-                              isPdfEmbedded="true" size="11"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10"/>
                     </textElement>
                     <textFieldExpression><![CDATA[$P{reportStatus}]]></textFieldExpression>
                 </textField>
 
                 <rectangle>
-                    <reportElement x="670" y="90" width="95" height="30" mode="Opaque" backcolor="#D9D9D9"/>
+                    <reportElement x="670" y="90" width="95" height="30" mode="Opaque" backcolor="#A6A6A6"/>
                 </rectangle>
                 <staticText>
                     <reportElement x="670" y="90" width="95" height="30"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf" pdfEncoding="Identity-H"
-                              isPdfEmbedded="true" size="11" isBold="true"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true" />
                     </textElement>
                     <text><![CDATA[حالة التقرير]]></text>
                 </staticText>
@@ -611,93 +578,72 @@
 
                 <!-- COLUMN 1 VALUE -->
                 <rectangle>
-                    <reportElement x="0" y="120" width="160" height="30" mode="Opaque" backcolor="#F2F2F2"/>
+                    <reportElement x="0" y="120" width="160" height="30" mode="Opaque" backcolor="#FFFFFF"/>
                 </rectangle>
                 <textField>
                     <reportElement x="0" y="120" width="160" height="30"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf"
-                              pdfEncoding="Identity-H"
-                              isPdfEmbedded="true"
-                              size="11"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" />
                     </textElement>
                     <textFieldExpression><![CDATA[$P{reportType}]]></textFieldExpression>
                 </textField>
 
                 <!-- COLUMN 1 LABEL -->
                 <rectangle>
-                    <reportElement x="160" y="120" width="95" height="30" mode="Opaque" backcolor="#D9D9D9"/>
+                    <reportElement x="160" y="120" width="95" height="30" mode="Opaque" backcolor="#A6A6A6"/>
                 </rectangle>
                 <staticText>
                     <reportElement x="160" y="120" width="95" height="30"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf"
-                              pdfEncoding="Identity-H"
-                              isPdfEmbedded="true"
-                              size="11"
-                              isBold="true"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true" />
                     </textElement>
                     <text><![CDATA[مرحلة البناء]]></text>
                 </staticText>
 
                 <!-- COLUMN 2 VALUE -->
                 <rectangle>
-                    <reportElement x="255" y="120" width="160" height="30" mode="Opaque" backcolor="#F2F2F2"/>
+                    <reportElement x="255" y="120" width="160" height="30" mode="Opaque" backcolor="#FFFFFF"/>
                 </rectangle>
                 <textField>
                     <reportElement x="255" y="120" width="160" height="30"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf"
-                              pdfEncoding="Identity-H"
-                              isPdfEmbedded="true"
-                              size="11"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10"/>
                     </textElement>
                     <textFieldExpression><![CDATA[$P{supervisingOffice}]]></textFieldExpression>
                 </textField>
 
                 <!-- COLUMN 2 LABEL -->
                 <rectangle>
-                    <reportElement x="415" y="120" width="95" height="30" mode="Opaque" backcolor="#D9D9D9"/>
+                    <reportElement x="415" y="120" width="95" height="30" mode="Opaque" backcolor="#A6A6A6"/>
                 </rectangle>
                 <staticText>
                     <reportElement x="415" y="120" width="95" height="30"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf"
-                              pdfEncoding="Identity-H"
-                              isPdfEmbedded="true"
-                              size="11"
-                              isBold="true"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true"/>
                     </textElement>
                     <text><![CDATA[المكتب المشرف]]></text>
                 </staticText>
 
                 <!-- COLUMN 3 VALUE -->
                 <rectangle>
-                    <reportElement x="510" y="120" width="160" height="30" mode="Opaque" backcolor="#F2F2F2"/>
+                    <reportElement x="510" y="120" width="160" height="30" mode="Opaque" backcolor="#FFFFFF"/>
                 </rectangle>
                 <textField>
                     <reportElement x="510" y="120" width="160" height="30"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf"
-                              pdfEncoding="Identity-H"
-                              isPdfEmbedded="true"
-                              size="11"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" />
                     </textElement>
                     <textFieldExpression><![CDATA[$P{landArea}]]></textFieldExpression>
                 </textField>
 
                 <!-- COLUMN 3 LABEL -->
                 <rectangle>
-                    <reportElement x="670" y="120" width="95" height="30" mode="Opaque" backcolor="#D9D9D9"/>
+                    <reportElement x="670" y="120" width="95" height="30" mode="Opaque" backcolor="#A6A6A6"/>
                 </rectangle>
                 <staticText>
                     <reportElement x="670" y="120" width="95" height="30"/>
                     <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/Amiri-Regular.ttf"
-                              pdfEncoding="Identity-H"
-                              isPdfEmbedded="true"
-                              size="11"
-                              isBold="true"/>
+                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true" />
                     </textElement>
                     <text><![CDATA[مساحة الأرض]]></text>
                 </staticText>
