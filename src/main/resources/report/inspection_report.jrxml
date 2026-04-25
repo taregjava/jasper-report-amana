@@ -1,695 +1,578 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
-              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports
-              http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
-              name="riyadh_full_report"
-              pageWidth="842"
-              pageHeight="1000"
-              columnWidth="802"
-              leftMargin="20"
-              rightMargin="20"
-              topMargin="20"
-              isSummaryWithPageHeaderAndFooter="true"
-              bottomMargin="20">
-    <property name="net.sf.jasperreports.element.padding" value="2"/>
-
-    <style name="BaseStyle" isDefault="true" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" fontSize="10"/>
-
-    <!-- PARAMETERS -->
-    <parameter name="siteMapImage" class="java.lang.Object"/>
-    <parameter name="frontImage" class="java.lang.Object"/>
-    <parameter name="rightImage" class="java.lang.Object"/>
-    <parameter name="leftImage" class="java.lang.Object"/>
-    <parameter name="reportLogo" class="java.lang.Object"/>
-    <parameter name="controlNumber" class="java.lang.String"/>
-    <parameter name="dateAndControl" class="java.lang.String"/>
-    <parameter name="pageInfo" class="java.lang.String"/>
-    <parameter name="ownerName" class="java.lang.String"/>
-    <parameter name="proofNumber" class="java.lang.String"/>
-    <parameter name="plotNumber" class="java.lang.String"/>
-    <parameter name="districtName" class="java.lang.String"/>
-    <parameter name="streetName" class="java.lang.String"/>
-    <parameter name="licenseNumber" class="java.lang.String"/>
-    <parameter name="buildingName" class="java.lang.String"/>
-    <parameter name="reportStatus" class="java.lang.String"/>
-    <parameter name="supervisingOffice" class="java.lang.String"/>
-    <parameter name="landArea" class="java.lang.String"/>
-    <parameter name="transactionNumber" class="java.lang.String"/>
-    <parameter name="reportType" class="java.lang.String"/>
-    <parameter name="constructionStage" class="java.lang.String"/>
-
-    <parameter name="entity" class="java.lang.String"/>
-
-    <parameter name="buildingLicense" class="java.lang.String"/>
-    <parameter name="requestNumber" class="java.lang.String"/>
-    <parameter name="zoningPlan" class="java.lang.String"/>
-    <parameter name="activityType" class="java.lang.String"/>
-    <parameter name="buildingStage" class="java.lang.String"/>
-
-    <parameter name="inspectionTableSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
-    <parameter name="inspectionImagesSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
-    <parameter name="inspectionConditionsSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
-    <parameter name="tableData" class="net.sf.jasperreports.engine.JRDataSource"/>
-    <parameter name="imageData" class="net.sf.jasperreports.engine.JRDataSource"/>
-    <parameter name="conditionsData" class="net.sf.jasperreports.engine.JRDataSource"/>
-    <parameter name="conditionImageRows" class="net.sf.jasperreports.engine.JRDataSource"/>
-
-    <parameter name="regulatoryPlan" class="java.lang.String"/>
-
-
-    <pageHeader>
-        <band height="260">
-
-
-            <image>
-                <reportElement x="735" y="0" width="56" height="56"/>
-                <imageExpression><![CDATA[$P{reportLogo}]]></imageExpression>
-            </image>
-
-            <frame>
-                <reportElement x="632" y="70" width="170" height="20"/>
-
-                <rectangle>
-                    <reportElement x="0" y="0" width="100" height="20" mode="Opaque" backcolor="#FFFFFF"/>
-                </rectangle>
-                <textField>
-                    <reportElement x="5" y="0" width="90" height="20"/>
-                    <textElement textAlignment="Right" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="9"/>
-                    </textElement>
-                    <textFieldExpression><![CDATA[$P{entity}]]></textFieldExpression>
-                </textField>
-                <rectangle>
-                    <reportElement x="110" y="0" width="60" height="20" mode="Opaque" backcolor="#A6A6A6"/>
-                </rectangle>
-                <staticText>
-                    <reportElement x="110" y="0" width="55" height="20"/>
-                    <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true"/>
-                    </textElement>
-                    <text><![CDATA[البلدية]]></text>
-                </staticText>
-            </frame>
-
-
-            <frame>
-                <reportElement x="10" y="5" width="240" height="88"/>
-
-                <rectangle>
-                    <reportElement x="0" y="0" width="100" height="20" mode="Opaque" backcolor="#FFFFFF"/>
-                </rectangle>
-                <textField>
-                    <reportElement x="5" y="0" width="90" height="20"/>
-                    <textElement textAlignment="Right" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10"/>
-                    </textElement>
-                    <textFieldExpression><![CDATA[$P{supervisingOffice}]]></textFieldExpression>
-                </textField>
-                <rectangle>
-                    <reportElement x="110" y="0" width="60" height="20" mode="Opaque" backcolor="#A6A6A6"/>
-                </rectangle>
-                <staticText>
-                    <reportElement x="110" y="0" width="55" height="20"/>
-                    <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true"/>
-                    </textElement>
-                    <text><![CDATA[مكتب]]></text>
-                </staticText>
-
-                <rectangle>
-                    <reportElement x="0" y="22" width="100" height="20" mode="Opaque" backcolor="#FFFFFF"/>
-                </rectangle>
-                <textField>
-                    <reportElement x="5" y="22" width="90" height="20"/>
-                    <textElement textAlignment="Right" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10"/>
-                    </textElement>
-                    <textFieldExpression><![CDATA[$P{dateAndControl}]]></textFieldExpression>
-                </textField>
-                <rectangle>
-                    <reportElement x="110" y="22" width="60" height="20" mode="Opaque" backcolor="#A6A6A6"/>
-                </rectangle>
-                <staticText>
-                    <reportElement x="110" y="22" width="55" height="20"/>
-                    <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true"/>
-                    </textElement>
-                    <text><![CDATA[التاريخ والرقابة]]></text>
-                </staticText>
-
-                <rectangle>
-                    <reportElement x="0" y="44" width="100" height="20" mode="Opaque" backcolor="#FFFFFF"/>
-                </rectangle>
-                <textField>
-                    <reportElement x="5" y="44" width="90" height="20"/>
-                    <textElement textAlignment="Right" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10"/>
-                    </textElement>
-                    <textFieldExpression><![CDATA[$P{controlNumber}]]></textFieldExpression>
-                </textField>
-                <rectangle>
-                    <reportElement x="110" y="44" width="60" height="20" mode="Opaque" backcolor="#A6A6A6"/>
-                </rectangle>
-                <staticText>
-                    <reportElement x="110" y="44" width="55" height="20"/>
-                    <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true"/>
-                    </textElement>
-                    <text><![CDATA[رقم الرقابة]]></text>
-                </staticText>
-
-                <rectangle>
-                    <reportElement x="0" y="66" width="100" height="20" mode="Opaque" backcolor="#FFFFFF"/>
-                </rectangle>
-                <textField>
-                    <reportElement x="5" y="66" width="90" height="20"/>
-                    <textElement textAlignment="Right" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10"/>
-                    </textElement>
-                    <textFieldExpression><![CDATA[$P{pageInfo}]]></textFieldExpression>
-                </textField>
-                <rectangle>
-                    <reportElement x="110" y="66" width="60" height="20" mode="Opaque" backcolor="#A6A6A6"/>
-                </rectangle>
-                <staticText>
-                    <reportElement x="110" y="66" width="55" height="20"/>
-                    <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true"/>
-                    </textElement>
-                    <text><![CDATA[الصفحة]]></text>
-                </staticText>
-
-            </frame>
-
-            <!-- TITLE -->
-            <staticText>
-                <reportElement x="40" y="0" width="742" height="30"/>
-                <textElement textAlignment="Center">
-                    <font pdfFontName="fonts/ARIAL.TTF"
-                          pdfEncoding="Identity-H"
-                          isPdfEmbedded="true"
-                          size="20"
-                          isBold="true"/>
-                </textElement>
-                <text><![CDATA[التقرير الفني لامتثال المباني]]></text>
-            </staticText>
-
-            <frame>
-                <reportElement x="10" y="30" width="782" height="35"/>
-
-                <rectangle>
-                    <reportElement x="280" y="5" width="140" height="25" mode="Opaque" backcolor="#D9D9D9"/>
-                    <graphicElement>
-                        <pen lineWidth="1.0" lineColor="#000000"/>
-                    </graphicElement>
-                </rectangle>
-
-                <staticText>
-                    <reportElement x="300" y="5" width="100" height="25"/>
-                    <textElement textAlignment="Right" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true"/>
-                    </textElement>
-                    <text><![CDATA[تقرير إلكتروني]]></text>
-                </staticText>
-
-                <ellipse>
-                    <reportElement x="410" y="10" width="14" height="14"/>
-                    <graphicElement>
-                        <pen lineWidth="1.0"/>
-                    </graphicElement>
-                </ellipse>
-
-                <ellipse>
-                    <reportElement x="413" y="13" width="8" height="8" mode="Opaque" backcolor="#555555"/>
-                </ellipse>
-
-
-                <rectangle>
-                    <reportElement x="440" y="5" width="140" height="25" mode="Opaque" backcolor="#D9D9D9"/>
-                    <graphicElement>
-                        <pen lineWidth="1.0" lineColor="#000000"/>
-                    </graphicElement>
-                </rectangle>
-
-                <staticText>
-                    <reportElement x="460" y="5" width="100" height="25"/>
-                    <textElement textAlignment="Right" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true"/>
-                    </textElement>
-                    <text><![CDATA[جولة استطلاعية]]></text>
-                </staticText>
-
-                <!-- RADIO (EMPTY) -->
-                <ellipse>
-                    <reportElement x="570" y="10" width="14" height="14"/>
-                    <graphicElement>
-                        <pen lineWidth="1.0"/>
-                    </graphicElement>
-                </ellipse>
-
-            </frame>
-
-            <frame>
-                <reportElement x="540" y="8" width="160" height="56"/>
-
-                <staticText>
-                    <reportElement x="0" y="0" width="160" height="14"/>
-                    <textElement textAlignment="Right" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="12" isBold="true"/>
-                    </textElement>
-                    <text><![CDATA[أمانة منطقة الرياض]]></text>
-                </staticText>
-
-                <staticText>
-                    <reportElement x="0" y="14" width="160" height="12"/>
-                    <textElement textAlignment="Right" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="9"/>
-                    </textElement>
-                    <text><![CDATA[الإدارة العامة لخدمات البنية الرقمية]]></text>
-                </staticText>
-
-                <staticText>
-                    <reportElement x="0" y="26" width="160" height="12"/>
-                    <textElement textAlignment="Right" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="9"/>
-                    </textElement>
-                    <text><![CDATA[إدارة الخدمات الرقمية]]></text>
-                </staticText>
-
-
-            </frame>
-
-            <frame>
-                <reportElement x="18" y="100" width="765" height="150"/>
-
-                <!-- OUTER BORDER -->
-                <rectangle>
-                    <reportElement x="0" y="0" width="765" height="150"/>
-                    <graphicElement>
-                        <pen lineWidth="1.0" lineColor="#000000"/>
-                    </graphicElement>
-                </rectangle>
-
-                <!-- ================================================= -->
-                <!-- ROW 1 -->
-                <!-- ================================================= -->
-
-                <rectangle>
-                    <reportElement x="0" y="0" width="160" height="30" mode="Opaque" backcolor="#FFFFFF"/>
-                    <graphicElement><pen lineWidth="1.0" lineColor="#000000"/></graphicElement>
-                </rectangle>
-                <textField>
-                    <reportElement x="0" y="0" width="160" height="30"/>
-                    <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10"/>
-                    </textElement>
-                    <textFieldExpression><![CDATA[$P{requestNumber}]]></textFieldExpression>
-                </textField>
-
-                <rectangle>
-                    <reportElement x="160" y="0" width="95" height="30" mode="Opaque" backcolor="#A6A6A6"/>
-                </rectangle>
-                <staticText>
-                    <reportElement x="160" y="0" width="95" height="30"/>
-                    <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true"/>
-                    </textElement>
-                    <text><![CDATA[رقم المعاملة]]></text>
-                </staticText>
-
-                <rectangle>
-                    <reportElement x="255" y="0" width="160" height="30" mode="Opaque" backcolor="#FFFFFF"/>
-                </rectangle>
-                <textField>
-                    <reportElement x="255" y="0" width="160" height="30"/>
-                    <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10"/>
-                    </textElement>
-                    <textFieldExpression><![CDATA[$P{proofNumber}]]></textFieldExpression>
-                </textField>
-
-                <rectangle>
-                    <reportElement x="415" y="0" width="95" height="30" mode="Opaque" backcolor="#A6A6A6"/>
-                </rectangle>
-                <staticText>
-                    <reportElement x="415" y="0" width="95" height="30"/>
-                    <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true"/>
-                    </textElement>
-                    <text><![CDATA[رقم الإثبات]]></text>
-                </staticText>
-
-                <rectangle>
-                    <reportElement x="510" y="0" width="160" height="30" mode="Opaque" backcolor="#FFFFFF"/>
-                </rectangle>
-                <textField>
-                    <reportElement x="510" y="0" width="160" height="30"/>
-                    <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10"/>
-                    </textElement>
-                    <textFieldExpression><![CDATA[$P{ownerName}]]></textFieldExpression>
-                </textField>
-
-                <rectangle>
-                    <reportElement x="670" y="0" width="95" height="30" mode="Opaque" backcolor="#A6A6A6"/>
-                </rectangle>
-                <staticText>
-                    <reportElement x="670" y="0" width="95" height="30"/>
-                    <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true"/>
-                    </textElement>
-                    <text><![CDATA[اسم المالك]]></text>
-                </staticText>
-
-                <!-- ================================================= -->
-                <!-- ROW 2 -->
-                <!-- ================================================= -->
-
-                <rectangle>
-                    <reportElement x="0" y="30" width="160" height="30" mode="Opaque" backcolor="#FFFFFF"/>
-                </rectangle>
-                <textField>
-                    <reportElement x="0" y="30" width="160" height="30"/>
-                    <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10"/>
-                    </textElement>
-                    <textFieldExpression><![CDATA[$P{districtName}]]></textFieldExpression>
-                </textField>
-
-                <rectangle>
-                    <reportElement x="160" y="30" width="95" height="30" mode="Opaque" backcolor="#A6A6A6"/>
-                </rectangle>
-                <staticText>
-                    <reportElement x="160" y="30" width="95" height="30"/>
-                    <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true"/>
-                    </textElement>
-                    <text><![CDATA[اسم الحي]]></text>
-                </staticText>
-
-                <rectangle>
-                    <reportElement x="255" y="30" width="160" height="30" mode="Opaque" backcolor="#FFFFFF"/>
-                </rectangle>
-                <textField>
-                    <reportElement x="255" y="30" width="160" height="30"/>
-                    <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10"/>
-                    </textElement>
-                    <textFieldExpression><![CDATA[$P{plotNumber}]]></textFieldExpression>
-                </textField>
-
-                <rectangle>
-                    <reportElement x="415" y="30" width="95" height="30" mode="Opaque" backcolor="#A6A6A6"/>
-                </rectangle>
-                <staticText>
-                    <reportElement x="415" y="30" width="95" height="30"/>
-                    <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true"/>
-                    </textElement>
-                    <text><![CDATA[رقم القطعة]]></text>
-                </staticText>
-
-                <rectangle>
-                    <reportElement x="510" y="30" width="160" height="30" mode="Opaque" backcolor="#FFFFFF"/>
-                </rectangle>
-                <textField>
-                    <reportElement x="510" y="30" width="160" height="30"/>
-                    <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10"/>
-                    </textElement>
-                    <textFieldExpression><![CDATA[$P{licenseNumber}]]></textFieldExpression>
-                </textField>
-
-                <rectangle>
-                    <reportElement x="670" y="30" width="95" height="30" mode="Opaque" backcolor="#A6A6A6"/>
-                </rectangle>
-                <staticText>
-                    <reportElement x="670" y="30" width="95" height="30"/>
-                    <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true" />
-                    </textElement>
-                    <text><![CDATA[رخصة البناء]]></text>
-                </staticText>
-
-                <!-- ================================================= -->
-                <!-- ROW 3 -->
-                <!-- ================================================= -->
-
-                <rectangle>
-                    <reportElement x="0" y="60" width="160" height="30" mode="Opaque" backcolor="#FFFFFF"/>
-                </rectangle>
-                <textField>
-                    <reportElement x="0" y="60" width="160" height="30"/>
-                    <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10"/>
-                    </textElement>
-                    <textFieldExpression><![CDATA[$P{regulatoryPlan}]]></textFieldExpression>
-                </textField>
-
-                <rectangle>
-                    <reportElement x="160" y="60" width="95" height="30" mode="Opaque" backcolor="#A6A6A6"/>
-                </rectangle>
-                <staticText>
-                    <reportElement x="160" y="60" width="95" height="30"/>
-                    <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true" />
-                    </textElement>
-                    <text><![CDATA[عصب تجاري]]></text>
-                </staticText>
-
-                <rectangle>
-                    <reportElement x="255" y="60" width="160" height="30" mode="Opaque" backcolor="#FFFFFF"/>
-                </rectangle>
-                <textField>
-                    <reportElement x="255" y="60" width="160" height="30"/>
-                    <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" />
-                    </textElement>
-                    <textFieldExpression><![CDATA[$P{streetName}]]></textFieldExpression>
-                </textField>
-
-                <rectangle>
-                    <reportElement x="415" y="60" width="95" height="30" mode="Opaque" backcolor="#A6A6A6"/>
-                </rectangle>
-                <staticText>
-                    <reportElement x="415" y="60" width="95" height="30"/>
-                    <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true" />
-                    </textElement>
-                    <text><![CDATA[اسم الشارع]]></text>
-                </staticText>
-
-                <rectangle>
-                    <reportElement x="510" y="60" width="160" height="30" mode="Opaque" backcolor="#FFFFFF"/>
-                </rectangle>
-                <textField>
-                    <reportElement x="510" y="60" width="160" height="30"/>
-                    <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10"/>
-                    </textElement>
-                    <textFieldExpression><![CDATA[$P{reportType}]]></textFieldExpression>
-                </textField>
-
-                <rectangle>
-                    <reportElement x="670" y="60" width="95" height="30" mode="Opaque" backcolor="#A6A6A6"/>
-                </rectangle>
-                <staticText>
-                    <reportElement x="670" y="60" width="95" height="30"/>
-                    <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true"/>
-                    </textElement>
-                    <text><![CDATA[نوع التقرير]]></text>
-                </staticText>
-
-                <!-- ================================================= -->
-                <!-- ROW 4 -->
-                <!-- ================================================= -->
-
-                <rectangle>
-                    <reportElement x="0" y="90" width="160" height="30" mode="Opaque" backcolor="#FFFFFF"/>
-                </rectangle>
-                <textField>
-                    <reportElement x="0" y="90" width="160" height="30"/>
-                    <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" />
-                    </textElement>
-                    <textFieldExpression><![CDATA[$P{landArea}]]></textFieldExpression>
-                </textField>
-
-                <rectangle>
-                    <reportElement x="160" y="90" width="95" height="30" mode="Opaque" backcolor="#A6A6A6"/>
-                </rectangle>
-                <staticText>
-                    <reportElement x="160" y="90" width="95" height="30"/>
-                    <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true" />
-                    </textElement>
-                    <text><![CDATA[اتمام بناء رقم]]></text>
-                </staticText>
-
-                <rectangle>
-                    <reportElement x="255" y="90" width="160" height="30" mode="Opaque" backcolor="#FFFFFF"/>
-                </rectangle>
-                <textField>
-                    <reportElement x="255" y="90" width="160" height="30"/>
-                    <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" />
-                    </textElement>
-                    <textFieldExpression><![CDATA[$P{regulatoryPlan}]]></textFieldExpression>
-                </textField>
-
-                <rectangle>
-                    <reportElement x="415" y="90" width="95" height="30" mode="Opaque" backcolor="#A6A6A6"/>
-                </rectangle>
-                <staticText>
-                    <reportElement x="415" y="90" width="95" height="30"/>
-                    <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true"/>
-                    </textElement>
-                    <text><![CDATA[المخطط التنظيمي]]></text>
-                </staticText>
-
-                <rectangle>
-                    <reportElement x="510" y="90" width="160" height="30" mode="Opaque" backcolor="#FFFFFF"/>
-                </rectangle>
-                <textField>
-                    <reportElement x="510" y="90" width="160" height="30"/>
-                    <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10"/>
-                    </textElement>
-                    <textFieldExpression><![CDATA[$P{reportStatus}]]></textFieldExpression>
-                </textField>
-
-                <rectangle>
-                    <reportElement x="670" y="90" width="95" height="30" mode="Opaque" backcolor="#A6A6A6"/>
-                </rectangle>
-                <staticText>
-                    <reportElement x="670" y="90" width="95" height="30"/>
-                    <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true" />
-                    </textElement>
-                    <text><![CDATA[حالة التقرير]]></text>
-                </staticText>
-
-                <!-- ================================================= -->
-                <!-- ROW 5 FIXED (CORRECT 3 FULL COLUMNS) -->
-                <!-- ================================================= -->
-
-                <!-- COLUMN 1 VALUE -->
-                <rectangle>
-                    <reportElement x="0" y="120" width="160" height="30" mode="Opaque" backcolor="#FFFFFF"/>
-                </rectangle>
-                <textField>
-                    <reportElement x="0" y="120" width="160" height="30"/>
-                    <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" />
-                    </textElement>
-                    <textFieldExpression><![CDATA[$P{reportType}]]></textFieldExpression>
-                </textField>
-
-                <!-- COLUMN 1 LABEL -->
-                <rectangle>
-                    <reportElement x="160" y="120" width="95" height="30" mode="Opaque" backcolor="#A6A6A6"/>
-                </rectangle>
-                <staticText>
-                    <reportElement x="160" y="120" width="95" height="30"/>
-                    <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true" />
-                    </textElement>
-                    <text><![CDATA[مرحلة البناء]]></text>
-                </staticText>
-
-                <!-- COLUMN 2 VALUE -->
-                <rectangle>
-                    <reportElement x="255" y="120" width="160" height="30" mode="Opaque" backcolor="#FFFFFF"/>
-                </rectangle>
-                <textField>
-                    <reportElement x="255" y="120" width="160" height="30"/>
-                    <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10"/>
-                    </textElement>
-                    <textFieldExpression><![CDATA[$P{supervisingOffice}]]></textFieldExpression>
-                </textField>
-
-                <!-- COLUMN 2 LABEL -->
-                <rectangle>
-                    <reportElement x="415" y="120" width="95" height="30" mode="Opaque" backcolor="#A6A6A6"/>
-                </rectangle>
-                <staticText>
-                    <reportElement x="415" y="120" width="95" height="30"/>
-                    <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true"/>
-                    </textElement>
-                    <text><![CDATA[المكتب المشرف]]></text>
-                </staticText>
-
-                <!-- COLUMN 3 VALUE -->
-                <rectangle>
-                    <reportElement x="510" y="120" width="160" height="30" mode="Opaque" backcolor="#FFFFFF"/>
-                </rectangle>
-                <textField>
-                    <reportElement x="510" y="120" width="160" height="30"/>
-                    <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" />
-                    </textElement>
-                    <textFieldExpression><![CDATA[$P{landArea}]]></textFieldExpression>
-                </textField>
-
-                <!-- COLUMN 3 LABEL -->
-                <rectangle>
-                    <reportElement x="670" y="120" width="95" height="30" mode="Opaque" backcolor="#A6A6A6"/>
-                </rectangle>
-                <staticText>
-                    <reportElement x="670" y="120" width="95" height="30"/>
-                    <textElement textAlignment="Center" verticalAlignment="Middle">
-                        <font pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true" size="10" isBold="true" />
-                    </textElement>
-                    <text><![CDATA[مساحة الأرض]]></text>
-                </staticText>
-            </frame>
-        </band>
-    </pageHeader>
-
-    <detail>
-        <band height="700" splitType="Stretch">
-
-            <subreport>
-                <reportElement x="0" y="0" width="802" height="420"/>
-                <subreportParameter name="siteMapImage">
-                    <subreportParameterExpression><![CDATA[$P{siteMapImage}]]></subreportParameterExpression>
-                </subreportParameter>
-                <subreportParameter name="frontImage">
-                    <subreportParameterExpression><![CDATA[$P{frontImage}]]></subreportParameterExpression>
-                </subreportParameter>
-                <subreportParameter name="rightImage">
-                    <subreportParameterExpression><![CDATA[$P{rightImage}]]></subreportParameterExpression>
-                </subreportParameter>
-                <subreportParameter name="leftImage">
-                    <subreportParameterExpression><![CDATA[$P{leftImage}]]></subreportParameterExpression>
-                </subreportParameter>
-                <subreportParameter name="conditionsData">
-                    <subreportParameterExpression><![CDATA[$P{conditionsData}]]></subreportParameterExpression>
-                </subreportParameter>
-                <dataSourceExpression><![CDATA[$P{tableData}]]></dataSourceExpression>
-                <subreportExpression><![CDATA[$P{inspectionTableSubreport}]]></subreportExpression>
-            </subreport>
-
-        </band>
-    </detail>
-
-    <summary>
-        <band height="260">
-            <subreport>
-                <reportElement x="0" y="0" width="802" height="260"/>
-                <subreportParameter name="conditionImageRows">
-                    <subreportParameterExpression><![CDATA[$P{conditionImageRows}]]></subreportParameterExpression>
-                </subreportParameter>
-                <dataSourceExpression><![CDATA[$P{conditionImageRows}]]></dataSourceExpression>
-                <subreportExpression><![CDATA[$P{inspectionConditionsSubreport}]]></subreportExpression>
-            </subreport>
-        </band>
-    </summary>
-
+<!-- Created with Jaspersoft Studio version 6.21.5.final using JasperReports Library version 6.21.5-74d586df47b25dbd05bd0957999819196e59934a  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="riyadh_full_report" pageWidth="842" pageHeight="1000" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="ada0132a-38cb-4218-88d1-d4a9760ec81e">
+	<property name="net.sf.jasperreports.element.padding" value="2"/>
+	<style name="BaseStyle" isDefault="true" fontSize="10" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+	<parameter name="siteMapImage" class="java.lang.Object"/>
+	<parameter name="frontImage" class="java.lang.Object"/>
+	<parameter name="rightImage" class="java.lang.Object"/>
+	<parameter name="leftImage" class="java.lang.Object"/>
+	<parameter name="reportLogo" class="java.lang.Object"/>
+	<parameter name="controlNumber" class="java.lang.String"/>
+	<parameter name="dateAndControl" class="java.lang.String"/>
+	<parameter name="pageInfo" class="java.lang.String"/>
+	<parameter name="ownerName" class="java.lang.String"/>
+	<parameter name="proofNumber" class="java.lang.String"/>
+	<parameter name="plotNumber" class="java.lang.String"/>
+	<parameter name="districtName" class="java.lang.String"/>
+	<parameter name="streetName" class="java.lang.String"/>
+	<parameter name="licenseNumber" class="java.lang.String"/>
+	<parameter name="buildingName" class="java.lang.String"/>
+	<parameter name="reportStatus" class="java.lang.String"/>
+	<parameter name="supervisingOffice" class="java.lang.String"/>
+	<parameter name="landArea" class="java.lang.String"/>
+	<parameter name="transactionNumber" class="java.lang.String"/>
+	<parameter name="reportType" class="java.lang.String"/>
+	<parameter name="constructionStage" class="java.lang.String"/>
+	<parameter name="entity" class="java.lang.String"/>
+	<parameter name="buildingLicense" class="java.lang.String"/>
+	<parameter name="requestNumber" class="java.lang.String"/>
+	<parameter name="zoningPlan" class="java.lang.String"/>
+	<parameter name="activityType" class="java.lang.String"/>
+	<parameter name="buildingStage" class="java.lang.String"/>
+	<parameter name="inspectionTableSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="inspectionImagesSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="inspectionConditionsSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="tableData" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<parameter name="imageData" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<parameter name="conditionsData" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<parameter name="conditionImageRows" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<parameter name="regulatoryPlan" class="java.lang.String"/>
+	<pageHeader>
+		<band height="260">
+			<image>
+				<reportElement x="735" y="0" width="56" height="56" uuid="c3bcf0dc-75d6-4a2b-9b04-40d250001dd6"/>
+				<imageExpression><![CDATA[$P{reportLogo}]]></imageExpression>
+			</image>
+			<frame>
+				<reportElement x="632" y="70" width="170" height="20" uuid="b02f6e8f-d6ae-4c85-994d-8653840a1025"/>
+				<rectangle>
+					<reportElement mode="Opaque" x="0" y="0" width="100" height="20" backcolor="#FFFFFF" uuid="d537ca23-88c9-4e83-822f-8e29082e4d03"/>
+				</rectangle>
+				<textField>
+					<reportElement x="-15" y="0" width="90" height="20" uuid="63d2401b-d5bf-4a72-a2a6-24aa3f14af0d"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="9" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{entity}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement mode="Opaque" x="90" y="0" width="60" height="20" backcolor="#A6A6A6" uuid="e6ad95bb-ead3-4e44-933f-e83722108963"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="90" y="0" width="55" height="20" uuid="46ad1b63-32b7-4ee3-b9c7-a8e2616e2290"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[البلدية]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement x="10" y="5" width="240" height="88" uuid="270010e0-321b-44fb-b5f8-8d110cf36de6"/>
+				<rectangle>
+					<reportElement mode="Opaque" x="0" y="0" width="100" height="20" backcolor="#FFFFFF" uuid="946f83d8-0053-4922-ad6e-4b0a3a70f314"/>
+				</rectangle>
+				<textField>
+					<reportElement x="5" y="0" width="90" height="20" uuid="d18c55c8-da15-445c-8fec-93ccb42866a1"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{supervisingOffice}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement mode="Opaque" x="110" y="0" width="60" height="20" backcolor="#A6A6A6" uuid="c4c8a2a1-f573-46d7-9fca-af8cfc6a4339"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="110" y="0" width="55" height="20" uuid="60de6ea7-93d3-42c1-98b8-f6bfcfc91a8a"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[مكتب]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement mode="Opaque" x="0" y="22" width="100" height="20" backcolor="#FFFFFF" uuid="e6ecebbc-8669-4690-b93e-9e41ccab92b1"/>
+				</rectangle>
+				<textField>
+					<reportElement x="5" y="22" width="90" height="20" uuid="5866cc31-8000-4e0d-ae61-dff077906ce6"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{dateAndControl}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement mode="Opaque" x="110" y="22" width="60" height="20" backcolor="#A6A6A6" uuid="c4f36905-b3bb-4565-9b8d-5909a3eacebd"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="110" y="22" width="55" height="20" uuid="a2b466dc-83fd-4f62-bb98-b5258490da81"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[التاريخ والرقابة]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement mode="Opaque" x="0" y="44" width="100" height="20" backcolor="#FFFFFF" uuid="38e09054-10ea-44d5-884f-3d04120b5cdc"/>
+				</rectangle>
+				<textField>
+					<reportElement x="5" y="44" width="90" height="20" uuid="17dc5f60-e196-428a-be13-f4fc7cdf9d03"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{controlNumber}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement mode="Opaque" x="110" y="44" width="60" height="20" backcolor="#A6A6A6" uuid="77f8d33a-97be-4ab1-8975-5df17857fb2d"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="110" y="44" width="55" height="20" uuid="ef2dd1ea-25b9-4ff7-b999-305120f9cba4"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[رقم الرقابة]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement mode="Opaque" x="0" y="66" width="100" height="20" backcolor="#FFFFFF" uuid="bde5c1e0-8be4-4d0f-8d22-cbae64832912"/>
+				</rectangle>
+				<textField>
+					<reportElement x="5" y="66" width="90" height="20" uuid="658ecd69-f5be-4eee-97de-a388e2d1c79e"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{pageInfo}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement mode="Opaque" x="110" y="66" width="60" height="20" backcolor="#A6A6A6" uuid="45d6c373-fbb4-4bba-8a80-2592c16db67a"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="110" y="66" width="55" height="20" uuid="5109a71a-fbf3-48d1-85f3-0d8040b0e812"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[الصفحة]]></text>
+				</staticText>
+			</frame>
+			<staticText>
+				<reportElement x="10" y="8" width="742" height="30" uuid="04632061-7ca3-4b99-9724-c2638b2ba503"/>
+				<textElement textAlignment="Center">
+					<font size="20" isBold="true" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[التقرير الفني لامتثال المباني]]></text>
+			</staticText>
+			<frame>
+				<reportElement x="175" y="60" width="430" height="22" uuid="8a9f7d35-48cd-475f-ad83-e6ea2db73022"/>
+				<rectangle>
+					<reportElement mode="Opaque" x="220" y="0" width="150" height="18" backcolor="#D9D9D9" uuid="09d8905c-3747-48d7-b55b-c4036150adac"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#C0C0C0"/>
+					</graphicElement>
+				</rectangle>
+				<staticText>
+					<reportElement x="245" y="0" width="95" height="18" uuid="431e7da6-f975-418f-b690-4727bba3ecfb"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" isBold="false" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[تقرير إلكتروني]]></text>
+				</staticText>
+				<ellipse>
+					<reportElement x="355" y="2" width="14" height="14" uuid="1d42fb36-09ad-4ab9-be15-1faaae4a11f0"/>
+					<graphicElement>
+						<pen lineWidth="0.7" lineColor="#777777"/>
+					</graphicElement>
+				</ellipse>
+				<ellipse>
+					<reportElement mode="Opaque" x="359" y="6" width="6" height="6" backcolor="#777777" uuid="7bf6d143-da04-4290-aa8b-a1d9ca846588"/>
+				</ellipse>
+				<rectangle>
+					<reportElement mode="Opaque" x="40" y="0" width="150" height="18" backcolor="#D9D9D9" uuid="7e0abaae-b2e5-4f2e-8ee4-64e6c9b58f1c"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#C0C0C0"/>
+					</graphicElement>
+				</rectangle>
+				<staticText>
+					<reportElement x="60" y="0" width="100" height="18" uuid="262d8dc8-8286-4aa1-bfb1-d767facee070"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" isBold="false" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[جولة استطلاعية]]></text>
+				</staticText>
+				<ellipse>
+					<reportElement x="175" y="2" width="14" height="14" uuid="be256085-ad5d-45bb-87d8-3d3fbac28e0c"/>
+					<graphicElement>
+						<pen lineWidth="0.7" lineColor="#B0B0B0"/>
+					</graphicElement>
+				</ellipse>
+			</frame>
+			<frame>
+				<reportElement x="540" y="8" width="160" height="56" uuid="3390eb0d-a033-4af8-a5e8-8f7b50efa8a0"/>
+				<staticText>
+					<reportElement x="0" y="0" width="160" height="20" uuid="0964b756-d99f-490f-8257-240f4527d049"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+						<font size="12" isBold="true" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[أمانة منطقة الرياض]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="14" width="160" height="12" uuid="5fa64adb-474e-4f6f-958f-f9650547cf19"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="9" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[الإدارة العامة لخدمات البنية الرقمية]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="26" width="160" height="12" uuid="291181ad-81a5-4bdd-9884-24f0ae4c0fce"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="9" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[إدارة الخدمات الرقمية]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement x="18" y="100" width="765" height="150" uuid="761931e4-bde2-4d70-bf75-347cfed2b974"/>
+				<rectangle>
+					<reportElement x="0" y="0" width="765" height="150" uuid="d79d21bb-a83d-4d0e-9592-72ea34616081"/>
+					<graphicElement>
+						<pen lineWidth="1.0" lineColor="#000000"/>
+					</graphicElement>
+				</rectangle>
+				<rectangle>
+					<reportElement mode="Opaque" x="0" y="0" width="160" height="30" backcolor="#FFFFFF" uuid="3f7689c6-2cbe-4ca3-bb07-38ea3dc505b0"/>
+					<graphicElement>
+						<pen lineWidth="1.0" lineColor="#000000"/>
+					</graphicElement>
+				</rectangle>
+				<textField>
+					<reportElement x="0" y="0" width="160" height="30" uuid="969412fe-bb11-4157-a3ee-7a4b2f79ed26"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{requestNumber}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement mode="Opaque" x="160" y="0" width="95" height="30" backcolor="#A6A6A6" uuid="482bcaeb-a4df-4062-8ff1-5519126eac30"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="160" y="0" width="95" height="30" uuid="89982cd5-6ce5-4668-8084-c1bce2ba03d8"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[رقم المعاملة]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement mode="Opaque" x="255" y="0" width="160" height="30" backcolor="#FFFFFF" uuid="fb87107b-a862-44fa-9abb-07f756b5e08e"/>
+				</rectangle>
+				<textField>
+					<reportElement x="255" y="0" width="160" height="30" uuid="d172978c-8e94-43a8-966b-f9d301df6dd0"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{proofNumber}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement mode="Opaque" x="415" y="0" width="95" height="30" backcolor="#A6A6A6" uuid="f45edbd1-c128-49f7-a15b-d20ddff18fcd"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="415" y="0" width="95" height="30" uuid="a5868062-7011-4f33-b42d-9130f7f8c407"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[رقم الإثبات]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement mode="Opaque" x="510" y="0" width="160" height="30" backcolor="#FFFFFF" uuid="312ee93e-7d49-4bea-9067-9ded4472b76f"/>
+				</rectangle>
+				<textField>
+					<reportElement x="510" y="0" width="160" height="30" uuid="481a1057-1ff3-4424-ac4a-1167a774b203"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{ownerName}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement mode="Opaque" x="670" y="0" width="95" height="30" backcolor="#A6A6A6" uuid="55ba716b-4fb1-4f2e-9dea-6fbd525ddee7"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="670" y="0" width="95" height="30" uuid="d3500f94-2b8d-45c5-bbd0-2ecba17481a0"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[اسم المالك]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement mode="Opaque" x="0" y="30" width="160" height="30" backcolor="#FFFFFF" uuid="15c6fed4-c3fe-4734-a8e6-d6ba0b162105"/>
+				</rectangle>
+				<textField>
+					<reportElement x="0" y="30" width="160" height="30" uuid="bdf8446e-9d37-45bc-bdeb-ff6c7c5228e3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{districtName}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement mode="Opaque" x="160" y="30" width="95" height="30" backcolor="#A6A6A6" uuid="abab3972-9eb4-49ee-bdcd-e71d0e4a01e1"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="160" y="30" width="95" height="30" uuid="a6b0a3f1-62ef-4335-aa1a-ff8911a271ae"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[اسم الحي]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement mode="Opaque" x="255" y="30" width="160" height="30" backcolor="#FFFFFF" uuid="c90bd904-6c28-4c09-8987-8ba92c6eb71e"/>
+				</rectangle>
+				<textField>
+					<reportElement x="255" y="30" width="160" height="30" uuid="ec2c4ab1-3668-470b-8961-0ea5c5e82134"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{plotNumber}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement mode="Opaque" x="415" y="30" width="95" height="30" backcolor="#A6A6A6" uuid="59de4817-6eed-4449-bd73-a2015a87a6f7"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="415" y="30" width="95" height="30" uuid="c436796c-7677-4404-9009-7d82bfe0f459"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[رقم القطعة]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement mode="Opaque" x="510" y="30" width="160" height="30" backcolor="#FFFFFF" uuid="18fccaf3-5276-4a00-8afc-1f6bf3b2ae02"/>
+				</rectangle>
+				<textField>
+					<reportElement x="510" y="30" width="160" height="30" uuid="ccdda4ee-0f30-428b-a9c0-08006745e5ba"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{licenseNumber}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement mode="Opaque" x="670" y="30" width="95" height="30" backcolor="#A6A6A6" uuid="ed90219b-1946-44f7-996b-2eb88186c0ac"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="670" y="30" width="95" height="30" uuid="60ec70f9-2263-4ab1-b09b-6c04395b3da7"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[رخصة البناء]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement mode="Opaque" x="0" y="60" width="160" height="30" backcolor="#FFFFFF" uuid="d6082cdc-c475-48da-b512-9d35680a28ee"/>
+				</rectangle>
+				<textField>
+					<reportElement x="0" y="60" width="160" height="30" uuid="4cf73ee6-dba2-44b7-aa35-5186e8d28e51"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{regulatoryPlan}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement mode="Opaque" x="160" y="60" width="95" height="30" backcolor="#A6A6A6" uuid="6206a06c-d817-4eaf-8ea3-1e6d17648d4c"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="160" y="60" width="95" height="30" uuid="c9ce3500-cba1-418a-89fe-87acdddc907b"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[عصب تجاري]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement mode="Opaque" x="255" y="60" width="160" height="30" backcolor="#FFFFFF" uuid="80134a71-855d-4cf6-97ec-b80d30ca4c06"/>
+				</rectangle>
+				<textField>
+					<reportElement x="255" y="60" width="160" height="30" uuid="8036c426-3c28-48b9-a72b-fe1612d36873"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{streetName}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement mode="Opaque" x="415" y="60" width="95" height="30" backcolor="#A6A6A6" uuid="b48d08c1-1cbf-47eb-bebd-cad8df8709a6"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="415" y="60" width="95" height="30" uuid="bb1ae2a3-013f-43e9-838d-52037a2b95f8"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[اسم الشارع]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement mode="Opaque" x="510" y="60" width="160" height="30" backcolor="#FFFFFF" uuid="4d6c8192-5d2e-46c1-b5b7-5bc2cff329c1"/>
+				</rectangle>
+				<textField>
+					<reportElement x="510" y="60" width="160" height="30" uuid="335dd0e4-6f06-48d3-af06-836f5b2be03b"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{reportType}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement mode="Opaque" x="670" y="60" width="95" height="30" backcolor="#A6A6A6" uuid="46ded71d-c207-4fd0-a869-bae7f8c172b8"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="670" y="60" width="95" height="30" uuid="bcec3a8a-1378-43ce-b570-b45f4a9f162f"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[نوع التقرير]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement mode="Opaque" x="0" y="90" width="160" height="30" backcolor="#FFFFFF" uuid="d9f8c944-2785-4b3f-8ed5-2cc52d020ed5"/>
+				</rectangle>
+				<textField>
+					<reportElement x="0" y="90" width="160" height="30" uuid="4f036e65-f8b2-40f0-b1cb-319471944cc2"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{landArea}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement mode="Opaque" x="160" y="90" width="95" height="30" backcolor="#A6A6A6" uuid="1fd8d258-a8a7-4170-95dd-160314c673d5"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="160" y="90" width="95" height="30" uuid="488d54c7-a3a8-4648-9aa4-f2111d27eb07"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[اتمام بناء رقم]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement mode="Opaque" x="255" y="90" width="160" height="30" backcolor="#FFFFFF" uuid="3ddb444c-514c-412d-b69c-27ec4dc7f7a5"/>
+				</rectangle>
+				<textField>
+					<reportElement x="255" y="90" width="160" height="30" uuid="81340712-e127-4e3e-b90c-c2704f63ad45"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{regulatoryPlan}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement mode="Opaque" x="415" y="90" width="95" height="30" backcolor="#A6A6A6" uuid="5a1e5fd2-5f12-4dc2-a784-a741d71ce096"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="415" y="90" width="95" height="30" uuid="8712733d-9c3a-432a-8807-236ef0d71448"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[المخطط التنظيمي]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement mode="Opaque" x="510" y="90" width="160" height="30" backcolor="#FFFFFF" uuid="26f343db-6afa-456d-bef1-1869a9f2be76"/>
+				</rectangle>
+				<textField>
+					<reportElement x="510" y="90" width="160" height="30" uuid="58016694-a3ac-4f39-8b98-c9d8ed050599"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{reportStatus}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement mode="Opaque" x="670" y="90" width="95" height="30" backcolor="#A6A6A6" uuid="dc7bf2dd-f14e-43ad-ad50-52ba90447593"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="670" y="90" width="95" height="30" uuid="9ee31aae-eef6-4b33-b26c-0e5d212580d5"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[حالة التقرير]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement mode="Opaque" x="0" y="120" width="160" height="30" backcolor="#FFFFFF" uuid="08558042-d426-4fdd-9180-54badb558c7e"/>
+				</rectangle>
+				<textField>
+					<reportElement x="0" y="120" width="160" height="30" uuid="0092491f-060f-4278-8165-7edf8496d602"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{reportType}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement mode="Opaque" x="160" y="120" width="95" height="30" backcolor="#A6A6A6" uuid="56875fbc-3fab-4e1c-85e5-f82cc00d35f6"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="160" y="120" width="95" height="30" uuid="0564cd84-ebd4-4451-84b2-aa8537043ef0"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[مرحلة البناء]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement mode="Opaque" x="255" y="120" width="160" height="30" backcolor="#FFFFFF" uuid="e93eb834-0f8b-4c44-8399-45b175ee56d3"/>
+				</rectangle>
+				<textField>
+					<reportElement x="255" y="120" width="160" height="30" uuid="5f87b736-2158-49a7-8151-1cdefcc6fb08"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{supervisingOffice}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement mode="Opaque" x="415" y="120" width="95" height="30" backcolor="#A6A6A6" uuid="a240edfa-bc9e-4300-8c32-f7a586d1e2bb"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="415" y="120" width="95" height="30" uuid="55455811-ef77-42ba-9aa0-c3aff86c6e88"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[المكتب المشرف]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement mode="Opaque" x="510" y="120" width="160" height="30" backcolor="#FFFFFF" uuid="b9e663cd-e092-4b0f-8ff0-2aad2b8a23d7"/>
+				</rectangle>
+				<textField>
+					<reportElement x="510" y="120" width="160" height="30" uuid="a4941b3a-2651-4b71-8650-fd11df045d34"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{landArea}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement mode="Opaque" x="670" y="120" width="95" height="30" backcolor="#A6A6A6" uuid="3c2c5644-debf-4206-ad62-d03c05c7d728"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="670" y="120" width="95" height="30" uuid="f786470a-3172-4cf7-b79b-b4ceba26aca5"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true" pdfFontName="fonts/ARIAL.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[مساحة الأرض]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="700" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="420" uuid="7890f34d-f330-46d6-96ab-3e9362f43fca"/>
+				<subreportParameter name="siteMapImage">
+					<subreportParameterExpression><![CDATA[$P{siteMapImage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="frontImage">
+					<subreportParameterExpression><![CDATA[$P{frontImage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="rightImage">
+					<subreportParameterExpression><![CDATA[$P{rightImage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="leftImage">
+					<subreportParameterExpression><![CDATA[$P{leftImage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="conditionsData">
+					<subreportParameterExpression><![CDATA[$P{conditionsData}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$P{tableData}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{inspectionTableSubreport}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<summary>
+		<band height="260">
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="260" uuid="e80832b6-44b9-47fe-bf18-15ea0d8a5719"/>
+				<subreportParameter name="conditionImageRows">
+					<subreportParameterExpression><![CDATA[$P{conditionImageRows}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$P{conditionImageRows}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{inspectionConditionsSubreport}]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
 </jasperReport>
-
