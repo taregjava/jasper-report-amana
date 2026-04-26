@@ -34,6 +34,8 @@
     <parameter name="requirementsData" class="net.sf.jasperreports.engine.JRDataSource"/>
     <parameter name="exteriorPhotosData" class="net.sf.jasperreports.engine.JRDataSource"/>
     <parameter name="internalPhotosData" class="net.sf.jasperreports.engine.JRDataSource"/>
+    <parameter name="tableSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
+    <parameter name="tableData" class="net.sf.jasperreports.engine.JRDataSource"/>
     <parameter name="hasRequirementsPage" class="java.lang.Boolean"/>
     <parameter name="hasExteriorPhotosPage" class="java.lang.Boolean"/>
     <parameter name="hasInternalPhotosPage" class="java.lang.Boolean"/>
@@ -388,14 +390,14 @@
                 <subreportParameter name="isPartiallyBuilt"><subreportParameterExpression><![CDATA[$P{isPartiallyBuilt}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="stageInspectionAccepted"><subreportParameterExpression><![CDATA[$P{stageInspectionAccepted}]]></subreportParameterExpression></subreportParameter>
                 <subreportParameter name="stageInspectionRejected"><subreportParameterExpression><![CDATA[$P{stageInspectionRejected}]]></subreportParameterExpression></subreportParameter>
+                <!-- Forward table subreport and datasource so nested table inside building components can render -->
+                <subreportParameter name="tableSubreport"><subreportParameterExpression><![CDATA[$P{tableSubreport}]]></subreportParameterExpression></subreportParameter>
+                <subreportParameter name="tableData"><subreportParameterExpression><![CDATA[$P{tableData}]]></subreportParameterExpression></subreportParameter>
                 <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
                 <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{buildingSubreport}]]></subreportExpression>
             </subreport>
-
         </band>
     </detail>
 
 
 </jasperReport>
-
-

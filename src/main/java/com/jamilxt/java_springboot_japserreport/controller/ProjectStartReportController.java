@@ -6,6 +6,7 @@ import com.jamilxt.java_springboot_japserreport.dto.ProjectPhotosDTO;
 import com.jamilxt.java_springboot_japserreport.dto.ProjectStartReportDto;
 import com.jamilxt.java_springboot_japserreport.dto.TaskRow;
 import com.jamilxt.java_springboot_japserreport.service.report.PrePouringService;
+import com.jamilxt.java_springboot_japserreport.service.report.ProTipService;
 import com.jamilxt.java_springboot_japserreport.service.report.ProjectStartReportService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.MediaType;
@@ -25,9 +26,12 @@ public class ProjectStartReportController {
 
     private final PrePouringService prePouringService;
 
-    public ProjectStartReportController(ProjectStartReportService service, PrePouringService prePouringService) {
+    private final ProTipService proTipService;
+
+    public ProjectStartReportController(ProjectStartReportService service, PrePouringService prePouringService, ProTipService proTipService) {
         this.service = service;
         this.prePouringService = prePouringService;
+        this.proTipService = proTipService;
     }
     @GetMapping(path = "/pre-pouring/pdf", produces = MediaType.APPLICATION_PDF_VALUE)
     public void projectStartPdfsss(HttpServletResponse response) throws Exception {
@@ -127,6 +131,15 @@ public class ProjectStartReportController {
         byte[] pdf = service.generatePdf(dto);
         response.setContentType(MediaType.APPLICATION_PDF_VALUE);
         response.setHeader("Content-Disposition", "inline; filename=project_start_report.pdf");
+        response.getOutputStream().write(pdf);
+        response.getOutputStream().flush();
+    }
+
+    @GetMapping(path = "/pro-tip/pdf", produces = MediaType.APPLICATION_PDF_VALUE)
+    public void proTipPdf(HttpServletResponse response) throws Exception {
+        byte[] pdf = proTipService.generateProTipPdfStatic();
+        response.setContentType(MediaType.APPLICATION_PDF_VALUE);
+        response.setContentLength(pdf.length);
         response.getOutputStream().write(pdf);
         response.getOutputStream().flush();
     }

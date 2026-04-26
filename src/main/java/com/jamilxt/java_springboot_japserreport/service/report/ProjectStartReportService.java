@@ -97,11 +97,34 @@ public class ProjectStartReportService {
     }
     private StageReportDataProvider resolveProvider(StageReportProfile profile) {
 
-        return switch (profile) {
-            case PRE_POURING -> providers.get("prePouringDataProvider");
-            case PRO_TIP -> providers.get("proTipDataProvider");
-            default -> providers.get("defaultStageReportDataProvider");
+        // Prefer the stage-specific provider when registered; otherwise fall back to the default provider.
+        if (providers == null || providers.isEmpty()) {
+            throw new IllegalStateException("No StageReportDataProvider beans found in application context");
+        }
+
+        String beanName = switch (profile) {
+            case PRE_POURING -> "prePouringDataProvider";
+            case PRO_TIP -> "proTipDataProvider";
+            default -> "defaultStageReportDataProvider";
         };
+
+        StageReportDataProvider provider = providers.get(beanName);
+        if (provider != null) {
+            return provider;
+        }
+
+        // Fallback to the default provider if the specific one is not present
+        StageReportDataProvider defaultProvider = providers.get("defaultStageReportDataProvider");
+        if (defaultProvider != null) {
+            return defaultProvider;
+        }
+
+        // As a last resort return any available provider (useful for tests) or throw a clear error.
+        if (!providers.isEmpty()) {
+            return providers.values().iterator().next();
+        }
+
+        throw new IllegalStateException("No StageReportDataProvider available for profile: " + profile);
     }
     public byte[] generateStatic(StageReportProfile profile) throws Exception {
         StageCompiledReports reports = compileStageReports(profile);
@@ -384,7 +407,7 @@ public class ProjectStartReportService {
              InputStream changesRowsIs = resourceLoader.getResource(profile.reportPath("changes_rows")).getInputStream();
              InputStream changesPageIs = resourceLoader.getResource(profile.reportPath("changes_page")).getInputStream();
              InputStream inspectionResponsibilityIs = resourceLoader.getResource(profile.reportPath("inspection_responsibility")).getInputStream();
-             InputStream stageBuildingComponentsIs = resourceLoader.getResource("classpath:report/prePouring/stage_building_components.jrxml").getInputStream();
+             InputStream stageBuildingComponentsIs = resourceLoader.getResource(profile.reportPath("building_components")).getInputStream();
              InputStream masterIs = resourceLoader.getResource(profile.reportPath("report_master")).getInputStream()) {
 
             return new StageCompiledReports(
@@ -424,7 +447,7 @@ public class ProjectStartReportService {
              InputStream changesRowsIs = resourceLoader.getResource(profile.reportPath("changes_rows")).getInputStream();
              InputStream changesPageIs = resourceLoader.getResource(profile.reportPath("changes_page")).getInputStream();
              InputStream inspectionResponsibilityIs = resourceLoader.getResource(profile.reportPath("inspection_responsibility")).getInputStream();
-             InputStream stageBuildingComponentsIs = resourceLoader.getResource("classpath:report/prePouring/stage_building_components.jrxml").getInputStream();
+             InputStream stageBuildingComponentsIs = resourceLoader.getResource(profile.reportPath("building_components")).getInputStream();
              InputStream masterIs = resourceLoader.getResource(profile.reportPath("report_master")).getInputStream()) {
 
             return new StageCompiledReports(

@@ -24,6 +24,7 @@
     <parameter name="reportLogo" class="java.lang.Object"/>
     <parameter name="projectNameAndAddress" class="java.lang.String"/>
     <parameter name="reportDate" class="java.lang.String"/>
+    <parameter name="footerSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
     <parameter name="officeName" class="java.lang.String"/>
     <parameter name="stageReportNumber" class="java.lang.String"/>
     <parameter name="stageReportTitle" class="java.lang.String"/>
@@ -126,4 +127,3 @@
     </pageFooter>
 
 </jasperReport>
-
