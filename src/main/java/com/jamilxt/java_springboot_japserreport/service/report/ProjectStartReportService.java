@@ -17,9 +17,12 @@ import java.util.Map;
 public class ProjectStartReportService {
 
     private final ResourceLoader resourceLoader;
+    private final Map<String, StageReportDataProvider> providers;
 
-    public ProjectStartReportService(ResourceLoader resourceLoader) {
+    public ProjectStartReportService(ResourceLoader resourceLoader,
+                                     Map<String, StageReportDataProvider> providers) {
         this.resourceLoader = resourceLoader;
+        this.providers = providers;
     }
 // imports omitted for brevity (JasperCompileManager, JasperFillManager, JasperExportManager, JRBeanCollectionDataSource, JasperReport, JasperPrint, etc.)
 
@@ -27,33 +30,84 @@ public class ProjectStartReportService {
         return generateStatic(StageReportProfile.PROJECT_START);
     }
 
+
+    public byte[] generateStaticWithOverrides(StageReportProfile profile,
+                                              Map<String, Object> overrides) throws Exception {
+
+        StageCompiledReports reports = compileStageReports(profile);
+        // Build static grouped rows so static preview matches dynamic checklist design.
+        JRBeanCollectionDataSource tableDs = getJrBeanCollectionDataSource();
+
+        Map<String, Object> params = createBaseParams(reports, tableDs);
+
+        StageReportDataProvider provider = resolveProvider(profile);
+        params.putAll(provider.getStaticData(profile));
+
+        params.put("stageReportNumber", profile.reportNumberLabel());
+        params.put("stageReportTitle", profile.stageTitle());
+        // static sample data for changes tables
+        params.put("changesData",    buildTextRowsDataSource(java.util.List.of(
+                "تعديل موقع النافذة في الواجهة الشمالية",
+                "تغيير مقاس باب المدخل الرئيسي من 100 إلى 120 سم"
+        )));
+        params.put("extraItemsData", buildTextRowsDataSource(java.util.List.of(
+                "لم يتم تركيب حواجز السلامة على السطح"
+        )));
+        InspectionResponsibilityDTO staticInspection = buildStaticInspectionResponsibility();
+        params.put("inspectionResponsibilityData", buildInspectionResponsibilityDataSource(staticInspection));
+        params.put("hasInspectionResponsibilityData", hasInspectionResponsibilityData(staticInspection));
+
+
+        // sample photos section params
+        params.put("spatialPortalPhoto", resolveImageSource("classpath:report/siteMapImage.png"));
+        params.put("implementationPhoto", resolveImageSource("classpath:report/front-image.png"));
+        params.put("aerialPhoto", resolveImageSource("classpath:report/logoSite.png"));
+        params.put("implementationPhoto1", resolveImageSource("classpath:report/front-image.png"));
+        params.put("implementationPhoto2", resolveImageSource("classpath:report/siteMapImage.png"));
+        params.put("implementationPhoto3", resolveImageSource("classpath:report/front-image.png"));
+        params.put("implementationPhoto4", resolveImageSource("classpath:report/logoSite.png"));
+        params.put("detailPhoto1", resolveImageSource("classpath:report/front-image.png"));
+        params.put("detailPhoto2", resolveImageSource("classpath:report/siteMapImage.png"));
+        params.put("detailPhoto3", resolveImageSource("classpath:report/logoSite.png"));
+        params.put("detailPhoto4", resolveImageSource("classpath:report/front-image.png"));
+        params.put("detailPhoto5", resolveImageSource("classpath:report/siteMapImage.png"));
+        params.put("detailPhoto6", resolveImageSource("classpath:report/logoSite.png"));
+        params.put("detailDescription1", "   توضيح الصورة توضيح الصورة توضيح الصورة توضيح الصورة توضيح الصورة توضيح الصورة توضيح الصورة 1 الصورة توضيح الصورة توضيح الصورة توضيح الصورة 1 الصورة توضيح الصورة توضيح الصورة توضيح الصورة 1 ");
+        params.put("detailDescription2", "توضيح الصورة 2");
+        params.put("detailDescription3", "توضيح الصورة 3");
+        params.put("detailDescription4", "توضيح الصورة 4");
+        params.put("detailDescription5", "توضيح الصورة 5");
+        params.put("detailDescription6", "توضيح الصورة 6");
+        params.put("officeName", "المكتب الهندسي النموذجي");
+        params.put("digitalStampPath", resolveImageSource("classpath:report/logo.png"));
+
+        // Build photo datasources after photo params are filled.
+        params.put("photosTopData", buildTopPhotoRows(params));
+        params.put("photosBottomData", buildBottomPhotoRows(params));
+
+        // Merge custom overrides last so they take precedence
+        if (overrides != null) {
+            params.putAll(overrides);
+        }
+        JasperPrint jasperPrint = JasperFillManager.fillReport(reports.master, params, new net.sf.jasperreports.engine.JREmptyDataSource());
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        JasperExportManager.exportReportToPdfStream(jasperPrint, baos);
+        return baos.toByteArray();
+    }
+    private StageReportDataProvider resolveProvider(StageReportProfile profile) {
+
+        return switch (profile) {
+            case PRE_POURING -> providers.get("prePouringDataProvider");
+            case PRO_TIP -> providers.get("proTipDataProvider");
+            default -> providers.get("defaultStageReportDataProvider");
+        };
+    }
     public byte[] generateStatic(StageReportProfile profile) throws Exception {
         StageCompiledReports reports = compileStageReports(profile);
 
-            // Build static grouped rows so static preview matches dynamic checklist design.
-            List<Map<String,Object>> rows = new ArrayList<>(java.util.List.of(
-                    tableRow("متطلبات سور الحماية", "2", 1, "التأكد من سلامة الأساسات", "☑", "ملاحظة توضيحية"),
-                    tableRow("متطلبات سور الحماية", "2", 2, "مراجعة الرسومات", "☐", ""),
-                    tableRow("متطلبات سور الحماية", "2", 3, "تحديد حدود الموقع بشكل صحيح", "☑", ""),
-                    tableRow("متطلبات سور الحماية", "2", 4, "التأكد من ارتفاع السور حسب المواصفات", "☐", "يحتاج مراجعة"),
-
-                    tableRow("متطلبات الأعمال الخرسانية", "3", 5, "اختبارات السلامة", "NA", ""),
-                    tableRow("متطلبات الأعمال الخرسانية", "3", 6, "توثيق نتائج الفحص الموقعي", "☑", "تم الاستلام"),
-                    tableRow("متطلبات الأعمال الخرسانية", "3", 7, "فحص جودة الخرسانة", "☑", ""),
-                    tableRow("متطلبات الأعمال الخرسانية", "3", 8, "التأكد من نسب الخلط", "☐", "غير مطابق"),
-
-                    tableRow("متطلبات الأساسات", "4", 9, "فحص التربة", "☑", ""),
-                    tableRow("متطلبات الأساسات", "4", 10, "مطابقة العمق مع المخطط", "☑", ""),
-                    tableRow("متطلبات الأساسات", "4", 11, "التأكد من العزل", "☐", "بحاجة تعديل"),
-
-                    tableRow("متطلبات الهيكل الإنشائي", "5", 12, "مطابقة الأعمدة للمخططات", "☑", ""),
-                    tableRow("متطلبات الهيكل الإنشائي", "5", 13, "فحص الكمرات", "☑", ""),
-                    tableRow("متطلبات الهيكل الإنشائي", "5", 14, "التأكد من استقامة العناصر", "☐", ""),
-
-                    tableRow("متطلبات السلامة العامة", "6", 15, "توفر معدات السلامة", "☑", ""),
-                    tableRow("متطلبات السلامة العامة", "6", 16, "وجود لوحات تحذيرية", "☐", "غير كافي")
-            ));
-            JRBeanCollectionDataSource tableDs = new JRBeanCollectionDataSource(rows);
+        // Build static grouped rows so static preview matches dynamic checklist design.
+        JRBeanCollectionDataSource tableDs = getJrBeanCollectionDataSource();
 
             Map<String, Object> params = createBaseParams(reports, tableDs);
             params.put("stageReportNumber", profile.reportNumberLabel());
@@ -72,95 +126,96 @@ public class ProjectStartReportService {
             BoundaryComplianceDTO staticBoundaryCompliance = buildStaticBoundaryCompliance();
             BuildingComponentsDTO staticBuildingComponents = buildStaticBuildingComponents();
 
-             List<BoundaryComplianceDTO.SetbackDirection> setbackList = new java.util.ArrayList<>();
-            if (staticBoundaryCompliance.getNorthSetback() != null) setbackList.add(staticBoundaryCompliance.getNorthSetback());
-           if (staticBoundaryCompliance.getSouthSetback() != null) setbackList.add(staticBoundaryCompliance.getSouthSetback());
-          if (staticBoundaryCompliance.getEastSetback() != null) setbackList.add(staticBoundaryCompliance.getEastSetback());
-           if (staticBoundaryCompliance.getWestSetback() != null) setbackList.add(staticBoundaryCompliance.getWestSetback());
+        params.put("stageInspectionNotes", "كل العناصر مطابقة مع ملاحظات طفيفة.");
+        params.put("stageInspectionAccepted", Boolean.TRUE);
+        params.put("stageInspectionRejected", Boolean.FALSE);
+        params.put("stageInspectionHasNotes", Boolean.FALSE);
+        params.put("contractorName", "شركة المقاول المحدودة");
+        params.put("supervisingEngineeringOffice", "المكتب الهندسي النموذجي");
+        params.put("buildingType", "سكني");
+        params.put("buildingTypeResidential", Boolean.TRUE);
+        params.put("buildingTypeResidentialCommercial", Boolean.FALSE);
+        params.put("buildingTypeCommercial", Boolean.FALSE);
+        params.put("buildingTypeVilla", Boolean.FALSE);
+        params.put("buildingTypeOther", Boolean.FALSE);
+        params.put("otherBuildingType", "");
+        params.put("buildingCondition", "جيد");
+        params.put("buildingDescription", "وصف نموذجي للمبنى...");
+        params.put("licenseNumber", "LIC-001");
+        params.put("licenseDate", "1446/12/15");
+        params.put("planNumber", "PLN-88");
+        params.put("pieceNumber", "45");
+        params.put("floorsCount", "2");
+        params.put("district", "حي النور");
+        params.put("street", "شارع الأمير");
+        params.put("sector", "قطاع الشمال");
+        params.put("landNumber", "245");
+        params.put("blockNumber", "17");
+        params.put("areaByDeed", 350.0d);
+        params.put("areaByLicense", 340.0d);
+        params.put("areaByNature", 338.5d);
+        params.put("isFullyFinished", Boolean.TRUE);
+        params.put("isPartiallyBuilt", Boolean.FALSE);
+        // sample photos section params
+        params.put("spatialPortalPhoto", resolveImageSource("classpath:report/siteMapImage.png"));
+        params.put("implementationPhoto", resolveImageSource("classpath:report/front-image.png"));
+        params.put("aerialPhoto", resolveImageSource("classpath:report/logoSite.png"));
+        params.put("implementationPhoto1", resolveImageSource("classpath:report/front-image.png"));
+        params.put("implementationPhoto2", resolveImageSource("classpath:report/siteMapImage.png"));
+        params.put("implementationPhoto3", resolveImageSource("classpath:report/front-image.png"));
+        params.put("implementationPhoto4", resolveImageSource("classpath:report/logoSite.png"));
+        params.put("detailPhoto1", resolveImageSource("classpath:report/front-image.png"));
+        params.put("detailPhoto2", resolveImageSource("classpath:report/siteMapImage.png"));
+        params.put("detailPhoto3", resolveImageSource("classpath:report/logoSite.png"));
+        params.put("detailPhoto4", resolveImageSource("classpath:report/front-image.png"));
+        params.put("detailPhoto5", resolveImageSource("classpath:report/siteMapImage.png"));
+        params.put("detailPhoto6", resolveImageSource("classpath:report/logoSite.png"));
+        params.put("detailDescription1", "   توضيح الصورة توضيح الصورة توضيح الصورة توضيح الصورة توضيح الصورة توضيح الصورة توضيح الصورة 1 الصورة توضيح الصورة توضيح الصورة توضيح الصورة 1 الصورة توضيح الصورة توضيح الصورة توضيح الصورة 1 ");
+        params.put("detailDescription2", "توضيح الصورة 2");
+        params.put("detailDescription3", "توضيح الصورة 3");
+        params.put("detailDescription4", "توضيح الصورة 4");
+        params.put("detailDescription5", "توضيح الصورة 5");
+        params.put("detailDescription6", "توضيح الصورة 6");
+        params.put("officeName", "المكتب الهندسي النموذجي");
+        params.put("digitalStampPath", resolveImageSource("classpath:report/logo.png"));
 
-            // header/body params (example)
-            // load logo as byte[] so Jasper/iText can recognize the image format reliably during export
-            try (InputStream logoIs = getClass().getResourceAsStream("/report/logoSite.png")) {
-                if (logoIs != null) {
-                    byte[] logoBytes = logoIs.readAllBytes();
-                    params.put("reportLogo", logoBytes);
-                }
-            } catch (Exception ignore) {
-                // ignore missing logo
-            }
-            params.put("projectNameAndAddress", "مشروع نموذجي - شارع المثال");
-            params.put("reportDate", "1447/01/01 هـ");
-            params.put("ownerName", "محمود محمد");
-            params.put("ownerIdNumber", "1234567890");
-            params.put("ownerMobile", "0500000000");
-            params.put("deedNumber", "D-2026-999");
-            params.put("designingEngineeringOffice", "مكتب التصميم العالمي");
-            params.put("contractorRecord", "CR-998877");
-            params.put("contractorMobile", "0550000000");
-            params.put("supervisingEngineerName", "م. علي الحربي");
-            params.put("stageInspectionResult", "مقبول");
-            params.put("stageInspectionNotes", "كل العناصر مطابقة مع ملاحظات طفيفة.");
-            params.put("stageInspectionAccepted", Boolean.TRUE);
-            params.put("stageInspectionRejected", Boolean.FALSE);
-            params.put("stageInspectionHasNotes", Boolean.FALSE);
-            params.put("contractorName", "شركة المقاول المحدودة");
-            params.put("supervisingEngineeringOffice", "المكتب الهندسي النموذجي");
-            params.put("buildingType", "سكني");
-            params.put("buildingTypeResidential", Boolean.TRUE);
-            params.put("buildingTypeResidentialCommercial", Boolean.FALSE);
-            params.put("buildingTypeCommercial", Boolean.FALSE);
-            params.put("buildingTypeVilla", Boolean.FALSE);
-            params.put("buildingTypeOther", Boolean.FALSE);
-            params.put("otherBuildingType", "");
-            params.put("buildingCondition", "جيد");
-            params.put("buildingDescription", "وصف نموذجي للمبنى...");
-            params.put("licenseNumber", "LIC-001");
-            params.put("licenseDate", "1446/12/15");
-            params.put("planNumber", "PLN-88");
-            params.put("pieceNumber", "45");
-            params.put("floorsCount", "2");
-            params.put("district", "حي النور");
-            params.put("street", "شارع الأمير");
-            params.put("sector", "قطاع الشمال");
-            params.put("landNumber", "245");
-            params.put("blockNumber", "17");
-            params.put("areaByDeed", 350.0d);
-            params.put("areaByLicense", 340.0d);
-            params.put("areaByNature", 338.5d);
-            params.put("isFullyFinished", Boolean.TRUE);
-            params.put("isPartiallyBuilt", Boolean.FALSE);
-            // sample photos section params
-            params.put("spatialPortalPhoto", resolveImageSource("classpath:report/siteMapImage.png"));
-            params.put("implementationPhoto", resolveImageSource("classpath:report/front-image.png"));
-            params.put("aerialPhoto", resolveImageSource("classpath:report/logoSite.png"));
-            params.put("implementationPhoto1", resolveImageSource("classpath:report/front-image.png"));
-            params.put("implementationPhoto2", resolveImageSource("classpath:report/siteMapImage.png"));
-            params.put("implementationPhoto3", resolveImageSource("classpath:report/front-image.png"));
-            params.put("implementationPhoto4", resolveImageSource("classpath:report/logoSite.png"));
-            params.put("detailPhoto1", resolveImageSource("classpath:report/front-image.png"));
-            params.put("detailPhoto2", resolveImageSource("classpath:report/siteMapImage.png"));
-            params.put("detailPhoto3", resolveImageSource("classpath:report/logoSite.png"));
-            params.put("detailPhoto4", resolveImageSource("classpath:report/front-image.png"));
-            params.put("detailPhoto5", resolveImageSource("classpath:report/siteMapImage.png"));
-            params.put("detailPhoto6", resolveImageSource("classpath:report/logoSite.png"));
-            params.put("detailDescription1", "   توضيح الصورة توضيح الصورة توضيح الصورة توضيح الصورة توضيح الصورة توضيح الصورة توضيح الصورة 1 الصورة توضيح الصورة توضيح الصورة توضيح الصورة 1 الصورة توضيح الصورة توضيح الصورة توضيح الصورة 1 ");
-            params.put("detailDescription2", "توضيح الصورة 2");
-            params.put("detailDescription3", "توضيح الصورة 3");
-            params.put("detailDescription4", "توضيح الصورة 4");
-            params.put("detailDescription5", "توضيح الصورة 5");
-            params.put("detailDescription6", "توضيح الصورة 6");
-            params.put("officeName", "المكتب الهندسي النموذجي");
-            params.put("digitalStampPath", resolveImageSource("classpath:report/logo.png"));
+        // Build photo datasources after photo params are filled.
+        params.put("photosTopData", buildTopPhotoRows(params));
+        params.put("photosBottomData", buildBottomPhotoRows(params));
 
-            // Build photo datasources after photo params are filled.
-            params.put("photosTopData", buildTopPhotoRows(params));
-            params.put("photosBottomData", buildBottomPhotoRows(params));
+        JasperPrint jasperPrint = JasperFillManager.fillReport(reports.master, params, new net.sf.jasperreports.engine.JREmptyDataSource());
 
-            JasperPrint jasperPrint = JasperFillManager.fillReport(reports.master, params, new net.sf.jasperreports.engine.JREmptyDataSource());
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        JasperExportManager.exportReportToPdfStream(jasperPrint, baos);
+        return baos.toByteArray();
+    }
 
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            JasperExportManager.exportReportToPdfStream(jasperPrint, baos);
-            return baos.toByteArray();
+
+    private JRBeanCollectionDataSource getJrBeanCollectionDataSource() {
+        List<Map<String,Object>> rows = new ArrayList<>(List.of(
+                tableRow("متطلبات سور الحماية", "2", 1, "التأكد من سلامة الأساسات", "☑", "ملاحظة توضيحية"),
+                tableRow("متطلبات سور الحماية", "2", 2, "مراجعة الرسومات", "☐", ""),
+                tableRow("متطلبات سور الحماية", "2", 3, "تحديد حدود الموقع بشكل صحيح", "☑", ""),
+                tableRow("متطلبات سور الحماية", "2", 4, "التأكد من ارتفاع السور حسب المواصفات", "☐", "يحتاج مراجعة"),
+
+                tableRow("متطلبات الأعمال الخرسانية", "3", 5, "اختبارات السلامة", "NA", ""),
+                tableRow("متطلبات الأعمال الخرسانية", "3", 6, "توثيق نتائج الفحص الموقعي", "☑", "تم الاستلام"),
+                tableRow("متطلبات الأعمال الخرسانية", "3", 7, "فحص جودة الخرسانة", "☑", ""),
+                tableRow("متطلبات الأعمال الخرسانية", "3", 8, "التأكد من نسب الخلط", "☐", "غير مطابق"),
+
+                tableRow("متطلبات الأساسات", "4", 9, "فحص التربة", "☑", ""),
+                tableRow("متطلبات الأساسات", "4", 10, "مطابقة العمق مع المخطط", "☑", ""),
+                tableRow("متطلبات الأساسات", "4", 11, "التأكد من العزل", "☐", "بحاجة تعديل"),
+
+                tableRow("متطلبات الهيكل الإنشائي", "5", 12, "مطابقة الأعمدة للمخططات", "☑", ""),
+                tableRow("متطلبات الهيكل الإنشائي", "5", 13, "فحص الكمرات", "☑", ""),
+                tableRow("متطلبات الهيكل الإنشائي", "5", 14, "التأكد من استقامة العناصر", "☐", ""),
+
+                tableRow("متطلبات السلامة العامة", "6", 15, "توفر معدات السلامة", "☑", ""),
+                tableRow("متطلبات السلامة العامة", "6", 16, "وجود لوحات تحذيرية", "☐", "غير كافي")
+        ));
+        JRBeanCollectionDataSource tableDs = new JRBeanCollectionDataSource(rows);
+        return tableDs;
     }
 
     public byte[] generatePdf(ProjectStartReportDto dto) throws JRException {

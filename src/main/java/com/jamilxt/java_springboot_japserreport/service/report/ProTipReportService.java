@@ -17,10 +17,21 @@ import java.util.Map;
 public class ProTipReportService {
 
     private final ResourceLoader resourceLoader;
+    private final ProjectStartReportService reportService;
 
-    public ProTipReportService(ResourceLoader resourceLoader) {
+    public ProTipReportService(ResourceLoader resourceLoader, ProjectStartReportService reportService) {
         this.resourceLoader = resourceLoader;
+        this.reportService = reportService;
     }
+
+    public byte[] generateProTipStatic() throws Exception {
+        return reportService.generateStatic(StageReportProfile.PRO_TIP);
+    }
+
+    public byte[] generateProTip(ProjectStartReportDto dto) throws Exception {
+        return reportService.generatePdf(dto, StageReportProfile.PRO_TIP);
+    }
+
 // imports omitted for brevity (JasperCompileManager, JasperFillManager, JasperExportManager, JRBeanCollectionDataSource, JasperReport, JasperPrint, etc.)
     public byte[] generateProjectStartPdfStatic() throws Exception {
     return generateOCVerificationPdfStatic(StageReportProfile.PRO_TIP);
@@ -57,42 +68,16 @@ public class ProTipReportService {
             JasperReport masterRep = JasperCompileManager.compileReport(masterIs);
 
             // Build static grouped rows so static preview matches dynamic checklist design.
-            List<Map<String,Object>> rows = new ArrayList<>(List.of(
-                    tableRow("متطلبات سور الحماية", "2", 1, "التأكد من سلامة الأساسات", "☑", "ملاحظة توضيحية"),
-                    tableRow("متطلبات سور الحماية", "2", 2, "مراجعة الرسومات", "☐", ""),
-                    tableRow("متطلبات سور الحماية", "2", 3, "تحديد حدود الموقع بشكل صحيح", "☑", ""),
-                    tableRow("متطلبات سور الحماية", "2", 4, "التأكد من ارتفاع السور حسب المواصفات", "☐", "يحتاج مراجعة"),
-
-                    tableRow("متطلبات الأعمال الخرسانية", "3", 5, "اختبارات السلامة", "NA", ""),
-                    tableRow("متطلبات الأعمال الخرسانية", "3", 6, "توثيق نتائج الفحص الموقعي", "☑", "تم الاستلام"),
-                    tableRow("متطلبات الأعمال الخرسانية", "3", 7, "فحص جودة الخرسانة", "☑", ""),
-                    tableRow("متطلبات الأعمال الخرسانية", "3", 8, "التأكد من نسب الخلط", "☐", "غير مطابق"),
-
-                    tableRow("متطلبات الأساسات", "4", 9, "فحص التربة", "☑", ""),
-                    tableRow("متطلبات الأساسات", "4", 10, "مطابقة العمق مع المخطط", "☑", ""),
-                    tableRow("متطلبات الأساسات", "4", 11, "التأكد من العزل", "☐", "بحاجة تعديل"),
-
-                    tableRow("متطلبات الهيكل الإنشائي", "5", 12, "مطابقة الأعمدة للمخططات", "☑", ""),
-                    tableRow("متطلبات الهيكل الإنشائي", "5", 13, "فحص الكمرات", "☑", ""),
-                    tableRow("متطلبات الهيكل الإنشائي", "5", 14, "التأكد من استقامة العناصر", "☐", ""),
-
-                    tableRow("متطلبات السلامة العامة", "6", 15, "توفر معدات السلامة", "☑", ""),
-                    tableRow("متطلبات السلامة العامة", "6", 16, "وجود لوحات تحذيرية", "☐", "غير كافي")
-            ));
+            List<Map<String, Object>> rows = getMaps();
             JRBeanCollectionDataSource tableDs = new JRBeanCollectionDataSource(rows);
             BoundaryComplianceDTO staticBoundaryCompliance = buildStaticBoundaryCompliance();
             BuildingComponentsDTO staticBuildingComponents = buildStaticBuildingComponents();
 
             Map<String,Object> params = new HashMap<>();
 
-            params.put(
-                    "stageReportNumber",
-                 profile.reportNumberLabel()
-            );
+            params.put("stageReportNumber", profile.reportNumberLabel());
 
-            params.put(
-                    "stageReportTitle",profile.stageTitle()
-            );
+            params.put("stageReportTitle",profile.stageTitle());
             // pass compiled subreports
             params.put("headerSubreport", headerRep);
             params.put("ownerSubreport", ownerRep);
@@ -216,6 +201,31 @@ public class ProTipReportService {
         }
     }
 
+    private List<Map<String, Object>> getMaps() {
+        List<Map<String,Object>> rows = new ArrayList<>(List.of(
+                tableRow("متطلبات سور الحماية", "2", 1, "التأكد من سلامة الأساسات", "☑", "ملاحظة توضيحية"),
+                tableRow("متطلبات سور الحماية", "2", 2, "مراجعة الرسومات", "☐", ""),
+                tableRow("متطلبات سور الحماية", "2", 3, "تحديد حدود الموقع بشكل صحيح", "☑", ""),
+                tableRow("متطلبات سور الحماية", "2", 4, "التأكد من ارتفاع السور حسب المواصفات", "☐", "يحتاج مراجعة"),
+
+                tableRow("متطلبات الأعمال الخرسانية", "3", 5, "اختبارات السلامة", "NA", ""),
+                tableRow("متطلبات الأعمال الخرسانية", "3", 6, "توثيق نتائج الفحص الموقعي", "☑", "تم الاستلام"),
+                tableRow("متطلبات الأعمال الخرسانية", "3", 7, "فحص جودة الخرسانة", "☑", ""),
+                tableRow("متطلبات الأعمال الخرسانية", "3", 8, "التأكد من نسب الخلط", "☐", "غير مطابق"),
+
+                tableRow("متطلبات الأساسات", "4", 9, "فحص التربة", "☑", ""),
+                tableRow("متطلبات الأساسات", "4", 10, "مطابقة العمق مع المخطط", "☑", ""),
+                tableRow("متطلبات الأساسات", "4", 11, "التأكد من العزل", "☐", "بحاجة تعديل"),
+
+                tableRow("متطلبات الهيكل الإنشائي", "5", 12, "مطابقة الأعمدة للمخططات", "☑", ""),
+                tableRow("متطلبات الهيكل الإنشائي", "5", 13, "فحص الكمرات", "☑", ""),
+                tableRow("متطلبات الهيكل الإنشائي", "5", 14, "التأكد من استقامة العناصر", "☐", ""),
+
+                tableRow("متطلبات السلامة العامة", "6", 15, "توفر معدات السلامة", "☑", ""),
+                tableRow("متطلبات السلامة العامة", "6", 16, "وجود لوحات تحذيرية", "☐", "غير كافي")
+        ));
+        return rows;
+    }
 
 
     private Map<String, Object> tableRow(String groupTitle, String sideNumber, Integer index, String task, String status, String notes) {

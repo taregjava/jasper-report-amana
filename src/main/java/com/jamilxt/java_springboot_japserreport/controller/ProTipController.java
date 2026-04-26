@@ -23,4 +23,12 @@ public class ProTipController {
         response.getOutputStream().write(pdf);
     }
 
+    @GetMapping(path = "/pre-tip2/pdf", produces = MediaType.APPLICATION_PDF_VALUE)
+    public void projectStartPdfsss2(HttpServletResponse response) throws Exception {
+        byte[] pdf = proTipReportService.generateProTipStatic();
+        response.setContentType(MediaType.APPLICATION_PDF_VALUE);
+        response.setContentLength(pdf.length);
+        response.getOutputStream().write(pdf);
+    }
+
 }

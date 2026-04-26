@@ -4,6 +4,9 @@ import com.jamilxt.java_springboot_japserreport.dto.ProjectStartReportDto;
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 public class PrePouringService {
 
@@ -14,12 +17,16 @@ public class PrePouringService {
     }
 
     public byte[] generatePrePouringPdfStatic() throws Exception {
-        // Uses the static data method for PRE_POURING profile
-        return stageReportService.generateStatic(StageReportProfile.PRE_POURING);
+
+        Map<String, Object> customData = new HashMap<>();
+
+        customData.put("ownerName", "PrePouring Owner");
+        customData.put("stageInspectionResult", "Pending");
+
+        return stageReportService.generateStaticWithOverrides(
+                StageReportProfile.PRE_POURING,
+                customData
+        );
     }
 
-    public byte[] generatePdf(ProjectStartReportDto dto) throws JRException {
-        // Use PRE_POURING profile for prePouring reports
-        return stageReportService.generatePdf(dto, StageReportProfile.PRE_POURING);
-    }
 }
