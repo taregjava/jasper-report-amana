@@ -15,8 +15,8 @@
     <parameter name="digitalStampPath" class="java.lang.Object"/>
 	<parameter name="tableSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
 	<parameter name="tableData" class="net.sf.jasperreports.engine.JRDataSource"/>
-	<parameter name="boundaryComplianceData" class="com.jamilxt.java_springboot_japserreport.dto.BoundaryComplianceDTO"/>
-	<parameter name="buildingComponentsData" class="com.jamilxt.java_springboot_japserreport.dto.BuildingComponentsDTO"/>
+	<parameter name="boundaryComplianceData" class="com.halfacode.japserreport.dto.BoundaryComplianceDTO"/>
+	<parameter name="buildingComponentsData" class="com.halfacode.japserreport.dto.BuildingComponentsDTO"/>
 	<detail>
 		<band height="510">
 			<subreport>

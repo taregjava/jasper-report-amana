@@ -113,8 +113,8 @@
     <parameter name="inspectionResponsibilitySubreport" class="net.sf.jasperreports.engine.JasperReport"/>
     <parameter name="inspectionResponsibilityData" class="net.sf.jasperreports.engine.JRDataSource"/>
     <parameter name="hasInspectionResponsibilityData" class="java.lang.Boolean"/>
-    <parameter name="boundaryComplianceData" class="com.jamilxt.java_springboot_japserreport.dto.BoundaryComplianceDTO"/>
-    <parameter name="buildingComponentsData" class="com.jamilxt.java_springboot_japserreport.dto.BuildingComponentsDTO"/>
+    <parameter name="boundaryComplianceData" class="com.halfacode.japserreport.dto.BoundaryComplianceDTO"/>
+    <parameter name="buildingComponentsData" class="com.halfacode.japserreport.dto.BuildingComponentsDTO"/>
 
     <!--
         Group rendering order (innermost footer first, outermost last):
